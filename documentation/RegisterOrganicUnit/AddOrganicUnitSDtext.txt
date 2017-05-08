@@ -1,0 +1,38 @@
+title SD - Add Organic Unit
+
+participant ":Administrator" as u
+participant ":MainMenu" as mm
+participant ":AddOrganicUnitUI" as ui
+participant ":AddOrganicUnitController" as ctrl
+participant ":OrganicUnit" as dt
+participant ":PersistenceContext" as pc
+#participant ":AppSettings" as app
+
+participant ":RepositoryFactory" as fact
+participant ":OrganicUnitRepository" as repo
+
+u-->mm:New Organic Unit
+mm-->+ui:create
+ui-->ctrl:create
+ui->ui:doShow()
+u-->ui:input acronym, name, description
+#u->ui:submit()
+ui->+ctrl:addDishType(acronym, name, description)
+ctrl-->dt:new(acronym, name, description)
+ctrl->pc:repositories()
+#pc->app:instance()
+#pc->app:getRepositoryFactory()
+#pc->+app:getRepositoryFactory()
+#app-->fact: create
+#fact-->-app:
+#app-->-cont:
+
+ctrl->fact: organicUnit()
+#ctrl->+fact: organicUnit()
+fact-->repo:create()
+
+ctrl->repo:add(newOrganicUnit)
+#repo-->-ctrl:
+ctrl-->-ui:
+ui->ui:show(newoOganicUnit)
+ui-->-u:

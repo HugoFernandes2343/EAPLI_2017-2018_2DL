@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+  <persistence-unit name="eapli.eCafeteriaPU">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>eapli.ecafeteria.domain.meals.DishType</class>
+    <class>eapli.ecafeteria.domain.cafeteria.OrganicUnit</class>
+    <class>eapli.ecafeteria.domain.authz.SystemUser</class>
+    <class>eapli.ecafeteria.domain.authz.Role</class>
+    <class>eapli.ecafeteria.domain.authz.RoleSet</class>
+    <class>eapli.ecafeteria.domain.cafeteria.Cafeteria</class>
+    <class>eapli.ecafeteria.domain.cafeteria.CafeteriaUser</class>
+    <class>eapli.ecafeteria.domain.cafeteria.SignupRequest</class>
+    <class>eapli.ecafeteria.domain.meals.Dish</class>
+    <class>eapli.ecafeteria.domain.kitchen.Material</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
+      <!--            
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>
+      -->
+      <property name="javax.persistence.jdbc.user" value=""/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+      <!--<property name="eclipselink.logging.level" value="FINE"/>-->
+    </properties>
+  </persistence-unit>
+</persistence>

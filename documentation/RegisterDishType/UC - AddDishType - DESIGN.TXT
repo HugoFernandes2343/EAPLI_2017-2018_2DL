@@ -1,0 +1,35 @@
+	_________
+
+	DESIGN
+	_________
+
+	* Utilizar a estrutura base standard da aplicação baseada em camadas
+
+
+   	Classes do domínio:  DishType
+   	Controlador: RegisterDishTypeController
+   	Repository: DishTypeRepository
+
+
+	Diagrama de Sequência - websequencediagrams.com source
+
+		title SD - Register Dish Type
+
+		participant ":RegisterDishTypeUI" as rui
+		participant ":RegisterDishTypeController" as ctrl
+		participant ":PersistenceContext" as pc
+		participant ":RepositoryFactory" as rf
+		participant ":DishTypeRepository" as repo
+		participant ":DishType" as dt
+
+		rui->ctrl:create
+		ctrl->pc:repositories()
+		pc->rf:create
+		rf->repo:create
+		pc-->ctrl:DistTypeRepository
+
+		rui->rui:doShow()
+		rui->ctrl:registerDishType(acronym, description)
+
+		ctrl->dt:newDishType = create(acronym, description)
+		ctrl->repo:save(newDishType)

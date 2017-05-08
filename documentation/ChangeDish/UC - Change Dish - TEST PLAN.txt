@@ -1,0 +1,17 @@
+	
+
+	TEST PLAN
+
+	_______________________________
+	CASO #2: Change Dish
+	_______________________________
+
+	1. Fazer o login como chef/Password1
+	2. Escolher a opção Dishes > Change DishInformation
+	3. Escolher a opção Change Nutricional Info
+	4. Mostrar todos os pratos e seu estado
+	5. Escolher Dish a atualizar a informação nutricional
+	6. Escolher a opção Dishes > Change DishInformation
+	7. Escolher a opção Change Price
+	8. Escolher Dish a atualizar o preço
+	9. Confirmar as atualizaçções efetuadas1 através de List Dishes (Dish  >  List Dish)

@@ -1,0 +1,32 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+
+	Reunião com o cliente  em 2017.03.27
+
+	* Um prato passa a ter um estado ativo ou inativo
+	* Esse estado vai ser importante no futuro para a possibilidade de inclusão numa ementa
+	* O utilizador que pode efetuar esta alteração é do tipo "menu manager"
+	* Não importa saber o historico de estado do prato
+	* Um prato pode ser desativado mesmo que esteja atualmente em uso numa ementa
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+
+	* Um prato é inicialmente criado no estado ativo
+
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+
+
+	* EnsureNewlyCreatedDishIsActive

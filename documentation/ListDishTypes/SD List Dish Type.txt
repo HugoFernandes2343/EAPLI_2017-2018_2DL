@@ -1,0 +1,15 @@
+title SD List Dish Type
+
+ListDishTypeUI->ListDishTypeController : create()
+ListDishTypeUI -> ListDishTypeController : listDishTypes()
+ListDishTypeController -> ListDishTypeService :create()
+ListDishTypeController -> ListDishTypeService : allDishTypes()
+ListDishTypeService -> PersistenceContext: repositories()
+PersistenceContext -> RepositoryFactory : create()
+PersistenceContext -> RepositoryFactory : dishTypes()
+RepositoryFactory -> DishTypeRepository : create()  
+ListDishTypeService -> DishTypeRepository : findAll()
+DishTypeRepository-->-ListDishTypeService :alldishes()
+ListDishTypeService-->-ListDishTypeController :
+ListDishTypeController-->-ListDishTypeUI:
+ListDishTypeUI->ListDishTypeUI:show()

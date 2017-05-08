@@ -1,0 +1,12 @@
+	_________
+
+	DESIGN
+	_________
+
+	* Utilizar a estrutura base standard da aplicação baseada em camadas
+	* Este caso de uso é muito semelhante ao ActivateDeactivate DishType
+
+
+   	Classes do domínio:  Dish e suas classes associadas
+   	Controlador: ActivateDeactivate Dish
+   	Repository: DishRepository

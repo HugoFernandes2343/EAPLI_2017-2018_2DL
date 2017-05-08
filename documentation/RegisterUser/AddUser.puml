@@ -1,0 +1,69 @@
+@startuml
+'http://plantuml.com/skinparam.html
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor Admin as Actor
+participant AddUserUI as UI <<presentation>>
+participant AddUserController as Controller <<application>>
+participant UserBuilder as Builder <<builder>>
+participant "user:User" as Domain <<domain>>
+participant PersistenceContext as Persistence <<persistence>>
+participant RepositoryFactory as Factory <<factory>>
+database UserRepository as Repository <<repository>>
+
+Actor --> UI: Add User
+activate UI
+    UI -> Controller: create
+    UI --> Actor: Ask user information
+    Actor --> UI: Usernane, Password,\nFirst Name,\nLast Name, E-Mail
+
+    loop option != 0
+        UI --> Actor: Show List\nof Role Types
+        Actor --> UI: Role Type
+    end
+
+    UI -> Controller: addUser(username, \npassword, firstName,\nlastName, email, \nroles)
+    activate Controller
+        note right of Builder:UserBuilder é usado para criar uma entidade do tipo User num estado válido
+        Controller -> Builder: create
+        Controller -> Builder:setUsername(username)
+
+        note right of Controller: Set the rest of the information
+
+        'Controller -> Builder:setPassword(password)
+        'Controller -> Builder:setFirstName(firstName)
+        'Controller -> Builder:setLastName(lastName)
+        'Controller -> Builder:setEmail(email)
+        'Controller -> Builder:setRoles(roles)
+
+        Controller -> Builder:createUser()
+        activate Builder
+            Builder -> Domain: create (username,\npassword, firstName,\nlastName,email, roles)
+            Domain->Builder: user
+            Builder -> Controller:user
+        deactivate Builder
+
+        Controller -> Persistence: repositories()
+        activate Persistence
+            note right of Persistence: pode criar repositório em memória ou JPA
+            Persistence -> Factory: create
+            Persistence -> Controller: factory
+        deactivate Persistence
+
+        Controller -> Factory: users()
+        activate Factory
+            Factory -> Repository: create
+            Factory -> Controller: userRepository
+        deactivate Factory
+
+        Controller->Repository:save(user)
+        Controller->UI: user
+    deactivate Controller
+
+        UI-->Actor: displayUserInfo
+deactivate UI
+@enduml

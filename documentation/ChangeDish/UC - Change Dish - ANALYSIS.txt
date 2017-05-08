@@ -1,0 +1,31 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+
+	Reunião com o cliente  em 2017.03.23
+
+	* Passa a ser possivel alterar informação sobre o prato (Dish)
+	* A informação do prato passível de ser alterada é o Preço (Price) e a Informação Nutricional (NutricionalInfo)	
+	* O utilizador que pode efetuar esta alteração é do tipo “menu manager”
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+
+	* Não é possivel alterar informação sensivel do prato como o seu nome (Name) e o seu tipo (DishType)
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+
+
+	* testchangeNutricionalInfoToMustNotBeNull
+	* testchangePriceToMustNotBeNull
+	* testchangePriceToCanNotBeNegative

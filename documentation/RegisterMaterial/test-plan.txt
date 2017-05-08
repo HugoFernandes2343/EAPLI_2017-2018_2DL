@@ -1,0 +1,35 @@
+-----------------
+TEST PLAN
+-----------------
+
+
+-----------------
+CASO #1 : registar novo material
+-----------------
+
+1. fazer login com chef/Password1
+2. escolher opção Traceability > Register Material
+3. introduzir "Eggs" no acrónimo e "Eggs (chicken, duck)" no descritivo
+4. submeter
+5. confirmar o registo executando a opção Traceability > List Materials
+
+
+-----------------
+CASO #1 : registar material repetido
+-----------------
+
+1. fazer login com chef/Password1
+2. executar caso #1
+3. executar caso #1 novamente
+4. o sistema deve alertar o utilizador que já existe um material com esse acrónimo
+
+
+-----------------
+CASO #3 : registar material sem acrónimo
+-----------------
+
+1. fazer login com chef/Password1
+2. escolher opção Traceability > Register Material
+3. introduzir "" no acrónimo e "xpto" no descritivo
+4. submeter
+5. o sistema deve alertar o utilizador que um material tem que ter um acrónimo

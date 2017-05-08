@@ -1,0 +1,174 @@
+﻿eCafeteria
+Polythecnic of Porto, School of Engineering
+#EAPLI [^1]
+=======================
+
+Parts of the application were developed to show specific approaches or 
+techniques; as such, the overall application is not consistent in terms of design.
+for production ready code this would obvisously be a problem as we should strive for 
+consistency. In this case, it is acceptable as the inconsistencies are meant to provide
+samples of different valid approaches.
+
+
+Several discussions migth be raised:
+1) which layers?
+2) domain objects with persistence knowledge or not
+3) passing domain objects to the UI or not 
+4) performing calculations in memory or directly at the persistence layer
+5) factoring out common behaviour, e.g., IncomeType & ExpenseType, Income & Expense
+...
+...
+...
+
+
+--------------------------------------------------------------------------
+Project structure
+--------------------------------------------------------------------------
+
+eapli.ecafeteria.consoleapp
+	- presentation using console
+	- Main class 
+	- application properties in resource folder
+
+eapli.ecafeteria.bootstrap 
+	- bootstrap data. should be ignored on a "real" instalation
+
+eapli.ecafeteria.core 
+	- use case controllers, model, and persistence
+
+eapli.framework
+	- framework classes and interfaces
+	- presentation
+	- persistence
+
+eapli.util
+	- generic utility classes for handling files, validations, Strings, math, and console
+
+
+--------------------------------------------------------------------------
+##1) which layers
+--------------------------------------------------------------------------
+
+The application follows a traditional approach of separating the following layers:
+
+	UI | use case controllers | domain/model | persistence
+
+Access to the busines logic is guarded by use case controllers
+ 
+Generaly speaking the persistence layer is organized around the concept of Repository
+(a class acting as an in memory list) that "takes care" of the objects.
+to accomodate both in-memory and database repositories the persistence layer is actually 
+composed of interfaces and a PersistenceFactory which acts as an Abstract Factory  
+of the actual repository implementation
+
+See Persistence-AbstractFactory.pptx
+
+
+--------------------------------------------------------------------------
+##2) domain objects with persistence knowledge or not
+--------------------------------------------------------------------------
+
+Two different approaches are possible:
+- pure domain objects without any knowledge of the persistence
+- domain objects that can save and load thenselves from persistence (thus, an Active Record)
+
+In the first case, the controller is responsible for obtaining the domain objects 
+from the repository, asking the domain objects to perform the business logic and then pass
+them back to the repository. in this case, the domain objects can "easily" be tested as 
+they do not depend on any other package
+this gets trickier when we need/want to have lazy load of collections...
+
+
+In the second case, the controller asks the domain object class to load a certain instance,
+asks that object to perform the business operation and then asks the object to save itself
+back to the database
+
+
+
+--------------------------------------------------------------------------
+##3) passing domain objects to the UI or not 
+--------------------------------------------------------------------------
+
+The decision is to use domain objects outside of the controllers boundary. One could argue that domain objects should be known only "inside" the application boundary and as such other data structures should be returned to outside layers. Those data structures would i fcat be DTO (Data Transfer Objects)
+
+
+--------------------------------------------------------------------------
+##4) performing calculations in memory or directly at the persistence layer
+--------------------------------------------------------------------------
+
+Both approaches have advantages and disavantages:
+
+
+in memory
+	advantages
+		allows the use of business logic in code		
+	disavantages
+		performance my be poor
+	
+at persistence layer		
+	advantages
+		use of aggregated SQL functions is straigth forward	
+		performance	
+	disavantages
+		complicated business logic is hard to implement
+
+The BaseController provides one example of each approach for calculating the
+current month expenditure and current week expenditure.
+
+See also http://www.martinfowler.com/articles/dblogic.html
+
+
+--------------------------------------------------------------------------
+##5) factoring out common behaviour
+--------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------
+##6) can controllers call other controllers?
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+##7) should the UI/controller create domain objects directly
+--------------------------------------------------------------------------
+
+Should the rules for the Creator pattern be fully enforced, e.g., the responsibility to 
+create a Payment should be of Expense, or can the controller/UI create a Payment and pass it
+to the Expense?
+
+
+--------------------------------------------------------------------------
+##8) how to reuse behavior betwen controllers
+--------------------------------------------------------------------------
+
+application services like ListDishTypeService
+
+--------------------------------------------------------------------------
+##9) when showing movements gruped by type, who performs the sum operation? UI, Controller or Domain object?
+--------------------------------------------------------------------------
+
+* the UI might not be smart enough to compute the total sum with enough precision, and would carry a burden for the computer running the interface
+
+* the Controller might indeed perform such calculation as it has all the data is needs for a short period of time, but it is not the controller function to perform mathematical operations
+
+* the domain object might indeed be the very best resource to calculate the sum for each expense type, but it would not make sense to delegate the domain object to the interface. 
+
+--------------------------------------------------------------------------
+##10) when showing movements grouped by type, should types with no values also appear? 
+--------------------------------------------------------------------------
+this can be another strategy
+
+
+--------------------------------------------------------------------------
+##11) Should Controllers be specialized by other Use Cases?
+--------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------
+##12) Should UI be specialized by other Use Cases?
+--------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------
+##Footnotes
+[^1]:using # for headings, because === and ___ are not well combined with mac/linux/windows line breaks

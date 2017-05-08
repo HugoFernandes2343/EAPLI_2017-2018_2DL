@@ -1,0 +1,35 @@
+@startuml
+'http://plantuml.com/skinparam.html
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor Admin as Actor
+participant ChangeDishTypeUI as UI <<presentation>>
+control ChangeDishTypeController as Controller <<application>>
+participant "theDishType:DishType" as Domain <<domain>>
+database DishTypeRepository as Repository <<repository>>
+
+-> UI: doShow()
+activate UI
+    UI -> Controller: listDishTypes()
+    UI -> UI: output Dish Types
+    UI --> Actor: Ask user Dish \nType Selection
+    Actor --> UI: Select Dish Type
+
+    UI --> Actor: Ask user for description
+    Actor --> UI: Description
+
+    UI -> Controller: changeDishType(theDishType, \nnewDescription)
+    activate Controller
+        Controller -> Domain:changeDescriptionTo(newDescription)
+
+        Controller->Repository:save(theDishType)
+        Controller->UI: theDishType
+    deactivate Controller
+
+        UI-->Actor: back to menu
+deactivate UI
+@enduml

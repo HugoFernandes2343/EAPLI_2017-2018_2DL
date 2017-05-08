@@ -1,0 +1,12 @@
+-----------------
+DESIGN
+-----------------
+
+utilizar a estrutura base standard da aplicação baseada em camadas
+este caso de uso é muito semelhante ao RegisterDishType
+
+
+classe de domínio: 	Material
+controlador: 		RegisterMaterialController
+repositório:		MaterialRepository
+

@@ -1,0 +1,17 @@
+-----------------
+ANÁLISE
+-----------------
+reunião com cliente em 2017.01.27
+
+matéria prima é um ingrediente utilizado na confeção de pratos. no contexto da rastreabilidade interessa posteriormente saber que lotes foram utilizados para por exemplo avisar os utentes de eventuais problemas, ex., intoxicação alimentar
+
+uma matéria prima será caracterizada por um simples descritivo e um acrónimo. o acrónimo será unico e a principal identidade de negócio. o descritivo é opcional
+
+
+-----------------
+REGRAS DE NEGÓCIO
+-----------------
+
+uma matéria prima tem um acrónimo
+uma matéria prima pode ou não ter um descritivo
+o acrónimo da matéria prima deve ser único para todas as matérias primas registadas

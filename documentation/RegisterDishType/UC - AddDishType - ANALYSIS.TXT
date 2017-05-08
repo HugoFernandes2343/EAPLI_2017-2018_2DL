@@ -1,0 +1,36 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+	Reunião com o cliente  em 2017.03.31
+
+	* O tipo de prato é caracterizado por um acrónimo e uma descrição
+	* O tipo de prato é identificado pelo acrónimo que, por essa razão, deve ser único
+	* O tipo de prato pode estar ativo ou inativo
+	* Exemplos de tipos de prato: carne, peixe, vegetariano
+
+	* Qualquer prato é de um único tipo de prato
+	* Só os tipos de prato ativos podem ser associados a pratos
+	* Alterar o estado de um tipo de prato não tem repercussões nos pratos existentes
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+	* Um tipo de prato é criado no estado ativo
+
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+
+	* O tipo de prato tem que ter um acrónimo
+	* O acrónimo do tipo de prato não pode ser vazio nem espaço(s)
+	* O tipo de prato tem que ter uma descrição
+	* A descrição do tipo de prato não pode ser vazio ou espaço(s)
+	* Quando um tipo de prato é criado o seu estado é ativo
