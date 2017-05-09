@@ -4,31 +4,28 @@
  */
 package eapli.framework.persistence.repositories;
 
-import java.io.Serializable;
-import java.util.Optional;
-
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * A generic interface for repositories.
  *
- * @param T
- *            the class we want to manage in the repository (a table in the
- *            database)
- * @param K
- *            the class denoting the primary key of the entity in the database
+ * @param T the class we want to manage in the repository (a table in the
+ * database)
+ * @param K the class denoting the primary key of the entity in the database
  * @author Paulo Gandra Sousa
  */
-public interface DataRepository<T, K extends Serializable> extends Iterable<T> {
+public interface DataRepository<T, K extends Serializable> {
 
     /**
      * removes the specified entity from the repository.
      *
      * @param entity
      * @throws DataIntegrityViolationException
-     * @throws UnsuportedOperationException
-     *             if the delete operation makes no sense for this repository
+     * @throws UnsuportedOperationException if the delete operation makes no
+     * sense for this repository
      */
     void delete(T entity) throws DataIntegrityViolationException;
 
@@ -37,8 +34,8 @@ public interface DataRepository<T, K extends Serializable> extends Iterable<T> {
      *
      * @param entity
      * @throws DataIntegrityViolationException
-     * @throws UnsuportedOperationException
-     *             if the delete operation makes no sense for this repository
+     * @throws UnsuportedOperationException if the delete operation makes no
+     * sense for this repository
      */
     void delete(K entityId) throws DataIntegrityViolationException;
 
