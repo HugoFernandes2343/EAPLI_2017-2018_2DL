@@ -6,7 +6,7 @@ import eapli.framework.dto.DTOable;
 import eapli.framework.dto.GenericDTO;
 import eapli.framework.visitor.Visitable;
 import eapli.framework.visitor.Visitor;
-import eapli.util.DateTime;
+import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;

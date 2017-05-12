@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.util;
+package eapli.framework.util;
 
+import eapli.framework.util.Strings;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;

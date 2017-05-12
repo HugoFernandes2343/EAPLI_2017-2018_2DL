@@ -1,7 +1,7 @@
 /**
  *
  */
-package eapli.util.math;
+package eapli.framework.util.math;
 
 /**
  * An immutable matrix.

@@ -1,4 +1,4 @@
-package eapli.util;
+package eapli.framework.util;
 
 import java.io.StringReader;
 import java.io.StringWriter;

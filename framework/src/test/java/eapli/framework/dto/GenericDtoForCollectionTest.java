@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import eapli.util.Collections;
+import eapli.framework.util.Collections;
 
 /**
  *

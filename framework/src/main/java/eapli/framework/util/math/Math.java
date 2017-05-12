@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
  */
-package eapli.util.math;
+package eapli.framework.util.math;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import eapli.util.RomanNumeral;
+import eapli.framework.util.RomanNumeral;
 
 /**
  *

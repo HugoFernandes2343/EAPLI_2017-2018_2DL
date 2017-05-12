@@ -1,7 +1,7 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.framework.domain.ddd.AggregateRoot;
-import eapli.util.Strings;
+import eapli.framework.util.Strings;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

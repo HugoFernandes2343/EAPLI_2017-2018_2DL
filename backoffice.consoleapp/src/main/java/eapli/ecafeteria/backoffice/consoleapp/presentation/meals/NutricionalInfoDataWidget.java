@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.backoffice.consoleapp.presentation.meals;
 
-import eapli.util.io.Console;
+import eapli.framework.util.io.Console;
 
 /**
  *

@@ -7,7 +7,7 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
-import eapli.util.io.Console;
+import eapli.framework.util.io.Console;
 
 /**
  *

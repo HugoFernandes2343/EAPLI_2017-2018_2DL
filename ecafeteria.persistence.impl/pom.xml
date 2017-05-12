@@ -6,12 +6,11 @@
 	<groupId>eapli</groupId>
 	<artifactId>ecafeteria</artifactId>
 	<relativePath>../</relativePath>
-	<version>1.0-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
     
     <groupId>eapli.ecafeteria</groupId>
     <artifactId>persistence.impl</artifactId>
-    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>ecafeteria.persistence.impl</name>
     

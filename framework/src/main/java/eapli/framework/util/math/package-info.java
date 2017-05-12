@@ -5,4 +5,4 @@
  * @author Paulo Gandra Sousa
  *
  */
-package eapli.util.math;
+package eapli.framework.util.math;

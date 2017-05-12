@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.util;
+package eapli.framework.util;
 
+import eapli.framework.util.DateTime;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;

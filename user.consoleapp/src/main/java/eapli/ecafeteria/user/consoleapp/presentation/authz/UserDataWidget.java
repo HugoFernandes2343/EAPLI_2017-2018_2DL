@@ -1,6 +1,6 @@
 package eapli.ecafeteria.user.consoleapp.presentation.authz;
 
-import eapli.util.io.Console;
+import eapli.framework.util.io.Console;
 
 /**
  * TODO move to console.common to allow reuse from both backoffice and UtenteApp

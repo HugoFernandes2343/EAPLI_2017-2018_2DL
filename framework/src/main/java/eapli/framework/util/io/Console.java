@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
  */
-package eapli.util.io;
+package eapli.framework.util.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import eapli.util.DateTime;
+import eapli.framework.util.DateTime;
 
 /**
  * Utility class for reading different data types from the Console.

@@ -1,7 +1,7 @@
 /**
  *
  */
-package eapli.util;
+package eapli.framework.util;
 
 /**
  * @author pgsou_000

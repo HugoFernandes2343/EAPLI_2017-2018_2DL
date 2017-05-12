@@ -4,7 +4,7 @@
 package eapli.ecafeteria.domain.authz;
 
 import eapli.framework.domain.ddd.ValueObject;
-import eapli.util.Strings;
+import eapli.framework.util.Strings;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
 

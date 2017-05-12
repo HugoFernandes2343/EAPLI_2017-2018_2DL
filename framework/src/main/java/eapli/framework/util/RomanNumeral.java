@@ -1,4 +1,4 @@
-package eapli.util;
+package eapli.framework.util;
 
 /**
  * This code is from http://math.hws.edu/eck/cs124/javanotes6/c8/ex3-ans.html

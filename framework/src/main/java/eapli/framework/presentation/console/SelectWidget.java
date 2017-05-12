@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import eapli.framework.visitor.Visitor;
-import eapli.util.io.Console;
+import eapli.framework.util.io.Console;
 
 /**
  * A simple widget that lists the items of a collection and allows the user to

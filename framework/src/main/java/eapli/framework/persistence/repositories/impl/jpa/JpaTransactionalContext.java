@@ -11,7 +11,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import eapli.framework.persistence.repositories.TransactionalContext;
-import eapli.util.Strings;
+import eapli.framework.util.Strings;
 
 /**
  * An utility class for providing transactional context to JPA repositories not

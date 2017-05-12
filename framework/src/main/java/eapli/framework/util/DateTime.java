@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
  */
-package eapli.util;
+package eapli.framework.util;
 
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import eapli.util.io.Console;
+import eapli.framework.util.io.Console;
 
 /**
  * utility class for Calendar manipulation and several date and time related

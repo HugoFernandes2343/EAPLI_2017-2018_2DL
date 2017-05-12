@@ -7,7 +7,7 @@ package eapli.framework.persistence.repositories.impl.jpa;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.persistence.repositories.IterableRepository;
-import eapli.util.Strings;
+import eapli.framework.util.Strings;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Iterator;

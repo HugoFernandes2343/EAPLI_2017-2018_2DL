@@ -11,7 +11,7 @@ import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.util.io.Console;
+import eapli.framework.util.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;

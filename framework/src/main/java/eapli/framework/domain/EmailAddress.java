@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import javax.persistence.Embeddable;
 
 import eapli.framework.domain.ddd.ValueObject;
-import eapli.util.Strings;
+import eapli.framework.util.Strings;
 
 /**
  * @author Paulo Gandra Sousa

@@ -2,7 +2,7 @@ package eapli.ecafeteria.domain.authz;
 
 import eapli.framework.domain.EmailAddress;
 import eapli.framework.domain.ddd.Factory;
-import eapli.util.Strings;
+import eapli.framework.util.Strings;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;

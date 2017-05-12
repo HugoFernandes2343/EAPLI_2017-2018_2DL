@@ -11,7 +11,7 @@ import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
-import eapli.util.io.Console;
+import eapli.framework.util.io.Console;
 import java.util.HashSet;
 import java.util.Set;
 
