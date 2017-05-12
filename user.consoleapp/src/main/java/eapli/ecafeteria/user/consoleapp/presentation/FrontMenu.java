@@ -7,6 +7,7 @@ package eapli.ecafeteria.user.consoleapp.presentation;
 
 import eapli.cafeteria.consoleapp.presentation.ExitWithMessageAction;
 import eapli.cafeteria.consoleapp.presentation.authz.LoginAction;
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.user.consoleapp.presentation.authz.SignupRequestAction;
 import eapli.framework.actions.IfThenAction;
 import eapli.framework.presentation.console.AbstractUI;
@@ -31,8 +32,8 @@ public class FrontMenu extends AbstractUI {
 
     @Override
     public boolean show() {
-	drawFormTitle();
-	return doShow();
+        drawFormTitle();
+        return doShow();
     }
 
     /**
@@ -40,18 +41,18 @@ public class FrontMenu extends AbstractUI {
      */
     @Override
     public boolean doShow() {
-	final Menu menu = new Menu();
-	menu.add(new MenuItem(LOGIN_OPTION, "Login",
-		new IfThenAction(new LoginAction(), new ShowUiAction(new MainMenu()))));
-	menu.add(new MenuItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction()));
-	menu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
+        final Menu menu = new Menu();
+        menu.add(new MenuItem(LOGIN_OPTION, "Login",
+                new IfThenAction(new LoginAction(ActionRight.SELECT_MEAL), new ShowUiAction(new MainMenu()))));
+        menu.add(new MenuItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
-	final MenuRenderer renderer = new VerticalMenuRenderer(menu);
-	return renderer.show();
+        final MenuRenderer renderer = new VerticalMenuRenderer(menu);
+        return renderer.show();
     }
 
     @Override
     public String headline() {
-	return "eCAFETERIA";
+        return "eCAFETERIA";
     }
 }

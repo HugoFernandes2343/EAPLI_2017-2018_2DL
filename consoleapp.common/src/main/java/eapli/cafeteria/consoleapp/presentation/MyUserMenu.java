@@ -23,6 +23,7 @@ public class MyUserMenu extends Menu {
 
     private void buildMyUserMenu() {
         add(new MenuItem(CHANGE_PASSWORD_OPTION, "Change password", new ShowMessageAction("Not implemented yet")));
+        //TODO need to know if there are some specific action rights to check, e.g., for the POS or USER app
         add(new MenuItem(LOGIN_OPTION, "Change user (Login)", new LoginAction()));
         add(new MenuItem(LOGOUT_OPTION, "Logout", new LogoutAction()));
         add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));

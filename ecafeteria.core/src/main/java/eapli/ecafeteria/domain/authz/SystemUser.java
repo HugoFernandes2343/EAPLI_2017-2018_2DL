@@ -169,7 +169,7 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 
     public boolean isAuthorizedTo(final ActionRight... actions) {
         for (final ActionRight a : actions) {
-            if (a.canBePerformedBy(roles.roleTypes())) {
+            if (a != null && a.canBePerformedBy(roles.roleTypes())) {
                 return true;
             }
         }

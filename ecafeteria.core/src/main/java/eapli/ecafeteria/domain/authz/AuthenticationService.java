@@ -20,26 +20,34 @@ public class AuthenticationService {
      * @param pass
      * @return the authenticated user or null otherwise
      */
-    public Optional<UserSession> authenticate(Username username, Password pass) {
-	if (username == null) {
-	    throw new IllegalArgumentException("a username must be provided");
-	}
-	final Optional<SystemUser> user = retrieveUser(username);
-	if (!user.isPresent()) {
-	    return Optional.empty();
-	}
-	if (user.get().passwordMatches(pass) && user.get().isActive()) {
-	    return Optional.of(createSessionForUser(user.get()));
-	} else {
-	    return Optional.empty();
-	}
+    public Optional<UserSession> authenticate(Username username, Password pass, ActionRight... onlyWithThis) {
+        if (username == null) {
+            throw new IllegalArgumentException("a username must be provided");
+        }
+        final Optional<SystemUser> user = retrieveUser(username);
+        if (!user.isPresent()) {
+            return Optional.empty();
+        }
+        if (user.get().passwordMatches(pass) && user.get().isActive()) {
+            if (anyActionRight(onlyWithThis) || user.get().isAuthorizedTo(onlyWithThis)) {
+                return Optional.of(createSessionForUser(user.get()));
+            } else {
+                return Optional.empty();
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private boolean anyActionRight(ActionRight... onlyWithThis) {
+        return onlyWithThis.length == 0 || (onlyWithThis.length == 1 && onlyWithThis[0] == null);
     }
 
     private UserSession createSessionForUser(SystemUser user) {
-	return new UserSession(user);
+        return new UserSession(user);
     }
 
     private Optional<SystemUser> retrieveUser(Username userName) {
-	return this.repo.findOne(userName);
+        return this.repo.findOne(userName);
     }
 }

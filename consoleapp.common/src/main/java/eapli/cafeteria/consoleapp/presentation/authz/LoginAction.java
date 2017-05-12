@@ -1,5 +1,6 @@
 package eapli.cafeteria.consoleapp.presentation.authz;
 
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.Action;
 
 /**
@@ -7,8 +8,23 @@ import eapli.framework.actions.Action;
  */
 public class LoginAction implements Action {
 
+    private ActionRight onlyWithThis;
+
+    public LoginAction() {
+
+    }
+
+    /**
+     *
+     * @param onlyWithThis only if the user has this specific action right will
+     * be allowed to login
+     */
+    public LoginAction(ActionRight onlyWithThis) {
+        this.onlyWithThis = onlyWithThis;
+    }
+
     @Override
     public boolean execute() {
-	return new LoginUI().show();
+        return new LoginUI(onlyWithThis).show();
     }
 }
