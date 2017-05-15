@@ -3,12 +3,10 @@
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
+import eapli.framework.persistence.repositories.TransactionalContext;
 import java.io.Serializable;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
-import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
  * An utility class for implementing JPA repositories not running in containers.
@@ -20,11 +18,9 @@ import eapli.framework.persistence.repositories.TransactionalContext;
  * TransactionalContext interface.
  *
  * @author Paulo Gandra Sousa
- * @param <T>
- *            the entity type managed by this repository (a table in the
- *            database)
- * @param <K>
- *            the primary key of the table
+ * @param <T> the entity type managed by this repository (a table in the
+ * database)
+ * @param <K> the primary key of the table
  */
 public class JpaNotRunningInContainerRepository<T, K extends Serializable> extends JpaBaseRepository<T, K> {
 
@@ -34,30 +30,30 @@ public class JpaNotRunningInContainerRepository<T, K extends Serializable> exten
      *
      */
     public JpaNotRunningInContainerRepository(TransactionalContext txCtx) {
-	super();
-	setTxCtx(txCtx);
+        super();
+        setTxCtx(txCtx);
     }
 
     JpaNotRunningInContainerRepository(TransactionalContext txCtx, Class<T> classz) {
-	super(classz);
-	setTxCtx(txCtx);
+        super(classz);
+        setTxCtx(txCtx);
     }
 
     private void setTxCtx(TransactionalContext txCtx) {
-	if (txCtx == null || !(txCtx instanceof JpaTransactionalContext)) {
-	    throw new IllegalArgumentException();
-	}
-	this.txContext = (JpaTransactionalContext) txCtx;
+        if (txCtx == null || !(txCtx instanceof JpaTransactionalContext)) {
+            throw new IllegalArgumentException();
+        }
+        this.txContext = (JpaTransactionalContext) txCtx;
     }
 
     @Override
     @SuppressWarnings("squid:S3346")
     protected EntityManagerFactory entityManagerFactory() {
-	return this.txContext.entityManagerFactory();
+        return this.txContext.entityManagerFactory();
     }
 
     @Override
     protected EntityManager entityManager() {
-	return this.txContext.entityManager();
+        return this.txContext.entityManager();
     }
 }
