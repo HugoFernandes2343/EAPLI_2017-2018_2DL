@@ -13,10 +13,10 @@ import eapli.ecafeteria.persistence.OrganicUnitRepository;
  * @author arocha
  */
 public class JpaOrganicUnitRepository extends CafeteriaJpaRepositoryBase<OrganicUnit, Long>
-	implements OrganicUnitRepository {
+        implements OrganicUnitRepository {
 
     @Override
     public OrganicUnit findByAcronym(String acronym) {
-	return matchOne("e.acronym=:a", "a", acronym);
+        return matchOne("e.acronym=:a", "a", acronym);
     }
 }

@@ -13,6 +13,6 @@ public class InMemoryUserRepository extends InMemoryRepository<SystemUser, Usern
 
     @Override
     protected Username newPK(SystemUser u) {
-	return u.username();
+        return u.username();
     }
 }

@@ -16,21 +16,21 @@ public class ListDishUI extends AbstractListUI<Dish> {
     private final ListDishController theController = new ListDishController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected Iterable<Dish> listOfElements() {
-	return this.theController.allDishes();
+        return this.theController.allDishes();
     }
 
     @Override
     protected Visitor<Dish> elementPrinter() {
-	return new DishPrinter();
+        return new DishPrinter();
     }
 
     @Override
     protected String elementName() {
-	return "Dish";
+        return "Dish";
     }
 }

@@ -6,10 +6,10 @@ package eapli.ecafeteria.domain.authz.exceptions;
 public class UserSessionNotInitiatedException extends RuntimeException {
 
     public UserSessionNotInitiatedException() {
-	super();
+        super();
     }
 
     public UserSessionNotInitiatedException(String message) {
-	super(message);
+        super(message);
     }
 }

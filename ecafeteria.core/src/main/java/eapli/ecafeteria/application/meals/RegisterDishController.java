@@ -24,19 +24,19 @@ public class RegisterDishController implements Controller {
     private DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
-	    final double price) throws DataIntegrityViolationException, DataConcurrencyException {
+            final double price) throws DataIntegrityViolationException, DataConcurrencyException {
 
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-	final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
-		Money.euros(price));
+        final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
+                Money.euros(price));
 
-	Dish ret = this.dishRepository.save(newDish);
+        Dish ret = this.dishRepository.save(newDish);
 
-	return ret;
+        return ret;
     }
 
     public Iterable<DishType> dishTypes() {
-	return this.svc.activeDishTypes();
+        return this.svc.activeDishTypes();
     }
 }

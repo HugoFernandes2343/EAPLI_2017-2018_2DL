@@ -10,6 +10,6 @@ class JpaMaterialRepository extends CafeteriaJpaRepositoryBase<Material, Long> i
 
     @Override
     public Material findByAcronym(String acronym) {
-	return matchOne("e.acronym=:acronym", "acronym", acronym);
+        return matchOne("e.acronym=:acronym", "acronym", acronym);
     }
 }

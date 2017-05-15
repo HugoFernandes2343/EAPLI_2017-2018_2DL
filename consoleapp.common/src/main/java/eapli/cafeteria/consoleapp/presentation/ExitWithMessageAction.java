@@ -15,7 +15,7 @@ public class ExitWithMessageAction implements Action {
 
     @Override
     public boolean execute() {
-	System.out.println("Bye, bye.");
-	return true;
+        System.out.println("Bye, bye.");
+        return true;
     }
 }

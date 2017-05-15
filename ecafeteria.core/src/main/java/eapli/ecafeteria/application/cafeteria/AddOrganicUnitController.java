@@ -23,9 +23,9 @@ public class AddOrganicUnitController implements Controller {
     private final OrganicUnitRepository organicUnitRepository = PersistenceContext.repositories().organicUnits();
 
     public OrganicUnit addOrganicUnit(String acronym, String name, String description)
-	    throws DataIntegrityViolationException, DataConcurrencyException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-	return this.organicUnitRepository.save(new OrganicUnit(acronym, name, description));
+        return this.organicUnitRepository.save(new OrganicUnit(acronym, name, description));
     }
 }

@@ -23,10 +23,10 @@ public class RegisterMaterialController implements Controller {
     private final MaterialRepository repository = PersistenceContext.repositories().materials();
 
     public Material registerMaterial(String acronym, String description)
-	    throws DataIntegrityViolationException, DataConcurrencyException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
-	final Material mat = new Material(acronym, description);
-	return this.repository.save(mat);
+        final Material mat = new Material(acronym, description);
+        return this.repository.save(mat);
     }
 }

@@ -9,6 +9,6 @@ public class ActivateDeactivateDishTypeAction implements Action {
 
     @Override
     public boolean execute() {
-	return new ActivateDeactivateDishTypeUI().show();
+        return new ActivateDeactivateDishTypeUI().show();
     }
 }

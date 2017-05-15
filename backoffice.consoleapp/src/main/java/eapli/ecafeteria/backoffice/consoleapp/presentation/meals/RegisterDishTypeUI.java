@@ -21,24 +21,24 @@ public class RegisterDishTypeUI extends AbstractUI {
     private final RegisterDishTypeController theController = new RegisterDishTypeController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected boolean doShow() {
-	final String acronym = Console.readLine("Dish Type Acronym:");
-	final String description = Console.readLine("Dish Type Description:");
+        final String acronym = Console.readLine("Dish Type Acronym:");
+        final String description = Console.readLine("Dish Type Description:");
 
-	try {
-	    this.theController.registerDishType(acronym, description);
-	} catch (final DataConcurrencyException | DataIntegrityViolationException e) {
-	    System.out.println("That acronym is already in use.");
-	}
-	return false;
+        try {
+            this.theController.registerDishType(acronym, description);
+        } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
+            System.out.println("That acronym is already in use.");
+        }
+        return false;
     }
 
     @Override
     public String headline() {
-	return "Register Dish Type";
+        return "Register Dish Type";
     }
 }

@@ -16,21 +16,21 @@ public class ListMaterialUI extends AbstractListUI<Material> {
     private final ListMaterialController theController = new ListMaterialController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected Iterable<Material> listOfElements() {
-	return this.theController.all();
+        return this.theController.all();
     }
 
     @Override
     protected Visitor<Material> elementPrinter() {
-	return new MaterialPrinter();
+        return new MaterialPrinter();
     }
 
     @Override
     protected String elementName() {
-	return "Material";
+        return "Material";
     }
 }

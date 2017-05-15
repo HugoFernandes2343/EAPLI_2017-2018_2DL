@@ -39,25 +39,25 @@ public class MaterialTest {
 
     @Test(expected = IllegalStateException.class)
     public void testAcronymMustNotBeEmpty() {
-	System.out.println("must have non-empty acronym");
-	new Material("", "");
+        System.out.println("must have non-empty acronym");
+        new Material("", "");
     }
 
     @Test(expected = IllegalStateException.class)
     public void testAcronymMustNotBeNull() {
-	System.out.println("must have an acronym");
-	new Material(null, "");
+        System.out.println("must have an acronym");
+        new Material(null, "");
     }
 
     @Test
     public void testChangeDescriptionTo() {
-	System.out.println("attest changeDescriptionTo");
-	final Material instance = new Material("eggs", "Eggs (chicken, duck)");
-	final String newDescription = "new description";
-	instance.changeDescriptionTo(newDescription);
-	final String expResult = newDescription;
-	final String result = instance.description();
-	assertEquals(expResult, result);
+        System.out.println("attest changeDescriptionTo");
+        final Material instance = new Material("eggs", "Eggs (chicken, duck)");
+        final String newDescription = "new description";
+        instance.changeDescriptionTo(newDescription);
+        final String expResult = newDescription;
+        final String result = instance.description();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -65,12 +65,12 @@ public class MaterialTest {
      */
     @Test
     public void testId() {
-	System.out.println("id");
-	final String acronym = "eggs";
-	final Material instance = new Material(acronym, "eggs");
-	final boolean expResult = true;
-	final boolean result = acronym.equals(instance.id());
-	assertEquals(expResult, result);
+        System.out.println("id");
+        final String acronym = "eggs";
+        final Material instance = new Material(acronym, "eggs");
+        final boolean expResult = true;
+        final boolean result = acronym.equals(instance.id());
+        assertEquals(expResult, result);
     }
 
     /**
@@ -78,12 +78,12 @@ public class MaterialTest {
      */
     @Test
     public void testIs() {
-	System.out.println("Test is method");
-	final String id = "eggs";
-	final String description = "eggs";
-	final Material instance = new Material(id, description);
-	final boolean expResult = true;
-	final boolean result = instance.is(id);
-	assertEquals(expResult, result);
+        System.out.println("Test is method");
+        final String id = "eggs";
+        final String description = "eggs";
+        final Material instance = new Material(id, description);
+        final boolean expResult = true;
+        final boolean result = instance.is(id);
+        assertEquals(expResult, result);
     }
 }

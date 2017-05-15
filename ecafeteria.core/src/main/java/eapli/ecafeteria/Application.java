@@ -17,21 +17,21 @@ public class Application {
     private static final AppSettings SETTINGS = new AppSettings();
 
     public static AppSession session() {
-	return SESSION;
+        return SESSION;
     }
 
     public static AppSettings settings() {
-	return SETTINGS;
+        return SETTINGS;
     }
 
     /**
      * helper method to check the permission of the currently logged in user
      */
     public static void ensurePermissionOfLoggedInUser(ActionRight... actions) {
-	session().ensurePermissionOfLoggedInUser(actions);
+        session().ensurePermissionOfLoggedInUser(actions);
     }
 
     private Application() {
-	// private visibility to ensure singleton & utility
+        // private visibility to ensure singleton & utility
     }
 }

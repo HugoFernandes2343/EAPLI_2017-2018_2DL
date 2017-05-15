@@ -20,36 +20,36 @@ public class SignupRequestUI extends AbstractUI {
     private final SignupController theController = new SignupController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected boolean doShow() {
-	final UserDataWidget userData = new UserDataWidget();
+        final UserDataWidget userData = new UserDataWidget();
 
-	userData.show();
+        userData.show();
 
-	final SelectWidget<OrganicUnit> selector = new SelectWidget<>("Organic units:",
-		this.theController.organicUnits(), new OrganicUnitUIVisitor());
-	selector.show();
+        final SelectWidget<OrganicUnit> selector = new SelectWidget<>("Organic units:",
+                this.theController.organicUnits(), new OrganicUnitUIVisitor());
+        selector.show();
 
-	final OrganicUnit organicUnit = selector.selectedElement();
+        final OrganicUnit organicUnit = selector.selectedElement();
 
-	final String mecanographicNumber = Console.readLine("Mecanographic Number");
+        final String mecanographicNumber = Console.readLine("Mecanographic Number");
 
-	try {
-	    this.theController.signup(userData.username(), userData.password(), userData.firstName(),
-		    userData.lastName(), userData.email(), organicUnit, mecanographicNumber);
-	} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-	    // TODO Auto-generated catch block
-	    Logger.getLogger(SignupRequestUI.class.getName()).log(Level.SEVERE, null, e);
-	}
+        try {
+            this.theController.signup(userData.username(), userData.password(), userData.firstName(),
+                    userData.lastName(), userData.email(), organicUnit, mecanographicNumber);
+        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            // TODO Auto-generated catch block
+            Logger.getLogger(SignupRequestUI.class.getName()).log(Level.SEVERE, null, e);
+        }
 
-	return false;
+        return false;
     }
 
     @Override
     public String headline() {
-	return "Sign Up";
+        return "Sign Up";
     }
 }

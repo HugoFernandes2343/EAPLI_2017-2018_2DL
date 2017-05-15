@@ -21,50 +21,50 @@ public class AppSettings {
     private final Properties applicationProperties = new Properties();
 
     public AppSettings() {
-	loadProperties();
+        loadProperties();
     }
 
     private void loadProperties() {
-	InputStream propertiesStream = null;
-	try {
-	    propertiesStream = this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE);
-	    if (propertiesStream != null) {
-		this.applicationProperties.load(propertiesStream);
-	    } else {
-		throw new FileNotFoundException(
-			"property file '" + PROPERTIES_RESOURCE + "' not found in the classpath");
-	    }
-	} catch (final IOException exio) {
-	    setDefaultProperties();
+        InputStream propertiesStream = null;
+        try {
+            propertiesStream = this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE);
+            if (propertiesStream != null) {
+                this.applicationProperties.load(propertiesStream);
+            } else {
+                throw new FileNotFoundException(
+                        "property file '" + PROPERTIES_RESOURCE + "' not found in the classpath");
+            }
+        } catch (final IOException exio) {
+            setDefaultProperties();
 
-	    Logger.getLogger(AppSettings.class.getName()).log(Level.SEVERE, null, exio);
-	} finally {
-	    if (propertiesStream != null) {
-		try {
-		    propertiesStream.close();
-		} catch (final IOException ex) {
-		    Logger.getLogger(AppSettings.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	    }
-	}
+            Logger.getLogger(AppSettings.class.getName()).log(Level.SEVERE, null, exio);
+        } finally {
+            if (propertiesStream != null) {
+                try {
+                    propertiesStream.close();
+                } catch (final IOException ex) {
+                    Logger.getLogger(AppSettings.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     private void setDefaultProperties() {
-	this.applicationProperties.setProperty(REPOSITORY_FACTORY_KEY,
-		"eapli.ecafeteria.persistence.jpa.JpaRepositoryFactory");
-	this.applicationProperties.setProperty(UI_MENU_LAYOUT_KEY, "horizontal");
-	this.applicationProperties.setProperty(PERSISTENCE_UNIT_KEY, "eapli.eCafeteriaPU");
+        this.applicationProperties.setProperty(REPOSITORY_FACTORY_KEY,
+                "eapli.ecafeteria.persistence.jpa.JpaRepositoryFactory");
+        this.applicationProperties.setProperty(UI_MENU_LAYOUT_KEY, "horizontal");
+        this.applicationProperties.setProperty(PERSISTENCE_UNIT_KEY, "eapli.eCafeteriaPU");
     }
 
     public Boolean isMenuLayoutHorizontal() {
-	return "horizontal".equalsIgnoreCase(this.applicationProperties.getProperty(UI_MENU_LAYOUT_KEY));
+        return "horizontal".equalsIgnoreCase(this.applicationProperties.getProperty(UI_MENU_LAYOUT_KEY));
     }
 
     public String getPersistenceUnitName() {
-	return this.applicationProperties.getProperty(PERSISTENCE_UNIT_KEY);
+        return this.applicationProperties.getProperty(PERSISTENCE_UNIT_KEY);
     }
 
     public String getRepositoryFactory() {
-	return this.applicationProperties.getProperty(REPOSITORY_FACTORY_KEY);
+        return this.applicationProperties.getProperty(REPOSITORY_FACTORY_KEY);
     }
 }

@@ -16,30 +16,30 @@ class UserDataWidget {
     private String email;
 
     public void show() {
-	this.username = Console.readLine("Username");
-	this.password = Console.readLine("Password");
-	this.firstName = Console.readLine("First Name");
-	this.lastName = Console.readLine("Last Name");
-	this.email = Console.readLine("E-Mail");
+        this.username = Console.readLine("Username");
+        this.password = Console.readLine("Password");
+        this.firstName = Console.readLine("First Name");
+        this.lastName = Console.readLine("Last Name");
+        this.email = Console.readLine("E-Mail");
     }
 
     public String username() {
-	return this.username;
+        return this.username;
     }
 
     public String password() {
-	return this.password;
+        return this.password;
     }
 
     public String firstName() {
-	return this.firstName;
+        return this.firstName;
     }
 
     public String lastName() {
-	return this.lastName;
+        return this.lastName;
     }
 
     public String email() {
-	return this.email;
+        return this.email;
     }
 }

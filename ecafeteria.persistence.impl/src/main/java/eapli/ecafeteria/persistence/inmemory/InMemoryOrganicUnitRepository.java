@@ -14,10 +14,10 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  * @author arocha
  */
 public class InMemoryOrganicUnitRepository extends InMemoryRepositoryWithLongPK<OrganicUnit>
-	implements OrganicUnitRepository {
+        implements OrganicUnitRepository {
 
     @Override
     public OrganicUnit findByAcronym(String acronym) {
-	return matchOne(e -> e.id().equals(acronym));
+        return matchOne(e -> e.id().equals(acronym));
     }
 }

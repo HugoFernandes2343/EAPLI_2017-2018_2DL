@@ -12,11 +12,11 @@ public class InMemoryDishRepository extends InMemoryRepository<Dish, Designation
 
     @Override
     public Dish findByName(Designation name) {
-	return matchOne(e -> e.name().equals(name));
+        return matchOne(e -> e.name().equals(name));
     }
 
     @Override
     protected Designation newPK(Dish entity) {
-	return entity.id();
+        return entity.id();
     }
 }

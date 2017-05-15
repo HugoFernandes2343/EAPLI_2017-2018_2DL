@@ -15,7 +15,7 @@ public class ListMaterialController implements Controller {
     private final MaterialRepository repository = PersistenceContext.repositories().materials();
 
     public Iterable<Material> all() {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-	return this.repository.findAll();
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return this.repository.findAll();
     }
 }

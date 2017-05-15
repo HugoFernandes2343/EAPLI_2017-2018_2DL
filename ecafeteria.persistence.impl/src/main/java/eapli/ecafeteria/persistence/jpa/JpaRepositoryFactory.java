@@ -19,41 +19,41 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public UserRepository users(TransactionalContext autoTx) {
-	return new JpaUserRepository(autoTx);
+        return new JpaUserRepository(autoTx);
     }
 
     @Override
     public DishTypeRepository dishTypes() {
-	return new JpaDishTypeRepository();
+        return new JpaDishTypeRepository();
     }
 
     @Override
     public OrganicUnitRepository organicUnits() {
-	return new JpaOrganicUnitRepository();
+        return new JpaOrganicUnitRepository();
     }
 
     @Override
     public JpaCafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx) {
-	return new JpaCafeteriaUserRepository(autoTx);
+        return new JpaCafeteriaUserRepository(autoTx);
     }
 
     @Override
     public SignupRequestRepository signupRequests(TransactionalContext autoTx) {
-	return new JpaSignupRequestRepository(autoTx);
+        return new JpaSignupRequestRepository(autoTx);
     }
 
     @Override
     public DishRepository dishes() {
-	return new JpaDishRepository();
+        return new JpaDishRepository();
     }
 
     @Override
     public MaterialRepository materials() {
-	return new JpaMaterialRepository();
+        return new JpaMaterialRepository();
     }
 
     @Override
     public TransactionalContext buildTransactionalContext() {
-	return new JpaTransactionalContext(Application.settings().getPersistenceUnitName());
+        return new JpaTransactionalContext(Application.settings().getPersistenceUnitName());
     }
 }

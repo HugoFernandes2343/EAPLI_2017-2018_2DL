@@ -15,6 +15,6 @@ public class RegisterDishTypeAction implements Action {
 
     @Override
     public boolean execute() {
-	return new RegisterDishTypeUI().show();
+        return new RegisterDishTypeUI().show();
     }
 }

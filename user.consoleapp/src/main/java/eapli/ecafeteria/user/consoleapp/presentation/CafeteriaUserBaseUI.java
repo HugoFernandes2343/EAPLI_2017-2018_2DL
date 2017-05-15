@@ -18,19 +18,19 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI {
     protected abstract CafeteriaUserBaseController controller();
 
     public String showBalance() {
-	return "CURRENT BALANCE OF YOUR USERCARD: " + controller().balance().toString();
+        return "CURRENT BALANCE OF YOUR USERCARD: " + controller().balance().toString();
     }
 
     @Override
     public String headline() {
-	return "eCAFETERIA [@" + Application.session().session().authenticatedUser().id() + "]   " + showBalance();
+        return "eCAFETERIA [@" + Application.session().session().authenticatedUser().id() + "]   " + showBalance();
     }
 
     @Override
     protected void drawFormTitle(String title) {
-	// drawFormBorder();
-	final String titleBorder = BORDER.substring(0, 2) + " " + title;
-	System.out.println(titleBorder);
-	drawFormBorder();
+        // drawFormBorder();
+        final String titleBorder = BORDER.substring(0, 2) + " " + title;
+        System.out.println(titleBorder);
+        drawFormBorder();
     }
 }

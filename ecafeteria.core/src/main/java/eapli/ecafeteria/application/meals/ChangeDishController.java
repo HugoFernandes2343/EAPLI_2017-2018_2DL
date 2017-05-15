@@ -26,28 +26,28 @@ public class ChangeDishController implements Controller {
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Iterable<Dish> allDishes() {
-	return this.svc.allDishes();
+        return this.svc.allDishes();
     }
 
     public void changeDishPrice(Dish dish, Money newPrice)
-	    throws DataConcurrencyException, DataIntegrityViolationException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-	if (dish == null) {
-	    throw new IllegalArgumentException();
-	}
-	dish.changePriceTo(newPrice);
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        if (dish == null) {
+            throw new IllegalArgumentException();
+        }
+        dish.changePriceTo(newPrice);
 
-	Dish ret = this.dishRepository.save(dish);
+        Dish ret = this.dishRepository.save(dish);
     }
 
     public void changeDishNutricionalInfo(Dish dish, NutricionalInfo newNutricionalInfo)
-	    throws DataConcurrencyException, DataIntegrityViolationException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-	if (dish == null) {
-	    throw new IllegalArgumentException();
-	}
-	dish.changeNutricionalInfoTo(newNutricionalInfo);
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        if (dish == null) {
+            throw new IllegalArgumentException();
+        }
+        dish.changeNutricionalInfoTo(newNutricionalInfo);
 
-	Dish ret = this.dishRepository.save(dish);
+        Dish ret = this.dishRepository.save(dish);
     }
 }

@@ -25,16 +25,16 @@ public class ChangeDishTypeController implements Controller {
     private final DishTypeRepository repo = PersistenceContext.repositories().dishTypes();
 
     public DishType changeDishType(DishType theDishType, String newDescription)
-	    throws DataConcurrencyException, DataIntegrityViolationException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-	if (theDishType == null) {
-	    throw new IllegalStateException();
-	}
+        if (theDishType == null) {
+            throw new IllegalStateException();
+        }
 
-	theDishType.changeDescriptionTo(newDescription);
+        theDishType.changeDescriptionTo(newDescription);
 
-	return this.repo.save(theDishType);
+        return this.repo.save(theDishType);
     }
 
     /**
@@ -43,6 +43,6 @@ public class ChangeDishTypeController implements Controller {
      * @return
      */
     public Iterable<DishType> listDishTypes() {
-	return this.svc.activeDishTypes();
+        return this.svc.activeDishTypes();
     }
 }

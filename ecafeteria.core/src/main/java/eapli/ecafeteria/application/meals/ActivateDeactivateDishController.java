@@ -24,16 +24,16 @@ public class ActivateDeactivateDishController implements Controller {
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Iterable<Dish> allDishes() {
-	return this.svc.allDishes();
+        return this.svc.allDishes();
     }
 
     public void changeDishState(Dish dish) throws DataConcurrencyException, DataIntegrityViolationException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-	if (dish == null) {
-	    throw new IllegalArgumentException();
-	}
-	dish.toogleState();
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        if (dish == null) {
+            throw new IllegalArgumentException();
+        }
+        dish.toogleState();
 
-	Dish ret = this.dishRepository.save(dish);
+        Dish ret = this.dishRepository.save(dish);
     }
 }

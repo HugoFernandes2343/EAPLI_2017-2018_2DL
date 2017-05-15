@@ -18,35 +18,35 @@ public class ActivateDeactivateDishTypeUI extends AbstractUI {
     private final ActivateDeactivateDishTypeController theController = new ActivateDeactivateDishTypeController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected boolean doShow() {
 
-	final Iterable<DishType> allDishTypes = this.theController.allDishTypes();
-	if (!allDishTypes.iterator().hasNext()) {
-	    System.out.println("There are no registered Dish Types");
-	} else {
-	    final SelectWidget<DishType> selector = new SelectWidget<>("Dish types:", allDishTypes,
-		    new DishTypePrinter());
-	    selector.show();
-	    final DishType updtDishType = selector.selectedElement();
-	    try {
-		this.theController.changeDishTypeState(updtDishType);
-	    } catch (DataConcurrencyException ex) {
-		System.out.println(
-			"It is not possible to change the dish type state because it was changed by another user");
-	    } catch (DataIntegrityViolationException ex) {
-		// should not happen!
-		Logger.getLogger(ActivateDeactivateDishTypeUI.class.getName()).log(Level.SEVERE, null, ex);
-	    }
-	}
-	return true;
+        final Iterable<DishType> allDishTypes = this.theController.allDishTypes();
+        if (!allDishTypes.iterator().hasNext()) {
+            System.out.println("There are no registered Dish Types");
+        } else {
+            final SelectWidget<DishType> selector = new SelectWidget<>("Dish types:", allDishTypes,
+                    new DishTypePrinter());
+            selector.show();
+            final DishType updtDishType = selector.selectedElement();
+            try {
+                this.theController.changeDishTypeState(updtDishType);
+            } catch (DataConcurrencyException ex) {
+                System.out.println(
+                        "It is not possible to change the dish type state because it was changed by another user");
+            } catch (DataIntegrityViolationException ex) {
+                // should not happen!
+                Logger.getLogger(ActivateDeactivateDishTypeUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return true;
     }
 
     @Override
     public String headline() {
-	return "Activate / Deactivate Dish Types";
+        return "Activate / Deactivate Dish Types";
     }
 }

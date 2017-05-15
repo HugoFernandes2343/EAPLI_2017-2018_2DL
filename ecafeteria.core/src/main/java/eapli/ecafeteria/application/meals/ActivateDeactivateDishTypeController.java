@@ -24,15 +24,15 @@ public class ActivateDeactivateDishTypeController implements Controller {
     private final DishTypeRepository dishTypeRepository = PersistenceContext.repositories().dishTypes();
 
     public Iterable<DishType> allDishTypes() {
-	return this.svc.allDishTypes();
+        return this.svc.allDishTypes();
     }
 
     public void changeDishTypeState(DishType dType) throws DataConcurrencyException, DataIntegrityViolationException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-	if (dType == null) {
-	    throw new IllegalStateException();
-	}
-	dType.toogleState();
-	this.dishTypeRepository.save(dType);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        if (dType == null) {
+            throw new IllegalStateException();
+        }
+        dType.toogleState();
+        this.dishTypeRepository.save(dType);
     }
 }

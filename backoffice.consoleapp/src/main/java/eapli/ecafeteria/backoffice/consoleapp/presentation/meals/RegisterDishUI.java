@@ -18,37 +18,37 @@ public class RegisterDishUI extends AbstractUI {
     private final RegisterDishController theController = new RegisterDishController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected boolean doShow() {
-	final Iterable<DishType> dishTypes = this.theController.dishTypes();
+        final Iterable<DishType> dishTypes = this.theController.dishTypes();
 
-	final SelectWidget<DishType> selector = new SelectWidget<>("Dish types:", dishTypes, new DishTypePrinter());
-	selector.show();
-	final DishType theDishType = selector.selectedElement();
+        final SelectWidget<DishType> selector = new SelectWidget<>("Dish types:", dishTypes, new DishTypePrinter());
+        selector.show();
+        final DishType theDishType = selector.selectedElement();
 
-	final String name = Console.readLine("Name");
+        final String name = Console.readLine("Name");
 
-	final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
+        final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
 
-	nutricionalData.show();
+        nutricionalData.show();
 
-	final double price = Console.readDouble("Price");
+        final double price = Console.readDouble("Price");
 
-	try {
-	    this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
-		    price);
-	} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-	    System.out.println("You tried to enter a dish which already exists in the database.");
-	}
+        try {
+            this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
+                    price);
+        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            System.out.println("You tried to enter a dish which already exists in the database.");
+        }
 
-	return false;
+        return false;
     }
 
     @Override
     public String headline() {
-	return "Register Dish";
+        return "Register Dish";
     }
 }

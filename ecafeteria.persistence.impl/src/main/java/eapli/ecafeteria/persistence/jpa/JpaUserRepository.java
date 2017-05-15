@@ -14,6 +14,6 @@ import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
 class JpaUserRepository extends JpaAutoTxRepository<SystemUser, Username> implements UserRepository {
 
     public JpaUserRepository(TransactionalContext autoTx) {
-	super(Application.settings().getPersistenceUnitName(), autoTx);
+        super(Application.settings().getPersistenceUnitName(), autoTx);
     }
 }

@@ -15,7 +15,7 @@ import eapli.framework.domain.Money;
 public class CafeteriaUserBaseController implements Controller {
 
     public Money balance() {
-	// TODO get the actual balance of the user
-	return Money.euros(0);
+        // TODO get the actual balance of the user
+        return Money.euros(0);
     }
 }

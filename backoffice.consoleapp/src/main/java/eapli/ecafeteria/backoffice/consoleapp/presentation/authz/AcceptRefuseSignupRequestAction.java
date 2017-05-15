@@ -9,6 +9,6 @@ public class AcceptRefuseSignupRequestAction implements Action {
 
     @Override
     public boolean execute() {
-	return new AcceptRefuseSignupRequestUI().show();
+        return new AcceptRefuseSignupRequestUI().show();
     }
 }

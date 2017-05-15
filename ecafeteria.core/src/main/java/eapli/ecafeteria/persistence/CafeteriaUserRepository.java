@@ -4,7 +4,6 @@ import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteria.MecanographicNumber;
 import eapli.framework.persistence.repositories.DataRepository;
-import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
  *
@@ -15,8 +14,7 @@ public interface CafeteriaUserRepository extends DataRepository<CafeteriaUser, M
     /**
      * returns the cafeteria user (utente) whose username is given
      *
-     * @param name
-     *            the username to search for
+     * @param name the username to search for
      * @return
      */
     CafeteriaUser findByUsername(Username name);

@@ -6,7 +6,6 @@
 package eapli.ecafeteria.domain.meals;
 
 import org.junit.*;
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -35,31 +34,31 @@ public class DishTypeTest {
 
     @Test
     public void ensureDishTypeHasAnAcronymAndDescription() {
-	new DishType("Veg", "Vegetarian");
+        new DishType("Veg", "Vegetarian");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAcronymMustNotBeEmpty() {
-	System.out.println("must have non-empty acronym");
-	new DishType("", "vegetarian dish");
+        System.out.println("must have non-empty acronym");
+        new DishType("", "vegetarian dish");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAcronymMustNotBeNull() {
-	System.out.println("must have an acronym");
-	new DishType(null, "vegetarian dish");
+        System.out.println("must have an acronym");
+        new DishType(null, "vegetarian dish");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDescriptionMustNotBeEmpty() {
-	System.out.println("must have non-empty description");
-	new DishType("veg1", "");
+        System.out.println("must have non-empty description");
+        new DishType("veg1", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDescriptionMustNotBeNull() {
-	System.out.println("must have a description");
-	new DishType("veg1", null);
+        System.out.println("must have a description");
+        new DishType("veg1", null);
     }
 
     /**
@@ -67,14 +66,14 @@ public class DishTypeTest {
      */
     @Test
     public void testIsActive() {
-	System.out.println("isActive - normal behaviour");
+        System.out.println("isActive - normal behaviour");
 
-	System.out.println("Attest 'is' method - Normal Behaviour");
-	final String acronym = "vege001";
-	final DishType instance = new DishType(acronym, "vegetarian dish");
-	final boolean expResult = true;
-	final boolean result = instance.is(acronym);
-	assertEquals(expResult, result);
+        System.out.println("Attest 'is' method - Normal Behaviour");
+        final String acronym = "vege001";
+        final DishType instance = new DishType(acronym, "vegetarian dish");
+        final boolean expResult = true;
+        final boolean result = instance.is(acronym);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -82,12 +81,12 @@ public class DishTypeTest {
      */
     @Test
     public void testChangeDishTypeState() {
-	System.out.println("changeDishTypeState");
-	final DishType instance = new DishType("vege005", "vegetarian dish");
-	instance.toogleState();
-	final boolean expResult = false;
-	final boolean result = instance.isActive();
-	assertEquals(expResult, result);
+        System.out.println("changeDishTypeState");
+        final DishType instance = new DishType("vege005", "vegetarian dish");
+        instance.toogleState();
+        final boolean expResult = false;
+        final boolean result = instance.isActive();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -95,27 +94,27 @@ public class DishTypeTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testchangeDescriptionToMustNotBeNull() {
-	System.out.println("ChangeDescriptionTo -New description must not be null");
-	final DishType instance = new DishType("vege005", "vegetarian dish");
-	instance.changeDescriptionTo(null);
+        System.out.println("ChangeDescriptionTo -New description must not be null");
+        final DishType instance = new DishType("vege005", "vegetarian dish");
+        instance.changeDescriptionTo(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testchangeDescriptionToMustNotBeEmpty() {
-	System.out.println("ChangeDescriptionTo -New description must not be empty");
-	final DishType instance = new DishType("vege005", "vegetarian dish");
-	instance.changeDescriptionTo("");
+        System.out.println("ChangeDescriptionTo -New description must not be empty");
+        final DishType instance = new DishType("vege005", "vegetarian dish");
+        instance.changeDescriptionTo("");
     }
 
     @Test
     public void testChangeDescriptionTo() {
-	System.out.println("attest changeDescriptionTo");
-	final DishType instance = new DishType("vege005", "vegetarian dish");
-	final String newDescription = "new description";
-	instance.changeDescriptionTo(newDescription);
-	final String expResult = newDescription;
-	final String result = instance.description();
-	assertEquals(expResult, result);
+        System.out.println("attest changeDescriptionTo");
+        final DishType instance = new DishType("vege005", "vegetarian dish");
+        final String newDescription = "new description";
+        instance.changeDescriptionTo(newDescription);
+        final String expResult = newDescription;
+        final String result = instance.description();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -123,12 +122,12 @@ public class DishTypeTest {
      */
     @Test
     public void testId() {
-	System.out.println("id");
-	final String acronym = "veg";
-	final DishType instance = new DishType(acronym, "vegetarian dish");
-	final boolean expResult = true;
-	final boolean result = acronym.equals(instance.id());
-	assertEquals(expResult, result);
+        System.out.println("id");
+        final String acronym = "veg";
+        final DishType instance = new DishType(acronym, "vegetarian dish");
+        final boolean expResult = true;
+        final boolean result = acronym.equals(instance.id());
+        assertEquals(expResult, result);
 
     }
 
@@ -137,12 +136,12 @@ public class DishTypeTest {
      */
     @Test
     public void testIs() {
-	System.out.println("Attest is method");
-	final String id = "veg";
-	final String description = "vegetarian dish";
-	final DishType instance = new DishType(id, description);
-	final boolean expResult = true;
-	final boolean result = instance.is(id);
-	assertEquals(expResult, result);
+        System.out.println("Attest is method");
+        final String id = "veg";
+        final String description = "vegetarian dish";
+        final DishType instance = new DishType(id, description);
+        final boolean expResult = true;
+        final boolean result = instance.is(id);
+        assertEquals(expResult, result);
     }
 }

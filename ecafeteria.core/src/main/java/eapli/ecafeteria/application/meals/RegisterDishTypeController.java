@@ -23,10 +23,10 @@ public class RegisterDishTypeController implements Controller {
     private final DishTypeRepository repository = PersistenceContext.repositories().dishTypes();
 
     public DishType registerDishType(String acronym, String description)
-	    throws DataIntegrityViolationException, DataConcurrencyException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-	final DishType newDishType = new DishType(acronym, description);
-	return this.repository.save(newDishType);
+        final DishType newDishType = new DishType(acronym, description);
+        return this.repository.save(newDishType);
     }
 }

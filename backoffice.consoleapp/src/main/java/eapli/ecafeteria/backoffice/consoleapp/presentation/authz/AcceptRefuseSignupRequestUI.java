@@ -25,43 +25,43 @@ public class AcceptRefuseSignupRequestUI extends AbstractUI {
     private final AcceptRefuseSignupRequestController theController = new AcceptRefuseSignupRequestController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected boolean doShow() {
-	final SelectWidget<SignupRequest> selector = new SelectWidget<SignupRequest>("Pending signups",
-		this.theController.listPendingSignupRequests(), new SignupRequestPrinter());
-	selector.show();
-	final SignupRequest theSignupRequest = selector.selectedElement();
-	if (theSignupRequest != null) {
-	    System.out.println("1. Accept Signup Request");
-	    System.out.println("2. Refuse Signup Request");
-	    System.out.println("0. Exit");
+        final SelectWidget<SignupRequest> selector = new SelectWidget<SignupRequest>("Pending signups",
+                this.theController.listPendingSignupRequests(), new SignupRequestPrinter());
+        selector.show();
+        final SignupRequest theSignupRequest = selector.selectedElement();
+        if (theSignupRequest != null) {
+            System.out.println("1. Accept Signup Request");
+            System.out.println("2. Refuse Signup Request");
+            System.out.println("0. Exit");
 
-	    final int option = Console.readOption(1, 2, 0);
-	    // System.out.println("No valid option selected");
-	    try {
-		switch (option) {
-		case 1:
-		    this.theController.acceptSignupRequest(theSignupRequest);
-		    break;
-		case 2:
-		    this.theController.refuseSignupRequest(theSignupRequest);
-		    break;
-		default:
-		    System.out.println("No valid option selected");
-		    break;
-		}
-	    } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
-		Logger.getLogger(AcceptRefuseSignupRequestUI.class.getName()).log(Level.SEVERE, null, ex);
-	    }
-	}
-	return false;
+            final int option = Console.readOption(1, 2, 0);
+            // System.out.println("No valid option selected");
+            try {
+                switch (option) {
+                    case 1:
+                        this.theController.acceptSignupRequest(theSignupRequest);
+                        break;
+                    case 2:
+                        this.theController.refuseSignupRequest(theSignupRequest);
+                        break;
+                    default:
+                        System.out.println("No valid option selected");
+                        break;
+                }
+            } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
+                Logger.getLogger(AcceptRefuseSignupRequestUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
 
     @Override
     public String headline() {
-	return "Accept of Refuse Signup Requests";
+        return "Accept of Refuse Signup Requests";
     }
 }

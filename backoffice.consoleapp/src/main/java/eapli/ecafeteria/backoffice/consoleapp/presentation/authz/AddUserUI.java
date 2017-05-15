@@ -25,51 +25,51 @@ public class AddUserUI extends AbstractUI {
     private final AddUserController theController = new AddUserController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected boolean doShow() {
-	// FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
-	// UtenteApp
-	final String username = Console.readLine("Username");
-	final String password = Console.readLine("Password");
-	final String firstName = Console.readLine("First Name");
-	final String lastName = Console.readLine("Last Name");
-	final String email = Console.readLine("E-Mail");
+        // FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
+        // UtenteApp
+        final String username = Console.readLine("Username");
+        final String password = Console.readLine("Password");
+        final String firstName = Console.readLine("First Name");
+        final String lastName = Console.readLine("Last Name");
+        final String email = Console.readLine("E-Mail");
 
-	final Set<RoleType> roleTypes = new HashSet<>();
-	boolean show;
-	do {
-	    show = showRoles(roleTypes);
-	} while (!show);
+        final Set<RoleType> roleTypes = new HashSet<>();
+        boolean show;
+        do {
+            show = showRoles(roleTypes);
+        } while (!show);
 
-	try {
-	    this.theController.addUser(username, password, firstName, lastName, email, roleTypes);
-	} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-	    System.out.println("That username is already in use.");
-	}
+        try {
+            this.theController.addUser(username, password, firstName, lastName, email, roleTypes);
+        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            System.out.println("That username is already in use.");
+        }
 
-	return false;
+        return false;
     }
 
     private boolean showRoles(final Set<RoleType> roleTypes) {
-	// TODO we could also use the "widget" classes from the framework...
-	final Menu rolesMenu = buildRolesMenu(roleTypes);
-	final MenuRenderer renderer = new VerticalMenuRenderer(rolesMenu);
-	return renderer.show();
+        // TODO we could also use the "widget" classes from the framework...
+        final Menu rolesMenu = buildRolesMenu(roleTypes);
+        final MenuRenderer renderer = new VerticalMenuRenderer(rolesMenu);
+        return renderer.show();
     }
 
     private Menu buildRolesMenu(final Set<RoleType> roleTypes) {
-	final Menu rolesMenu = new Menu();
-	int counter = 0;
-	rolesMenu.add(new MenuItem(counter++, "No Role", new ReturnAction()));
-	for (final RoleType roleType : getRoleTypes()) {
-	    if (roleType != RoleType.CAFETERIA_USER) {
-		rolesMenu.add(new MenuItem(counter++, roleType.name(), () -> roleTypes.add(roleType)));
-	    }
-	}
-	return rolesMenu;
+        final Menu rolesMenu = new Menu();
+        int counter = 0;
+        rolesMenu.add(new MenuItem(counter++, "No Role", new ReturnAction()));
+        for (final RoleType roleType : getRoleTypes()) {
+            if (roleType != RoleType.CAFETERIA_USER) {
+                rolesMenu.add(new MenuItem(counter++, roleType.name(), () -> roleTypes.add(roleType)));
+            }
+        }
+        return rolesMenu;
     }
 
     /**
@@ -78,12 +78,12 @@ public class AddUserUI extends AbstractUI {
      * @return a list of RoleTypes
      */
     private RoleType[] getRoleTypes() {
-	// TODO NMB: Should this method have direct access to RoleTypes?
-	return RoleType.values();
+        // TODO NMB: Should this method have direct access to RoleTypes?
+        return RoleType.values();
     }
 
     @Override
     public String headline() {
-	return "Add User";
+        return "Add User";
     }
 }

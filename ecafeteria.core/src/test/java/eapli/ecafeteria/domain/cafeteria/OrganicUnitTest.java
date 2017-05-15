@@ -39,14 +39,14 @@ public class OrganicUnitTest {
 
     @Test(expected = IllegalStateException.class)
     public void testAcronymMustNotBeEmpty() {
-	System.out.println("must have non-empty acronym");
-	new OrganicUnit("", "Instituto", "Porto");
+        System.out.println("must have non-empty acronym");
+        new OrganicUnit("", "Instituto", "Porto");
     }
 
     @Test(expected = IllegalStateException.class)
     public void testAcronymMustNotBeNull() {
-	System.out.println("must have an acronym");
-	new OrganicUnit(null, "Instituto", "Porto");
+        System.out.println("must have an acronym");
+        new OrganicUnit(null, "Instituto", "Porto");
     }
 
     /**
@@ -54,11 +54,11 @@ public class OrganicUnitTest {
      */
     @Test
     public void testIs() {
-	System.out.println("Attest 'is' method - Normal Behaviour");
-	final String id = "ISEP";
-	final OrganicUnit instance = new OrganicUnit(id, "Instituto", "Porto");
-	final boolean expResult = true;
-	final boolean result = instance.is(id);
-	assertEquals(expResult, result);
+        System.out.println("Attest 'is' method - Normal Behaviour");
+        final String id = "ISEP";
+        final OrganicUnit instance = new OrganicUnit(id, "Instituto", "Porto");
+        final boolean expResult = true;
+        final boolean result = instance.is(id);
+        assertEquals(expResult, result);
     }
 }

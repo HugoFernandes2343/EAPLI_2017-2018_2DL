@@ -15,7 +15,7 @@ public class SignupRequestAction implements Action {
 
     @Override
     public boolean execute() {
-	return new SignupRequestUI().show();
-	// return new AddUserUI().show();
+        return new SignupRequestUI().show();
+        // return new AddUserUI().show();
     }
 }

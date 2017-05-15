@@ -10,11 +10,11 @@ class JpaDishTypeRepository extends CafeteriaJpaRepositoryBase<DishType, Long> i
 
     @Override
     public Iterable<DishType> activeDishTypes() {
-	return match("e.active=true");
+        return match("e.active=true");
     }
 
     @Override
     public DishType findByAcronym(String acronym) {
-	return matchOne("e.acronym=:acronym", "acronym", acronym);
+        return matchOne("e.acronym=:acronym", "acronym", acronym);
     }
 }

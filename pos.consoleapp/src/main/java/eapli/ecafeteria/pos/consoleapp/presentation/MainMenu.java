@@ -33,8 +33,8 @@ public class MainMenu extends AbstractUI {
 
     @Override
     public boolean show() {
-	drawFormTitle();
-	return doShow();
+        drawFormTitle();
+        return doShow();
     }
 
     /**
@@ -42,41 +42,41 @@ public class MainMenu extends AbstractUI {
      */
     @Override
     public boolean doShow() {
-	final Menu menu = buildMainMenu();
-	final MenuRenderer renderer;
-	if (Application.settings().isMenuLayoutHorizontal()) {
-	    renderer = new HorizontalMenuRenderer(menu);
-	} else {
-	    renderer = new VerticalMenuRenderer(menu);
-	}
-	return renderer.show();
+        final Menu menu = buildMainMenu();
+        final MenuRenderer renderer;
+        if (Application.settings().isMenuLayoutHorizontal()) {
+            renderer = new HorizontalMenuRenderer(menu);
+        } else {
+            renderer = new VerticalMenuRenderer(menu);
+        }
+        return renderer.show();
     }
 
     @Override
     public String headline() {
-	return "eCafeteria POS [@" + Application.session().session().authenticatedUser().id() + "]";
+        return "eCafeteria POS [@" + Application.session().session().authenticatedUser().id() + "]";
     }
 
     private Menu buildMainMenu() {
-	final Menu mainMenu = new Menu();
+        final Menu mainMenu = new Menu();
 
-	final Menu myUserMenu = new MyUserMenu();
-	mainMenu.add(new SubMenu(MY_USER_OPTION, myUserMenu, new ShowVerticalSubMenuAction(myUserMenu)));
+        final Menu myUserMenu = new MyUserMenu();
+        mainMenu.add(new SubMenu(MY_USER_OPTION, myUserMenu, new ShowVerticalSubMenuAction(myUserMenu)));
 
-	if (!Application.settings().isMenuLayoutHorizontal()) {
-	    mainMenu.add(VerticalSeparator.separator());
-	}
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.add(VerticalSeparator.separator());
+        }
 
-	if (Application.session().session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
-	    // TODO
-	}
+        if (Application.session().session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
+            // TODO
+        }
 
-	if (!Application.settings().isMenuLayoutHorizontal()) {
-	    mainMenu.add(VerticalSeparator.separator());
-	}
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.add(VerticalSeparator.separator());
+        }
 
-	mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
+        mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
-	return mainMenu;
+        return mainMenu;
     }
 }

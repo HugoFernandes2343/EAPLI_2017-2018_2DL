@@ -10,6 +10,6 @@ public enum RoleType {
      * @return
      */
     public static RoleType[] nonUserValues() {
-	return new RoleType[] { ADMIN, KITCHEN_MANAGER, MENU_MANAGER, CASHIER };
+        return new RoleType[]{ADMIN, KITCHEN_MANAGER, MENU_MANAGER, CASHIER};
     }
 }

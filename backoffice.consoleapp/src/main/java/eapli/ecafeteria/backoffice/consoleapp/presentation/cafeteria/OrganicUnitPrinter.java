@@ -16,16 +16,16 @@ public class OrganicUnitPrinter implements Visitor<OrganicUnit> {
 
     @Override
     public void visit(OrganicUnit visitee) {
-	System.out.printf("%-10s%-30s%-4s\n", visitee.id(), visitee.description(), String.valueOf(visitee.isActive()));
+        System.out.printf("%-10s%-30s%-4s\n", visitee.id(), visitee.description(), String.valueOf(visitee.isActive()));
     }
 
     @Override
     public void beforeVisiting(OrganicUnit visitee) {
-	// nothing to do
+        // nothing to do
     }
 
     @Override
     public void afterVisiting(OrganicUnit visitee) {
-	// nothing to do
+        // nothing to do
     }
 }

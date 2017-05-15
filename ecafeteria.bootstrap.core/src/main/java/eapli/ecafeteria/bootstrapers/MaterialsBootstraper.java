@@ -19,24 +19,24 @@ public class MaterialsBootstraper implements Action {
 
     @Override
     public boolean execute() {
-	register("eggs", "Chicken or Duck Eggs");
-	register("oil", "Olive oil");
-	register("so", "sunflower oil");
-	return false;
+        register("eggs", "Chicken or Duck Eggs");
+        register("oil", "Olive oil");
+        register("so", "sunflower oil");
+        return false;
     }
 
     /**
      *
      */
     private void register(String acronym, String description) {
-	final RegisterMaterialController controller = new RegisterMaterialController();
-	try {
-	    controller.registerMaterial(acronym, description);
-	} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-	    // ignoring exception. assuming it is just a primary key violation
-	    // due to the tentative of inserting a duplicated user
-	    Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
-		    .info("EAPLI-DI001: bootstrapping existing record");
-	}
+        final RegisterMaterialController controller = new RegisterMaterialController();
+        try {
+            controller.registerMaterial(acronym, description);
+        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            // ignoring exception. assuming it is just a primary key violation
+            // due to the tentative of inserting a duplicated user
+            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+                    .info("EAPLI-DI001: bootstrapping existing record");
+        }
     }
 }

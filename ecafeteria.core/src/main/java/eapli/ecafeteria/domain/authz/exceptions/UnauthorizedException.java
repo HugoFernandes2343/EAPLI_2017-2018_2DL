@@ -19,16 +19,16 @@ public class UnauthorizedException extends RuntimeException {
      * @param message
      */
     public UnauthorizedException(String message, SystemUser user, ActionRight... actions) {
-	super(message);
-	this.actions = actions;
-	this.user = user;
+        super(message);
+        this.actions = actions;
+        this.user = user;
     }
 
     public SystemUser user() {
-	return this.user;
+        return this.user;
     }
 
     public ActionRight[] intendedActions() {
-	return this.actions;
+        return this.actions;
     }
 }

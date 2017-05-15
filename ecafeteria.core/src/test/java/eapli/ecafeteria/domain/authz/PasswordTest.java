@@ -45,21 +45,21 @@ public class PasswordTest {
 
     @Test
     public void ensurePasswordHasAtLeastOneDigitOneCapitalAnd6CharactersLong() {
-	new Password("abCdefgh1");
+        new Password("abCdefgh1");
     }
 
     @Test(expected = IllegalStateException.class)
     public void ensurePasswordsSmallerThan6CharactersAreNotAllowed() {
-	new Password("ab1c");
+        new Password("ab1c");
     }
 
     @Test(expected = IllegalStateException.class)
     public void ensurePasswordsWithoutDigitsAreNotAllowed() {
-	new Password("abcdefgh");
+        new Password("abcdefgh");
     }
 
     @Test(expected = IllegalStateException.class)
     public void ensurePasswordsWithoutCapitalLetterAreNotAllowed() {
-	new Password("abcdefgh1");
+        new Password("abcdefgh1");
     }
 }

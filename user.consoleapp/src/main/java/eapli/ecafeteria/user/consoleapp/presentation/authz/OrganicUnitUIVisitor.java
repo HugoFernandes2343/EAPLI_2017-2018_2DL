@@ -13,16 +13,16 @@ public class OrganicUnitUIVisitor implements Visitor<OrganicUnit> {
 
     @Override
     public void visit(OrganicUnit visited) {
-	System.out.println(visited.id() + " " + visited.description() + " " + visited.isActive());
+        System.out.println(visited.id() + " " + visited.description() + " " + visited.isActive());
     }
 
     @Override
     public void beforeVisiting(OrganicUnit visited) {
-	System.out.println("ID Acronimo Description Active");
+        System.out.println("ID Acronimo Description Active");
     }
 
     @Override
     public void afterVisiting(OrganicUnit visited) {
-	// nothing to do
+        // nothing to do
     }
 }

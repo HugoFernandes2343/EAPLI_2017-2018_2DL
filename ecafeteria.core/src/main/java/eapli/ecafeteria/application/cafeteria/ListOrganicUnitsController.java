@@ -21,8 +21,8 @@ public class ListOrganicUnitsController implements Controller {
     private final OrganicUnitRepository repo = PersistenceContext.repositories().organicUnits();
 
     public Iterable<OrganicUnit> listOrganicUnits() {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-	return this.repo.findAll();
+        return this.repo.findAll();
     }
 }

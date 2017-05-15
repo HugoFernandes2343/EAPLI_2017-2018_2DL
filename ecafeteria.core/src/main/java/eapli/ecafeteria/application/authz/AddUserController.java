@@ -28,22 +28,22 @@ public class AddUserController implements Controller {
      * @return a list of RoleTypes
      */
     public RoleType[] getRoleTypes() {
-	return RoleType.nonUserValues();
+        return RoleType.nonUserValues();
     }
 
     public SystemUser addUser(String username, String password, String firstName, String lastName, String email,
-	    Set<RoleType> roles, Calendar createdOn) throws DataIntegrityViolationException, DataConcurrencyException {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+            Set<RoleType> roles, Calendar createdOn) throws DataIntegrityViolationException, DataConcurrencyException {
+        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-	final SystemUserBuilder userBuilder = new SystemUserBuilder();
-	userBuilder.withUsername(username).withPassword(password).withFirstName(firstName).withLastName(lastName)
-		.withEmail(email).withCreatedOn(createdOn).withRoles(roles);
+        final SystemUserBuilder userBuilder = new SystemUserBuilder();
+        userBuilder.withUsername(username).withPassword(password).withFirstName(firstName).withLastName(lastName)
+                .withEmail(email).withCreatedOn(createdOn).withRoles(roles);
 
-	return this.userRepository.save(userBuilder.build());
+        return this.userRepository.save(userBuilder.build());
     }
 
     public SystemUser addUser(String username, String password, String firstName, String lastName, String email,
-	    Set<RoleType> roles) throws DataIntegrityViolationException, DataConcurrencyException {
-	return addUser(username, password, firstName, lastName, email, roles, DateTime.now());
+            Set<RoleType> roles) throws DataIntegrityViolationException, DataConcurrencyException {
+        return addUser(username, password, firstName, lastName, email, roles, DateTime.now());
     }
 }

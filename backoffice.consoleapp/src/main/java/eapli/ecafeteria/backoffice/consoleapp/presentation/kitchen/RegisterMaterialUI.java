@@ -21,24 +21,24 @@ public class RegisterMaterialUI extends AbstractUI {
     private final RegisterMaterialController theController = new RegisterMaterialController();
 
     protected Controller controller() {
-	return this.theController;
+        return this.theController;
     }
 
     @Override
     protected boolean doShow() {
-	final String acronym = Console.readLine("Acronym:");
-	final String description = Console.readLine("Description:");
+        final String acronym = Console.readLine("Acronym:");
+        final String description = Console.readLine("Description:");
 
-	try {
-	    this.theController.registerMaterial(acronym, description);
-	} catch (final DataConcurrencyException | DataIntegrityViolationException e) {
-	    System.out.println("That acronym is already in use.");
-	}
-	return false;
+        try {
+            this.theController.registerMaterial(acronym, description);
+        } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
+            System.out.println("That acronym is already in use.");
+        }
+        return false;
     }
 
     @Override
     public String headline() {
-	return "Register Material";
+        return "Register Material";
     }
 }

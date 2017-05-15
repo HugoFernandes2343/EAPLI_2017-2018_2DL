@@ -11,11 +11,11 @@ public class InMemoryDishTypeRepository extends InMemoryRepositoryWithLongPK<Dis
 
     @Override
     public Iterable<DishType> activeDishTypes() {
-	return match(e -> e.isActive());
+        return match(e -> e.isActive());
     }
 
     @Override
     public DishType findByAcronym(String acronym) {
-	return matchOne(e -> e.id().equals(acronym));
+        return matchOne(e -> e.id().equals(acronym));
     }
 }

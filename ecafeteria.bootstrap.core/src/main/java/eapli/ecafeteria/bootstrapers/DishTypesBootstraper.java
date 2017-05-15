@@ -19,24 +19,24 @@ public class DishTypesBootstraper implements Action {
 
     @Override
     public boolean execute() {
-	register("vegie", "vegetarian dish");
-	register("fish", "fish dish");
-	register("meat", "meat dish");
-	return false;
+        register("vegie", "vegetarian dish");
+        register("fish", "fish dish");
+        register("meat", "meat dish");
+        return false;
     }
 
     /**
      *
      */
     private void register(String acronym, String description) {
-	final RegisterDishTypeController controller = new RegisterDishTypeController();
-	try {
-	    controller.registerDishType(acronym, description);
-	} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-	    // ignoring exception. assuming it is just a primary key violation
-	    // due to the tentative of inserting a duplicated user
-	    Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
-		    .info("EAPLI-DI001: bootstrapping existing record");
-	}
+        final RegisterDishTypeController controller = new RegisterDishTypeController();
+        try {
+            controller.registerDishType(acronym, description);
+        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            // ignoring exception. assuming it is just a primary key violation
+            // due to the tentative of inserting a duplicated user
+            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+                    .info("EAPLI-DI001: bootstrapping existing record");
+        }
     }
 }

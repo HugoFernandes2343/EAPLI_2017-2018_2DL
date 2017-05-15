@@ -20,8 +20,8 @@ public class ListCafeteriaUsersController {
     private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers(null);
 
     public Iterable<CafeteriaUser> activeCafeteriaUsers() {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-	return this.repo.findAll();
+        return this.repo.findAll();
     }
 }

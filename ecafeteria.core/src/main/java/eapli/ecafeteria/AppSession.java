@@ -17,24 +17,24 @@ public class AppSession {
     // in a real life situation this method should not exist! anyone could
     // circunvent the authentication
     public void setSession(UserSession session) {
-	this.theSession = session;
+        this.theSession = session;
     }
 
     public void clearSession() {
-	this.theSession = null;
+        this.theSession = null;
     }
 
     public UserSession session() {
-	return this.theSession;
+        return this.theSession;
     }
 
     public void ensurePermissionOfLoggedInUser(ActionRight... actions) {
-	if (session() == null) {
-	    throw new UserSessionNotInitiatedException();
-	}
-	if (!session().authenticatedUser().isAuthorizedTo(actions)) {
-	    throw new UnauthorizedException("User is not authorized to perform this action",
-		    session().authenticatedUser(), actions);
-	}
+        if (session() == null) {
+            throw new UserSessionNotInitiatedException();
+        }
+        if (!session().authenticatedUser().isAuthorizedTo(actions)) {
+            throw new UnauthorizedException("User is not authorized to perform this action",
+                    session().authenticatedUser(), actions);
+        }
     }
 }

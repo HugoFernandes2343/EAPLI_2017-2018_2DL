@@ -11,6 +11,6 @@ public class InMemoryMaterialRepository extends InMemoryRepositoryWithLongPK<Mat
 
     @Override
     public Material findByAcronym(String acronym) {
-	return matchOne(e -> e.id().equals(acronym));
+        return matchOne(e -> e.id().equals(acronym));
     }
 }

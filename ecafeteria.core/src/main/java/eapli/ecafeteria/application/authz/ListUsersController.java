@@ -21,8 +21,8 @@ public class ListUsersController implements Controller {
     private final UserRepository userRepository = PersistenceContext.repositories().users(null);
 
     public Iterable<SystemUser> allUsers() {
-	Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-	return this.userRepository.findAll();
+        return this.userRepository.findAll();
     }
 }

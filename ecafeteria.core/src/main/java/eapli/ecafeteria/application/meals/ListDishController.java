@@ -11,6 +11,6 @@ public class ListDishController implements Controller {
     private ListDishService svc = new ListDishService();
 
     public Iterable<Dish> allDishes() {
-	return this.svc.allDishes();
+        return this.svc.allDishes();
     }
 }
