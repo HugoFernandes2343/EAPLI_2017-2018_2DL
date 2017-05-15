@@ -25,12 +25,12 @@
         <dependency>
             <groupId>eapli.ecafeteria</groupId>
             <artifactId>core</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>eapli.ecafeteria</groupId>
             <artifactId>bootstrap.core</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
