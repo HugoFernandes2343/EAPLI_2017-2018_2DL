@@ -4,7 +4,7 @@
 package eapli.ecafeteria.domain.authz;
 
 import eapli.framework.domain.ddd.ValueObject;
-import eapli.util.DateTime;
+import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Entity;
