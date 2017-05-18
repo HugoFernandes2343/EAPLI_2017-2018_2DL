@@ -3,7 +3,6 @@ package eapli.ecafeteria.domain.cafeteria;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -35,10 +34,17 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @EmbeddedId
     private MecanographicNumber mecanographicNumber;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    /**
+     * cascade = CascadeType.NONE as the systemUser is part of another aggregate
+     */
+    @OneToOne()
     private SystemUser systemUser;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    /**
+     * cascade = CascadeType.NONE as the organicUnit is part of another
+     * aggregate
+     */
+    @ManyToOne()
     private OrganicUnit organicUnit;
 
     public CafeteriaUser(SystemUser user, OrganicUnit organicUnit, MecanographicNumber mecanographicNumber) {

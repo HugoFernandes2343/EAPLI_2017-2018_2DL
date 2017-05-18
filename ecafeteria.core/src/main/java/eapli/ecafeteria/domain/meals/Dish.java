@@ -4,7 +4,6 @@ import eapli.framework.domain.Designation;
 import eapli.framework.domain.Money;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -27,7 +26,10 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
 
     @EmbeddedId
     private Designation name;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    /**
+     * cascade = CascadeType.NONE as the dishType is part of another aggregate
+     */
+    @ManyToOne()
     private DishType dishType;
     private NutricionalInfo nutricionalInfo;
     private Money price;

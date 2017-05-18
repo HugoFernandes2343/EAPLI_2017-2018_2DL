@@ -9,7 +9,6 @@ import eapli.framework.util.DateTime;
 import eapli.framework.util.Strings;
 import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -48,7 +47,11 @@ public class SignupRequest implements AggregateRoot<Username>, Serializable {
     private Name name;
     private EmailAddress email;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    /**
+     * cascade = CascadeType.NONE as the organicUnit is part of another
+     * aggregate
+     */
+    @ManyToOne()
     private OrganicUnit organicUnit;
     private MecanographicNumber mecanographicNumber;
     @Enumerated(EnumType.STRING)
