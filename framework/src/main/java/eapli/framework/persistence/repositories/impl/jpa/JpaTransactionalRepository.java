@@ -4,15 +4,13 @@
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.io.Serializable;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceException;
-
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 
 /**
  * An utility class for implementing JPA repositories not running in containers
@@ -25,20 +23,18 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  *
  *
  * @author Paulo Gandra Sousa
- * @param <T>
- *            the entity type managed by this repository (a table in the
- *            database)
- * @param <K>
- *            the primary key of the table
+ * @param <T> the entity type managed by this repository (a table in the
+ * database)
+ * @param <K> the primary key of the table
  */
 public class JpaTransactionalRepository<T, K extends Serializable> extends JpaNotRunningInContainerRepository<T, K> {
 
     public JpaTransactionalRepository(String persistenceUnitName) {
-	super(new JpaTransactionalContext(persistenceUnitName));
+        super(new JpaTransactionalContext(persistenceUnitName));
     }
 
     JpaTransactionalRepository(String persistenceUnitName, Class<T> classz) {
-	super(new JpaTransactionalContext(persistenceUnitName), classz);
+        super(new JpaTransactionalContext(persistenceUnitName), classz);
     }
 
     /**
@@ -50,23 +46,23 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaNo
      */
     @Override
     public void delete(T entity) throws DataIntegrityViolationException {
-	if (entity == null) {
-	    throw new IllegalArgumentException();
-	}
+        if (entity == null) {
+            throw new IllegalArgumentException();
+        }
 
-	final EntityManager em = entityManager();
-	try {
-	    final EntityTransaction tx = em.getTransaction();
-	    tx.begin();
-	    super.delete(entity);
-	    tx.commit();
-	} finally {
-	    // we are closing the entity manager here because this code is
-	    // running in a non-container managed way. if it was the case to be
-	    // running under an application server with a JPA container and
-	    // managed transactions/sessions, one should not be doing this
-	    em.close();
-	}
+        final EntityManager em = entityManager();
+        try {
+            final EntityTransaction tx = em.getTransaction();
+            tx.begin();
+            super.delete(entity);
+            tx.commit();
+        } finally {
+            // we are closing the entity manager here because this code is
+            // running in a non-container managed way. if it was the case to be
+            // running under an application server with a JPA container and
+            // managed transactions/sessions, one should not be doing this
+            em.close();
+        }
     }
 
     /**
@@ -74,24 +70,24 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaNo
      *
      * @param entityId
      * @throws DataIntegrityViolationException
-     * @throws UnsuportedOperationException
-     *             if the delete operation makes no sense for this repository
+     * @throws UnsuportedOperationException if the delete operation makes no
+     * sense for this repository
      */
     @Override
     public void delete(K entityId) throws DataIntegrityViolationException {
-	final EntityManager em = entityManager();
-	try {
-	    final EntityTransaction tx = em.getTransaction();
-	    tx.begin();
-	    super.delete(entityId);
-	    tx.commit();
-	} finally {
-	    // we are closing the entity manager here because this code is
-	    // running in a non-container managed way. if it was the case to be
-	    // running under an application server with a JPA container and
-	    // managed transactions/sessions, one should not be doing this
-	    em.close();
-	}
+        final EntityManager em = entityManager();
+        try {
+            final EntityTransaction tx = em.getTransaction();
+            tx.begin();
+            super.delete(entityId);
+            tx.commit();
+        } finally {
+            // we are closing the entity manager here because this code is
+            // running in a non-container managed way. if it was the case to be
+            // running under an application server with a JPA container and
+            // managed transactions/sessions, one should not be doing this
+            em.close();
+        }
     }
 
     /**
@@ -103,28 +99,28 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaNo
      */
     @Override
     public T create(T entity) throws DataIntegrityViolationException {
-	if (entity == null) {
-	    throw new IllegalArgumentException();
-	}
+        if (entity == null) {
+            throw new IllegalArgumentException();
+        }
 
-	final EntityManager em = entityManager();
-	try {
-	    final EntityTransaction tx = em.getTransaction();
-	    tx.begin();
-	    em.persist(entity);
-	    tx.commit();
-	} catch (final PersistenceException ex) {
-	    // TODO need to check and make sure we only throw
-	    // DataIntegrityViolationException if we get sql state 23505
-	    throw new DataIntegrityViolationException(ex);
-	} finally {
-	    // we are closing the entity manager here because this code is
-	    // running in a non-container managed way. if it was the case to be
-	    // running under an application server with a JPA container and
-	    // managed transactions/sessions, one should not be doing this.
-	    em.close();
-	}
-	return entity;
+        final EntityManager em = entityManager();
+        try {
+            final EntityTransaction tx = em.getTransaction();
+            tx.begin();
+            em.persist(entity);
+            tx.commit();
+        } catch (final PersistenceException ex) {
+            // TODO need to check and make sure we only throw
+            // DataIntegrityViolationException if we get sql state 23505
+            throw new DataIntegrityViolationException(ex);
+        } finally {
+            // we are closing the entity manager here because this code is
+            // running in a non-container managed way. if it was the case to be
+            // running under an application server with a JPA container and
+            // managed transactions/sessions, one should not be doing this.
+            em.close();
+        }
+        return entity;
     }
 
     /**
@@ -141,42 +137,42 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaNo
      *
      * @param entity
      * @return the persisted entity - might be a different object than the
-     *         parameter
+     * parameter
      * @throws eapli.framework.persistence.DataConcurrencyException
      * @throws DataIntegrityViolationException
      */
     @Override
     @SuppressWarnings("squid:S1226")
     public T save(T entity) throws DataConcurrencyException, DataIntegrityViolationException {
-	if (entity == null) {
-	    throw new IllegalArgumentException();
-	}
+        if (entity == null) {
+            throw new IllegalArgumentException();
+        }
 
-	// the following code attempts to do a save or update
-	// this could be made more efficient if we check if the entity has an
-	// autogenerated id
-	final EntityManager em = entityManager();
-	assert em != null;
-	try {
-	    final EntityTransaction tx = em.getTransaction();
-	    tx.begin();
-	    entity = em.merge(entity);
-	    tx.commit();
-	} catch (final PersistenceException ex) {
-	    if (ex.getCause() instanceof OptimisticLockException) {
-		throw new DataConcurrencyException(ex);
-	    }
-	    // TODO need to check and make sure we only throw
-	    // DataIntegrityViolationException if we get sql state 23505
-	    throw new DataIntegrityViolationException(ex);
-	} finally {
-	    // we are closing the entity manager here because this code is
-	    // running in a non-container managed way. if it was the case to be
-	    // running under an application server with a JPA container and
-	    // managed transactions/sessions, one should not be doing this
-	    em.close();
-	}
+        // the following code attempts to do a save or update
+        // this could be made more efficient if we check if the entity has an
+        // autogenerated id
+        final EntityManager em = entityManager();
+        assert em != null;
+        try {
+            final EntityTransaction tx = em.getTransaction();
+            tx.begin();
+            entity = em.merge(entity);
+            tx.commit();
+        } catch (final PersistenceException ex) {
+            if (ex.getCause() instanceof OptimisticLockException) {
+                throw new DataConcurrencyException(ex);
+            }
+            // TODO need to check and make sure we only throw
+            // DataIntegrityViolationException if we get sql state 23505
+            throw new DataIntegrityViolationException(ex);
+        } finally {
+            // we are closing the entity manager here because this code is
+            // running in a non-container managed way. if it was the case to be
+            // running under an application server with a JPA container and
+            // managed transactions/sessions, one should not be doing this
+            em.close();
+        }
 
-	return entity;
+        return entity;
     }
 }
