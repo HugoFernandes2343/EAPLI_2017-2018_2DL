@@ -10,16 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Version;
 
 /**
- * a dish type, e.g., vegetarian or fish or meat.
- *
- * this class is implemented in a more traditional way than DDD, by using
- * primitive types for the attributes instead of value objects. this means that
- * some semantic is lost and potential code duplication may rise if the same
- * concept is used as an attribute in more than one class. however, the learning
- * curve is smoother when compared to full DDD.
- *
- *
- * Created by MCN on 29/03/2016.
+ * @FIXME javadoc
  */
 @Entity
 public class Material implements AggregateRoot<String>, Serializable {
