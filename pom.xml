@@ -6,7 +6,7 @@
 
     <groupId>eapli</groupId>
     <artifactId>ecafeteria</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -17,12 +17,12 @@
     </properties>
 
     <modules>
-        <module>backoffice.consoleapp</module>
-        <module>user.consoleapp</module>
-        <module>pos.consoleapp</module>
-        <module>consoleapp.common</module>
+        <module>ecafeteria.backoffice.consoleapp</module>
+        <module>ecafeteria.user.consoleapp</module>
+        <module>ecafeteria.pos.consoleapp</module>
+        <module>ecafeteria.consoleapp.common</module>
         <module>ecafeteria.bootstrapapp</module>
-        <module>ecafeteria.bootstrap.core</module>
+        <module>ecafeteria.bootstrappers</module>
         <module>ecafeteria.core</module>
         <module>ecafeteria.persistence.impl</module>
         <module>framework</module>
