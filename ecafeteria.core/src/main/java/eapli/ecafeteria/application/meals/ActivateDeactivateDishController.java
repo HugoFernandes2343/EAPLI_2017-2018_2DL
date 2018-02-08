@@ -20,20 +20,20 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public class ActivateDeactivateDishController implements Controller {
 
-    private final ListDishService svc = new ListDishService();
-    private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
+	private final ListDishService svc = new ListDishService();
+	private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
-    public Iterable<Dish> allDishes() {
-        return this.svc.allDishes();
-    }
+	public Iterable<Dish> allDishes() {
+		return this.svc.allDishes();
+	}
 
-    public void changeDishState(Dish dish) throws DataConcurrencyException, DataIntegrityViolationException {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-        if (dish == null) {
-            throw new IllegalArgumentException();
-        }
-        dish.toogleState();
+	public Dish changeDishState(Dish dish) throws DataConcurrencyException, DataIntegrityViolationException {
+		Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+		if (dish == null) {
+			throw new IllegalArgumentException();
+		}
+		dish.toogleState();
 
-        Dish ret = this.dishRepository.save(dish);
-    }
+		return this.dishRepository.save(dish);
+	}
 }

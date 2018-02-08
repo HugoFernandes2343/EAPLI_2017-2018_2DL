@@ -19,24 +19,22 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public class RegisterDishController implements Controller {
 
-    private ListDishTypeService svc = new ListDishTypeService();
+	private final ListDishTypeService svc = new ListDishTypeService();
 
-    private DishRepository dishRepository = PersistenceContext.repositories().dishes();
+	private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
-    public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
-            final double price) throws DataIntegrityViolationException, DataConcurrencyException {
+	public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
+			final double price) throws DataIntegrityViolationException, DataConcurrencyException {
 
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+		Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-        final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
-                Money.euros(price));
+		final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
+				Money.euros(price));
 
-        Dish ret = this.dishRepository.save(newDish);
+		return this.dishRepository.save(newDish);
+	}
 
-        return ret;
-    }
-
-    public Iterable<DishType> dishTypes() {
-        return this.svc.activeDishTypes();
-    }
+	public Iterable<DishType> dishTypes() {
+		return this.svc.activeDishTypes();
+	}
 }

@@ -12,8 +12,6 @@ import eapli.ecafeteria.app.backoffice.console.presentation.authz.AcceptRefuseSi
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.cafeteria.AddOrganicUnitUI;
-import eapli.ecafeteria.app.backoffice.console.presentation.cafeteria.OrganicUnitPrinter;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.ActivateDeactivateDishAction;
@@ -25,12 +23,10 @@ import eapli.ecafeteria.app.backoffice.console.presentation.meals.ListDishAction
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.ListDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.RegisterDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.RegisterDishTypeAction;
-import eapli.ecafeteria.application.cafeteria.ListOrganicUnitsController;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.HorizontalMenuRenderer;
-import eapli.framework.presentation.console.ListUI;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;
@@ -54,10 +50,6 @@ public class MainMenu extends AbstractUI {
 	private static final int LIST_USERS_OPTION = 2;
 	private static final int DEACTIVATE_USER_OPTION = 3;
 	private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
-
-	// ORGANIC UNITS
-	private static final int ADD_ORGANIC_UNIT_OPTION = 1;
-	private static final int LIST_ORGANIC_UNIT_OPTION = 2;
 
 	// SETTINGS
 	private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -86,7 +78,6 @@ public class MainMenu extends AbstractUI {
 	// MAIN MENU
 	private static final int MY_USER_OPTION = 1;
 	private static final int USERS_OPTION = 2;
-	private static final int ORGANIC_UNITS_OPTION = 3;
 	private static final int SETTINGS_OPTION = 4;
 	private static final int DISH_TYPES_OPTION = 5;
 	private static final int TRACEABILITY_OPTION = 6;
@@ -130,9 +121,6 @@ public class MainMenu extends AbstractUI {
 		if (Application.session().session().authenticatedUser().isAuthorizedTo(ActionRight.ADMINISTER)) {
 			final Menu usersMenu = buildUsersMenu();
 			mainMenu.add(new SubMenu(USERS_OPTION, usersMenu, new ShowVerticalSubMenuAction(usersMenu)));
-			final Menu organicUnitsMenu = buildOrganicUnitsMenu();
-			mainMenu.add(new SubMenu(ORGANIC_UNITS_OPTION, organicUnitsMenu,
-					new ShowVerticalSubMenuAction(organicUnitsMenu)));
 			final Menu settingsMenu = buildAdminSettingsMenu();
 			mainMenu.add(new SubMenu(SETTINGS_OPTION, settingsMenu, new ShowVerticalSubMenuAction(settingsMenu)));
 		}
@@ -164,24 +152,6 @@ public class MainMenu extends AbstractUI {
 				new ShowMessageAction("Not implemented yet")));
 		menu.add(new MenuItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit",
 				new ShowMessageAction("Not implemented yet")));
-		menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
-		return menu;
-	}
-
-	private Menu buildOrganicUnitsMenu() {
-		final Menu menu = new Menu("Organic units >");
-
-		menu.add(new MenuItem(ADD_ORGANIC_UNIT_OPTION, "Add Organic Unit", () -> {
-			return new AddOrganicUnitUI().show();
-		}));
-		menu.add(new MenuItem(LIST_ORGANIC_UNIT_OPTION, "List Organic Unit", () -> {
-			// example of using the generic list ui from the framework
-			new ListUI<>(new ListOrganicUnitsController().listOrganicUnits(), new OrganicUnitPrinter(), "Organic Unit", "ORGANIC UNITS")
-			.show();
-			return false;
-		}));
-		// TODO add other options for Organic Unit management
 		menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
 		return menu;

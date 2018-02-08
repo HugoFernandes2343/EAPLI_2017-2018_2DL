@@ -12,23 +12,27 @@ import eapli.ecafeteria.domain.authz.SystemUser;
  */
 public class UnauthorizedException extends RuntimeException {
 
-    private final SystemUser user;
-    private final ActionRight[] actions;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	private final SystemUser user;
+	private final ActionRight[] actions;
 
-    /**
-     * @param message
-     */
-    public UnauthorizedException(String message, SystemUser user, ActionRight... actions) {
-        super(message);
-        this.actions = actions;
-        this.user = user;
-    }
+	/**
+	 * @param message
+	 */
+	public UnauthorizedException(String message, SystemUser user, ActionRight... actions) {
+		super(message);
+		this.actions = actions;
+		this.user = user;
+	}
 
-    public SystemUser user() {
-        return this.user;
-    }
+	public SystemUser user() {
+		return this.user;
+	}
 
-    public ActionRight[] intendedActions() {
-        return this.actions;
-    }
+	public ActionRight[] intendedActions() {
+		return this.actions;
+	}
 }

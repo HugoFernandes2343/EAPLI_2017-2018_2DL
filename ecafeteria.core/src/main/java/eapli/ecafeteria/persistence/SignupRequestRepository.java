@@ -3,7 +3,6 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.SignupRequest;
 import eapli.framework.persistence.repositories.DataRepository;
-import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
  *
@@ -11,5 +10,5 @@ import eapli.framework.persistence.repositories.TransactionalContext;
  */
 public interface SignupRequestRepository extends DataRepository<SignupRequest, Username> {
 
-    Iterable<SignupRequest> pendingSignupRequests();
+	Iterable<SignupRequest> pendingSignupRequests();
 }

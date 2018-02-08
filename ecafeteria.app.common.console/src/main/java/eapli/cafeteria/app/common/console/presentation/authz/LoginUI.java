@@ -11,37 +11,36 @@ import eapli.framework.util.Console;
  */
 public class LoginUI extends AbstractUI {
 
-    private final LoginController theController = new LoginController();
-    private ActionRight onlyWithThis;
+	private final LoginController theController = new LoginController();
+	private ActionRight onlyWithThis;
 
-    protected Controller controller() {
-        return this.theController;
-    }
+	protected Controller controller() {
+		return this.theController;
+	}
 
-    public LoginUI() {
-    }
+	public LoginUI() {
+	}
 
-    public LoginUI(ActionRight onlyWithThis) {
-        this.onlyWithThis = onlyWithThis;
-    }
+	public LoginUI(ActionRight onlyWithThis) {
+		this.onlyWithThis = onlyWithThis;
+	}
 
-    @Override
-    protected boolean doShow() {
-        final String userName = Console.readLine("Username:");
-        final String password = Console.readLine("Password:");
+	@Override
+	protected boolean doShow() {
+		final String userName = Console.readLine("Username:");
+		final String password = Console.readLine("Password:");
 
-        if (this.theController.login(userName, password, onlyWithThis)) {
-            System.out.println("Authentication Successful");
-            return true;
-        } else {
-            // getLogger().info("Invalid Authenticon:" + e);
-            System.out.println("Invalid authentication");
-            return false;
-        }
-    }
+		if (this.theController.login(userName, password, onlyWithThis)) {
+			System.out.println("Authentication Successful");
+			return true;
+		} else {
+			System.out.println("Invalid authentication");
+			return false;
+		}
+	}
 
-    @Override
-    public String headline() {
-        return "Login";
-    }
+	@Override
+	public String headline() {
+		return "Login";
+	}
 }

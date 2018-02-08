@@ -5,11 +5,16 @@ package eapli.ecafeteria.domain.authz.exceptions;
  */
 public class UserSessionNotInitiatedException extends RuntimeException {
 
-    public UserSessionNotInitiatedException() {
-        super();
-    }
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    public UserSessionNotInitiatedException(String message) {
-        super(message);
-    }
+	public UserSessionNotInitiatedException() {
+		super();
+	}
+
+	public UserSessionNotInitiatedException(String message) {
+		super(message);
+	}
 }
