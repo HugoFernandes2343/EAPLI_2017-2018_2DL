@@ -6,7 +6,7 @@
 package eapli.ecafeteria.application;
 
 import eapli.framework.application.Controller;
-import eapli.framework.domain.Money;
+import eapli.framework.domain.money.Money;
 
 /**
  *

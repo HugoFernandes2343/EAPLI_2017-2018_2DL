@@ -1,7 +1,7 @@
 package eapli.ecafeteria.domain.cafeteria;
 
 import eapli.ecafeteria.domain.authz.SystemUser;
-import eapli.framework.domain.ddd.Factory;
+import eapli.framework.domain.ddd.DomainFactory;
 
 /**
  * A factory for User entities.
@@ -11,7 +11,7 @@ import eapli.framework.domain.ddd.Factory;
  *
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
-public class CafeteriaUserBuilder implements Factory<CafeteriaUser> {
+public class CafeteriaUserBuilder implements DomainFactory<CafeteriaUser> {
 
     private SystemUser systemUser;
     private OrganicUnit organicUnit;

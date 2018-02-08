@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.persistence;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.cafeteria.OrganicUnit;
 import eapli.framework.persistence.repositories.DataRepository;
 
@@ -14,5 +16,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface OrganicUnitRepository extends DataRepository<OrganicUnit, Long> {
 
-    OrganicUnit findByAcronym(String acronym);
+	Optional<OrganicUnit> findByAcronym(String acronym);
 }

@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.application.cafeteria;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteria.MecanographicNumber;
@@ -17,13 +19,13 @@ import eapli.ecafeteria.persistence.PersistenceContext;
  */
 public class CafeteriaUserService {
 
-    private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers(null);
+	private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers(null);
 
-    public CafeteriaUser findCafeteriaUserByMecNumber(String mecNumber) {
-        return this.repo.findByMecanographicNumber(new MecanographicNumber(mecNumber));
-    }
+	public Optional<CafeteriaUser> findCafeteriaUserByMecNumber(String mecNumber) {
+		return this.repo.findByMecanographicNumber(new MecanographicNumber(mecNumber));
+	}
 
-    public CafeteriaUser findCafeteriaUserByUsername(Username user) {
-        return this.repo.findByUsername(user);
-    }
+	public Optional<CafeteriaUser> findCafeteriaUserByUsername(Username user) {
+		return this.repo.findByUsername(user);
+	}
 }

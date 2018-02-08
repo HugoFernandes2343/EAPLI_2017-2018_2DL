@@ -1,5 +1,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
@@ -9,8 +11,8 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  */
 public class InMemoryMaterialRepository extends InMemoryRepositoryWithLongPK<Material> implements MaterialRepository {
 
-    @Override
-    public Material findByAcronym(String acronym) {
-        return matchOne(e -> e.id().equals(acronym));
-    }
+	@Override
+	public Optional<Material> findByAcronym(String acronym) {
+		return matchOne(e -> e.id().equals(acronym));
+	}
 }

@@ -6,7 +6,7 @@
         <groupId>eapli</groupId>
         <artifactId>ecafeteria</artifactId>
         <relativePath>../</relativePath>
-        <version>1.2.0-SNAPSHOT</version>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
     
     <groupId>eapli.ecafeteria</groupId>

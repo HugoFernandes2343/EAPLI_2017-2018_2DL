@@ -1,5 +1,7 @@
 package eapli.ecafeteria.persistence;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.meals.DishType;
 import eapli.framework.persistence.repositories.DataRepository;
 
@@ -9,12 +11,12 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface DishTypeRepository extends DataRepository<DishType, Long> {
 
-    /**
-     * returns the active dish types
-     *
-     * @return
-     */
-    Iterable<DishType> activeDishTypes();
+	/**
+	 * returns the active dish types
+	 *
+	 * @return
+	 */
+	Iterable<DishType> activeDishTypes();
 
-    DishType findByAcronym(String acronym);
+	Optional<DishType> findByAcronym(String acronym);
 }

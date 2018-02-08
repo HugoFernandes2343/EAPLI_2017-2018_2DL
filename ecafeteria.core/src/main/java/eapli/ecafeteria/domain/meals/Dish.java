@@ -1,7 +1,7 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.framework.domain.Designation;
-import eapli.framework.domain.Money;
+import eapli.framework.domain.money.Money;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;

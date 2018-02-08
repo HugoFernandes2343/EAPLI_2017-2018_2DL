@@ -1,5 +1,7 @@
 package eapli.ecafeteria.persistence;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.framework.domain.Designation;
 import eapli.framework.persistence.repositories.DataRepository;
@@ -10,5 +12,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface DishRepository extends DataRepository<Dish, Designation> {
 
-    Dish findByName(Designation name);
+	Optional<Dish> findByName(Designation name);
 }

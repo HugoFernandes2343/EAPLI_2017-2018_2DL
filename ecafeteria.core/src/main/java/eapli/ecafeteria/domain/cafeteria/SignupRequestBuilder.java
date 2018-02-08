@@ -1,7 +1,8 @@
 package eapli.ecafeteria.domain.cafeteria;
 
-import eapli.framework.domain.ddd.Factory;
 import java.util.Calendar;
+
+import eapli.framework.domain.ddd.DomainFactory;
 
 /**
  * A factory for Signup Requests
@@ -11,7 +12,7 @@ import java.util.Calendar;
  *
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
-public class SignupRequestBuilder implements Factory<SignupRequest> {
+public class SignupRequestBuilder implements DomainFactory<SignupRequest> {
 
     private String username;
     private String password;

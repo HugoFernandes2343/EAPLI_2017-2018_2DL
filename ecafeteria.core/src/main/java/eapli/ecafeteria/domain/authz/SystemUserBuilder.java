@@ -1,7 +1,7 @@
 package eapli.ecafeteria.domain.authz;
 
 import eapli.framework.domain.EmailAddress;
-import eapli.framework.domain.ddd.Factory;
+import eapli.framework.domain.ddd.DomainFactory;
 import eapli.framework.util.Strings;
 import java.util.Calendar;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * This class demonstrates the use of the factory (DDD) pattern using a fluent
  * interface. it acts as a Builder (GoF).
  */
-public class SystemUserBuilder implements Factory<SystemUser> {
+public class SystemUserBuilder implements DomainFactory<SystemUser> {
 
     private Username username;
     private Password password;

@@ -1,5 +1,7 @@
 package eapli.ecafeteria.persistence;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.framework.persistence.repositories.DataRepository;
 
@@ -9,5 +11,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface MaterialRepository extends DataRepository<Material, Long> {
 
-    Material findByAcronym(String acronym);
+	Optional<Material> findByAcronym(String acronym);
 }

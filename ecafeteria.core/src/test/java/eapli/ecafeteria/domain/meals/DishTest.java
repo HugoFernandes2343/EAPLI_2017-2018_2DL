@@ -6,7 +6,7 @@ package eapli.ecafeteria.domain.meals;
  * and open the template in the editor.
  */
 import eapli.framework.domain.Designation;
-import eapli.framework.domain.Money;
+import eapli.framework.domain.money.Money;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;

@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.cafeteria.OrganicUnit;
 import eapli.ecafeteria.persistence.OrganicUnitRepository;
 
@@ -13,10 +15,10 @@ import eapli.ecafeteria.persistence.OrganicUnitRepository;
  * @author arocha
  */
 public class JpaOrganicUnitRepository extends CafeteriaJpaRepositoryBase<OrganicUnit, Long>
-        implements OrganicUnitRepository {
+implements OrganicUnitRepository {
 
-    @Override
-    public OrganicUnit findByAcronym(String acronym) {
-        return matchOne("e.acronym=:a", "a", acronym);
-    }
+	@Override
+	public Optional<OrganicUnit> findByAcronym(String acronym) {
+		return matchOne("e.acronym=:a", "a", acronym);
+	}
 }

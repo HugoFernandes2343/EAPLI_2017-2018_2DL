@@ -12,7 +12,7 @@ import eapli.ecafeteria.domain.meals.NutricionalInfo;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
-import eapli.framework.domain.Money;
+import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 

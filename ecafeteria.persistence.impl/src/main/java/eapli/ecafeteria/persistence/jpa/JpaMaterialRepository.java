@@ -1,5 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.persistence.MaterialRepository;
 
@@ -8,8 +10,8 @@ import eapli.ecafeteria.persistence.MaterialRepository;
  */
 class JpaMaterialRepository extends CafeteriaJpaRepositoryBase<Material, Long> implements MaterialRepository {
 
-    @Override
-    public Material findByAcronym(String acronym) {
-        return matchOne("e.acronym=:acronym", "acronym", acronym);
-    }
+	@Override
+	public Optional<Material> findByAcronym(String acronym) {
+		return matchOne("e.acronym=:acronym", "acronym", acronym);
+	}
 }

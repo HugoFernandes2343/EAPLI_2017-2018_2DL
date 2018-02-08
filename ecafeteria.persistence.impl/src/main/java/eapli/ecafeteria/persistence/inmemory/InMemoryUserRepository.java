@@ -11,8 +11,8 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  */
 public class InMemoryUserRepository extends InMemoryRepository<SystemUser, Username> implements UserRepository {
 
-    @Override
-    protected Username newPK(SystemUser u) {
-        return u.username();
-    }
+	@Override
+	protected Username newKeyFor(SystemUser u) {
+		return u.username();
+	}
 }
