@@ -40,15 +40,17 @@ public class UsersBootstraper implements Action {
 
         final String email = "mary.doe@emai.l.com";
 
-        final Set<RoleType> roles = new HashSet<RoleType>();
+        final Set<RoleType> roles = new HashSet<>();
         roles.add(RoleType.ADMIN);
 
         final AddUserController userController = new AddUserController();
         try {
             userController.addUser(username, password, firstName, lastName, email, roles);
         } catch (final Exception e) {
-            // ignoring exception. assuming it is justa primiray key violation
+            // ignoring exception. assuming it is just a primary key violation
             // due to the tentative of inserting a duplicated user
+            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+                    .info("EAPLI-DI001: bootstrapping existing record");
         }
     }
 
@@ -61,7 +63,7 @@ public class UsersBootstraper implements Action {
 
         final String email = "johny.doe@emai.l.com";
 
-        final Set<RoleType> roles = new HashSet<RoleType>();
+        final Set<RoleType> roles = new HashSet<>();
         roles.add(RoleType.CASHIER);
 
         final AddUserController userController = new AddUserController();
@@ -93,6 +95,8 @@ public class UsersBootstraper implements Action {
         } catch (final Exception e) {
             // ignoring exception. assuming it is just a primary key violation
             // due to the tentative of inserting a duplicated user
+            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+                    .info("EAPLI-DI001: bootstrapping existing record");
         }
     }
 
@@ -114,6 +118,8 @@ public class UsersBootstraper implements Action {
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             // ignoring exception. assuming it is just a primary key violation
             // due to the tentative of inserting a duplicated user
+            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+                    .info("EAPLI-DI001: bootstrapping existing record");
         }
     }
 }
