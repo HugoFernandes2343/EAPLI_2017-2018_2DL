@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.application.meals;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.NutricionalInfo;
@@ -22,32 +22,32 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public class ChangeDishController implements Controller {
 
-	private final ListDishService svc = new ListDishService();
-	private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
+    private final ListDishService svc = new ListDishService();
+    private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
-	public Iterable<Dish> allDishes() {
-		return this.svc.allDishes();
-	}
+    public Iterable<Dish> allDishes() {
+        return this.svc.allDishes();
+    }
 
-	public Dish changeDishPrice(Dish dish, Money newPrice)
-			throws DataConcurrencyException, DataIntegrityViolationException {
-		Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-		if (dish == null) {
-			throw new IllegalArgumentException();
-		}
-		dish.changePriceTo(newPrice);
+    public Dish changeDishPrice(Dish dish, Money newPrice)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        if (dish == null) {
+            throw new IllegalArgumentException();
+        }
+        dish.changePriceTo(newPrice);
 
-		return this.dishRepository.save(dish);
-	}
+        return this.dishRepository.save(dish);
+    }
 
-	public Dish changeDishNutricionalInfo(Dish dish, NutricionalInfo newNutricionalInfo)
-			throws DataConcurrencyException, DataIntegrityViolationException {
-		Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-		if (dish == null) {
-			throw new IllegalArgumentException();
-		}
-		dish.changeNutricionalInfoTo(newNutricionalInfo);
+    public Dish changeDishNutricionalInfo(Dish dish, NutricionalInfo newNutricionalInfo)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        if (dish == null) {
+            throw new IllegalArgumentException();
+        }
+        dish.changeNutricionalInfoTo(newNutricionalInfo);
 
-		return this.dishRepository.save(dish);
-	}
+        return this.dishRepository.save(dish);
+    }
 }

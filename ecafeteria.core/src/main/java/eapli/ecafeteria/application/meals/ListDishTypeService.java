@@ -1,6 +1,6 @@
 package eapli.ecafeteria.application.meals;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.DishType;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -14,13 +14,14 @@ class ListDishTypeService {
     private final DishTypeRepository dishTypeRepository = PersistenceContext.repositories().dishTypes();
 
     public Iterable<DishType> allDishTypes() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
         return this.dishTypeRepository.findAll();
     }
 
     public Iterable<DishType> activeDishTypes() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService
+                .ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
         return this.dishTypeRepository.activeDishTypes();
     }

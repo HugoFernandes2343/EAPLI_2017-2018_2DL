@@ -1,6 +1,5 @@
 package eapli.ecafeteria.application.authz;
 
-import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.AuthenticationService;
 import eapli.ecafeteria.domain.authz.Password;
@@ -27,7 +26,7 @@ public class LoginController implements Controller {
             final Optional<UserSession> newSession = authenticationService.authenticate(new Username(userName),
                     new Password(password), onlyWithThis);
             if (newSession.isPresent()) {
-                Application.session().setSession(newSession.get());
+                AuthorizationService.setSession(newSession.get());
             }
             return newSession.isPresent();
         } catch (final IllegalStateException e) {

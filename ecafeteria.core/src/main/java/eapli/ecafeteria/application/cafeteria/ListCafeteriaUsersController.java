@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.application.cafeteria;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
@@ -20,7 +20,7 @@ public class ListCafeteriaUsersController {
     private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers(null);
 
     public Iterable<CafeteriaUser> activeCafeteriaUsers() {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
         return this.repo.findAll();
     }

@@ -1,6 +1,5 @@
 package eapli.ecafeteria.application.authz;
 
-import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
@@ -33,7 +32,7 @@ public class AddUserController implements Controller {
 
     public SystemUser addUser(String username, String password, String firstName, String lastName, String email,
             Set<RoleType> roles, Calendar createdOn) throws DataIntegrityViolationException, DataConcurrencyException {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
         final SystemUserBuilder userBuilder = new SystemUserBuilder();
         userBuilder.withUsername(username).withPassword(password).withFirstName(firstName).withLastName(lastName)

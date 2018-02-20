@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.UserSession;
@@ -40,7 +40,7 @@ public class MasterUsersBootstrapper extends UsersBootstrapperBase implements Ac
         // perform all other options during bootstrap
         // in this case we will inject the session but we shouldn't do this
         final UserSession adminSession = new UserSession(poweruser);
-        Application.session().setSession(adminSession);
+        AuthorizationService.setSession(adminSession);
     }
 
     /**

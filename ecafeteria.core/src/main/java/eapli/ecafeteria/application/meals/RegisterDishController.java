@@ -1,6 +1,6 @@
 package eapli.ecafeteria.application.meals;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.Dish;
 import eapli.ecafeteria.domain.meals.DishType;
@@ -19,22 +19,22 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public class RegisterDishController implements Controller {
 
-	private final ListDishTypeService svc = new ListDishTypeService();
+    private final ListDishTypeService svc = new ListDishTypeService();
 
-	private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
+    private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
-	public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
-			final double price) throws DataIntegrityViolationException, DataConcurrencyException {
+    public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
+            final double price) throws DataIntegrityViolationException, DataConcurrencyException {
 
-		Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-		final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
-				Money.euros(price));
+        final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
+                Money.euros(price));
 
-		return this.dishRepository.save(newDish);
-	}
+        return this.dishRepository.save(newDish);
+    }
 
-	public Iterable<DishType> dishTypes() {
-		return this.svc.activeDishTypes();
-	}
+    public Iterable<DishType> dishTypes() {
+        return this.svc.activeDishTypes();
+    }
 }

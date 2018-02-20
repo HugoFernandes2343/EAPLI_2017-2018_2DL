@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.application.cafeteria;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
@@ -37,94 +37,94 @@ import eapli.framework.persistence.repositories.TransactionalContext;
  */
 public class AcceptRefuseSignupRequestController implements Controller {
 
-	private final TransactionalContext TxCtx = PersistenceContext.repositories().buildTransactionalContext();
-	private final UserRepository userRepository = PersistenceContext.repositories().users(TxCtx);
-	private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories()
-			.cafeteriaUsers(TxCtx);
-	private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories()
-			.signupRequests(TxCtx);
+    private final TransactionalContext TxCtx = PersistenceContext.repositories().buildTransactionalContext();
+    private final UserRepository userRepository = PersistenceContext.repositories().users(TxCtx);
+    private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories()
+            .cafeteriaUsers(TxCtx);
+    private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories()
+            .signupRequests(TxCtx);
 
-	public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest)
-			throws DataIntegrityViolationException, DataConcurrencyException {
-		Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+    public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest)
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-		if (theSignupRequest == null) {
-			throw new IllegalStateException();
-		}
+        if (theSignupRequest == null) {
+            throw new IllegalStateException();
+        }
 
-		// explicitly begin a transaction
-		TxCtx.beginTransaction();
+        // explicitly begin a transaction
+        TxCtx.beginTransaction();
 
-		final SystemUser newUser = createSystemUserForCafeteriaUser(theSignupRequest);
-		createCafeteriaUser(theSignupRequest, newUser);
-		theSignupRequest = acceptTheSignupRequest(theSignupRequest);
+        final SystemUser newUser = createSystemUserForCafeteriaUser(theSignupRequest);
+        createCafeteriaUser(theSignupRequest, newUser);
+        theSignupRequest = acceptTheSignupRequest(theSignupRequest);
 
-		// explicitly commit the transaction
-		TxCtx.commit();
+        // explicitly commit the transaction
+        TxCtx.commit();
 
-		return theSignupRequest;
-	}
+        return theSignupRequest;
+    }
 
-	private SignupRequest acceptTheSignupRequest(SignupRequest theSignupRequest)
-			throws DataConcurrencyException, DataIntegrityViolationException {
-		//
-		// modify Signup Request to accepted
-		//
-		theSignupRequest.accept();
-		theSignupRequest = this.signupRequestsRepository.save(theSignupRequest);
-		return theSignupRequest;
-	}
+    private SignupRequest acceptTheSignupRequest(SignupRequest theSignupRequest)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        //
+        // modify Signup Request to accepted
+        //
+        theSignupRequest.accept();
+        theSignupRequest = this.signupRequestsRepository.save(theSignupRequest);
+        return theSignupRequest;
+    }
 
-	private void createCafeteriaUser(SignupRequest theSignupRequest, SystemUser newUser)
-			throws DataConcurrencyException, DataIntegrityViolationException {
-		//
-		// add cafeteria user
-		//
-		final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
-		cafeteriaUserBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
-		.withSystemUser(newUser);
-		this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
-	}
+    private void createCafeteriaUser(SignupRequest theSignupRequest, SystemUser newUser)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        //
+        // add cafeteria user
+        //
+        final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
+        cafeteriaUserBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
+                .withSystemUser(newUser);
+        this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
+    }
 
-	private SystemUser createSystemUserForCafeteriaUser(SignupRequest theSignupRequest)
-			throws DataConcurrencyException, DataIntegrityViolationException {
-		//
-		// add system user
-		//
-		final SystemUserBuilder userBuilder = new SystemUserBuilder();
-		userBuilder.withUsername(theSignupRequest.username()).withPassword(theSignupRequest.password())
-		.withName(theSignupRequest.name()).withEmail(theSignupRequest.email())
-		.withRole(RoleType.CAFETERIA_USER);
-		// TODO error checking if the username is already in the persistence
-		// store
-		return this.userRepository.save(userBuilder.build());
-	}
+    private SystemUser createSystemUserForCafeteriaUser(SignupRequest theSignupRequest)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        //
+        // add system user
+        //
+        final SystemUserBuilder userBuilder = new SystemUserBuilder();
+        userBuilder.withUsername(theSignupRequest.username()).withPassword(theSignupRequest.password())
+                .withName(theSignupRequest.name()).withEmail(theSignupRequest.email())
+                .withRole(RoleType.CAFETERIA_USER);
+        // TODO error checking if the username is already in the persistence
+        // store
+        return this.userRepository.save(userBuilder.build());
+    }
 
-	public SignupRequest refuseSignupRequest(SignupRequest theSignupRequest)
-			throws DataConcurrencyException, DataIntegrityViolationException {
-		Application.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+    public SignupRequest refuseSignupRequest(SignupRequest theSignupRequest)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-		if (theSignupRequest == null) {
-			throw new IllegalStateException();
-		}
+        if (theSignupRequest == null) {
+            throw new IllegalStateException();
+        }
 
-		// explicitly begin a transaction
-		TxCtx.beginTransaction();
+        // explicitly begin a transaction
+        TxCtx.beginTransaction();
 
-		theSignupRequest.refuse();
-		theSignupRequest = this.signupRequestsRepository.save(theSignupRequest);
+        theSignupRequest.refuse();
+        theSignupRequest = this.signupRequestsRepository.save(theSignupRequest);
 
-		// explicitly commit the transaction
-		TxCtx.commit();
+        // explicitly commit the transaction
+        TxCtx.commit();
 
-		return theSignupRequest;
-	}
+        return theSignupRequest;
+    }
 
-	/**
-	 *
-	 * @return
-	 */
-	public Iterable<SignupRequest> listPendingSignupRequests() {
-		return this.signupRequestsRepository.pendingSignupRequests();
-	}
+    /**
+     *
+     * @return
+     */
+    public Iterable<SignupRequest> listPendingSignupRequests() {
+        return this.signupRequestsRepository.pendingSignupRequests();
+    }
 }

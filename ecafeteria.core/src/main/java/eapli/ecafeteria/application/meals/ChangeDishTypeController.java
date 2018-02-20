@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.application.meals;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.DishType;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -26,7 +26,7 @@ public class ChangeDishTypeController implements Controller {
 
     public DishType changeDishType(DishType theDishType, String newDescription)
             throws DataConcurrencyException, DataIntegrityViolationException {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
         if (theDishType == null) {
             throw new IllegalStateException();

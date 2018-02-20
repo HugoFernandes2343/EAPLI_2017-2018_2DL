@@ -1,6 +1,6 @@
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.UserSession;
@@ -28,7 +28,7 @@ public class ECafeteriaBootstraper implements Action {
         roles.add(RoleType.KITCHEN_MANAGER);
         final UserSession adminSession = new UserSession(
                 new SystemUser("poweruser", "poweruserA1", "joe", "doe", "joe@email.org", roles));
-        Application.session().setSession(adminSession);
+        AuthorizationService.setSession(adminSession);
 
         // execute all bootstrapping returning true if any of the bootstraping
         // actions returns true

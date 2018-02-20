@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.persistence.MaterialRepository;
@@ -24,7 +24,7 @@ public class RegisterMaterialController implements Controller {
 
     public Material registerMaterial(String acronym, String description)
             throws DataIntegrityViolationException, DataConcurrencyException {
-        Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
         final Material mat = new Material(acronym, description);
         return this.repository.save(mat);

@@ -19,9 +19,9 @@ public class DishTypesBootstraper implements Action {
 
     @Override
     public boolean execute() {
-        register("vegie", "vegetarian dish");
-        register("fish", "fish dish");
-        register("meat", "meat dish");
+        register(TestDataConstants.DISH_TYPE_VEGIE, "vegetarian dish");
+        register(TestDataConstants.DISH_TYPE_FISH, "fish dish");
+        register(TestDataConstants.DISH_TYPE_MEAT, "meat dish");
         return false;
     }
 
