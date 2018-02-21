@@ -5,8 +5,8 @@
  */
 package eapli.ecafeteria.app.user.console.presentation;
 
-import eapli.ecafeteria.Application;
-import eapli.ecafeteria.application.CafeteriaUserBaseController;
+import eapli.ecafeteria.application.bookings.CafeteriaUserBaseController;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.framework.presentation.console.AbstractUI;
 
 /**
@@ -23,7 +23,7 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "eCAFETERIA [@" + Application.session().session().authenticatedUser().id() + "]   " + showBalance();
+        return "eCAFETERIA [@" + AuthorizationService.session().authenticatedUser().id() + "]   " + showBalance();
     }
 
     @Override

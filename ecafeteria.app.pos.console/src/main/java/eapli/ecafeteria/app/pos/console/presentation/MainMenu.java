@@ -5,11 +5,12 @@
  */
 package eapli.ecafeteria.app.pos.console.presentation;
 
-import eapli.cafeteria.app.common.console.presentation.ExitWithMessageAction;
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.presentation.console.AbstractUI;
+import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
@@ -54,7 +55,7 @@ public class MainMenu extends AbstractUI {
 
     @Override
     public String headline() {
-        return "eCafeteria POS [@" + Application.session().session().authenticatedUser().id() + "]";
+        return "eCafeteria POS [@" + AuthorizationService.session().authenticatedUser().id() + "]";
     }
 
     private Menu buildMainMenu() {
@@ -67,7 +68,7 @@ public class MainMenu extends AbstractUI {
             mainMenu.add(VerticalSeparator.separator());
         }
 
-        if (Application.session().session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
+        if (AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
             // TODO
         }
 

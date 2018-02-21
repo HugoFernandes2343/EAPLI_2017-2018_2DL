@@ -5,12 +5,12 @@
  */
 package eapli.ecafeteria.app.user.console.presentation;
 
-import eapli.cafeteria.app.common.console.presentation.ExitWithMessageAction;
 import eapli.cafeteria.app.common.console.presentation.authz.LoginAction;
 import eapli.ecafeteria.app.user.console.presentation.authz.SignupRequestAction;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.IfThenAction;
 import eapli.framework.presentation.console.AbstractUI;
+import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;

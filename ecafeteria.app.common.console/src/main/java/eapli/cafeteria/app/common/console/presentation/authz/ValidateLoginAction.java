@@ -5,7 +5,7 @@
  */
 package eapli.cafeteria.app.common.console.presentation.authz;
 
-import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.Action;
 import eapli.framework.actions.CompoundAction;
@@ -27,7 +27,7 @@ public class ValidateLoginAction extends CompoundAction {
     public boolean execute() {
         LoginUI loginUI = new LoginUI();
         if (loginUI.show()) {
-            if (Application.session().session().authenticatedUser().isAuthorizedTo(expectedActionRight)) {
+            if (AuthorizationService.session().authenticatedUser().isAuthorizedTo(expectedActionRight)) {
                 return next();
             } else {
                 System.out.println("you are not authorized for using this app");

@@ -8,15 +8,15 @@ import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
  */
 public class ECafeteriaBootstrap {
 
-	public static void main(String[] args) {
-		System.out.println("=====================================");
-		System.out.println("Bootstrapping eCafeteria 2018 data");
-		System.out.println("=====================================");
+    public static void main(String[] args) {
+        System.out.println("======================================");
+        System.out.println("Bootstrapping eCafeteria (c) 2018 data");
+        System.out.println("======================================");
 
-		new ECafeteriaBootstraper().execute();
+        new ECafeteriaBootstraper().execute();
 
-		System.out.println("=====================================");
-		System.out.println("Bootstrap data done.");
-		System.out.println("=====================================");
-	}
+        System.out.println("======================================");
+        System.out.println("Bootstrap data done.");
+        System.out.println("======================================");
+    }
 }

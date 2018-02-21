@@ -27,7 +27,6 @@ public final class ECafeteriaPOS {
     public static void main(final String[] args) {
 
         // login and go to main menu
-        // TODO should provide three attempts
         if (new LoginAction(ActionRight.SALE).execute()) {
             final MainMenu menu = new MainMenu();
             menu.mainLoop();
