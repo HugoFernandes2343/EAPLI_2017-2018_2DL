@@ -37,13 +37,13 @@ public class MaterialTest {
     public void tearDown() {
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testAcronymMustNotBeEmpty() {
         System.out.println("must have non-empty acronym");
         new Material("", "");
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testAcronymMustNotBeNull() {
         System.out.println("must have an acronym");
         new Material(null, "");

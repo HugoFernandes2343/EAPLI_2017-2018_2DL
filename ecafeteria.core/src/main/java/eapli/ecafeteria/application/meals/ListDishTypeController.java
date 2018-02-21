@@ -11,8 +11,6 @@ public class ListDishTypeController implements Controller {
     private final ListDishTypeService svc = new ListDishTypeService();
 
     public Iterable<DishType> listDishTypes() {
-        // TODO check if this use case should list all dish types or only active
-        // ones
-        return this.svc.allDishTypes();
+        return this.svc.activeDishTypes();
     }
 }

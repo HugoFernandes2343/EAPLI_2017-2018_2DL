@@ -27,7 +27,7 @@ public class LoginController implements Controller {
                     new Password(password), onlyWithThis);
             AuthorizationService.setSession(newSession);
             return newSession.isPresent();
-        } catch (final IllegalStateException e) {
+        } catch (final IllegalArgumentException e) {
             return false;
         }
     }

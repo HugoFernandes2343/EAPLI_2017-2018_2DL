@@ -23,7 +23,7 @@ public class Username implements ValueObject, Serializable {
 
     public Username(String username) {
         if (Strings.isNullOrEmpty(username)) {
-            throw new IllegalStateException("username should neither be null nor empty");
+            throw new IllegalArgumentException("username should neither be null nor empty");
         }
         // TODO validate other invariants, e.g., regular expression
         this.name = username;

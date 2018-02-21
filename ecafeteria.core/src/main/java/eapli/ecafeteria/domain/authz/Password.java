@@ -32,7 +32,7 @@ public class Password implements ValueObject, Serializable {
 
     public Password(String password) {
         if (!meetsMinimumRequirements(password)) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
         thePassword = password;
     }

@@ -8,7 +8,7 @@ import eapli.framework.application.Controller;
  */
 public class ListDishController implements Controller {
 
-    private ListDishService svc = new ListDishService();
+    private final ListDishService svc = new ListDishService();
 
     public Iterable<Dish> allDishes() {
         return this.svc.allDishes();

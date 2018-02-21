@@ -49,7 +49,7 @@ public class AcceptRefuseSignupRequestController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
         if (theSignupRequest == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
 
         // explicitly begin a transaction
@@ -105,7 +105,7 @@ public class AcceptRefuseSignupRequestController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
         if (theSignupRequest == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
 
         // explicitly begin a transaction

@@ -48,17 +48,17 @@ public class PasswordTest {
         new Password("abCdefgh1");
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void ensurePasswordsSmallerThan6CharactersAreNotAllowed() {
         new Password("ab1c");
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void ensurePasswordsWithoutDigitsAreNotAllowed() {
         new Password("abcdefgh");
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void ensurePasswordsWithoutCapitalLetterAreNotAllowed() {
         new Password("abcdefgh1");
     }

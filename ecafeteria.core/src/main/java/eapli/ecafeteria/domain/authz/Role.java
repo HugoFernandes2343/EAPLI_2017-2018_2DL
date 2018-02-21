@@ -35,7 +35,7 @@ public class Role implements ValueObject, Serializable {
 
     public Role(RoleType type, Calendar assignedOn) {
         if (type == null || assignedOn == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
         this.type = type;
         this.assignedOn = assignedOn;

@@ -23,7 +23,7 @@ public class MecanographicNumber implements ValueObject, Serializable {
 
     public MecanographicNumber(String mecanographicNumber) {
         if (Strings.isNullOrEmpty(mecanographicNumber)) {
-            throw new IllegalStateException("Mecanographic Number should neither be null nor empty");
+            throw new IllegalArgumentException("Mecanographic Number should neither be null nor empty");
         }
         // FIXME validate invariants, i.e., mechanographic number regular
         // expression

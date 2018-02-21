@@ -35,7 +35,7 @@ public class Material implements AggregateRoot<String>, Serializable {
 
     public Material(String name, String description) {
         if (Strings.isNullOrEmpty(name)) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
         this.acronym = name;
         this.description = description;

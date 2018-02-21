@@ -21,7 +21,7 @@ public class UserSession implements ValueObject {
 
     public UserSession(SystemUser user) {
         if (user == null) {
-            throw new IllegalStateException("user must not be null");
+            throw new IllegalArgumentException("user must not be null");
         }
         this.user = user;
         this.token = UUID.randomUUID();

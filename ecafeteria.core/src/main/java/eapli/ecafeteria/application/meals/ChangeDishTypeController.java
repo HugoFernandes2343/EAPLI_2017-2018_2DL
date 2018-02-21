@@ -29,7 +29,7 @@ public class ChangeDishTypeController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
         if (theDishType == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
 
         theDishType.changeDescriptionTo(newDescription);

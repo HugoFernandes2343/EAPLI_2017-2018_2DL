@@ -37,7 +37,7 @@ class RoleSet implements Set<Role>, Serializable {
     @Override
     public boolean add(Role arg0) {
         if (arg0 == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
         // FIXME validations are missing, e.g.,
         // no overlap in roles with the same role type?

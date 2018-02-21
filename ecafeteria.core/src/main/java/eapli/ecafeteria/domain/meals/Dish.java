@@ -1,8 +1,8 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.framework.domain.Designation;
-import eapli.framework.domain.money.Money;
 import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.domain.money.Money;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
 
     public Dish(final DishType dishType, final Designation name, final NutricionalInfo nutricionalInfo, Money price) {
         if (dishType == null || name == null || nutricionalInfo == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
 
         this.dishType = dishType;
@@ -49,7 +49,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
 
     public Dish(final DishType dishType, final Designation name, Money price) {
         if (dishType == null || name == null || price == null) {
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
 
         this.dishType = dishType;
