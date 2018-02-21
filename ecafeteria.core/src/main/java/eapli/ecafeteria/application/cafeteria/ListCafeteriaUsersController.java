@@ -22,6 +22,6 @@ public class ListCafeteriaUsersController {
     public Iterable<CafeteriaUser> activeCafeteriaUsers() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-        return this.repo.findAll();
+        return this.repo.findAllActive();
     }
 }
