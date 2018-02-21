@@ -25,9 +25,7 @@ public class LoginController implements Controller {
         try {
             final Optional<UserSession> newSession = authenticationService.authenticate(new Username(userName),
                     new Password(password), onlyWithThis);
-            if (newSession.isPresent()) {
-                AuthorizationService.setSession(newSession.get());
-            }
+            AuthorizationService.setSession(newSession);
             return newSession.isPresent();
         } catch (final IllegalStateException e) {
             return false;
