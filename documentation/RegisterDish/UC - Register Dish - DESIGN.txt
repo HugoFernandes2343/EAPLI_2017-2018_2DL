@@ -5,7 +5,18 @@
 
 	* Utilizar a estrutura base standard da aplicação baseada em camadas
 
-   	Classes do domínio:  Dish, DishType, NutricionalInfo. nome do prato é do tipo Designation (framework)
+   	Classes do domínio:  
+		Dish, DishType, NutricionalInfo. 
+		Dish é um agregado independente de DishType
+			- relação unidirecional many-to-one
+			- cascade NONE
+			- fetch EAGER
+		nome do prato é do tipo Designation (framework)
+		NutricionalInfo é um value object que faz parte do agregado Dish
+			- relação unidireccional one-to-one
+			- cascade ALL
+			- fetch EAGER
+
    	Controlador: RegisterDishController
    	Repository: DishRepository
 
