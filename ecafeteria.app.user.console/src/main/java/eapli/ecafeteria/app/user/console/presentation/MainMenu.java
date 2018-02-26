@@ -29,6 +29,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int MY_USER_OPTION = 1;
     private static final int BOOKINGS_OPTION = 2;
     private static final int ACCOUNT_OPTION = 3;
+    private static final int SETTINGS_OPTION = 4;
 
     // BOOKINGS MENU
     private static final int LIST_MENUS_OPTION = 1;
@@ -36,6 +37,9 @@ class MainMenu extends CafeteriaUserBaseUI {
 
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
+
+    // SETTINGS
+    private static final int SET_USER_ALERT_LIMIT_OPTION = 2;
 
     @Override
     public boolean show() {
@@ -68,7 +72,11 @@ class MainMenu extends CafeteriaUserBaseUI {
 
         final Menu accountMenu = buildAccountMenu();
         mainMenu.add(new SubMenu(ACCOUNT_OPTION, accountMenu, new ShowVerticalSubMenuAction(accountMenu)));
-        // TODO add menu options
+
+        mainMenu.add(VerticalSeparator.separator());
+
+        final Menu settingsMenu = buildAdminSettingsMenu();
+        mainMenu.add(new SubMenu(SETTINGS_OPTION, settingsMenu, new ShowVerticalSubMenuAction(settingsMenu)));
 
         mainMenu.add(VerticalSeparator.separator());
 
@@ -89,6 +97,16 @@ class MainMenu extends CafeteriaUserBaseUI {
         menu.add(new MenuItem(LIST_MENUS_OPTION, "List menus", new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        return menu;
+    }
+
+    private Menu buildAdminSettingsMenu() {
+        final Menu menu = new Menu("Settings >");
+
+        menu.add(new MenuItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit",
+                new ShowMessageAction("Not implemented yet")));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
         return menu;
     }
 
