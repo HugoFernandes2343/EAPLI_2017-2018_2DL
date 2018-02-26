@@ -15,23 +15,23 @@ import javax.persistence.Embeddable;
 public class Name implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+$", Pattern.CASE_INSENSITIVE);
+    public static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$", Pattern.CASE_INSENSITIVE);
     private String firstName;
     private String lastName;
 
-    public Name(String firstName, String lastName) {
+    public Name(final String firstName, final String lastName) {
         if (Strings.isNullOrEmpty(firstName) || Strings.isNullOrEmpty(lastName)) {
-            throw new IllegalArgumentException("first name and last name should neither be null nor empty");
+            throw new IllegalArgumentException("First name and last name should neither be null nor empty");
         }
 
         Matcher matcher = VALID_NAME_REGEX.matcher(firstName);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Invalid First Name");
+            throw new IllegalArgumentException("Invalid First Name: " + firstName);
         }
 
         matcher = VALID_NAME_REGEX.matcher(lastName);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Invalid Last Name");
+            throw new IllegalArgumentException("Invalid Last Name: " + lastName);
         }
 
         this.firstName = firstName;
@@ -42,15 +42,15 @@ public class Name implements ValueObject, Serializable {
     }
 
     public String firstName() {
-        return this.firstName;
+        return firstName;
     }
 
     public String lastName() {
-        return this.lastName;
+        return lastName;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -60,22 +60,21 @@ public class Name implements ValueObject, Serializable {
 
         final Name name = (Name) o;
 
-        if (!this.firstName.equals(name.firstName)) {
+        if (!firstName.equals(name.firstName)) {
             return false;
         }
-        return this.lastName.equals(name.lastName);
-
+        return lastName.equals(name.lastName);
     }
 
     @Override
     public int hashCode() {
-        int result = this.firstName.hashCode();
-        result = 31 * result + this.lastName.hashCode();
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return this.firstName + " " + this.lastName;
+        return firstName + " " + lastName;
     }
 }
