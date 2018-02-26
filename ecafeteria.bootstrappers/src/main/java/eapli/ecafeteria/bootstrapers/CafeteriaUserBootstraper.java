@@ -5,14 +5,13 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
-import java.util.logging.Logger;
-
 import eapli.ecafeteria.application.cafeteria.AcceptRefuseSignupRequestController;
 import eapli.ecafeteria.application.cafeteria.SignupController;
 import eapli.ecafeteria.domain.cafeteria.SignupRequest;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,31 +19,31 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public class CafeteriaUserBootstraper implements Action {
 
-	@Override
-	public boolean execute() {
-		signupAndApprove("900330", "Password1", "John", "Smith", "john@smith.com", "900330");
-		signupAndApprove("900331", "Password1", "Mary", "Smith", "mary@smith.com", "900331");
+    @Override
+    public boolean execute() {
+        signupAndApprove("900330", "Password1", "John", "Smith", "john@smith.com", "900330");
+        signupAndApprove("900331", "Password1", "Mary", "Smith", "mary@smith.com", "900331");
 
-		return false;
-	}
+        return true;
+    }
 
-	/**
-	 *
-	 */
-	private SignupRequest signupAndApprove(final String username, final String password, final String firstName,
-			final String lastName, final String email, String mecanographicNumber) {
-		final SignupController signupController = new SignupController();
-		final AcceptRefuseSignupRequestController acceptController = new AcceptRefuseSignupRequestController();
-		SignupRequest request = null;
-		try {
-			request = signupController.signup(username, password, firstName, lastName, email,
-					mecanographicNumber);
-			acceptController.acceptSignupRequest(request);
-		} catch (final DataConcurrencyException | DataIntegrityViolationException e) {
-			// assume it just a question of trying to insert duplicate record
-			Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
-			.info("EAPLI-DI001: Exception during bootstrapping: assuming existing record.");
-		}
-		return request;
-	}
+    /**
+     *
+     */
+    private SignupRequest signupAndApprove(final String username, final String password, final String firstName,
+            final String lastName, final String email, String mecanographicNumber) {
+        final SignupController signupController = new SignupController();
+        final AcceptRefuseSignupRequestController acceptController = new AcceptRefuseSignupRequestController();
+        SignupRequest request = null;
+        try {
+            request = signupController.signup(username, password, firstName, lastName, email,
+                    mecanographicNumber);
+            acceptController.acceptSignupRequest(request);
+        } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
+            // assume it just a question of trying to insert duplicate record
+            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+                    .info("EAPLI-DI001: Exception during bootstrapping: assuming existing record.");
+        }
+        return request;
+    }
 }

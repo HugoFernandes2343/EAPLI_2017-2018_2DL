@@ -20,6 +20,17 @@ public class ECafeteriaBootstraper implements Action {
         final Action[] actions = {new MasterUsersBootstrapper(), new DishTypesBootstraper(),
             new CafeteriaUserBootstraper(), new DishBootstraper(), new MaterialsBootstraper(),};
 
+        authenticateSuperUser();
+
+        // execute all bootstrapping
+        boolean ret = true;
+        for (final Action boot : actions) {
+            ret &= boot.execute();
+        }
+        return ret;
+    }
+
+    private void authenticateSuperUser() {
         // authenticate a super user to be able to register new users, ...
         // in this case we will inject the session but we shouldn't do this
         final Set<RoleType> roles = new HashSet<>();
@@ -29,13 +40,5 @@ public class ECafeteriaBootstraper implements Action {
         final UserSession adminSession = new UserSession(
                 new SystemUser("poweruser", "poweruserA1", "joe", "doe", "joe@email.org", roles));
         AuthorizationService.setSession(adminSession);
-
-        // execute all bootstrapping returning true if any of the bootstraping
-        // actions returns true
-        boolean ret = false;
-        for (final Action boot : actions) {
-            ret |= boot.execute();
-        }
-        return ret;
     }
 }

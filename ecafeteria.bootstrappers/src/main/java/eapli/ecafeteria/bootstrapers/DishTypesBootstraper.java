@@ -22,7 +22,7 @@ public class DishTypesBootstraper implements Action {
         register(TestDataConstants.DISH_TYPE_VEGIE, "vegetarian dish");
         register(TestDataConstants.DISH_TYPE_FISH, "fish dish");
         register(TestDataConstants.DISH_TYPE_MEAT, "meat dish");
-        return false;
+        return true;
     }
 
     /**
