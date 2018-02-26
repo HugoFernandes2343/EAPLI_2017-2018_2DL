@@ -1,0 +1,42 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+
+	Reunião com o cliente  em 2018.02.23
+
+	* o "menu manager" utiliza a aplicação de backoffice para registar os pratos constantes do receituário da cantina
+	* um prato é caracterizado pelo seu nome, tipo, preço e informação nutricional (calorias - KCal - e quantidade de sal - mg)
+	* um prato é sempre de um determinado tipo de prato, ex., carne
+	* um prato é vendido a um determinado preço
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+
+	* o nome de um prato tem que ser único no sistema
+	* o preço é sempre superior ou igual a zero Euros
+	* calorias e quantidade de sal são sempre positivos ou zero
+	* o utilizador pode criar um prato sem indicar a informação nutricional
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+
+
+	DISH
+	* testNameMustNotBeNullNorEmpty
+	* testDescriptionMustNotBeNullNorEmpty
+	* testPriceCanNotBeNegative
+	* testMustBelongToADishType
+
+	NUTRICIONALINFO
+	* testCaloriesCanNotBeNegative
+	* testSaltCanNotBeNegative
+

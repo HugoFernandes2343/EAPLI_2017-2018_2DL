@@ -1,0 +1,14 @@
+	
+
+	TEST PLAN
+
+	_______________________________
+	CASO #1: Register Dish
+	_______________________________
+
+	1. Fazer o login como chef/Password1
+	2. Escolher a opção Dishes > New
+	3. escolher dish type : peixe
+	4. introduzir nome "bacalhau com natas"
+	5. introduzir preço
+	6. Confirmar as atualizaçções efetuadas através de List Dishes (Dish  >  List Dish)
