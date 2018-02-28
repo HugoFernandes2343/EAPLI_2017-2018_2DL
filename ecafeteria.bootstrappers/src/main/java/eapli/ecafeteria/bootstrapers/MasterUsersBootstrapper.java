@@ -33,7 +33,7 @@ public class MasterUsersBootstrapper extends UsersBootstrapperBase implements Ac
         roles.add(RoleType.CASHIER);
         roles.add(RoleType.CAFETERIA_USER);
 
-        final SystemUser poweruser = registerUser("poweruser", TestDataConstants.PASSWORD1, "joe", "doe",
+        final SystemUser poweruser = registerUser("poweruser", TestDataConstants.PASSWORD1, "joe", "power",
                 "joe@email.org", roles);
         assert poweruser != null;
 

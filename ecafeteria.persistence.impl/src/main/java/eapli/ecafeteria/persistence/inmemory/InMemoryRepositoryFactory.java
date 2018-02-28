@@ -1,6 +1,6 @@
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
+import eapli.ecafeteria.bootstrapers.ECafeteriaBootstrapper;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -18,7 +18,7 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
 	static {
 		// only needed because of the in memory persistence
-		new ECafeteriaBootstraper().execute();
+		new ECafeteriaBootstrapper().execute();
 	}
 
 	@Override

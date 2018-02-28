@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author mcn
  */
-public class DishBootstraper implements Action {
+public class DishBootstrapper implements Action {
 
     @Override
     public boolean execute() {
@@ -48,7 +48,7 @@ public class DishBootstraper implements Action {
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             // ignoring exception. assuming it is just a primary key violation
             // due to the tentative of inserting a duplicated user
-            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+            Logger.getLogger(ECafeteriaBootstrapper.class.getSimpleName())
                     .info("EAPLI-DI001: bootstrapping existing record");
         }
     }

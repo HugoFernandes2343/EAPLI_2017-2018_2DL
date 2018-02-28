@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Paulo Sousa
  */
-public class CafeteriaUserBootstraper implements Action {
+public class CafeteriaUserBootstrapper implements Action {
 
     @Override
     public boolean execute() {
@@ -41,7 +41,7 @@ public class CafeteriaUserBootstraper implements Action {
             acceptController.acceptSignupRequest(request);
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
             // assume it just a question of trying to insert duplicate record
-            Logger.getLogger(ECafeteriaBootstraper.class.getSimpleName())
+            Logger.getLogger(ECafeteriaBootstrapper.class.getSimpleName())
                     .info("EAPLI-DI001: Exception during bootstrapping: assuming existing record.");
         }
         return request;

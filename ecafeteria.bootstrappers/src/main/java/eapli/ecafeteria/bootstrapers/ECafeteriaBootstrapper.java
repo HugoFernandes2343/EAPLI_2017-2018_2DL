@@ -5,6 +5,7 @@ import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.UserSession;
 import eapli.framework.actions.Action;
+import eapli.framework.util.Strings;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,19 +13,20 @@ import java.util.Set;
  * eCafeteria Bootstrapping data app
  *
  */
-public class ECafeteriaBootstraper implements Action {
+public class ECafeteriaBootstrapper implements Action {
 
     @Override
     public boolean execute() {
         // declare bootstrap actions
-        final Action[] actions = {new MasterUsersBootstrapper(), new DishTypesBootstraper(),
-            new CafeteriaUserBootstraper(), new DishBootstraper(), new MaterialsBootstraper(),};
+        final Action[] actions = {new MasterUsersBootstrapper(), new BackofficeUsersBootstrapper(), new DishTypesBootstrapper(),
+            new CafeteriaUserBootstrapper(), new DishBootstrapper(), new MaterialsBootstrapper(),};
 
         authenticateSuperUser();
 
         // execute all bootstrapping
         boolean ret = true;
         for (final Action boot : actions) {
+            System.out.println("Bootstrapping " + nameOfEntity(boot) + "...");
             ret &= boot.execute();
         }
         return ret;
@@ -40,5 +42,10 @@ public class ECafeteriaBootstraper implements Action {
         final UserSession adminSession = new UserSession(
                 new SystemUser("poweruser", "poweruserA1", "joe", "doe", "joe@email.org", roles));
         AuthorizationService.setSession(adminSession);
+    }
+
+    private String nameOfEntity(final Action boot) {
+        final String name = boot.getClass().getSimpleName();
+        return Strings.left(name, name.length() - "Bootstrapper".length());
     }
 }

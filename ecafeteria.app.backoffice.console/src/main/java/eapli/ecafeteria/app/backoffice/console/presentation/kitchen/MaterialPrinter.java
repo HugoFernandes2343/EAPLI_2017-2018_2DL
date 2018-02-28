@@ -14,7 +14,7 @@ class MaterialPrinter implements Visitor<Material> {
 
     @Override
     public void visit(Material visitee) {
-        System.out.printf("%-10s%-30s\n", visitee.id(), visitee.description());
+        System.out.printf("%-10s%-30s", visitee.id(), visitee.description());
     }
 
     @Override

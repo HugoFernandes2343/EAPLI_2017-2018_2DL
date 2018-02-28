@@ -1,6 +1,6 @@
 package eapli.ecafeteria.app.bootstrap;
 
-import eapli.ecafeteria.bootstrapers.ECafeteriaBootstraper;
+import eapli.ecafeteria.bootstrapers.ECafeteriaBootstrapper;
 
 /**
  * eCafeteria Bootstrapping data app
@@ -13,7 +13,7 @@ public class ECafeteriaBootstrap {
         System.out.println("Bootstrapping eCafeteria (c) 2018 data");
         System.out.println("======================================");
 
-        new ECafeteriaBootstraper().execute();
+        new ECafeteriaBootstrapper().execute();
 
         System.out.println("======================================");
         System.out.println("Bootstrap data done.");
