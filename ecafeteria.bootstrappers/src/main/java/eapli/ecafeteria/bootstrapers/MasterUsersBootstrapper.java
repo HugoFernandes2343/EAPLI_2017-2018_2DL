@@ -35,6 +35,7 @@ public class MasterUsersBootstrapper extends UsersBootstrapperBase implements Ac
 
         final SystemUser poweruser = registerUser("poweruser", TestDataConstants.PASSWORD1, "joe", "doe",
                 "joe@email.org", roles);
+        assert poweruser != null;
 
         // authenticate a super user to be able to register new users, and
         // perform all other options during bootstrap

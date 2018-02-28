@@ -7,9 +7,11 @@ package eapli.ecafeteria.application.authz;
 
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.application.Controller;
+import java.util.Optional;
 
 /**
  *
@@ -23,5 +25,9 @@ public class ListUsersController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
         return this.userRepository.findAll();
+    }
+
+    public Optional<SystemUser> find(Username u) {
+        return userRepository.findOne(u);
     }
 }
