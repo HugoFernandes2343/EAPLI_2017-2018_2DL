@@ -39,7 +39,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int LIST_MOVEMENTS_OPTION = 1;
 
     // SETTINGS
-    private static final int SET_USER_ALERT_LIMIT_OPTION = 2;
+    private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
 
     @Override
     public boolean show() {
