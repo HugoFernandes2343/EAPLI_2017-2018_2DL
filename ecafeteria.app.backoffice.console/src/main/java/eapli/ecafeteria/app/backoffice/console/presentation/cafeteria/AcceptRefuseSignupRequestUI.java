@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.authz;
+package eapli.ecafeteria.app.backoffice.console.presentation.cafeteria;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -1,7 +1,7 @@
 /**
  *
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.authz;
+package eapli.ecafeteria.app.backoffice.console.presentation.cafeteria;
 
 import eapli.ecafeteria.domain.cafeteria.SignupRequest;
 import eapli.framework.visitor.Visitor;

@@ -7,7 +7,7 @@ package eapli.ecafeteria.app.backoffice.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
-import eapli.ecafeteria.app.backoffice.console.presentation.authz.AcceptRefuseSignupRequestAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.cafeteria.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;

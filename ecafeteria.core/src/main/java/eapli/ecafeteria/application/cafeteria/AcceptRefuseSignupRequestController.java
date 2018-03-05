@@ -7,7 +7,6 @@ package eapli.ecafeteria.application.cafeteria;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.SystemUserBuilder;
 import eapli.ecafeteria.domain.cafeteria.CafeteriaUserBuilder;
@@ -67,9 +66,6 @@ public class AcceptRefuseSignupRequestController implements Controller {
 
     private SignupRequest acceptTheSignupRequest(SignupRequest theSignupRequest)
             throws DataConcurrencyException, DataIntegrityViolationException {
-        //
-        // modify Signup Request to accepted
-        //
         theSignupRequest.accept();
         theSignupRequest = this.signupRequestsRepository.save(theSignupRequest);
         return theSignupRequest;
@@ -77,24 +73,19 @@ public class AcceptRefuseSignupRequestController implements Controller {
 
     private void createCafeteriaUser(SignupRequest theSignupRequest, SystemUser newUser)
             throws DataConcurrencyException, DataIntegrityViolationException {
-        //
-        // add cafeteria user
-        //
         final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
         cafeteriaUserBuilder.withMecanographicNumber(theSignupRequest.mecanographicNumber())
                 .withSystemUser(newUser);
         this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
     }
 
+    //
+    // add system user
+    //
     private SystemUser createSystemUserForCafeteriaUser(SignupRequest theSignupRequest)
             throws DataConcurrencyException, DataIntegrityViolationException {
-        //
-        // add system user
-        //
-        final SystemUserBuilder userBuilder = new SystemUserBuilder();
-        userBuilder.withUsername(theSignupRequest.username()).withPassword(theSignupRequest.password())
-                .withName(theSignupRequest.name()).withEmail(theSignupRequest.email())
-                .withRole(RoleType.CAFETERIA_USER);
+
+        final SystemUserBuilder userBuilder = SystemUserBuilder.forSignupRequest(theSignupRequest);
         // TODO error checking if the username is already in the persistence
         // store
         return this.userRepository.save(userBuilder.build());

@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.authz;
 
+import eapli.ecafeteria.domain.cafeteria.SignupRequest;
 import eapli.framework.domain.EmailAddress;
 import eapli.framework.domain.ddd.DomainFactory;
 import eapli.framework.util.Strings;
@@ -27,6 +28,14 @@ public class SystemUserBuilder implements DomainFactory<SystemUser> {
 
     public SystemUserBuilder() {
         this.roles = new RoleSet();
+    }
+
+    public static SystemUserBuilder forSignupRequest(SignupRequest theSignupRequest) {
+        final SystemUserBuilder userBuilder = new SystemUserBuilder();
+        userBuilder.withUsername(theSignupRequest.username()).withPassword(theSignupRequest.password())
+                .withName(theSignupRequest.name()).withEmail(theSignupRequest.email())
+                .withRole(RoleType.CAFETERIA_USER);
+        return userBuilder;
     }
 
     public SystemUserBuilder withUsername(String username) {
