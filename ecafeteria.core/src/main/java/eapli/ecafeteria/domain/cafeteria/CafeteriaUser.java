@@ -83,12 +83,8 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         if (this == that) {
             return true;
         }
-        return (this.mecanographicNumber.equals(that.mecanographicNumber) && this.systemUser.sameAs(that.systemUser));
-    }
-
-    @Override
-    public boolean is(MecanographicNumber id) {
-        return id().equals(id);
+        return (this.mecanographicNumber.equals(that.mecanographicNumber)
+                && this.systemUser.sameAs(that.systemUser));
     }
 
     public MecanographicNumber mecanographicNumber() {

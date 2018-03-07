@@ -21,8 +21,9 @@ public class NutricionalInfo implements ValueObject, Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    // TODO a very interesting situation to use Quantity pattern:
+    // TODO this would be a very interesting situation to use Quantity pattern:
     // http://martinfowler.com/eaaDev/quantity.html
+    // also check javax.measure
     private Integer calories;
     private Integer salt;
 

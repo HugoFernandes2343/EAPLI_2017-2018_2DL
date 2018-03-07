@@ -44,7 +44,6 @@ public class MecanographicNumber implements ValueObject, Serializable {
         }
 
         final MecanographicNumber that = (MecanographicNumber) o;
-
         return this.number.equals(that.number);
     }
 
