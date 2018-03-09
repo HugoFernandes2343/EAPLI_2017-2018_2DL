@@ -20,57 +20,58 @@ import eapli.framework.util.Strings;
  *
  * @author Paulo Gandra Sousa
  */
-public class JpaTransactionalContext implements TransactionalContext {
+/* package */ class JpaTransactionalContext implements TransactionalContext {
 
-	private final String persistenceUnitName;
-	private static EntityManagerFactory singletonEMF;
-	private EntityManager entityManager;
+    private final String persistenceUnitName;
+    private static volatile EntityManagerFactory singletonEMF;
+    private EntityManager entityManager;
 
-	/**
-	 *
-	 * @param persistenceUnitName
-	 *            the name of the persistence unit to use
-	 */
-	public JpaTransactionalContext(String persistenceUnitName) {
-		this.persistenceUnitName = persistenceUnitName;
-		entityManagerFactory();
-	}
+    /**
+     *
+     * @param persistenceUnitName
+     *            the name of the persistence unit to use
+     */
+    public JpaTransactionalContext(String persistenceUnitName) {
+        this.persistenceUnitName = persistenceUnitName;
+        entityManagerFactory();
+    }
 
-	@SuppressWarnings({ "squid:S3346", "squid:S2696" })
-	EntityManagerFactory entityManagerFactory() {
-		if (singletonEMF == null) {
-			assert !Strings.isNullOrEmpty(this.persistenceUnitName) : "the persistence unit name must be provided";
-			Logger.getLogger(this.getClass().getSimpleName()).info("Not runing in container mode.");
-			singletonEMF = Persistence.createEntityManagerFactory(this.persistenceUnitName);
-		}
-		return singletonEMF;
-	}
+    @SuppressWarnings({ "squid:S3346", "squid:S2696" })
+    /* package */ EntityManagerFactory entityManagerFactory() {
+        if (singletonEMF == null) {
+            assert !Strings.isNullOrEmpty(
+                    this.persistenceUnitName) : "the persistence unit name must be provided";
+            Logger.getLogger(this.getClass().getSimpleName()).info("Not runing in container mode.");
+            singletonEMF = Persistence.createEntityManagerFactory(this.persistenceUnitName);
+        }
+        return singletonEMF;
+    }
 
-	EntityManager entityManager() {
-		if (this.entityManager == null || !this.entityManager.isOpen()) {
-			this.entityManager = entityManagerFactory().createEntityManager();
-		}
-		return this.entityManager;
-	}
+    /* package */ EntityManager entityManager() {
+        if (this.entityManager == null || !this.entityManager.isOpen()) {
+            this.entityManager = entityManagerFactory().createEntityManager();
+        }
+        return this.entityManager;
+    }
 
-	@Override
-	public void beginTransaction() {
-		final EntityTransaction tx = entityManager().getTransaction();
-		tx.begin();
-	}
+    @Override
+    public void beginTransaction() {
+        final EntityTransaction tx = entityManager().getTransaction();
+        tx.begin();
+    }
 
-	@Override
-	public void commit() {
-		entityManager().getTransaction().commit();
-	}
+    @Override
+    public void commit() {
+        entityManager().getTransaction().commit();
+    }
 
-	@Override
-	public void rollback() {
-		entityManager().getTransaction().rollback();
-	}
+    @Override
+    public void rollback() {
+        entityManager().getTransaction().rollback();
+    }
 
-	@Override
-	public void close() {
-		entityManager().close();
-	}
+    @Override
+    public void close() {
+        entityManager().close();
+    }
 }

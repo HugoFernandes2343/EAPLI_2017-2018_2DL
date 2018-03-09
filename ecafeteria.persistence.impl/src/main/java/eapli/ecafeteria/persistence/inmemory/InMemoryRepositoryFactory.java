@@ -16,45 +16,60 @@ import eapli.framework.persistence.repositories.TransactionalContext;
  */
 public class InMemoryRepositoryFactory implements RepositoryFactory {
 
-	static {
-		// only needed because of the in memory persistence
-		new ECafeteriaBootstrapper().execute();
-	}
+    static {
+        // only needed because of the in memory persistence
+        new ECafeteriaBootstrapper().execute();
+    }
 
-	@Override
-	public UserRepository users(TransactionalContext tx) {
-		return new InMemoryUserRepository();
-	}
+    @Override
+    public UserRepository users(TransactionalContext tx) {
+        return new InMemoryUserRepository();
+    }
 
-	@Override
-	public DishTypeRepository dishTypes() {
-		return new InMemoryDishTypeRepository();
-	}
+    @Override
+    public UserRepository users() {
+        return users(null);
+    }
 
-	@Override
-	public CafeteriaUserRepository cafeteriaUsers(TransactionalContext tx) {
+    @Override
+    public DishTypeRepository dishTypes() {
+        return new InMemoryDishTypeRepository();
+    }
 
-		return new InMemoryCafeteriaUserRepository();
-	}
+    @Override
+    public CafeteriaUserRepository cafeteriaUsers(TransactionalContext tx) {
 
-	@Override
-	public SignupRequestRepository signupRequests(TransactionalContext tx) {
-		return new InMemorySignupRequestRepository();
-	}
+        return new InMemoryCafeteriaUserRepository();
+    }
 
-	@Override
-	public DishRepository dishes() {
-		return new InMemoryDishRepository();
-	}
+    @Override
+    public CafeteriaUserRepository cafeteriaUsers() {
+        return cafeteriaUsers(null);
+    }
 
-	@Override
-	public MaterialRepository materials() {
-		return new InMemoryMaterialRepository();
-	}
+    @Override
+    public SignupRequestRepository signupRequests() {
+        return signupRequests(null);
+    }
 
-	@Override
-	public TransactionalContext buildTransactionalContext() {
-		// in memory does not support transactions...
-		return null;
-	}
+    @Override
+    public SignupRequestRepository signupRequests(TransactionalContext tx) {
+        return new InMemorySignupRequestRepository();
+    }
+
+    @Override
+    public DishRepository dishes() {
+        return new InMemoryDishRepository();
+    }
+
+    @Override
+    public MaterialRepository materials() {
+        return new InMemoryMaterialRepository();
+    }
+
+    @Override
+    public TransactionalContext buildTransactionalContext() {
+        // in memory does not support transactions...
+        return null;
+    }
 }

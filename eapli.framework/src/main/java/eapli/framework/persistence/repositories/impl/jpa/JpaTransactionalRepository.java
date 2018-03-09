@@ -31,7 +31,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  * @param <K>
  *            the primary key of the table
  */
-public class JpaTransactionalRepository<T, K extends Serializable> extends JpaNotRunningInContainerRepository<T, K> {
+public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWithTransactionalContextRepository<T, K> {
 
 	public JpaTransactionalRepository(String persistenceUnitName) {
 		super(new JpaTransactionalContext(persistenceUnitName));

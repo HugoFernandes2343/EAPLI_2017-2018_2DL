@@ -1,13 +1,15 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template file, choose Tools | Templates and open the template
+ * in the editor.
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import eapli.framework.persistence.DataConcurrencyException;
@@ -16,66 +18,108 @@ import eapli.framework.persistence.repositories.DataRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
+ * A JPA repository implementation for use with applications not running inside
+ * a container. this class can either support working within a
+ * TransactionalContext or a single immediate transaction mode. if running in
+ * single immediate mode a transaction is initiated, committed and the
+ * connection closed in the scope of each repository method call.
  *
  * @author pgsou_000
  */
 public class JpaAutoTxRepository<T, K extends Serializable> implements DataRepository<T, K> {
 
-	protected final JpaBaseRepository<T, K> repo;
-	private final TransactionalContext autoTx;
+    protected final JpaBaseRepository<T, K> repo;
+    private final TransactionalContext autoTx;
 
-	public JpaAutoTxRepository(String persistenceUnitName, TransactionalContext autoTx) {
-		final ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-		@SuppressWarnings("unchecked")
-		final Class<T> entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
+    public JpaAutoTxRepository(String persistenceUnitName) {
+        final ParameterizedType genericSuperclass = (ParameterizedType) getClass()
+                .getGenericSuperclass();
+        @SuppressWarnings("unchecked")
+        final Class<T> entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
 
-		if (autoTx == null) {
-			this.repo = new JpaTransactionalRepository<>(persistenceUnitName, entityClass);
-		} else {
-			this.repo = new JpaNotRunningInContainerRepository<>(autoTx, entityClass);
-		}
-		this.autoTx = autoTx;
-	}
+        this.repo = new JpaTransactionalRepository<>(persistenceUnitName, entityClass);
+        this.autoTx = null;
+    }
 
-	public TransactionalContext context() {
-		return this.autoTx;
-	}
+    public JpaAutoTxRepository(TransactionalContext autoTx) {
+        final ParameterizedType genericSuperclass = (ParameterizedType) getClass()
+                .getGenericSuperclass();
+        if (autoTx == null) {
+            throw new IllegalArgumentException();
+        }
+        @SuppressWarnings("unchecked")
+        final Class<T> entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
 
-	public boolean isInTransaction() {
-		return this.autoTx == null;
-	}
+        this.repo = new JpaWithTransactionalContextRepository<>(autoTx, entityClass);
+        this.autoTx = autoTx;
+    }
 
-	@Override
-	public void delete(T entity) throws DataIntegrityViolationException {
-		this.repo.delete(entity);
-	}
+    public static TransactionalContext buildTransactionalContext(String persistenceUnitName) {
+        return new JpaTransactionalContext(persistenceUnitName);
+    }
 
-	@Override
-	public void delete(K id) throws DataIntegrityViolationException {
-		this.repo.delete(id);
-	}
+    public TransactionalContext context() {
+        return this.autoTx;
+    }
 
-	@Override
-	public T save(T entity) throws DataConcurrencyException, DataIntegrityViolationException {
-		return this.repo.save(entity);
-	}
+    /**
+     * returns if the repository is running in single transaction mode or within
+     * a TransactionalContext
+     *
+     * @return true if the repository is running in single transaction mode
+     *         false if running within a Transactional Context
+     */
+    public boolean isInTransaction() {
+        return context() == null;
+    }
 
-	@Override
-	public Iterable<T> findAll() {
-		return this.repo.findAll();
-	}
+    @Override
+    public void delete(T entity) throws DataIntegrityViolationException {
+        this.repo.delete(entity);
+    }
 
-	@Override
-	public Optional<T> findOne(K id) {
-		return this.repo.findOne(id);
-	}
+    @Override
+    public void delete(K id) throws DataIntegrityViolationException {
+        this.repo.delete(id);
+    }
 
-	@Override
-	public long count() {
-		return this.repo.count();
-	}
+    @Override
+    public T save(T entity) throws DataConcurrencyException, DataIntegrityViolationException {
+        return this.repo.save(entity);
+    }
 
-	public Iterator<T> iterator() {
-		return this.repo.iterator();
-	}
+    @Override
+    public Iterable<T> findAll() {
+        return this.repo.findAll();
+    }
+
+    @Override
+    public Optional<T> findOne(K id) {
+        return this.repo.findOne(id);
+    }
+
+    @Override
+    public long count() {
+        return this.repo.count();
+    }
+
+    public Iterator<T> iterator() {
+        return this.repo.iterator();
+    }
+
+    protected List<T> match(String where) {
+        return repo.match(where);
+    }
+
+    protected List<T> match(String whereWithParameters, Map<String, Object> params) {
+        return repo.match(whereWithParameters, params);
+    }
+
+    protected Optional<T> matchOne(String where) {
+        return repo.matchOne(where);
+    }
+
+    protected Optional<T> matchOne(String whereWithParameters, Map<String, Object> params) {
+        return repo.matchOne(whereWithParameters, params);
+    }
 }

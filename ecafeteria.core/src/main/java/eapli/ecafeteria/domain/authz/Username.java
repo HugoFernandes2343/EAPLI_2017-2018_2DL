@@ -21,7 +21,7 @@ import eapli.framework.util.Strings;
 public class Username implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String name;
+    private final String name;
 
     public Username(String username) {
         if (Strings.isNullOrEmpty(username)) {
@@ -33,6 +33,7 @@ public class Username implements ValueObject, Serializable {
 
     protected Username() {
         // for ORM
+        name = null;
     }
 
     @Override

@@ -11,41 +11,62 @@ import eapli.framework.persistence.repositories.TransactionalContext;
  */
 public interface RepositoryFactory {
 
-	/**
-	 * factory method to create a transactional context to use in the
-	 * repositories
-	 *
-	 * @return
-	 */
-	TransactionalContext buildTransactionalContext();
+    /**
+     * factory method to create a transactional context to use in the
+     * repositories
+     *
+     * @return
+     */
+    TransactionalContext buildTransactionalContext();
 
-	/**
-	 *
-	 * @param autoTx declares if the repository should be created in auto
-	 * transaction mode or if the caller will take care of transactions
-	 * @return
-	 */
-	UserRepository users(TransactionalContext autoTx);
+    /**
+     *
+     * @param autoTx
+     *            the transactional context to enroll
+     * @return
+     */
+    UserRepository users(TransactionalContext autoTx);
 
-	DishTypeRepository dishTypes();
+    /**
+     * repository will be created in auto transaction mode
+     *
+     * @return
+     */
+    UserRepository users();
 
-	/**
-	 *
-	 * @param autoTx declares if the repository should be created in auto
-	 * transaction mode or if the caller will take care of transactions
-	 * @return
-	 */
-	CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx);
+    DishTypeRepository dishTypes();
 
-	/**
-	 *
-	 * @param autoTx declares if the repository should be created in auto
-	 * transaction mode or if the caller will take care of transactions
-	 * @return
-	 */
-	SignupRequestRepository signupRequests(TransactionalContext autoTx);
+    /**
+     *
+     * @param autoTx
+     *            the transactional context to enroll
+     * @return
+     */
+    CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx);
 
-	DishRepository dishes();
+    /**
+     * repository will be created in auto transaction mode
+     *
+     * @return
+     */
+    CafeteriaUserRepository cafeteriaUsers();
 
-	MaterialRepository materials();
+    /**
+     *
+     * @param autoTx
+     *            the transactional context to enroll
+     * @return
+     */
+    SignupRequestRepository signupRequests(TransactionalContext autoTx);
+
+    /**
+     * repository will be created in auto transaction mode
+     *
+     * @return
+     */
+    SignupRequestRepository signupRequests();
+
+    DishRepository dishes();
+
+    MaterialRepository materials();
 }

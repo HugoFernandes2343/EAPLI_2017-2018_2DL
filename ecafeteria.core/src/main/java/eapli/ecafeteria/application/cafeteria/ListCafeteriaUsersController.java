@@ -17,7 +17,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
  */
 public class ListCafeteriaUsersController {
 
-    private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers(null);
+    private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers();
 
     public Iterable<CafeteriaUser> activeCafeteriaUsers() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);

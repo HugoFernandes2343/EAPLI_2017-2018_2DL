@@ -19,13 +19,13 @@ import eapli.ecafeteria.persistence.PersistenceContext;
  */
 public class CafeteriaUserService {
 
-	private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers(null);
+    private final CafeteriaUserRepository repo = PersistenceContext.repositories().cafeteriaUsers();
 
-	public Optional<CafeteriaUser> findCafeteriaUserByMecNumber(String mecNumber) {
-		return this.repo.findByMecanographicNumber(new MecanographicNumber(mecNumber));
-	}
+    public Optional<CafeteriaUser> findCafeteriaUserByMecNumber(String mecNumber) {
+        return this.repo.findByMecanographicNumber(new MecanographicNumber(mecNumber));
+    }
 
-	public Optional<CafeteriaUser> findCafeteriaUserByUsername(Username user) {
-		return this.repo.findByUsername(user);
-	}
+    public Optional<CafeteriaUser> findCafeteriaUserByUsername(Username user) {
+        return this.repo.findByUsername(user);
+    }
 }

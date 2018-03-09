@@ -19,8 +19,8 @@ public class Name implements ValueObject, Serializable {
     private static final long serialVersionUID = 1L;
     public static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$",
             Pattern.CASE_INSENSITIVE);
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
 
     public Name(final String firstName, final String lastName) {
         if (Strings.isNullOrEmpty(firstName) || Strings.isNullOrEmpty(lastName)) {
@@ -43,6 +43,8 @@ public class Name implements ValueObject, Serializable {
     }
 
     protected Name() {
+        // for ORM only
+        firstName = lastName = null;
     }
 
     public String firstName() {
