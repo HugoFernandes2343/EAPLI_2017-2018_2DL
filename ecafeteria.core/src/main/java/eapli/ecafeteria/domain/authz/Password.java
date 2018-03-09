@@ -3,11 +3,13 @@
  */
 package eapli.ecafeteria.domain.authz;
 
-import eapli.framework.domain.ddd.ValueObject;
-import eapli.framework.util.Strings;
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+
+import eapli.framework.domain.ddd.ValueObject;
+import eapli.framework.util.Strings;
 
 /**
  * a password of a user.

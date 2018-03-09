@@ -22,45 +22,45 @@ import eapli.framework.domain.ddd.ValueObject;
 @Embeddable
 public class TimeInterval implements ValueObject {
 
-	private static final long serialVersionUID = -4658136141745243778L;
+    private static final long serialVersionUID = -4658136141745243778L;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	Calendar start;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar start;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	Calendar end;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar end;
 
-	@Transient
-	TimeRange period;
+    @Transient
+    private TimeRange period;
 
-	/**
-	 * Constructs a closed time interval
-	 *
-	 * @param start
-	 * @param end
-	 */
-	public TimeInterval(Calendar start, Calendar end) {
-		if (start == null || end == null) {
-			throw new IllegalArgumentException();
-		}
-		this.start = start;
-		this.end = end;
-		period = new TimeRange(start, end);
-	}
+    /**
+     * Constructs a closed time interval
+     *
+     * @param start
+     * @param end
+     */
+    public TimeInterval(Calendar start, Calendar end) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException();
+        }
+        this.start = start;
+        this.end = end;
+        period = new TimeRange(start, end);
+    }
 
-	protected TimeInterval() {
-		// ORM
-	}
+    protected TimeInterval() {
+        // ORM
+    }
 
-	public Calendar start() {
-		return start;
-	}
+    public Calendar start() {
+        return start;
+    }
 
-	public Calendar end() {
-		return start;
-	}
+    public Calendar end() {
+        return start;
+    }
 
-	public boolean includes(Calendar target) {
-		return period.includes(target);
-	}
+    public boolean includes(Calendar target) {
+        return period.includes(target);
+    }
 }

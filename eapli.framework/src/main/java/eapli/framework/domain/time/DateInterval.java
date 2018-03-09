@@ -23,58 +23,58 @@ import eapli.framework.util.DateTime;
 @Embeddable
 public class DateInterval implements ValueObject {
 
-	private static final long serialVersionUID = -3829067411069027990L;
+    private static final long serialVersionUID = -3829067411069027990L;
 
-	@Temporal(TemporalType.DATE)
-	Calendar start;
+    @Temporal(TemporalType.DATE)
+    private Calendar start;
 
-	@Temporal(TemporalType.DATE)
-	Calendar end;
+    @Temporal(TemporalType.DATE)
+    private Calendar end;
 
-	@Transient
-	TimeRange period;
+    @Transient
+    private TimeRange period;
 
-	/**
-	 * constructs a closed range between start and end
-	 *
-	 * @param start
-	 * @param end
-	 */
-	public DateInterval(Calendar start, Calendar end) {
-		if (start == null || end == null) {
-			throw new IllegalArgumentException();
-		}
-		this.start = DateTime.datePart(start);
-		this.end = DateTime.datePart(end);
-		period = new TimeRange(this.start, this.end);
-	}
+    /**
+     * constructs a closed range between start and end
+     *
+     * @param start
+     * @param end
+     */
+    public DateInterval(Calendar start, Calendar end) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException();
+        }
+        this.start = DateTime.datePart(start);
+        this.end = DateTime.datePart(end);
+        period = new TimeRange(this.start, this.end);
+    }
 
-	/**
-	 * constructs a closed range starting at start ad infinitum
-	 * 
-	 * @param start
-	 */
-	public DateInterval(Calendar start) {
-		if (start == null) {
-			throw new IllegalArgumentException();
-		}
-		this.start = DateTime.datePart(start);
-		period = new TimeRange(this.start);
-	}
+    /**
+     * constructs a closed range starting at start ad infinitum
+     * 
+     * @param start
+     */
+    public DateInterval(Calendar start) {
+        if (start == null) {
+            throw new IllegalArgumentException();
+        }
+        this.start = DateTime.datePart(start);
+        period = new TimeRange(this.start);
+    }
 
-	protected DateInterval() {
-		// ORM
-	}
+    protected DateInterval() {
+        // ORM
+    }
 
-	public Calendar start() {
-		return start;
-	}
+    public Calendar start() {
+        return start;
+    }
 
-	public Calendar end() {
-		return start;
-	}
+    public Calendar end() {
+        return start;
+    }
 
-	public boolean includes(Calendar target) {
-		return period.includes(target);
-	}
+    public boolean includes(Calendar target) {
+        return period.includes(target);
+    }
 }

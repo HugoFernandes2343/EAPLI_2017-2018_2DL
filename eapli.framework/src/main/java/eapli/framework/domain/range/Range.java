@@ -5,9 +5,11 @@
  */
 package eapli.framework.domain.range;
 
-import eapli.framework.domain.ddd.ValueObject;
 import java.io.Serializable;
+
 import javax.persistence.Embeddable;
+
+import eapli.framework.domain.ddd.ValueObject;
 
 /**
  * a generic immutable range class, i.e., a continuous domain.
@@ -85,24 +87,29 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
     /**
      * constructs a range.
      *
-     * @param start anchor start of the range or null to represent infinity
-     * @param end anchor end of the range or null to represent infinity
-     * @param startBoundary indicates if the range is open or closed at the
-     * start anchor
-     * @param endBoundary indicates if the range is open or closed at the end
-     * anchor
+     * @param start
+     *            anchor start of the range or null to represent infinity
+     * @param end
+     *            anchor end of the range or null to represent infinity
+     * @param startBoundary
+     *            indicates if the range is open or closed at the start anchor
+     * @param endBoundary
+     *            indicates if the range is open or closed at the end anchor
      */
-    protected Range(T start, BoundaryLimitType startBoundary, T end, BoundaryLimitType endBoundary) {
+    protected Range(T start, BoundaryLimitType startBoundary, T end,
+            BoundaryLimitType endBoundary) {
         if ((start == null && startBoundary != BoundaryLimitType.INFINITY)
                 || (end == null && endBoundary != BoundaryLimitType.INFINITY)) {
             throw new IllegalArgumentException("start or end must be non-null");
         }
 
         if (end != null && start != null && end.compareTo(start) < 0) {
-            throw new IllegalArgumentException("The end value of a range must be bigger than its start");
+            throw new IllegalArgumentException(
+                    "The end value of a range must be bigger than its start");
         }
         if (end != null && start != null && end.compareTo(start) == 0
-                && (startBoundary == BoundaryLimitType.OPEN || endBoundary == BoundaryLimitType.OPEN)) {
+                && (startBoundary == BoundaryLimitType.OPEN
+                        || endBoundary == BoundaryLimitType.OPEN)) {
             throw new IllegalArgumentException("An empty range is not allowed");
         }
 
@@ -146,7 +153,8 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
      * @return
      */
     public boolean includes(T target) {
-        if (this.startBoundary != BoundaryLimitType.INFINITY && this.endBoundary != BoundaryLimitType.INFINITY) {
+        if (this.startBoundary != BoundaryLimitType.INFINITY
+                && this.endBoundary != BoundaryLimitType.INFINITY) {
             return regularIncludes(target);
         } else if (this.endBoundary == BoundaryLimitType.INFINITY) {
             return toInfinityRangeIncludes(target);

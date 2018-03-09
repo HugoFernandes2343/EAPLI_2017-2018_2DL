@@ -13,34 +13,36 @@ import javax.persistence.TemporalType;
 import eapli.framework.util.DateTime;
 
 /**
- *
+ * An utility class for domain events. derive your own specialized classes from
+ * this one keeping the Value Object pattern.
+ * 
  * @author Paulo Gandra Sousa
  */
 public abstract class DomainEventBase implements DomainEvent {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Temporal(TemporalType.DATE)
-	private final Calendar occuredAt;
-	@Temporal(TemporalType.DATE)
-	private Calendar registeredAt;
+    @Temporal(TemporalType.DATE)
+    private final Calendar occuredAt;
+    @Temporal(TemporalType.DATE)
+    private final Calendar registeredAt;
 
-	public DomainEventBase() {
-		occuredAt = registeredAt = DateTime.now();
-	}
+    public DomainEventBase() {
+        occuredAt = registeredAt = DateTime.now();
+    }
 
-	public DomainEventBase(Calendar occuredAt) {
-		this.occuredAt = occuredAt;
-		registeredAt = DateTime.now();
-	}
+    public DomainEventBase(Calendar occuredAt) {
+        this.occuredAt = occuredAt;
+        registeredAt = DateTime.now();
+    }
 
-	@Override
-	public Calendar occurredAt() {
-		return occuredAt;
-	}
+    @Override
+    public Calendar occurredAt() {
+        return occuredAt;
+    }
 
-	@Override
-	public Calendar registeredAt() {
-		return registeredAt;
-	}
+    @Override
+    public Calendar registeredAt() {
+        return registeredAt;
+    }
 }

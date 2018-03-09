@@ -3,10 +3,12 @@
  */
 package eapli.framework.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+
 import eapli.framework.domain.ddd.ValueObject;
 import eapli.framework.util.Strings;
-import java.io.Serializable;
-import javax.persistence.Embeddable;
 
 /**
  * Generic name concept

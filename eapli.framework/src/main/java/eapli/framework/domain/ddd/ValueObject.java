@@ -10,9 +10,11 @@ import java.io.Serializable;
 /**
  * A value object is a Domain-Driven Design pattern for domain concepts which do
  * not have a thread of continuity neither need to be tracked by their identity
- * but for the value of its attributes. These are <b>immutable</b> objects which
- * can be freely shared and discarded and replaced by another instance. Equality
- * is done thru comparison of the attributes values.
+ * but for the value of its attributes.
+ * 
+ * These are <b>immutable</b> objects which can be freely shared and discarded
+ * and replaced by another instance. Equality is done thru comparison of the
+ * attributes values.
  *
  * Typical examples are:
  * <p>
@@ -24,37 +26,40 @@ import java.io.Serializable;
  * <p>
  * - Money
  *
+ * Make sure you don't provide mutator methods, always contruct the object in a
+ * valid state and all your private fileds are marked final
+ * 
  * @author Paulo Gandra Sousa
  */
 public interface ValueObject extends Serializable {
 
-	/**
-	 * returns a representation of this value object as a String.
-	 *
-	 * @return
-	 */
-	@Override
-	String toString();
+    /**
+     * returns a representation of this value object as a String.
+     *
+     * @return
+     */
+    @Override
+    String toString();
 
-	/**
-	 * Value objects are compared by the values of its properties
-	 *
-	 * @param other
-	 * @return
-	 */
-	@Override
-	public boolean equals(Object other);
+    /**
+     * Value objects are compared by the values of its properties
+     *
+     * @param other
+     * @return
+     */
+    @Override
+    public boolean equals(Object other);
 
-	/**
-	 * hash code of this object according to java rules. i.e., the same fields
-	 * used in equals() should be used in hashCode().
-	 *
-	 * see <a href=
-	 * "http://stackoverflow.com/questions/113511/best-implementation-for-hashcode-method">
-	 * stack overflow</a> for a nice discussion about hashCode() and equals()
-	 *
-	 * @return
-	 */
-	@Override
-	public int hashCode();
+    /**
+     * hash code of this object according to java rules. i.e., the same fields
+     * used in equals() should be used in hashCode().
+     *
+     * see <a href=
+     * "http://stackoverflow.com/questions/113511/best-implementation-for-hashcode-method">
+     * stack overflow</a> for a nice discussion about hashCode() and equals()
+     *
+     * @return
+     */
+    @Override
+    public int hashCode();
 }

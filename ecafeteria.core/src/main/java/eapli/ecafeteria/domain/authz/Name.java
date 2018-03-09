@@ -1,11 +1,13 @@
 package eapli.ecafeteria.domain.authz;
 
-import eapli.framework.domain.ddd.ValueObject;
-import eapli.framework.util.Strings;
 import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.persistence.Embeddable;
+
+import eapli.framework.domain.ddd.ValueObject;
+import eapli.framework.util.Strings;
 
 /**
  * Person name
@@ -15,13 +17,15 @@ import javax.persistence.Embeddable;
 public class Name implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$", Pattern.CASE_INSENSITIVE);
+    public static final Pattern VALID_NAME_REGEX = Pattern.compile("^[A-Z]+[a-zA-Z ]+$",
+            Pattern.CASE_INSENSITIVE);
     private String firstName;
     private String lastName;
 
     public Name(final String firstName, final String lastName) {
         if (Strings.isNullOrEmpty(firstName) || Strings.isNullOrEmpty(lastName)) {
-            throw new IllegalArgumentException("First name and last name should neither be null nor empty");
+            throw new IllegalArgumentException(
+                    "First name and last name should neither be null nor empty");
         }
 
         Matcher matcher = VALID_NAME_REGEX.matcher(firstName);
