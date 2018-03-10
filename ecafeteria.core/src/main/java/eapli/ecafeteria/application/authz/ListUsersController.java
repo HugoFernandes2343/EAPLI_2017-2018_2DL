@@ -5,13 +5,14 @@
  */
 package eapli.ecafeteria.application.authz;
 
+import java.util.Optional;
+
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.application.Controller;
-import java.util.Optional;
 
 /**
  *
@@ -19,7 +20,7 @@ import java.util.Optional;
  */
 public class ListUsersController implements Controller {
 
-    private final UserRepository userRepository = PersistenceContext.repositories().users(null);
+    private final UserRepository userRepository = PersistenceContext.repositories().users();
 
     public Iterable<SystemUser> allUsers() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);

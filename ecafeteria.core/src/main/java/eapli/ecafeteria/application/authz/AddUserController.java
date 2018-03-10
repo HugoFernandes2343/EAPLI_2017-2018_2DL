@@ -1,5 +1,8 @@
 package eapli.ecafeteria.application.authz;
 
+import java.util.Calendar;
+import java.util.Set;
+
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
@@ -10,8 +13,6 @@ import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
-import java.util.Calendar;
-import java.util.Set;
 
 /**
  *
@@ -19,7 +20,7 @@ import java.util.Set;
  */
 public class AddUserController implements Controller {
 
-    private final UserRepository userRepository = PersistenceContext.repositories().users(null);
+    private final UserRepository userRepository = PersistenceContext.repositories().users();
 
     /**
      * Get existing RoleTypes available to the user.
@@ -30,19 +31,21 @@ public class AddUserController implements Controller {
         return RoleType.nonUserValues();
     }
 
-    public SystemUser addUser(String username, String password, String firstName, String lastName, String email,
-            Set<RoleType> roles, Calendar createdOn) throws DataIntegrityViolationException, DataConcurrencyException {
+    public SystemUser addUser(String username, String password, String firstName, String lastName,
+            String email, Set<RoleType> roles, Calendar createdOn)
+            throws DataIntegrityViolationException, DataConcurrencyException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
         final SystemUserBuilder userBuilder = new SystemUserBuilder();
-        userBuilder.withUsername(username).withPassword(password).withFirstName(firstName).withLastName(lastName)
-                .withEmail(email).withCreatedOn(createdOn).withRoles(roles);
+        userBuilder.withUsername(username).withPassword(password).withFirstName(firstName)
+                .withLastName(lastName).withEmail(email).withCreatedOn(createdOn).withRoles(roles);
 
         return this.userRepository.save(userBuilder.build());
     }
 
-    public SystemUser addUser(String username, String password, String firstName, String lastName, String email,
-            Set<RoleType> roles) throws DataIntegrityViolationException, DataConcurrencyException {
+    public SystemUser addUser(String username, String password, String firstName, String lastName,
+            String email, Set<RoleType> roles)
+            throws DataIntegrityViolationException, DataConcurrencyException {
         return addUser(username, password, firstName, lastName, email, roles, DateTime.now());
     }
 }

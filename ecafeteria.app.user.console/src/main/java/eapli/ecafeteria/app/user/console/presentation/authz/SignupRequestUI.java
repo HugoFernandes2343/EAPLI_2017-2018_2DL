@@ -16,33 +16,34 @@ import eapli.framework.util.Console;
  */
 public class SignupRequestUI extends AbstractUI {
 
-	private final SignupController theController = new SignupController();
+    private final SignupController theController = new SignupController();
 
-	protected Controller controller() {
-		return this.theController;
-	}
+    protected Controller controller() {
+        return this.theController;
+    }
 
-	@Override
-	protected boolean doShow() {
-		final UserDataWidget userData = new UserDataWidget();
+    @Override
+    protected boolean doShow() {
+        final UserDataWidget userData = new UserDataWidget();
 
-		userData.show();
+        userData.show();
 
-		final String mecanographicNumber = Console.readLine("Mecanographic Number");
+        final String mecanographicNumber = Console.readLine("Mecanographic Number");
 
-		try {
-			this.theController.signup(userData.username(), userData.password(), userData.firstName(),
-					userData.lastName(), userData.email(), mecanographicNumber);
-		} catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-			// TODO Auto-generated catch block
-			Logger.getLogger(SignupRequestUI.class.getName()).log(Level.SEVERE, null, e);
-		}
+        try {
+            this.theController.signup(userData.username(), userData.password(),
+                    userData.firstName(), userData.lastName(), userData.email(),
+                    mecanographicNumber);
+        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            // TODO Auto-generated catch block
+            Logger.getLogger(SignupRequestUI.class.getName()).log(Level.SEVERE, null, e);
+        }
 
-		return false;
-	}
+        return true;
+    }
 
-	@Override
-	public String headline() {
-		return "Sign Up";
-	}
+    @Override
+    public String headline() {
+        return "Sign Up";
+    }
 }
