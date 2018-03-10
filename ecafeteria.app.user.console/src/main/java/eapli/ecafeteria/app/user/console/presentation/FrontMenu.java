@@ -5,16 +5,14 @@
  */
 package eapli.ecafeteria.app.user.console.presentation;
 
-import eapli.cafeteria.app.common.console.presentation.authz.LoginAction;
+import eapli.cafeteria.app.common.console.presentation.authz.ValidateLoginAction;
 import eapli.ecafeteria.app.user.console.presentation.authz.SignupRequestAction;
 import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.framework.actions.IfThenAction;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;
-import eapli.framework.presentation.console.ShowUiAction;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 
 /**
@@ -42,8 +40,10 @@ public class FrontMenu extends AbstractUI {
     @Override
     public boolean doShow() {
         final Menu menu = new Menu();
-        menu.add(new MenuItem(LOGIN_OPTION, "Login",
-                new IfThenAction(new LoginAction(ActionRight.SELECT_MEAL), new ShowUiAction(new MainMenu()))));
+        menu.add(new MenuItem(LOGIN_OPTION, "Login", new ValidateLoginAction(ActionRight.SELECT_MEAL, () -> {
+            new MainMenu().mainLoop();
+            return true;
+        })));
         menu.add(new MenuItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
