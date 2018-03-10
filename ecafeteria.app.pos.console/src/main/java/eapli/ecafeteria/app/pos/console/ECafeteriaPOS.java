@@ -21,10 +21,11 @@ public final class ECafeteriaPOS {
     private ECafeteriaPOS() {
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(final String[] args) {
+        System.out.println("=====================================");
+        System.out.println("eCafeteria POS");
+        System.out.println("(C) 2016, 2017, 2018");
+        System.out.println("=====================================");
 
         // login and go to main menu
         if (new LoginAction(ActionRight.SALE).execute()) {
@@ -32,4 +33,5 @@ public final class ECafeteriaPOS {
             menu.mainLoop();
         }
     }
+
 }

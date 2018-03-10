@@ -10,7 +10,8 @@ public class ECafeteriaBootstrap {
 
     public static void main(String[] args) {
         System.out.println("======================================");
-        System.out.println("Bootstrapping eCafeteria (c) 2018 data");
+        System.out.println("Bootstrapping eCafeteria data");
+        System.out.println("(C) 2016, 2017, 2018");
         System.out.println("======================================");
 
         new ECafeteriaBootstrapper().execute();

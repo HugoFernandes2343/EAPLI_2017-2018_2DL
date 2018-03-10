@@ -12,6 +12,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.MainMenu;
  *
  * @author Paulo Gandra Sousa
  */
+@SuppressWarnings("squid:S106")
 public final class ECafeteriaBackoffice {
 
     /**
@@ -24,6 +25,11 @@ public final class ECafeteriaBackoffice {
      * @param args the command line arguments
      */
     public static void main(final String[] args) {
+        System.out.println("=====================================");
+        System.out.println("eCafeteria Back Office");
+        System.out.println("(C) 2016, 2017, 2018");
+        System.out.println("=====================================");
+
         // login and go to main menu
         if (new LoginAction().execute()) {
             final MainMenu menu = new MainMenu();
