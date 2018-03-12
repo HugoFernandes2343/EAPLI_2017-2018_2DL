@@ -26,13 +26,13 @@ public class DateInterval implements ValueObject {
     private static final long serialVersionUID = -3829067411069027990L;
 
     @Temporal(TemporalType.DATE)
-    private Calendar start;
+    private final Calendar start;
 
     @Temporal(TemporalType.DATE)
-    private Calendar end;
+    private final Calendar end;
 
     @Transient
-    private TimeRange period;
+    private final TimeRange period;
 
     /**
      * constructs a closed range between start and end
@@ -51,7 +51,7 @@ public class DateInterval implements ValueObject {
 
     /**
      * constructs a closed range starting at start ad infinitum
-     * 
+     *
      * @param start
      */
     public DateInterval(Calendar start) {
@@ -59,11 +59,14 @@ public class DateInterval implements ValueObject {
             throw new IllegalArgumentException();
         }
         this.start = DateTime.datePart(start);
+        end = null;
         period = new TimeRange(this.start);
     }
 
     protected DateInterval() {
         // ORM
+        start = end = null;
+        period = null;
     }
 
     public Calendar start() {

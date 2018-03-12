@@ -12,50 +12,50 @@ import eapli.framework.visitor.Visitor;
  */
 public class ListUI<T> extends AbstractListUI<T> {
 
-	protected final Iterable<T> source;
-	protected final Visitor<T> printer;
-	protected final String theElementName;
-	protected final String theHeader;
+    protected final Iterable<T> source;
+    protected final Visitor<T> printer;
+    protected final String theElementName;
+    protected final String theHeader;
 
-	public ListUI(Iterable<T> source, Visitor<T> printer, String elementName, String header) {
-		this.source = source;
-		this.printer = printer;
-		this.theElementName = elementName;
-		this.theHeader = header;
-	}
+    public ListUI(Iterable<T> source, Visitor<T> printer, String elementName, String header) {
+	this.source = source;
+	this.printer = printer;
+	this.theElementName = elementName;
+	this.theHeader = header;
+    }
 
-	/**
-	 * the source to list
-	 *
-	 * @return
-	 */
-	@Override
-	protected Iterable<T> elements() {
-		return this.source;
-	}
+    /**
+     * the source to list
+     *
+     * @return
+     */
+    @Override
+    protected Iterable<T> elements() {
+	return this.source;
+    }
 
-	/**
-	 * the visitor that prints the content of each element
-	 *
-	 * @return
-	 */
-	@Override
-	protected Visitor<T> elementPrinter() {
-		return this.printer;
-	}
+    /**
+     * the visitor that prints the content of each element
+     *
+     * @return
+     */
+    @Override
+    protected Visitor<T> elementPrinter() {
+	return this.printer;
+    }
 
-	@Override
-	public String listHeader() {
-		return theHeader;
-	}
+    @Override
+    public String listHeader() {
+	return theHeader;
+    }
 
-	/**
-	 * the name of the type of elements to list
-	 *
-	 * @return
-	 */
-	@Override
-	protected String elementName() {
-		return this.theElementName;
-	}
+    /**
+     * the name of the type of elements to list
+     *
+     * @return
+     */
+    @Override
+    protected String elementName() {
+	return this.theElementName;
+    }
 }

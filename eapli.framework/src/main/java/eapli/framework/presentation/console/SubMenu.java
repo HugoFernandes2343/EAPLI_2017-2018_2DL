@@ -13,7 +13,7 @@ import eapli.framework.actions.Action;
  */
 public class SubMenu extends MenuItem {
 
-	public SubMenu(int option, Menu menu, Action a) {
-		super(option, menu.title(), a);
-	}
+    public SubMenu(int option, Menu menu, Action a) {
+	super(option, menu.title(), a);
+    }
 }

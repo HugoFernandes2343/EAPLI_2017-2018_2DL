@@ -10,22 +10,22 @@ package eapli.framework.actions;
  */
 public class NullAction implements Action {
 
-	private static class LazyHolder {
-		private static final NullAction INSTANCE = new NullAction();
+    private static class LazyHolder {
+	private static final NullAction INSTANCE = new NullAction();
 
-		private LazyHolder() {
-		}
+	private LazyHolder() {
 	}
+    }
 
-	private NullAction() {
-	}
+    private NullAction() {
+    }
 
-	public static NullAction instance() {
-		return LazyHolder.INSTANCE;
-	}
+    public static NullAction instance() {
+	return LazyHolder.INSTANCE;
+    }
 
-	@Override
-	public boolean execute() {
-		return false;
-	}
+    @Override
+    public boolean execute() {
+	return false;
+    }
 }

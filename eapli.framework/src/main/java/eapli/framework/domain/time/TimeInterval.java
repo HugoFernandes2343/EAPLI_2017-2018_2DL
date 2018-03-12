@@ -25,13 +25,13 @@ public class TimeInterval implements ValueObject {
     private static final long serialVersionUID = -4658136141745243778L;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar start;
+    private final Calendar start;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar end;
+    private final Calendar end;
 
     @Transient
-    private TimeRange period;
+    private final TimeRange period;
 
     /**
      * Constructs a closed time interval
@@ -50,6 +50,8 @@ public class TimeInterval implements ValueObject {
 
     protected TimeInterval() {
         // ORM
+        start = end = null;
+        period = null;
     }
 
     public Calendar start() {

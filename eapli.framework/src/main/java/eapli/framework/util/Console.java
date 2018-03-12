@@ -25,121 +25,121 @@ import java.util.logging.Logger;
 @SuppressWarnings("squid:S106")
 public final class Console {
 
-	private Console() {
-		// to make sure this is an utility class
+    private Console() {
+	// to make sure this is an utility class
+    }
+
+    public static String readLine(String prompt) {
+	try {
+	    System.out.println(prompt);
+	    final InputStreamReader converter = new InputStreamReader(System.in);
+	    final BufferedReader in = new BufferedReader(converter);
+
+	    return in.readLine();
+	} catch (final IOException ex) {
+	    Logger.getLogger(Console.class.getName()).log(Level.WARNING, null, ex);
+	    return null;
 	}
+    }
 
-	public static String readLine(String prompt) {
-		try {
-			System.out.println(prompt);
-			final InputStreamReader converter = new InputStreamReader(System.in);
-			final BufferedReader in = new BufferedReader(converter);
+    public static int readInteger(String prompt) {
+	do {
+	    try {
+		final String input = readLine(prompt);
+		return Integer.parseInt(input);
+	    } catch (final NumberFormatException ex) {
+		// nothing to do
+	    }
+	} while (true);
+    }
 
-			return in.readLine();
-		} catch (final IOException ex) {
-			Logger.getLogger(Console.class.getName()).log(Level.WARNING, null, ex);
-			return null;
+    public static long readLong(String prompt) {
+	do {
+	    try {
+		final String input = readLine(prompt);
+		return Long.parseLong(input);
+	    } catch (final NumberFormatException ex) {
+		// nothing to do
+	    }
+	} while (true);
+    }
+
+    public static boolean readBoolean(String prompt) {
+	do {
+	    try {
+		final String strBool = readLine(prompt).toLowerCase();
+		if ("y".equals(strBool) || "s".equals(strBool)) {
+		    return true;
+		} else if ("n".equals(strBool)) {
+		    return false;
 		}
-	}
+	    } catch (final NumberFormatException ex) {
+		// nothing to do
+	    }
+	} while (true);
+    }
 
-	public static int readInteger(String prompt) {
-		do {
-			try {
-				final String input = readLine(prompt);
-				return Integer.parseInt(input);
-			} catch (final NumberFormatException ex) {
-				// nothing to do
-			}
-		} while (true);
-	}
+    public static int readOption(int low, int high, int exit) {
+	int option;
+	do {
+	    option = Console.readInteger("Select an option: ");
+	    if (option == exit) {
+		break;
+	    }
+	} while (option < low || option > high);
+	return option;
+    }
 
-	public static long readLong(String prompt) {
-		do {
-			try {
-				final String input = readLine(prompt);
-				return Long.parseLong(input);
-			} catch (final NumberFormatException ex) {
-				// nothing to do
-			}
-		} while (true);
-	}
+    public static Date readDate(String prompt) {
+	return readDate(prompt, "yyyy/MM/dd");
+    }
 
-	public static boolean readBoolean(String prompt) {
-		do {
-			try {
-				final String strBool = readLine(prompt).toLowerCase();
-				if ("y".equals(strBool) || "s".equals(strBool)) {
-					return true;
-				} else if ("n".equals(strBool)) {
-					return false;
-				}
-			} catch (final NumberFormatException ex) {
-				// nothing to do
-			}
-		} while (true);
-	}
+    public static Date readDate(String prompt, String dateFormat) {
+	do {
+	    try {
+		final String strDate = readLine(prompt);
+		final SimpleDateFormat df = new SimpleDateFormat(dateFormat);
+		return df.parse(strDate);
+	    } catch (final ParseException ex) {
+		// nothing to do
+	    }
+	} while (true);
+    }
 
-	public static int readOption(int low, int high, int exit) {
-		int option;
-		do {
-			option = Console.readInteger("Select an option: ");
-			if (option == exit) {
-				break;
-			}
-		} while (option < low || option > high);
-		return option;
-	}
+    public static Calendar readCalendar(String prompt) {
+	return readCalendar(prompt, "dd-MM-yyyy");
+    }
 
-	public static Date readDate(String prompt) {
-		return readDate(prompt, "yyyy/MM/dd");
-	}
+    public static Calendar readCalendar(String prompt, String dateFormat) {
+	do {
+	    try {
+		final String strDate = readLine(prompt);
+		final SimpleDateFormat df = new SimpleDateFormat(dateFormat);
+		return DateTime.dateToCalendar(df.parse(strDate));
+	    } catch (final ParseException ex) {
+		// nothing to do
+	    }
+	} while (true);
+    }
 
-	public static Date readDate(String prompt, String dateFormat) {
-		do {
-			try {
-				final String strDate = readLine(prompt);
-				final SimpleDateFormat df = new SimpleDateFormat(dateFormat);
-				return df.parse(strDate);
-			} catch (final ParseException ex) {
-				// nothing to do
-			}
-		} while (true);
-	}
+    public static double readDouble(String prompt) {
+	do {
+	    try {
+		final String input = readLine(prompt);
+		return Double.parseDouble(input);
+	    } catch (final NumberFormatException ex) {
+		// nothing to do
+	    }
+	} while (true);
+    }
 
-	public static Calendar readCalendar(String prompt) {
-		return readCalendar(prompt, "dd-MM-yyyy");
+    @SuppressWarnings("squid:S1166")
+    public static void waitForKey(String prompt) {
+	System.out.println(prompt);
+	try {
+	    System.in.read();
+	} catch (final IOException ex) {
+	    // nothing to do
 	}
-
-	public static Calendar readCalendar(String prompt, String dateFormat) {
-		do {
-			try {
-				final String strDate = readLine(prompt);
-				final SimpleDateFormat df = new SimpleDateFormat(dateFormat);
-				return DateTime.dateToCalendar(df.parse(strDate));
-			} catch (final ParseException ex) {
-				// nothing to do
-			}
-		} while (true);
-	}
-
-	public static double readDouble(String prompt) {
-		do {
-			try {
-				final String input = readLine(prompt);
-				return Double.parseDouble(input);
-			} catch (final NumberFormatException ex) {
-				// nothing to do
-			}
-		} while (true);
-	}
-
-	@SuppressWarnings("squid:S1166")
-	public static void waitForKey(String prompt) {
-		System.out.println(prompt);
-		try {
-			System.in.read();
-		} catch (final IOException ex) {
-			// nothing to do
-		}
-	}
+    }
 }

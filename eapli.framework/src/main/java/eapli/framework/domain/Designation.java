@@ -19,7 +19,7 @@ import eapli.framework.util.Strings;
 public class Designation implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String name;
+    private final String name;
 
     /**
      * protected constructor. to construct a new Designation instance use the
@@ -27,15 +27,16 @@ public class Designation implements ValueObject, Serializable {
      *
      * @param name
      */
-    protected Designation(String name) {
-        if (Strings.isNullOrEmpty(name)) {
-            throw new IllegalArgumentException("Name should neither be null nor empty");
-        }
-        this.name = name;
+    protected Designation(final String name) {
+	if (Strings.isNullOrEmpty(name)) {
+	    throw new IllegalArgumentException("Name should neither be null nor empty");
+	}
+	this.name = name;
     }
 
     protected Designation() {
-        // for ORM
+	// for ORM
+	name = null;
     }
 
     /**
@@ -45,31 +46,31 @@ public class Designation implements ValueObject, Serializable {
      * @param name
      * @return
      */
-    public static Designation valueOf(String name) {
-        return new Designation(name);
+    public static Designation valueOf(final String name) {
+	return new Designation(name);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Designation)) {
-            return false;
-        }
+    public boolean equals(final Object o) {
+	if (this == o) {
+	    return true;
+	}
+	if (!(o instanceof Designation)) {
+	    return false;
+	}
 
-        final Designation other = (Designation) o;
+	final Designation other = (Designation) o;
 
-        return name.equals(other.name);
+	return name.equals(other.name);
     }
 
     @Override
     public String toString() {
-        return name;
+	return name;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+	return name.hashCode();
     }
 }

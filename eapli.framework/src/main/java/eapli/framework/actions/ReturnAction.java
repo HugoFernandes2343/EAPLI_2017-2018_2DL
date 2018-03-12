@@ -10,8 +10,8 @@ package eapli.framework.actions;
  */
 public class ReturnAction implements Action {
 
-	@Override
-	public boolean execute() {
-		return true;
-	}
+    @Override
+    public boolean execute() {
+	return true;
+    }
 }

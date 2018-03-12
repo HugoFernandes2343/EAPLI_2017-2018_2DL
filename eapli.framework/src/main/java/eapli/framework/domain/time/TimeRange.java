@@ -21,28 +21,28 @@ import eapli.framework.domain.range.Range;
  */
 public class TimeRange extends Range<Calendar> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * creates a closed time interval on both ends
-	 *
-	 * @param begin
-	 * @param end
-	 */
-	public TimeRange(Calendar begin, Calendar end) {
-		super(begin, BoundaryLimitType.CLOSED, end, BoundaryLimitType.CLOSED);
-	}
+    /**
+     * creates a closed time interval on both ends
+     *
+     * @param begin
+     * @param end
+     */
+    public TimeRange(Calendar begin, Calendar end) {
+        super(begin, BoundaryLimitType.CLOSED, end, BoundaryLimitType.CLOSED);
+    }
 
-	/**
-	 * creates a time interval from begin until "infinity"
-	 *
-	 * @param begin
-	 * @param end
-	 */
-	public TimeRange(Calendar begin) {
-		super(begin, BoundaryLimitType.CLOSED, null, BoundaryLimitType.INFINITY);
-	}
+    /**
+     * creates a time interval from begin until "infinity"
+     *
+     * @param begin
+     * @param end
+     */
+    public TimeRange(Calendar begin) {
+        super(begin, BoundaryLimitType.CLOSED, null, BoundaryLimitType.INFINITY);
+    }
 
-	protected TimeRange() {
-	}
+    protected TimeRange() {
+    }
 }

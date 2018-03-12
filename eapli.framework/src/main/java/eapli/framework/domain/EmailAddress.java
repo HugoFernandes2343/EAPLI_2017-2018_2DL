@@ -20,12 +20,12 @@ public class EmailAddress implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
-            .compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+            Pattern.CASE_INSENSITIVE);
 
-    private String email;
+    private final String email;
 
-    protected EmailAddress(String address) {
+    protected EmailAddress(final String address) {
         if (Strings.isNullOrEmpty(address)) {
             throw new IllegalArgumentException("email address should neither be null nor empty");
         }
@@ -34,19 +34,20 @@ public class EmailAddress implements ValueObject, Serializable {
             throw new IllegalArgumentException("Invalid E-mail");
         }
 
-        this.email = address;
+        email = address;
     }
 
     protected EmailAddress() {
         // for ORM
+        email = "";
     }
 
-    public static EmailAddress valueOf(String address) {
+    public static EmailAddress valueOf(final String address) {
         return new EmailAddress(address);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -56,17 +57,17 @@ public class EmailAddress implements ValueObject, Serializable {
 
         final EmailAddress that = (EmailAddress) o;
 
-        return this.email.equals(that.email);
+        return email.equals(that.email);
 
     }
 
     @Override
     public int hashCode() {
-        return this.email.hashCode();
+        return email.hashCode();
     }
 
     @Override
     public String toString() {
-        return this.email;
+        return email;
     }
 }

@@ -26,39 +26,42 @@ import eapli.framework.persistence.repositories.TransactionalContext;
  * @param <K>
  *            the primary key of the table
  */
-/* package */ class JpaWithTransactionalContextRepository<T, K extends Serializable>
-        extends JpaBaseRepository<T, K> {
+/* package */ class JpaWithTransactionalContextRepository<T, K extends Serializable> extends JpaBaseRepository<T, K> {
 
     private JpaTransactionalContext txContext;
 
     /**
      *
      */
-    public JpaWithTransactionalContextRepository(TransactionalContext txCtx) {
-        super();
-        setTxCtx(txCtx);
+    public JpaWithTransactionalContextRepository(final TransactionalContext txCtx) {
+	super();
+	setTxCtx(txCtx);
     }
 
-    /* package */ JpaWithTransactionalContextRepository(TransactionalContext txCtx, Class<T> classz) {
-        super(classz);
-        setTxCtx(txCtx);
+    /* package */ JpaWithTransactionalContextRepository(final TransactionalContext txCtx, final Class<T> classz) {
+	super(classz);
+	setTxCtx(txCtx);
     }
 
-    private void setTxCtx(TransactionalContext txCtx) {
-        if (txCtx == null || !(txCtx instanceof JpaTransactionalContext)) {
-            throw new IllegalArgumentException();
-        }
-        this.txContext = (JpaTransactionalContext) txCtx;
+    private void setTxCtx(final TransactionalContext txCtx) {
+	if (txCtx == null || !(txCtx instanceof JpaTransactionalContext)) {
+	    throw new IllegalArgumentException();
+	}
+	this.txContext = (JpaTransactionalContext) txCtx;
     }
 
     @Override
     @SuppressWarnings("squid:S3346")
     protected EntityManagerFactory entityManagerFactory() {
-        return this.txContext.entityManagerFactory();
+	return this.txContext.entityManagerFactory();
     }
 
     @Override
     protected EntityManager entityManager() {
-        return this.txContext.entityManager();
+	return this.txContext.entityManager();
+    }
+
+    protected TransactionalContext context() {
+	return txContext;
     }
 }

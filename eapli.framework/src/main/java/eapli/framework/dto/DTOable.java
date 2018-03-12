@@ -12,10 +12,10 @@ package eapli.framework.dto;
 @FunctionalInterface
 public interface DTOable {
 
-	/**
-	 * returns a representation of the content of the object as a DTO.
-	 *
-	 * @return
-	 */
-	GenericDTO toDTO();
+    /**
+     * returns a representation of the content of the object as a DTO.
+     *
+     * @return
+     */
+    GenericDTO toDTO();
 }

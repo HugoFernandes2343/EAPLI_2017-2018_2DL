@@ -12,16 +12,16 @@ package eapli.framework.actions;
  */
 public abstract class CompoundAction implements Action {
 
-	private final Action next;
+    private final Action next;
 
-	/**
-	 *
-	 */
-	public CompoundAction(Action next) {
-		this.next = next;
-	}
+    /**
+     *
+     */
+    public CompoundAction(Action next) {
+	this.next = next;
+    }
 
-	protected boolean next() {
-		return next.execute();
-	}
+    protected boolean next() {
+	return next.execute();
+    }
 }

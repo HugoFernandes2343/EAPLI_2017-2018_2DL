@@ -15,21 +15,21 @@ package eapli.framework.domain;
  */
 public interface Identifiable<T> {
 
-	/**
-	 * checks if the object is identified by the passed business id
-	 *
-	 * @param id
-	 *            the identity to check
-	 * @return true if the object has that identity
-	 */
-	default boolean is(T otherId) {
-		return id().equals(otherId);
-	}
+    /**
+     * checks if the object is identified by the passed business id
+     *
+     * @param id
+     *            the identity to check
+     * @return true if the object has that identity
+     */
+    default boolean is(T otherId) {
+	return id().equals(otherId);
+    }
 
-	/**
-	 * returns the primary <b>business</b> id of the entity
-	 *
-	 * @return the primary <b>business</b> id of the entity
-	 */
-	T id();
+    /**
+     * returns the primary <b>business</b> id of the entity
+     *
+     * @return the primary <b>business</b> id of the entity
+     */
+    T id();
 }

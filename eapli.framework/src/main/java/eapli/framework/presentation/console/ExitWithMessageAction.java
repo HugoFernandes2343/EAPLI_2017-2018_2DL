@@ -13,9 +13,9 @@ import eapli.framework.actions.Action;
  */
 public class ExitWithMessageAction implements Action {
 
-	@Override
-	public boolean execute() {
-		System.out.println("Bye, bye.");
-		return true;
-	}
+    @Override
+    public boolean execute() {
+	System.out.println("Bye, bye.");
+	return true;
+    }
 }

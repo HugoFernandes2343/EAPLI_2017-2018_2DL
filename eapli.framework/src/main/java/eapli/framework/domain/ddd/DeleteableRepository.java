@@ -14,23 +14,23 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public interface DeleteableRepository<T extends AggregateRoot<?>, I extends Serializable> extends Repository<T, I> {
 
-	/**
-	 * removes the specified entity from the repository.
-	 *
-	 * @param entity
-	 * @throws DataIntegrityViolationException
-	 * @throws UnsuportedOperationException
-	 *             if the delete operation makes no sense for this repository
-	 */
-	void remove(T entity) throws DataIntegrityViolationException;
+    /**
+     * removes the specified entity from the repository.
+     *
+     * @param entity
+     * @throws DataIntegrityViolationException
+     * @throws UnsuportedOperationException
+     *             if the delete operation makes no sense for this repository
+     */
+    void remove(T entity) throws DataIntegrityViolationException;
 
-	/**
-	 * Removes the entity with the specified primary key from the repository.
-	 *
-	 * @param entity
-	 * @throws DataIntegrityViolationException
-	 * @throws UnsuportedOperationException
-	 *             if the delete operation makes no sense for this repository
-	 */
-	void remove(I entityId) throws DataIntegrityViolationException;
+    /**
+     * Removes the entity with the specified primary key from the repository.
+     *
+     * @param entity
+     * @throws DataIntegrityViolationException
+     * @throws UnsuportedOperationException
+     *             if the delete operation makes no sense for this repository
+     */
+    void remove(I entityId) throws DataIntegrityViolationException;
 }

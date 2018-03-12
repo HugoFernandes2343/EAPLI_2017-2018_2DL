@@ -13,12 +13,12 @@ package eapli.framework.persistence;
  */
 public class DataConcurrencyException extends Exception {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6364660249001279449L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6364660249001279449L;
 
-	public DataConcurrencyException(Throwable arg0) {
-		super(arg0);
-	}
+    public DataConcurrencyException(Throwable arg0) {
+	super(arg0);
+    }
 }

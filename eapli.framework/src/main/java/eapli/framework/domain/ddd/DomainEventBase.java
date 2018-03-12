@@ -13,9 +13,7 @@ import javax.persistence.TemporalType;
 import eapli.framework.util.DateTime;
 
 /**
- * An utility class for domain events. derive your own specialized classes from
- * this one keeping the Value Object pattern.
- * 
+ *
  * @author Paulo Gandra Sousa
  */
 public abstract class DomainEventBase implements DomainEvent {

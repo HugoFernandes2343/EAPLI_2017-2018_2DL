@@ -8,7 +8,7 @@ import eapli.framework.actions.Action;
 
 /**
  * an action that shows a UI
- *
+ * 
  * @author Paulo Gandra Sousa
  */
 public class ShowUiAction implements Action {
@@ -16,12 +16,12 @@ public class ShowUiAction implements Action {
     private final AbstractUI ui;
 
     public ShowUiAction(AbstractUI ui) {
-        this.ui = ui;
+	this.ui = ui;
     }
 
     @Override
     public boolean execute() {
-        ui.show();
-        return true;
+	ui.show();
+	return false;
     }
 }

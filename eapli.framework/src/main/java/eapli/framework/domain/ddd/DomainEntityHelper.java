@@ -11,20 +11,20 @@ package eapli.framework.domain.ddd;
  */
 public final class DomainEntityHelper {
 
-	private DomainEntityHelper() {
-		// ensure utility
+    private DomainEntityHelper() {
+	// ensure utility
+    }
+
+    public static <T extends DomainEntity<T>> boolean areEqual(T one, Object other) {
+	if (one == other) {
+	    return true;
+	}
+	if (!(one.getClass().isInstance(other))) {
+	    return false;
 	}
 
-	public static <T extends DomainEntity<T>> boolean areEqual(T one, Object other) {
-		if (one == other) {
-			return true;
-		}
-		if (!(one.getClass().isInstance(other))) {
-			return false;
-		}
-
-		@SuppressWarnings("unchecked")
-		final T that = (T) other;
-		return one.id().equals(that.id());
-	}
+	@SuppressWarnings("unchecked")
+	final T that = (T) other;
+	return one.id().equals(that.id());
+    }
 }

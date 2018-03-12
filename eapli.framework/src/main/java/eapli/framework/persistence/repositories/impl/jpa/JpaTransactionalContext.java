@@ -31,47 +31,46 @@ import eapli.framework.util.Strings;
      * @param persistenceUnitName
      *            the name of the persistence unit to use
      */
-    public JpaTransactionalContext(String persistenceUnitName) {
-        this.persistenceUnitName = persistenceUnitName;
-        entityManagerFactory();
+    public JpaTransactionalContext(final String persistenceUnitName) {
+	this.persistenceUnitName = persistenceUnitName;
+	entityManagerFactory();
     }
 
     @SuppressWarnings({ "squid:S3346", "squid:S2696" })
-    /* package */ EntityManagerFactory entityManagerFactory() {
-        if (singletonEMF == null) {
-            assert !Strings.isNullOrEmpty(
-                    this.persistenceUnitName) : "the persistence unit name must be provided";
-            Logger.getLogger(this.getClass().getSimpleName()).info("Not runing in container mode.");
-            singletonEMF = Persistence.createEntityManagerFactory(this.persistenceUnitName);
-        }
-        return singletonEMF;
+    /* package */ final EntityManagerFactory entityManagerFactory() {
+	if (singletonEMF == null) {
+	    assert !Strings.isNullOrEmpty(persistenceUnitName) : "the persistence unit name must be provided";
+	    Logger.getLogger(this.getClass().getSimpleName()).info("Not runing in container mode.");
+	    singletonEMF = Persistence.createEntityManagerFactory(persistenceUnitName);
+	}
+	return singletonEMF;
     }
 
     /* package */ EntityManager entityManager() {
-        if (this.entityManager == null || !this.entityManager.isOpen()) {
-            this.entityManager = entityManagerFactory().createEntityManager();
-        }
-        return this.entityManager;
+	if (entityManager == null || !entityManager.isOpen()) {
+	    entityManager = entityManagerFactory().createEntityManager();
+	}
+	return entityManager;
     }
 
     @Override
     public void beginTransaction() {
-        final EntityTransaction tx = entityManager().getTransaction();
-        tx.begin();
+	final EntityTransaction tx = entityManager().getTransaction();
+	tx.begin();
     }
 
     @Override
     public void commit() {
-        entityManager().getTransaction().commit();
+	entityManager().getTransaction().commit();
     }
 
     @Override
     public void rollback() {
-        entityManager().getTransaction().rollback();
+	entityManager().getTransaction().rollback();
     }
 
     @Override
     public void close() {
-        entityManager().close();
+	entityManager().close();
     }
 }

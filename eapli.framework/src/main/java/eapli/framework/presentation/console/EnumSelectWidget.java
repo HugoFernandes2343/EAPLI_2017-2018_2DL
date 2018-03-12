@@ -18,11 +18,11 @@ import eapli.framework.visitor.Visitor;
  */
 public class EnumSelectWidget<T extends Enum<T>> extends SelectWidget<T> {
 
-	public EnumSelectWidget(String header, Class<T> source) {
-		super(header, EnumSet.allOf(source));
-	}
+    public EnumSelectWidget(String header, Class<T> source) {
+	super(header, EnumSet.allOf(source));
+    }
 
-	public EnumSelectWidget(String header, Class<T> source, Visitor<T> visitor) {
-		super(header, EnumSet.allOf(source), visitor);
-	}
+    public EnumSelectWidget(String header, Class<T> source, Visitor<T> visitor) {
+	super(header, EnumSet.allOf(source), visitor);
+    }
 }

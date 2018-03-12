@@ -15,35 +15,35 @@ import java.util.Map;
  */
 public class Menu {
 
-	private final String title;
-	private final List<MenuItem> itens = new ArrayList<>();
-	private final Map<Integer, MenuItem> itemByOption = new HashMap<>();
+    private final String title;
+    private final List<MenuItem> itens = new ArrayList<>();
+    private final Map<Integer, MenuItem> itemByOption = new HashMap<>();
 
-	public Menu() {
-		this.title = "";
-	}
+    public Menu() {
+	this.title = "";
+    }
 
-	public Menu(String title) {
-		this.title = title;
-	}
+    public Menu(String title) {
+	this.title = title;
+    }
 
-	public void add(MenuItem item) {
-		if (item == null) {
-			throw new IllegalArgumentException();
-		}
-		this.itens.add(item);
-		this.itemByOption.put(item.option(), item);
+    public void add(MenuItem item) {
+	if (item == null) {
+	    throw new IllegalArgumentException();
 	}
+	this.itens.add(item);
+	this.itemByOption.put(item.option(), item);
+    }
 
-	public String title() {
-		return this.title;
-	}
+    public String title() {
+	return this.title;
+    }
 
-	public Iterable<MenuItem> itens() {
-		return this.itens;
-	}
+    public Iterable<MenuItem> itens() {
+	return this.itens;
+    }
 
-	public MenuItem item(int option) {
-		return this.itemByOption.get(option);
-	}
+    public MenuItem item(int option) {
+	return this.itemByOption.get(option);
+    }
 }

@@ -17,17 +17,17 @@ import java.util.Calendar;
  */
 public interface DomainEvent extends ValueObject {
 
-	/**
-	 * returns the date and time when the event occurred in the domain
-	 *
-	 * @return
-	 */
-	Calendar occurredAt();
+    /**
+     * returns the date and time when the event occurred in the domain
+     *
+     * @return
+     */
+    Calendar occurredAt();
 
-	/**
-	 * returns the date and time when the event was recorded in the system
-	 *
-	 * @return
-	 */
-	Calendar registeredAt();
+    /**
+     * returns the date and time when the event was recorded in the system
+     *
+     * @return
+     */
+    Calendar registeredAt();
 }

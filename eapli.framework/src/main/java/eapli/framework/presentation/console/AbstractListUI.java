@@ -10,52 +10,52 @@ import eapli.framework.visitor.Visitor;
  */
 public abstract class AbstractListUI<T> extends AbstractUI {
 
-	/**
-	 * the source to list
-	 *
-	 * @return
-	 */
-	protected abstract Iterable<T> elements();
+    /**
+     * the source to list
+     *
+     * @return
+     */
+    protected abstract Iterable<T> elements();
 
-	/**
-	 * the visitor that prints the content of each element
-	 *
-	 * @return
-	 */
-	protected abstract Visitor<T> elementPrinter();
+    /**
+     * the visitor that prints the content of each element
+     *
+     * @return
+     */
+    protected abstract Visitor<T> elementPrinter();
 
-	/**
-	 * the name of the type of elements to list
-	 *
-	 * @return
-	 */
-	protected abstract String elementName();
+    /**
+     * the name of the type of elements to list
+     *
+     * @return
+     */
+    protected abstract String elementName();
 
-	/**
-	 * the name of the type of elements to list
-	 *
-	 * @return
-	 */
-	protected abstract String listHeader();
+    /**
+     * the name of the type of elements to list
+     *
+     * @return
+     */
+    protected abstract String listHeader();
 
-	/**
-	 * general listing of elements.
-	 *
-	 * template method (GoF)
-	 */
-	@Override
-	protected boolean doShow() {
-		final Iterable<T> elems = elements();
-		if (!elems.iterator().hasNext()) {
-			System.out.println("There is no registered " + elementName());
-		} else {
-			new ListWidget<>(listHeader(), elems, elementPrinter()).show();
-		}
-		return true;
+    /**
+     * general listing of elements.
+     *
+     * template method (GoF)
+     */
+    @Override
+    protected boolean doShow() {
+	final Iterable<T> elems = elements();
+	if (!elems.iterator().hasNext()) {
+	    System.out.println("There is no registered " + elementName());
+	} else {
+	    new ListWidget<>(listHeader(), elems, elementPrinter()).show();
 	}
+	return true;
+    }
 
-	@Override
-	public String headline() {
-		return "List " + elementName() + "s";
-	}
+    @Override
+    public String headline() {
+	return "List " + elementName() + "s";
+    }
 }

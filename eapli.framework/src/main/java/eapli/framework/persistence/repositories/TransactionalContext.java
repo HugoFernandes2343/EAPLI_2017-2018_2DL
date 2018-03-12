@@ -10,24 +10,24 @@ package eapli.framework.persistence.repositories;
  *
  */
 public interface TransactionalContext {
-	/**
-	 * start a transaction in the persistence store
-	 */
-	void beginTransaction();
+    /**
+     * start a transaction in the persistence store
+     */
+    void beginTransaction();
 
-	/**
-	 * commit changes to the persistence store
-	 */
-	void commit();
+    /**
+     * commit changes to the persistence store
+     */
+    void commit();
 
-	/**
-	 * rollback all changes from the beginning of the transaction
-	 */
-	void rollback();
+    /**
+     * rollback all changes from the beginning of the transaction
+     */
+    void rollback();
 
-	/**
-	 * close the connection to the persistence store and rollback any pending
-	 * transaction
-	 */
-	void close();
+    /**
+     * close the connection to the persistence store and rollback any pending
+     * transaction
+     */
+    void close();
 }

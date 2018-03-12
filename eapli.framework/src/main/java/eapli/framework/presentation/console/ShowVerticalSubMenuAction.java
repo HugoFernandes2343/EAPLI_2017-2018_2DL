@@ -12,18 +12,18 @@ import eapli.framework.actions.Action;
  */
 public class ShowVerticalSubMenuAction implements Action {
 
-	private final Menu menu;
-	private final VerticalMenuRenderer renderer;
+    private final Menu menu;
+    private final VerticalMenuRenderer renderer;
 
-	public ShowVerticalSubMenuAction(Menu menu) {
-		this.menu = menu;
-		this.renderer = new VerticalMenuRenderer(menu);
-	}
+    public ShowVerticalSubMenuAction(Menu menu) {
+	this.menu = menu;
+	this.renderer = new VerticalMenuRenderer(menu);
+    }
 
-	@Override
-	public boolean execute() {
-		System.out.println("\n>> " + this.menu.title());
-		this.renderer.show();
-		return false;
-	}
+    @Override
+    public boolean execute() {
+	System.out.println("\n>> " + this.menu.title());
+	this.renderer.show();
+	return false;
+    }
 }

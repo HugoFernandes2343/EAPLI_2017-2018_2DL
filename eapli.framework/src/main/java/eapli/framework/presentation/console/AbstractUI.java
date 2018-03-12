@@ -11,65 +11,65 @@ package eapli.framework.presentation.console;
 @SuppressWarnings("squid:S106")
 public abstract class AbstractUI {
 
-	public static final String SEPARATOR = "+------------------------------------------------------------------------------+";
-	public static final String BORDER = "+==============================================================================+";
+    public static final String SEPARATOR = "+------------------------------------------------------------------------------+";
+    public static final String BORDER = "+==============================================================================+";
 
-	/**
-	 * derived classes should override this method to perform the actual
-	 * rendering of the UI. follows the Template Method pattern
-	 *
-	 * @return true if the user wants to leave this UI
-	 */
-	protected abstract boolean doShow();
+    /**
+     * derived classes should override this method to perform the actual
+     * rendering of the UI. follows the Template Method pattern
+     *
+     * @return true if the user wants to leave this UI
+     */
+    protected abstract boolean doShow();
 
-	/**
-	 * derived classes should override this method to provide the title of the
-	 * "window"
-	 *
-	 * @return
-	 */
-	public abstract String headline();
+    /**
+     * derived classes should override this method to provide the title of the
+     * "window"
+     *
+     * @return
+     */
+    public abstract String headline();
 
-	/**
-	 *
-	 */
-	public void mainLoop() {
-		boolean wantsToExit;
-		do {
-			wantsToExit = show();
-		} while (!wantsToExit);
-	}
+    /**
+     *
+     */
+    public void mainLoop() {
+	boolean wantsToExit;
+	do {
+	    wantsToExit = show();
+	} while (!wantsToExit);
+    }
 
-	/**
-	 *
-	 * @return true if the user wants to leave this UI
-	 */
-	public boolean show() {
-		drawFormTitle();
-		final boolean wantsToExit = doShow();
-		drawFormBorder();
-		// Console.waitForKey("Press any key.");
+    /**
+     *
+     * @return true if the user wants to leave this UI
+     */
+    public boolean show() {
+	drawFormTitle();
+	final boolean wantsToExit = doShow();
+	drawFormBorder();
+	// Console.waitForKey("Press any key.");
 
-		return wantsToExit;
-	}
+	return wantsToExit;
+    }
 
-	protected void drawFormTitle() {
-		System.out.println();
-		drawFormTitle(headline());
-		System.out.println();
-	}
+    protected void drawFormTitle() {
+	System.out.println();
+	drawFormTitle(headline());
+	System.out.println();
+    }
 
-	protected void drawFormBorder() {
-		System.out.println(BORDER);
-		System.out.println();
-	}
+    protected void drawFormBorder() {
+	System.out.println(BORDER);
+	System.out.println();
+    }
 
-	protected void drawFormSeparator() {
-		System.out.println(SEPARATOR);
-	}
+    protected void drawFormSeparator() {
+	System.out.println(SEPARATOR);
+    }
 
-	protected void drawFormTitle(final String title) {
-		final String titleBorder = BORDER.substring(0, 2) + " " + title + " " + BORDER.substring(4 + title.length());
-		System.out.println(titleBorder);
-	}
+    protected void drawFormTitle(final String title) {
+	final String titleBorder = BORDER.substring(0, 2) + " " + title + " " + BORDER.substring(4 + title.length());
+	System.out.println(titleBorder);
+    }
 }

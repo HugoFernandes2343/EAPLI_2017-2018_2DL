@@ -25,10 +25,10 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
     }
 
     private static final long serialVersionUID = 1L;
-    private T start;
-    private T end;
-    private BoundaryLimitType startBoundary;
-    private BoundaryLimitType endBoundary;
+    private final T start;
+    private final T end;
+    private final BoundaryLimitType startBoundary;
+    private final BoundaryLimitType endBoundary;
 
     /**
      * The builder of ranges
@@ -38,7 +38,6 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
      * @param <R>
      */
     public static class RangeBuilder<R extends Comparable<R> & Serializable> {
-
         private final R start;
         private R end;
         private final BoundaryLimitType startBoundary;
@@ -50,20 +49,20 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
          * @param start
          * @param startBoundary
          */
-        private RangeBuilder(R start, BoundaryLimitType startBoundary) {
+        private RangeBuilder(final R start, final BoundaryLimitType startBoundary) {
             assert (startBoundary == BoundaryLimitType.INFINITY && start == null)
                     || (startBoundary != BoundaryLimitType.INFINITY && start != null);
             this.start = start;
             this.startBoundary = startBoundary;
         }
 
-        public RangeBuilder<R> closedTo(R anchor) {
+        public RangeBuilder<R> closedTo(final R anchor) {
             this.end = anchor;
             this.endBoundary = BoundaryLimitType.CLOSED;
             return this;
         }
 
-        public RangeBuilder<R> openTo(R anchor) {
+        public RangeBuilder<R> openTo(final R anchor) {
             this.end = anchor;
             this.endBoundary = BoundaryLimitType.OPEN;
             return this;
@@ -82,6 +81,8 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
 
     protected Range() {
         // for ORM
+        start = end = null;
+        endBoundary = startBoundary = null;
     }
 
     /**
@@ -96,20 +97,18 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
      * @param endBoundary
      *            indicates if the range is open or closed at the end anchor
      */
-    protected Range(T start, BoundaryLimitType startBoundary, T end,
-            BoundaryLimitType endBoundary) {
+    protected Range(final T start, final BoundaryLimitType startBoundary, final T end,
+            final BoundaryLimitType endBoundary) {
         if ((start == null && startBoundary != BoundaryLimitType.INFINITY)
                 || (end == null && endBoundary != BoundaryLimitType.INFINITY)) {
             throw new IllegalArgumentException("start or end must be non-null");
         }
 
         if (end != null && start != null && end.compareTo(start) < 0) {
-            throw new IllegalArgumentException(
-                    "The end value of a range must be bigger than its start");
+            throw new IllegalArgumentException("The end value of a range must be bigger than its start");
         }
         if (end != null && start != null && end.compareTo(start) == 0
-                && (startBoundary == BoundaryLimitType.OPEN
-                        || endBoundary == BoundaryLimitType.OPEN)) {
+                && (startBoundary == BoundaryLimitType.OPEN || endBoundary == BoundaryLimitType.OPEN)) {
             throw new IllegalArgumentException("An empty range is not allowed");
         }
 
@@ -133,7 +132,7 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
      *
      * @return a builder
      */
-    public static <T extends Comparable<T> & Serializable> RangeBuilder<T> closedFrom(T start) {
+    public static <T extends Comparable<T> & Serializable> RangeBuilder<T> closedFrom(final T start) {
         return new RangeBuilder<>(start, BoundaryLimitType.CLOSED);
     }
 
@@ -142,7 +141,7 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
      *
      * @return a builder
      */
-    public static <T extends Comparable<T> & Serializable> RangeBuilder<T> openFrom(T start) {
+    public static <T extends Comparable<T> & Serializable> RangeBuilder<T> openFrom(final T start) {
         return new RangeBuilder<>(start, BoundaryLimitType.OPEN);
     }
 
@@ -152,9 +151,8 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
      * @param target
      * @return
      */
-    public boolean includes(T target) {
-        if (this.startBoundary != BoundaryLimitType.INFINITY
-                && this.endBoundary != BoundaryLimitType.INFINITY) {
+    public boolean includes(final T target) {
+        if (this.startBoundary != BoundaryLimitType.INFINITY && this.endBoundary != BoundaryLimitType.INFINITY) {
             return regularIncludes(target);
         } else if (this.endBoundary == BoundaryLimitType.INFINITY) {
             return toInfinityRangeIncludes(target);
@@ -164,21 +162,21 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
         }
     }
 
-    private boolean fromInfinityRangeIncludes(T target) {
+    private boolean fromInfinityRangeIncludes(final T target) {
         if (target.compareTo(this.end) > 0) {
             return false;
         }
         return !(this.endBoundary == BoundaryLimitType.OPEN && target.compareTo(this.end) == 0);
     }
 
-    private boolean toInfinityRangeIncludes(T target) {
+    private boolean toInfinityRangeIncludes(final T target) {
         if (target.compareTo(this.start) < 0) {
             return false;
         }
         return !(this.startBoundary == BoundaryLimitType.OPEN && target.compareTo(this.start) == 0);
     }
 
-    private boolean regularIncludes(T target) {
+    private boolean regularIncludes(final T target) {
         if (target.compareTo(this.start) < 0 || target.compareTo(this.end) > 0) {
             return false;
         }
@@ -215,7 +213,7 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
         return this.end;
     }
 
-    private char startBracket(boolean isOpen) {
+    private char startBracket(final boolean isOpen) {
         if (isOpen) {
             return ']';
         } else {
@@ -223,7 +221,7 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
         }
     }
 
-    private char endBracket(boolean isOpen) {
+    private char endBracket(final boolean isOpen) {
         if (isOpen) {
             return '[';
         } else {
@@ -231,7 +229,7 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
         }
     }
 
-    private String rangeValue(boolean isInfinity, T value) {
+    private String rangeValue(final boolean isInfinity, final T value) {
         if (isInfinity) {
             return "oo";
         } else {
@@ -239,15 +237,15 @@ public class Range<T extends Comparable<T> & Serializable> implements ValueObjec
         }
     }
 
-    public boolean intersects(Range<T> other) {
+    public boolean intersects(final Range<T> other) {
         throw new UnsupportedOperationException();
     }
 
-    public Range<T> intersection(Range<T> other) {
+    public Range<T> intersection(final Range<T> other) {
         throw new UnsupportedOperationException();
     }
 
-    public Range<T> union(Range<T> other) {
+    public Range<T> union(final Range<T> other) {
         throw new UnsupportedOperationException();
     }
 }

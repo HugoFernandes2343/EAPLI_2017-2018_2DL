@@ -13,18 +13,18 @@ import eapli.framework.actions.NullAction;
  */
 public class VerticalSeparator extends MenuItem {
 
-	private static VerticalSeparator instance = new VerticalSeparator();
+    private static VerticalSeparator instance = new VerticalSeparator();
 
-	public VerticalSeparator() {
-		super(-1, "------------------", NullAction.instance());
-	}
+    public VerticalSeparator() {
+	super(-1, "------------------", NullAction.instance());
+    }
 
-	public static VerticalSeparator separator() {
-		return instance;
-	}
+    public static VerticalSeparator separator() {
+	return instance;
+    }
 
-	@Override
-	public void show() {
-		System.out.print(text());
-	}
+    @Override
+    public void show() {
+	System.out.print(text());
+    }
 }

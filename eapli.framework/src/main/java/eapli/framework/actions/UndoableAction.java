@@ -11,8 +11,8 @@ package eapli.framework.actions;
  * @author Paulo Gandra Sousa
  */
 public interface UndoableAction extends Action {
-	/**
-	 *
-	 */
-	void undo();
+    /**
+     *
+     */
+    void undo();
 }
