@@ -33,7 +33,7 @@
         <dependency>
             <groupId>eapli</groupId>
             <artifactId>framework</artifactId>
-            <version>3.3.0-SNAPSHOT</version>
+            <version>3.5.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     

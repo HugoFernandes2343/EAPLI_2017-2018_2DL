@@ -13,8 +13,6 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -41,10 +39,10 @@ public class ChangeDishTypeUI extends AbstractUI {
                 this.theController.changeDishType(theDishType, newDescription);
             } catch (DataConcurrencyException ex) {
                 System.out.println("That entity has already been changed or deleted since you last read it");
-                Logger.getLogger(ChangeDishTypeUI.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ChangeDishTypeUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (DataIntegrityViolationException ex) {
                 System.out.println("That entity ID is already in use");
-                Logger.getLogger(ChangeDishTypeUI.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ChangeDishTypeUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return false;
