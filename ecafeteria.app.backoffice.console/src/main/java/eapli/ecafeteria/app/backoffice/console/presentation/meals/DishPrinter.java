@@ -3,7 +3,7 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.meals;
 
-import eapli.ecafeteria.domain.meals.Dish;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.visitor.Visitor;
 
 /**

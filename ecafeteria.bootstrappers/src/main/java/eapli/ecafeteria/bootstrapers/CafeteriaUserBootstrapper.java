@@ -5,9 +5,9 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.application.cafeteria.AcceptRefuseSignupRequestController;
-import eapli.ecafeteria.application.cafeteria.SignupController;
-import eapli.ecafeteria.domain.cafeteria.SignupRequest;
+import eapli.ecafeteria.application.cafeteriauser.AcceptRefuseSignupRequestController;
+import eapli.ecafeteria.application.cafeteriauser.SignupController;
+import eapli.ecafeteria.domain.cafeteriauser.SignupRequest;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

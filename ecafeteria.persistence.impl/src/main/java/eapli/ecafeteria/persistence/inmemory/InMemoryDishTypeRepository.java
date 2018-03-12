@@ -2,7 +2,7 @@ package eapli.ecafeteria.persistence.inmemory;
 
 import java.util.Optional;
 
-import eapli.ecafeteria.domain.meals.DishType;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
 

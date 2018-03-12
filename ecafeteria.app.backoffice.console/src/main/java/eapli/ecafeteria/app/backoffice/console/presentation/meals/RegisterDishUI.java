@@ -1,7 +1,7 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.meals;
 
-import eapli.ecafeteria.application.meals.RegisterDishController;
-import eapli.ecafeteria.domain.meals.DishType;
+import eapli.ecafeteria.application.dishes.RegisterDishController;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

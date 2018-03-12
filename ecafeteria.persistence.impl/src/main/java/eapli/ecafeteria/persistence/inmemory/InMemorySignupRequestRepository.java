@@ -1,7 +1,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.authz.Username;
-import eapli.ecafeteria.domain.cafeteria.SignupRequest;
+import eapli.ecafeteria.domain.cafeteriauser.SignupRequest;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 

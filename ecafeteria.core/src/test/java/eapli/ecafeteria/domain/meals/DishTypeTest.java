@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.meals;
 
+import eapli.ecafeteria.domain.dishes.DishType;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
 

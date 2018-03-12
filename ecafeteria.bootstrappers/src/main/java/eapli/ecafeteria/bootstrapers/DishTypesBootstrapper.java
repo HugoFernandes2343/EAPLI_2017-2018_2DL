@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.application.meals.RegisterDishTypeController;
+import eapli.ecafeteria.application.dishes.RegisterDishTypeController;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

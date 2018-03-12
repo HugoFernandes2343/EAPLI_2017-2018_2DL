@@ -2,7 +2,7 @@ package eapli.ecafeteria.persistence;
 
 import java.util.Optional;
 
-import eapli.ecafeteria.domain.meals.Dish;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.domain.Designation;
 import eapli.framework.persistence.repositories.DataRepository;
 

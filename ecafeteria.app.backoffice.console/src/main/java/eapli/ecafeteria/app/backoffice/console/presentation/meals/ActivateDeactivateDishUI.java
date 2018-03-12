@@ -5,8 +5,8 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.meals;
 
-import eapli.ecafeteria.application.meals.ActivateDeactivateDishController;
-import eapli.ecafeteria.domain.meals.Dish;
+import eapli.ecafeteria.application.dishes.ActivateDeactivateDishController;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

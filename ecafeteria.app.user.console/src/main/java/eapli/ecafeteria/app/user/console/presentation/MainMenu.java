@@ -6,7 +6,7 @@
 package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
-import eapli.ecafeteria.application.bookings.CafeteriaUserBaseController;
+import eapli.ecafeteria.application.CafeteriaUserBaseController;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.Menu;

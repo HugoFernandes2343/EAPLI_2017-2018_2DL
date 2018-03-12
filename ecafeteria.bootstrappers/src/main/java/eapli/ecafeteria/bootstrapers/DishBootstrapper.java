@@ -5,8 +5,8 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.application.meals.RegisterDishController;
-import eapli.ecafeteria.domain.meals.DishType;
+import eapli.ecafeteria.application.dishes.RegisterDishController;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;

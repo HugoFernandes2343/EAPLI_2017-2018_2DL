@@ -8,8 +8,8 @@ package eapli.ecafeteria.app.backoffice.console.presentation.cafeteria;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import eapli.ecafeteria.application.cafeteria.AcceptRefuseSignupRequestController;
-import eapli.ecafeteria.domain.cafeteria.SignupRequest;
+import eapli.ecafeteria.application.cafeteriauser.AcceptRefuseSignupRequestController;
+import eapli.ecafeteria.domain.cafeteriauser.SignupRequest;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

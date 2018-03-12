@@ -13,6 +13,7 @@ import eapli.ecafeteria.domain.authz.ActionRight;
  *
  * @author Paulo Gandra Sousa
  */
+@SuppressWarnings("squid:S106")
 public final class ECafeteriaPOS {
 
     /**

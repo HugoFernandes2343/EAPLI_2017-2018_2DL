@@ -5,6 +5,7 @@ package eapli.ecafeteria.domain.meals;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import eapli.ecafeteria.domain.dishes.NutricionalInfo;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

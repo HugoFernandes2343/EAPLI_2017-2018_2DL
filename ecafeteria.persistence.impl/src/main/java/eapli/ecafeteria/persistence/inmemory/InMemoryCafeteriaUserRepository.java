@@ -1,8 +1,8 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.authz.Username;
-import eapli.ecafeteria.domain.cafeteria.CafeteriaUser;
-import eapli.ecafeteria.domain.cafeteria.MecanographicNumber;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import java.util.Optional;

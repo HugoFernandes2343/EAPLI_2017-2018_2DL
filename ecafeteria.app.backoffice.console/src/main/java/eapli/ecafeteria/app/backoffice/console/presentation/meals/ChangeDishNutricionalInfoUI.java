@@ -5,9 +5,9 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.meals;
 
-import eapli.ecafeteria.application.meals.ChangeDishController;
-import eapli.ecafeteria.domain.meals.Dish;
-import eapli.ecafeteria.domain.meals.NutricionalInfo;
+import eapli.ecafeteria.application.dishes.ChangeDishController;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.NutricionalInfo;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

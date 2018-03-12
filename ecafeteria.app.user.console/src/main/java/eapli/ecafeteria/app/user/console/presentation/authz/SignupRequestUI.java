@@ -3,7 +3,7 @@ package eapli.ecafeteria.app.user.console.presentation.authz;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import eapli.ecafeteria.application.cafeteria.SignupController;
+import eapli.ecafeteria.application.cafeteriauser.SignupController;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

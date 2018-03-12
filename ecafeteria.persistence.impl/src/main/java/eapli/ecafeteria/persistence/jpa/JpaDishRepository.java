@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import eapli.ecafeteria.domain.meals.Dish;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.framework.domain.Designation;
 
