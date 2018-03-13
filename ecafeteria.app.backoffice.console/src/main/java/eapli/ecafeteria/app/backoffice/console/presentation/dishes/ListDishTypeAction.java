@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.meals;
+package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 
 import eapli.framework.actions.Action;
 
 /**
  *
- * @author Nuno
+ * @author mcn
  */
-public class ChangeDishTypeAction implements Action {
+public class ListDishTypeAction implements Action {
 
     @Override
     public boolean execute() {
-        return new ChangeDishTypeUI().show();
+        return new ListDishTypeUI().show();
     }
 }

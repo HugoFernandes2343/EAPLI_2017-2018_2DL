@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates and open the template
  * in the editor.
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.meals;
+package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 
 import eapli.framework.actions.Action;
 
@@ -11,10 +11,10 @@ import eapli.framework.actions.Action;
  *
  * @author mcn
  */
-public class ListDishTypeAction implements Action {
+public class RegisterDishTypeAction implements Action {
 
     @Override
     public boolean execute() {
-        return new ListDishTypeUI().show();
+        return new RegisterDishTypeUI().show();
     }
 }

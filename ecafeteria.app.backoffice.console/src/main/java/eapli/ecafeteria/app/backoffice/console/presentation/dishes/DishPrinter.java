@@ -1,7 +1,7 @@
 /**
  *
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.meals;
+package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.visitor.Visitor;
