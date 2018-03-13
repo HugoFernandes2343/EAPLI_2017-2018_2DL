@@ -21,8 +21,7 @@ public interface RepositoryFactory {
 
     /**
      *
-     * @param autoTx
-     *            the transactional context to enroll
+     * @param autoTx the transactional context to enrol
      * @return
      */
     UserRepository users(TransactionalContext autoTx);
@@ -38,8 +37,7 @@ public interface RepositoryFactory {
 
     /**
      *
-     * @param autoTx
-     *            the transactional context to enroll
+     * @param autoTx the transactional context to enroll
      * @return
      */
     CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx);
@@ -53,8 +51,7 @@ public interface RepositoryFactory {
 
     /**
      *
-     * @param autoTx
-     *            the transactional context to enroll
+     * @param autoTx the transactional context to enroll
      * @return
      */
     SignupRequestRepository signupRequests(TransactionalContext autoTx);

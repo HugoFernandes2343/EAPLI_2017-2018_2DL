@@ -64,6 +64,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public TransactionalContext buildTransactionalContext() {
         return JpaAutoTxRepository
-                .buildTransactionalContext(Application.settings().getPersistenceUnitName());
+                .buildTransactionalContext(Application.settings().getPersistenceUnitName(), Application.settings().getExtendedPersistenceProperties());
     }
 }

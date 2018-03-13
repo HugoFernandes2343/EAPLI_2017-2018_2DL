@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.SignupRequest;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -18,7 +19,7 @@ class JpaSignupRequestRepository extends JpaAutoTxRepository<SignupRequest, User
     }
 
     public JpaSignupRequestRepository(String puname) {
-        super(puname);
+        super(puname, Application.settings().getExtendedPersistenceProperties());
     }
 
     @Override

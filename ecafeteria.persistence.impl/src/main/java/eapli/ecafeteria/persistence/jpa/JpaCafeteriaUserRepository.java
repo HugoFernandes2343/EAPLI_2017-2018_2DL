@@ -1,15 +1,15 @@
 package eapli.ecafeteria.persistence.jpa;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  *
@@ -23,7 +23,7 @@ class JpaCafeteriaUserRepository extends JpaAutoTxRepository<CafeteriaUser, Meca
     }
 
     public JpaCafeteriaUserRepository(String puname) {
-        super(puname);
+        super(puname, Application.settings().getExtendedPersistenceProperties());
     }
 
     @Override

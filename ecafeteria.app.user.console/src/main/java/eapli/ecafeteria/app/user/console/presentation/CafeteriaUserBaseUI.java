@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.app.user.console.presentation;
 
-import eapli.ecafeteria.application.CafeteriaUserBaseController;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.framework.presentation.console.AbstractUI;
 

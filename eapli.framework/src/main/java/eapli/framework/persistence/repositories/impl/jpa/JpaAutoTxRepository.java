@@ -5,17 +5,17 @@
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.persistence.repositories.DataRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * A JPA repository implementation for use with applications not running inside
@@ -32,12 +32,16 @@ public class JpaAutoTxRepository<T, K extends Serializable> implements DataRepos
     private final TransactionalContext autoTx;
 
     public JpaAutoTxRepository(String persistenceUnitName) {
+        this(persistenceUnitName, new HashMap());
+    }
+
+    public JpaAutoTxRepository(String persistenceUnitName, Map properties) {
         final ParameterizedType genericSuperclass = (ParameterizedType) getClass()
                 .getGenericSuperclass();
         @SuppressWarnings("unchecked")
         final Class<T> entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
 
-        this.repo = new JpaTransactionalRepository<>(persistenceUnitName, entityClass);
+        this.repo = new JpaTransactionalRepository<>(persistenceUnitName, properties, entityClass);
         this.autoTx = null;
     }
 
@@ -58,6 +62,10 @@ public class JpaAutoTxRepository<T, K extends Serializable> implements DataRepos
         return new JpaTransactionalContext(persistenceUnitName);
     }
 
+    public static TransactionalContext buildTransactionalContext(String persistenceUnitName, Map properties) {
+        return new JpaTransactionalContext(persistenceUnitName, properties);
+    }
+
     public TransactionalContext context() {
         return this.autoTx;
     }
@@ -67,7 +75,7 @@ public class JpaAutoTxRepository<T, K extends Serializable> implements DataRepos
      * a TransactionalContext
      *
      * @return true if the repository is running in single transaction mode
-     *         false if running within a Transactional Context
+     * false if running within a Transactional Context
      */
     public boolean isInTransaction() {
         return context() == null;

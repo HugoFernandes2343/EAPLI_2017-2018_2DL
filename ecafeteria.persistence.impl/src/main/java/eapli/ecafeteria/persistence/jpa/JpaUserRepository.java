@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.persistence.UserRepository;
@@ -18,6 +19,6 @@ class JpaUserRepository extends JpaAutoTxRepository<SystemUser, Username>
     }
 
     public JpaUserRepository(String puname) {
-        super(puname);
+        super(puname, Application.settings().getExtendedPersistenceProperties());
     }
 }

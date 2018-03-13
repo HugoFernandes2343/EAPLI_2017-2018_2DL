@@ -3,6 +3,8 @@ package eapli.ecafeteria;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +20,7 @@ public class AppSettings {
     private final static String REPOSITORY_FACTORY_KEY = "persistence.repositoryFactory";
     private final static String UI_MENU_LAYOUT_KEY = "ui.menu.layout";
     private final static String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
+    private final static String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
     private final Properties applicationProperties = new Properties();
 
     public AppSettings() {
@@ -25,9 +28,7 @@ public class AppSettings {
     }
 
     private void loadProperties() {
-        InputStream propertiesStream = null;
-        try {
-            propertiesStream = this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE);
+        try (InputStream propertiesStream = this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE)) {
             if (propertiesStream != null) {
                 this.applicationProperties.load(propertiesStream);
             } else {
@@ -38,14 +39,6 @@ public class AppSettings {
             setDefaultProperties();
 
             Logger.getLogger(AppSettings.class.getName()).log(Level.SEVERE, null, exio);
-        } finally {
-            if (propertiesStream != null) {
-                try {
-                    propertiesStream.close();
-                } catch (final IOException ex) {
-                    Logger.getLogger(AppSettings.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
         }
     }
 
@@ -66,5 +59,15 @@ public class AppSettings {
 
     public String getRepositoryFactory() {
         return this.applicationProperties.getProperty(REPOSITORY_FACTORY_KEY);
+    }
+
+    public Map getExtendedPersistenceProperties() {
+        Map ret = new HashMap();
+        ret.put(SCHEMA_GENERATION_KEY, this.applicationProperties.getProperty(SCHEMA_GENERATION_KEY));
+        return ret;
+    }
+
+    public String getProperty(String prop) {
+        return this.applicationProperties.getProperty(prop);
     }
 }

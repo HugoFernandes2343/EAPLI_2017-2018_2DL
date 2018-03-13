@@ -15,8 +15,6 @@ public class ECafeteriaBootstrap {
         System.out.println("(C) 2016, 2017, 2018");
         System.out.println("======================================");
 
-        //TODO: set the persistence layer in drop-and-create mode
-        //Persistence.reset();
         new ECafeteriaBootstrapper().execute();
 
         System.out.println("======================================");

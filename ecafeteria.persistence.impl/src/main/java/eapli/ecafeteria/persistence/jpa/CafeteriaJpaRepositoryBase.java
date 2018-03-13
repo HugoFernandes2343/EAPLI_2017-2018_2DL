@@ -1,9 +1,8 @@
 package eapli.ecafeteria.persistence.jpa;
 
-import java.io.Serializable;
-
 import eapli.ecafeteria.Application;
 import eapli.framework.persistence.repositories.impl.jpa.JpaTransactionalRepository;
+import java.io.Serializable;
 
 /**
  * a base class for all transactional repositories to use the same persistence
@@ -13,14 +12,14 @@ import eapli.framework.persistence.repositories.impl.jpa.JpaTransactionalReposit
  * @param <T>
  * @param <K>
  */
-class CafeteriaJpaRepositoryBase<T, K extends Serializable>
+/* package */ class CafeteriaJpaRepositoryBase<T, K extends Serializable>
         extends JpaTransactionalRepository<T, K> {
 
     CafeteriaJpaRepositoryBase(String persistenceUnitName) {
-        super(persistenceUnitName);
+        super(persistenceUnitName, Application.settings().getExtendedPersistenceProperties());
     }
 
     CafeteriaJpaRepositoryBase() {
-        super(Application.settings().getPersistenceUnitName());
+        super(Application.settings().getPersistenceUnitName(), Application.settings().getExtendedPersistenceProperties());
     }
 }

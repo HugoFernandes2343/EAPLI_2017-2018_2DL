@@ -4,13 +4,12 @@
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
-import java.io.Serializable;
-
-import javax.persistence.OptimisticLockException;
-import javax.persistence.PersistenceException;
-
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.io.Serializable;
+import java.util.Map;
+import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceException;
 
 /**
  * An utility class for implementing JPA repositories not running in containers
@@ -27,20 +26,26 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  * managed transactions/sessions, one should not be doing this
  *
  * @author Paulo Gandra Sousa
- * @param <T>
- *            the entity type managed by this repository (a table in the
- *            database)
- * @param <K>
- *            the primary key of the table
+ * @param <T> the entity type managed by this repository (a table in the
+ * database)
+ * @param <K> the primary key of the table
  */
 public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWithTransactionalContextRepository<T, K> {
 
     public JpaTransactionalRepository(final String persistenceUnitName) {
-	super(new JpaTransactionalContext(persistenceUnitName));
+        super(new JpaTransactionalContext(persistenceUnitName));
     }
 
-    JpaTransactionalRepository(final String persistenceUnitName, final Class<T> classz) {
-	super(new JpaTransactionalContext(persistenceUnitName), classz);
+    /* package */ JpaTransactionalRepository(final String persistenceUnitName, final Class<T> classz) {
+        super(new JpaTransactionalContext(persistenceUnitName), classz);
+    }
+
+    public JpaTransactionalRepository(final String persistenceUnitName, Map properties) {
+        super(new JpaTransactionalContext(persistenceUnitName, properties));
+    }
+
+    /* package */ JpaTransactionalRepository(final String persistenceUnitName, Map properties, final Class<T> classz) {
+        super(new JpaTransactionalContext(persistenceUnitName, properties), classz);
     }
 
     /**
@@ -52,13 +57,13 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWi
      */
     @Override
     public void delete(final T entity) throws DataIntegrityViolationException {
-	try {
-	    context().beginTransaction();
-	    super.delete(entity);
-	    context().commit();
-	} finally {
-	    context().close();
-	}
+        try {
+            context().beginTransaction();
+            super.delete(entity);
+            context().commit();
+        } finally {
+            context().close();
+        }
     }
 
     /**
@@ -66,18 +71,18 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWi
      *
      * @param entityId
      * @throws DataIntegrityViolationException
-     * @throws UnsuportedOperationException
-     *             if the delete operation makes no sense for this repository
+     * @throws UnsuportedOperationException if the delete operation makes no
+     * sense for this repository
      */
     @Override
     public void delete(final K entityId) throws DataIntegrityViolationException {
-	try {
-	    context().beginTransaction();
-	    super.delete(entityId);
-	    context().commit();
-	} finally {
-	    context().close();
-	}
+        try {
+            context().beginTransaction();
+            super.delete(entityId);
+            context().commit();
+        } finally {
+            context().close();
+        }
     }
 
     /**
@@ -89,19 +94,19 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWi
      */
     @Override
     public T create(final T entity) throws DataIntegrityViolationException {
-	try {
-	    context().beginTransaction();
-	    super.create(entity);
-	    context().commit();
-	} catch (final PersistenceException ex) {
-	    // TODO need to check and make sure we only throw
-	    // DataIntegrityViolationException if we get sql state 23505
-	    throw new DataIntegrityViolationException(ex);
-	} finally {
-	    context().close();
-	}
+        try {
+            context().beginTransaction();
+            super.create(entity);
+            context().commit();
+        } catch (final PersistenceException ex) {
+            // TODO need to check and make sure we only throw
+            // DataIntegrityViolationException if we get sql state 23505
+            throw new DataIntegrityViolationException(ex);
+        } finally {
+            context().close();
+        }
 
-	return entity;
+        return entity;
     }
 
     /**
@@ -118,32 +123,32 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWi
      *
      * @param entity
      * @return the persisted entity - might be a different object than the
-     *         parameter
+     * parameter
      * @throws eapli.framework.persistence.DataConcurrencyException
      * @throws DataIntegrityViolationException
      */
     @Override
     @SuppressWarnings("squid:S1226")
     public T save(T entity) throws DataConcurrencyException, DataIntegrityViolationException {
-	if (entity == null) {
-	    throw new IllegalArgumentException();
-	}
+        if (entity == null) {
+            throw new IllegalArgumentException();
+        }
 
-	try {
-	    context().beginTransaction();
-	    entity = super.save(entity);
-	    context().commit();
-	} catch (final PersistenceException ex) {
-	    if (ex.getCause() instanceof OptimisticLockException) {
-		throw new DataConcurrencyException(ex);
-	    }
-	    // TODO need to check and make sure we only throw
-	    // DataIntegrityViolationException if we get sql state 23505
-	    throw new DataIntegrityViolationException(ex);
-	} finally {
-	    context().close();
-	}
+        try {
+            context().beginTransaction();
+            entity = super.save(entity);
+            context().commit();
+        } catch (final PersistenceException ex) {
+            if (ex.getCause() instanceof OptimisticLockException) {
+                throw new DataConcurrencyException(ex);
+            }
+            // TODO need to check and make sure we only throw
+            // DataIntegrityViolationException if we get sql state 23505
+            throw new DataIntegrityViolationException(ex);
+        } finally {
+            context().close();
+        }
 
-	return entity;
+        return entity;
     }
 }
