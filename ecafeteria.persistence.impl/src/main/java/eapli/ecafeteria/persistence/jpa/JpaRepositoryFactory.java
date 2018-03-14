@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
@@ -65,5 +66,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public TransactionalContext buildTransactionalContext() {
         return JpaAutoTxRepository
                 .buildTransactionalContext(Application.settings().getPersistenceUnitName(), Application.settings().getExtendedPersistenceProperties());
+    }
+
+    @Override
+    public DishReportingRepository dishReporting() {
+        return new JpaDishReportingRepository();
     }
 }

@@ -11,7 +11,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
  */
 public class ListDishService {
 
-    private DishRepository dishRepository = PersistenceContext.repositories().dishes();
+    private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Iterable<Dish> allDishes() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);

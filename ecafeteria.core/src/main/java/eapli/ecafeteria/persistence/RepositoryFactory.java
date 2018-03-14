@@ -66,4 +66,14 @@ public interface RepositoryFactory {
     DishRepository dishes();
 
     MaterialRepository materials();
+
+    /**
+     * ************************
+     * reporting
+     *************************
+     */
+    /**
+     * @return
+     */
+    DishReportingRepository dishReporting();
 }

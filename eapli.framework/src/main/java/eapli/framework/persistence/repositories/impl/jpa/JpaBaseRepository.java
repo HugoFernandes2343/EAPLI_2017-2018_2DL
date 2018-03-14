@@ -4,13 +4,16 @@
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.persistence.repositories.IterableRepository;
+import eapli.framework.util.Strings;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -18,11 +21,6 @@ import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceException;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
-
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.persistence.repositories.IterableRepository;
-import eapli.framework.util.Strings;
 
 /**
  * An utility class for implementing JPA repositories. This class' methods don't
@@ -43,10 +41,8 @@ import eapli.framework.util.Strings;
  * implementation patterns</a>
  *
  * @author Paulo Gandra Sousa
- * @param <T>
- *            the entity type that we want to build a repository for
- * @param <K>
- *            the key type of the entity
+ * @param <T> the entity type that we want to build a repository for
+ * @param <K> the key type of the entity
  */
 public abstract class JpaBaseRepository<T, K extends Serializable>
         implements IterableRepository<T, K> {
@@ -63,12 +59,20 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
 
     @SuppressWarnings("unchecked")
     public JpaBaseRepository() {
-        final ParameterizedType genericSuperclass = (ParameterizedType) getClass()
-                .getGenericSuperclass();
-        entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
+        Boolean isGeneric = getClass().getGenericSuperclass() instanceof ParameterizedType;
+        if (isGeneric) {
+            final ParameterizedType genericSuperclass = (ParameterizedType) getClass()
+                    .getGenericSuperclass();
+            entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
+        } else {
+            // special case when this class is used without parametrization.
+            // we are assuming this only happens if you are creating a pure Reporting Repository
+            entityClass = null;
+        }
     }
 
     /* package */ JpaBaseRepository(Class<T> classz) {
+        assert classz != null : "you must parametrize the class";
         entityClass = classz;
     }
 
@@ -110,6 +114,9 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
      * @return
      */
     public Optional<T> read(K id) {
+        if (entityClass == null) {
+            throw new IllegalStateException("This repository was not parametrized at construction time");
+        }
         return Optional.ofNullable(this.entityManager().find(this.entityClass, id));
     }
 
@@ -162,8 +169,8 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
      *
      * @param entityId
      * @throws DataIntegrityViolationException
-     * @throws UnsuportedOperationException
-     *             if the delete operation makes no sense for this repository
+     * @throws UnsuportedOperationException if the delete operation makes no
+     * sense for this repository
      */
     @Override
     public void delete(K entityId) throws DataIntegrityViolationException {
@@ -185,6 +192,9 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
      */
     @Override
     public long count() {
+        if (entityClass == null) {
+            throw new IllegalStateException("This repository was not parametrized at construction time");
+        }
         final TypedQuery<Long> q = entityManager().createQuery(
                 "SELECT COUNT(*) FROM " + this.entityClass.getSimpleName(), Long.class);
         return q.getSingleResult();
@@ -218,7 +228,7 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
      *
      * @param entity
      * @return the persisted entity - might be a different object than the
-     *         parameter
+     * parameter
      * @throws eapli.framework.persistence.DataConcurrencyException
      * @throws DataIntegrityViolationException
      */
@@ -240,12 +250,18 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
      * @return
      */
     protected TypedQuery<T> queryAll() {
+        if (entityClass == null) {
+            throw new IllegalStateException("This repository was not parametrized at construction time");
+        }
         final String className = this.entityClass.getSimpleName();
         return entityManager().createQuery("SELECT e FROM " + className + " e ", this.entityClass);
     }
 
     @SuppressWarnings("squid:S3346")
     private TypedQuery<T> query(String where) {
+        if (entityClass == null) {
+            throw new IllegalStateException("This repository was not parametrized at construction time");
+        }
         assert !Strings.isNullOrEmpty(where) : QUERY_MUST_NOT_BE_NULL_OR_EMPTY;
 
         final String className = this.entityClass.getSimpleName();
@@ -336,8 +352,7 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
     /**
      * searches for objects that match the given criteria
      *
-     * @param where
-     *            the where clause should use "e" as the query object
+     * @param where the where clause should use "e" as the query object
      *
      * @return
      */
@@ -363,8 +378,7 @@ public abstract class JpaBaseRepository<T, K extends Serializable>
      *
      *
      *
-     * @param where
-     *            the where clause should use "e" as the query object
+     * @param where the where clause should use "e" as the query object
      * @return
      */
     protected Optional<T> matchOne(String where) {

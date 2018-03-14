@@ -2,6 +2,7 @@ package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstrapper;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
@@ -71,5 +72,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public TransactionalContext buildTransactionalContext() {
         // in memory does not support transactions...
         return null;
+    }
+
+    @Override
+    public DishReportingRepository dishReporting() {
+        return new InMemoryDishReportingRepository();
     }
 }

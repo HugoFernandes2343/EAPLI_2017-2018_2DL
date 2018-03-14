@@ -7,12 +7,10 @@ package eapli.ecafeteria.app.backoffice.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
-import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ChangeDishNutricionalInfoAction;
@@ -22,6 +20,9 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ListDishActio
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ListDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.RegisterDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.RegisterDishTypeAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportDishesPerDishTypeUI;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -75,12 +76,16 @@ public class MainMenu extends AbstractUI {
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
 
+    // REPORTING
+    private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
+
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
     private static final int SETTINGS_OPTION = 4;
     private static final int DISH_TYPES_OPTION = 5;
     private static final int TRACEABILITY_OPTION = 6;
+    private static final int REPORTING_DISHES_OPTION = 7;
 
     @Override
     public boolean show() {
@@ -129,8 +134,12 @@ public class MainMenu extends AbstractUI {
             mainMenu.add(new SubMenu(TRACEABILITY_OPTION, kitchenMenu, new ShowVerticalSubMenuAction(kitchenMenu)));
         }
         if (AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_MENUS)) {
-            final Menu myDishTypeMenu = buildDishMenu();
-            mainMenu.add(new SubMenu(DISH_TYPES_OPTION, myDishTypeMenu, new ShowVerticalSubMenuAction(myDishTypeMenu)));
+            final Menu dishTypeMenu = buildDishMenu();
+            mainMenu.add(new SubMenu(DISH_TYPES_OPTION, dishTypeMenu, new ShowVerticalSubMenuAction(dishTypeMenu)));
+
+            //reporting
+            Menu reportingDishesMenu = buildReportingDishesMenu();
+            mainMenu.add(new SubMenu(REPORTING_DISHES_OPTION, reportingDishesMenu, new ShowVerticalSubMenuAction(reportingDishesMenu)));
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -206,6 +215,17 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(CHANGE_DISH_NUTRICIONAL_INFO_OPTION, "Change Nutricional Info",
                 new ChangeDishNutricionalInfoAction()));
         menu.add(new MenuItem(CHANGE_DISH_PRICE_OPTION, "Change Price", new ChangeDishPriceAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
+        return menu;
+    }
+
+    private Menu buildReportingDishesMenu() {
+        final Menu menu = new Menu("Reporting Dishes >");
+
+        menu.add(new MenuItem(REPORTING_DISHES_PER_DISHTYPE_OPTION, "Dishes per Dish Type", () -> {
+            return new ReportDishesPerDishTypeUI().show();
+        }));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
