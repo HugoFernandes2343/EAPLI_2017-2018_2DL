@@ -10,7 +10,7 @@ import eapli.framework.visitor.Visitor;
  * @author ajs 13/04/2016
  *
  */
-class DishPrinter implements Visitor<Dish> {
+public class DishPrinter implements Visitor<Dish> {
 
     @Override
     public void visit(Dish visitee) {

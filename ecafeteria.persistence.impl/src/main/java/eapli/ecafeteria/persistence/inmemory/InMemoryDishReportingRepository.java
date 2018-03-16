@@ -5,11 +5,11 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
-import java.io.Serializable;
-
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
+import java.io.Serializable;
 
 /**
  *
@@ -34,5 +34,10 @@ class InMemoryDishReportingRepository extends InMemoryRepository
     @Override
     protected Serializable newKeyFor(Object entity) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Iterable<Dish> reportHighCaloriesDishes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

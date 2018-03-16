@@ -5,10 +5,10 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
-import javax.persistence.TypedQuery;
-
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType;
 import eapli.ecafeteria.persistence.DishReportingRepository;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -24,6 +24,14 @@ public class JpaDishReportingRepository extends CafeteriaJpaRepositoryBase
         final TypedQuery<DishesPerDishType> query = entityManager().createQuery(
                 "SELECT new eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType(t.acronym, COUNT(d)) FROM Dish d, DishType t WHERE d.dishType = t GROUP BY d.dishType",
                 DishesPerDishType.class);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public Iterable<Dish> reportHighCaloriesDishes() {
+        final TypedQuery<Dish> query = entityManager()
+                .createQuery("SELECT d FROM Dish d WHERE d.nutricionalInfo.calories > 300", Dish.class);
 
         return query.getResultList();
     }

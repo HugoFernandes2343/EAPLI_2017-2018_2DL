@@ -21,6 +21,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ListDishTypeA
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.RegisterDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.RegisterDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportDishesPerDishTypeUI;
+import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportHighCaloriesDishesUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
@@ -78,6 +79,7 @@ public class MainMenu extends AbstractUI {
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
+    private static final int REPORTING_HIGH_CALORIES_DISHES_OPTION = 2;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -226,6 +228,10 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(REPORTING_DISHES_PER_DISHTYPE_OPTION, "Dishes per Dish Type", () -> {
             return new ReportDishesPerDishTypeUI().show();
         }));
+        menu.add(new MenuItem(REPORTING_HIGH_CALORIES_DISHES_OPTION, "High Calories Dishes", () -> {
+            return new ReportHighCaloriesDishesUI().show();
+        }));
+
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;

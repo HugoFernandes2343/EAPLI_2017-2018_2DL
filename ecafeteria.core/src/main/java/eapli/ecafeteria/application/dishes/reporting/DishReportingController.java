@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.application.dishes.reporting;
 
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -14,11 +15,15 @@ import eapli.framework.application.Controller;
  *
  * @author pgsou_000
  */
-public class ReportDishesPerDishTypeController implements Controller {
+public class DishReportingController implements Controller {
 
     private final DishReportingRepository repo = PersistenceContext.repositories().dishReporting();
 
-    public Iterable<DishesPerDishType> all() {
+    public Iterable<DishesPerDishType> reportDishesPerDishType() {
         return repo.dishesPerDishType();
+    }
+
+    public Iterable<Dish> reportHighCaloriesDishes() {
+        return repo.reportHighCaloriesDishes();
     }
 }
