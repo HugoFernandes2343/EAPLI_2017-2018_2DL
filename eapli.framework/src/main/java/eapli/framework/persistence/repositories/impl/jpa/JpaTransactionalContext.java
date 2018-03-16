@@ -3,15 +3,17 @@
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
-import eapli.framework.persistence.repositories.TransactionalContext;
-import eapli.framework.util.Strings;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import eapli.framework.persistence.repositories.TransactionalContext;
+import eapli.framework.util.Strings;
 
 /**
  * An utility class for providing transactional context to JPA repositories not
@@ -25,13 +27,17 @@ import javax.persistence.Persistence;
     private final String persistenceUnitName;
     private static volatile EntityManagerFactory singletonEMF;
     private EntityManager entityManager;
-    private Map properties = new HashMap();
+    @SuppressWarnings("rawtypes")
+    private final Map properties = new HashMap();
 
     /**
      *
-     * @param persistenceUnitName the name of the persistence unit to use
-     * @param properties extend properties to override the persistence.xml file
+     * @param persistenceUnitName
+     *            the name of the persistence unit to use
+     * @param properties
+     *            extend properties to override the persistence.xml file
      */
+    @SuppressWarnings("rawtypes")
     public JpaTransactionalContext(final String persistenceUnitName, Map properties) {
         if (Strings.isNullOrEmpty(persistenceUnitName)) {
             throw new IllegalArgumentException();
@@ -41,14 +47,16 @@ import javax.persistence.Persistence;
         entityManagerFactory();
     }
 
+    @SuppressWarnings("rawtypes")
     public JpaTransactionalContext(final String persistenceUnitName) {
         this(persistenceUnitName, new HashMap());
     }
 
-    @SuppressWarnings({"squid:S3346", "squid:S2696"})
+    @SuppressWarnings({ "squid:S3346", "squid:S2696" })
     /* package */ final EntityManagerFactory entityManagerFactory() {
         if (singletonEMF == null) {
-            assert !Strings.isNullOrEmpty(persistenceUnitName) : "the persistence unit name must be provided";
+            assert !Strings.isNullOrEmpty(
+                    persistenceUnitName) : "the persistence unit name must be provided";
             Logger.getLogger(this.getClass().getSimpleName()).info("Not runing in container mode.");
             singletonEMF = Persistence.createEntityManagerFactory(persistenceUnitName, properties);
         }
