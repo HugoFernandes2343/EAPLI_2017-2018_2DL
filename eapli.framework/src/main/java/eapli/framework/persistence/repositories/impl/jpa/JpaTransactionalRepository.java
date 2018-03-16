@@ -4,12 +4,14 @@
  */
 package eapli.framework.persistence.repositories.impl.jpa;
 
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import java.io.Serializable;
 import java.util.Map;
+
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceException;
+
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 
 /**
  * An utility class for implementing JPA repositories not running in containers
@@ -26,25 +28,32 @@ import javax.persistence.PersistenceException;
  * managed transactions/sessions, one should not be doing this
  *
  * @author Paulo Gandra Sousa
- * @param <T> the entity type managed by this repository (a table in the
- * database)
- * @param <K> the primary key of the table
+ * @param <T>
+ *            the entity type managed by this repository (a table in the
+ *            database)
+ * @param <K>
+ *            the primary key of the table
  */
-public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWithTransactionalContextRepository<T, K> {
+public class JpaTransactionalRepository<T, K extends Serializable>
+        extends JpaWithTransactionalContextRepository<T, K> {
 
     public JpaTransactionalRepository(final String persistenceUnitName) {
         super(new JpaTransactionalContext(persistenceUnitName));
     }
 
-    /* package */ JpaTransactionalRepository(final String persistenceUnitName, final Class<T> classz) {
+    /* package */ JpaTransactionalRepository(final String persistenceUnitName,
+            final Class<T> classz) {
         super(new JpaTransactionalContext(persistenceUnitName), classz);
     }
 
+    @SuppressWarnings("rawtypes")
     public JpaTransactionalRepository(final String persistenceUnitName, Map properties) {
         super(new JpaTransactionalContext(persistenceUnitName, properties));
     }
 
-    /* package */ JpaTransactionalRepository(final String persistenceUnitName, Map properties, final Class<T> classz) {
+    @SuppressWarnings("rawtypes")
+    /* package */ JpaTransactionalRepository(final String persistenceUnitName, Map properties,
+            final Class<T> classz) {
         super(new JpaTransactionalContext(persistenceUnitName, properties), classz);
     }
 
@@ -71,8 +80,8 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWi
      *
      * @param entityId
      * @throws DataIntegrityViolationException
-     * @throws UnsuportedOperationException if the delete operation makes no
-     * sense for this repository
+     * @throws UnsuportedOperationException
+     *             if the delete operation makes no sense for this repository
      */
     @Override
     public void delete(final K entityId) throws DataIntegrityViolationException {
@@ -123,7 +132,7 @@ public class JpaTransactionalRepository<T, K extends Serializable> extends JpaWi
      *
      * @param entity
      * @return the persisted entity - might be a different object than the
-     * parameter
+     *         parameter
      * @throws eapli.framework.persistence.DataConcurrencyException
      * @throws DataIntegrityViolationException
      */

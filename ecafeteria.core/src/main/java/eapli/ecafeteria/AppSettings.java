@@ -28,7 +28,8 @@ public class AppSettings {
     }
 
     private void loadProperties() {
-        try (InputStream propertiesStream = this.getClass().getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE)) {
+        try (InputStream propertiesStream = this.getClass().getClassLoader()
+                .getResourceAsStream(PROPERTIES_RESOURCE)) {
             if (propertiesStream != null) {
                 this.applicationProperties.load(propertiesStream);
             } else {
@@ -50,7 +51,8 @@ public class AppSettings {
     }
 
     public Boolean isMenuLayoutHorizontal() {
-        return "horizontal".equalsIgnoreCase(this.applicationProperties.getProperty(UI_MENU_LAYOUT_KEY));
+        return "horizontal"
+                .equalsIgnoreCase(this.applicationProperties.getProperty(UI_MENU_LAYOUT_KEY));
     }
 
     public String getPersistenceUnitName() {
@@ -61,9 +63,11 @@ public class AppSettings {
         return this.applicationProperties.getProperty(REPOSITORY_FACTORY_KEY);
     }
 
+    @SuppressWarnings("rawtypes")
     public Map getExtendedPersistenceProperties() {
-        Map ret = new HashMap();
-        ret.put(SCHEMA_GENERATION_KEY, this.applicationProperties.getProperty(SCHEMA_GENERATION_KEY));
+        final Map ret = new HashMap();
+        ret.put(SCHEMA_GENERATION_KEY,
+                this.applicationProperties.getProperty(SCHEMA_GENERATION_KEY));
         return ret;
     }
 
