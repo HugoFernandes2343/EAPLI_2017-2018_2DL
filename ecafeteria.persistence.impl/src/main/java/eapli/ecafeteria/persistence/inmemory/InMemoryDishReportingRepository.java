@@ -6,6 +6,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
 import eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
@@ -38,6 +39,16 @@ class InMemoryDishReportingRepository extends InMemoryRepository
 
     @Override
     public Iterable<Dish> reportHighCaloriesDishes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<DishesPerCaloricCategory> reportDishesPerCaloricCategory() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<Object[]> reportDishesPerCaloricCategoryAsTuples() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

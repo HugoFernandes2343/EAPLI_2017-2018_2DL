@@ -6,6 +6,7 @@
 package eapli.ecafeteria.application.dishes.reporting;
 
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
 import eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -25,5 +26,13 @@ public class DishReportingController implements Controller {
 
     public Iterable<Dish> reportHighCaloriesDishes() {
         return repo.reportHighCaloriesDishes();
+    }
+
+    public Iterable<DishesPerCaloricCategory> reportDishesPerCaloricCategory() {
+        return repo.reportDishesPerCaloricCategory();
+    }
+
+    public Iterable<Object[]> reportDishesPerCaloricCategoryAsTuples() {
+        return repo.reportDishesPerCaloricCategoryAsTuples();
     }
 }

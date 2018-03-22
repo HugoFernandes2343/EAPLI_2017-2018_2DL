@@ -1,12 +1,16 @@
 package eapli.ecafeteria.domain.dishes;
 
+import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
 import java.io.Serializable;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Version;
 
 /**
@@ -16,7 +20,11 @@ import javax.persistence.Version;
  *
  */
 @Entity
-// @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
+@SqlResultSetMapping(name = "DishesPerCaloricCategoryMapping",
+        classes = @ConstructorResult(targetClass = DishesPerCaloricCategory.class,
+                columns = {
+                    @ColumnResult(name = "caloricCategory")
+                    , @ColumnResult(name = "n")}))
 public class Dish implements AggregateRoot<Designation>, Serializable {
 
     private static final long serialVersionUID = 1L;
