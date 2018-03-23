@@ -16,11 +16,11 @@ import java.util.logging.Logger;
  */
 public class AppSettings {
 
-    private final static String PROPERTIES_RESOURCE = "ecafeteria.properties";
-    private final static String REPOSITORY_FACTORY_KEY = "persistence.repositoryFactory";
-    private final static String UI_MENU_LAYOUT_KEY = "ui.menu.layout";
-    private final static String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
-    private final static String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
+    private static final String PROPERTIES_RESOURCE = "ecafeteria.properties";
+    private static final String REPOSITORY_FACTORY_KEY = "persistence.repositoryFactory";
+    private static final String UI_MENU_LAYOUT_KEY = "ui.menu.layout";
+    private static final String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
+    private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
     private final Properties applicationProperties = new Properties();
 
     public AppSettings() {
@@ -63,7 +63,7 @@ public class AppSettings {
         return this.applicationProperties.getProperty(REPOSITORY_FACTORY_KEY);
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Map getExtendedPersistenceProperties() {
         final Map ret = new HashMap();
         ret.put(SCHEMA_GENERATION_KEY,

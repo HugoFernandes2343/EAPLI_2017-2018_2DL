@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
+import java.util.logging.Logger;
+
 import eapli.ecafeteria.application.dishes.RegisterDishController;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -12,7 +14,6 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,18 +23,17 @@ public class DishBootstrapper implements Action {
 
     @Override
     public boolean execute() {
-
         final DishTypeRepository dishTypeRepo = PersistenceContext.repositories().dishTypes();
         final DishType vegie = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_VEGIE).get();
         final DishType fish = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_FISH).get();
         final DishType meat = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_MEAT).get();
 
-        register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 10, 1, 2.99);
-        register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 10, 1, 2.85);
-        register(fish, TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ, 50, 2, 3.99);
-        register(fish, TestDataConstants.DISH_NAME_LAGOSTA_SUADA, 50, 2, 24.99);
-        register(meat, TestDataConstants.DISH_NAME_PICANHA, 75, 2, 4.99);
-        register(meat, TestDataConstants.DISH_NAME_COSTELETA_A_SALSICHEIRO, 75, 2, 3.99);
+        register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 140, 1, 2.99);
+        register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 180, 1, 2.85);
+        register(fish, TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ, 250, 2, 3.99);
+        register(fish, TestDataConstants.DISH_NAME_LAGOSTA_SUADA, 230, 2, 24.99);
+        register(meat, TestDataConstants.DISH_NAME_PICANHA, 375, 2, 4.99);
+        register(meat, TestDataConstants.DISH_NAME_COSTELETA_A_SALSICHEIRO, 475, 2, 3.99);
 
         return true;
     }

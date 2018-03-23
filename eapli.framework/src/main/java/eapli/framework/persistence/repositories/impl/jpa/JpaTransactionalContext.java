@@ -37,7 +37,7 @@ import eapli.framework.util.Strings;
      * @param properties
      *            extend properties to override the persistence.xml file
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public JpaTransactionalContext(final String persistenceUnitName, Map properties) {
         if (Strings.isNullOrEmpty(persistenceUnitName)) {
             throw new IllegalArgumentException();
