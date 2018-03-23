@@ -210,3 +210,4 @@ db
 /ecafeteria.persistence.impl/target/
 /framework/target/
 classes
+.sonarlint
