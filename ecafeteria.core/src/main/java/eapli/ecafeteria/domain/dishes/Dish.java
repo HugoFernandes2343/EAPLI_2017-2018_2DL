@@ -1,10 +1,7 @@
 package eapli.ecafeteria.domain.dishes;
 
-import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
-import eapli.framework.domain.Designation;
-import eapli.framework.domain.ddd.AggregateRoot;
-import eapli.framework.domain.money.Money;
 import java.io.Serializable;
+
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
 import javax.persistence.EmbeddedId;
@@ -13,6 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Version;
 
+import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
+import eapli.ecafeteria.dto.DishDTO;
+import eapli.framework.domain.Designation;
+import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.domain.money.Money;
+
 /**
  * A Dish
  *
@@ -20,11 +23,8 @@ import javax.persistence.Version;
  *
  */
 @Entity
-@SqlResultSetMapping(name = "DishesPerCaloricCategoryMapping",
-        classes = @ConstructorResult(targetClass = DishesPerCaloricCategory.class,
-                columns = {
-                    @ColumnResult(name = "caloricCategory")
-                    , @ColumnResult(name = "n")}))
+@SqlResultSetMapping(name = "DishesPerCaloricCategoryMapping", classes = @ConstructorResult(targetClass = DishesPerCaloricCategory.class, columns = {
+        @ColumnResult(name = "caloricCategory"), @ColumnResult(name = "n") }))
 public class Dish implements AggregateRoot<Designation>, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,8 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     private Money price;
     private boolean active;
 
-    public Dish(final DishType dishType, final Designation name, final NutricionalInfo nutricionalInfo, Money price) {
+    public Dish(final DishType dishType, final Designation name,
+            final NutricionalInfo nutricionalInfo, Money price) {
         if (dishType == null || name == null || nutricionalInfo == null) {
             throw new IllegalArgumentException();
         }
@@ -100,8 +101,9 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
             return true;
         }
 
-        return id().equals(that.id()) && dishType.equals(that.dishType) && nutricionalInfo.equals(that.nutricionalInfo)
-                && price.equals(that.price) && active == that.active;
+        return id().equals(that.id()) && dishType.equals(that.dishType)
+                && nutricionalInfo.equals(that.nutricionalInfo) && price.equals(that.price)
+                && active == that.active;
     }
 
     @Override
@@ -172,5 +174,11 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
             throw new IllegalArgumentException();
         }
         this.price = price;
+    }
+
+    public DishDTO toDTO() {
+        return new DishDTO(dishType.id(), dishType.description(), name.toString(),
+                nutricionalInfo.calories(), nutricionalInfo.salt(), price.amount(),
+                price.currency().getCurrencyCode(), active);
     }
 }

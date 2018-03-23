@@ -10,6 +10,7 @@ import eapli.framework.visitor.Visitor;
  * @author ajs 13/04/2016
  *
  */
+@SuppressWarnings("squid:S106")
 public class DishPrinter implements Visitor<Dish> {
 
     @Override
