@@ -6,8 +6,8 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.dishes.Dish;
-import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
-import eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType;
+import eapli.ecafeteria.reporting.dishes.DishesPerCaloricCategory;
+import eapli.ecafeteria.reporting.dishes.DishesPerDishType;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;

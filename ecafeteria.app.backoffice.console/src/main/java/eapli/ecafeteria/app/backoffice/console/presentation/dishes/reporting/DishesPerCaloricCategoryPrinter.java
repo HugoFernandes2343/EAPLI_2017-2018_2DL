@@ -3,7 +3,7 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting;
 
-import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
+import eapli.ecafeteria.reporting.dishes.DishesPerCaloricCategory;
 import eapli.framework.visitor.Visitor;
 
 /**

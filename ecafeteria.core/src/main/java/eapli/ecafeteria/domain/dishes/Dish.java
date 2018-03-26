@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Version;
 
-import eapli.ecafeteria.domain.dishes.reporting.DishesPerCaloricCategory;
+import eapli.ecafeteria.reporting.dishes.DishesPerCaloricCategory;
 import eapli.ecafeteria.dto.DishDTO;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
