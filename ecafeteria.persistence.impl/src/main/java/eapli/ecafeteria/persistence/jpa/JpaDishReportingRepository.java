@@ -31,10 +31,10 @@ public class JpaDishReportingRepository extends CafeteriaJpaRepositoryBase
     }
 
     @Override
-    public Iterable<Dish> reportHighCaloriesDishes() {
+    public Iterable<Dish> reportHighCaloriesDishes(Integer highCalories ) {
         final TypedQuery<Dish> query = entityManager()
-                .createQuery("SELECT d FROM Dish d WHERE d.nutricionalInfo.calories > 300", Dish.class);
-
+                .createQuery("SELECT d FROM Dish d WHERE d.nutricionalInfo.calories > :hc", Dish.class);
+        query.setParameter("hc", highCalories);
         return query.getResultList();
     }
 

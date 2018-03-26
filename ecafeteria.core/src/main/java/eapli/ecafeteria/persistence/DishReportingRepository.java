@@ -13,7 +13,7 @@ public interface DishReportingRepository extends ReportingRepository {
 
     public Iterable<DishesPerDishType> dishesPerDishType();
 
-    public Iterable<Dish> reportHighCaloriesDishes();
+    public Iterable<Dish> reportHighCaloriesDishes(Integer highCalories);
 
     public Iterable<DishesPerCaloricCategory> reportDishesPerCaloricCategory();
 

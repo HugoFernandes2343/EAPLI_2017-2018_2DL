@@ -33,11 +33,11 @@ public class ReportHighCaloriesDishesUI extends AbstractListUI<Dish> {
 
     @Override
     protected String elementName() {
-        return "Dishes per dish type";
+        return "High calories dishes";
     }
 
     @Override
     protected String listHeader() {
-        return "DISHES PER DISH TYPE";
+        return "HIGH CALORIES DISH";
     }
 }

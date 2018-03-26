@@ -38,7 +38,7 @@ class InMemoryDishReportingRepository extends InMemoryRepository
     }
 
     @Override
-    public Iterable<Dish> reportHighCaloriesDishes() {
+    public Iterable<Dish> reportHighCaloriesDishes(Integer highCalories) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
