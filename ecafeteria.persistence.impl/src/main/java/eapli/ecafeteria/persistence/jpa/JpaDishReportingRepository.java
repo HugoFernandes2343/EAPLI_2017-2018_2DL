@@ -24,7 +24,7 @@ public class JpaDishReportingRepository extends CafeteriaJpaRepositoryBase
     public Iterable<DishesPerDishType> dishesPerDishType() {
 
         final TypedQuery<DishesPerDishType> query = entityManager().createQuery(
-                "SELECT new eapli.ecafeteria.domain.dishes.reporting.DishesPerDishType(t.acronym, COUNT(d)) FROM Dish d, DishType t WHERE d.dishType = t GROUP BY d.dishType",
+                "SELECT new eapli.ecafeteria.reporting.dishes.DishesPerDishType(t.acronym, COUNT(d)) FROM Dish d, DishType t WHERE d.dishType = t GROUP BY d.dishType",
                 DishesPerDishType.class);
 
         return query.getResultList();
