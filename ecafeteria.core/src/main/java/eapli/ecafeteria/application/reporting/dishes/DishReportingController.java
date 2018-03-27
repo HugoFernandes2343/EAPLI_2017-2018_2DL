@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.application.dishes.reporting;
+package eapli.ecafeteria.application.reporting.dishes;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.domain.dishes.Dish;

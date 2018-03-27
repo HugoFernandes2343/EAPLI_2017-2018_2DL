@@ -1,6 +1,6 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting;
 
-import eapli.ecafeteria.application.dishes.reporting.DishReportingController;
+import eapli.ecafeteria.application.reporting.dishes.DishReportingController;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
