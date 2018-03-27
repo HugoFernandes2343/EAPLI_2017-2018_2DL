@@ -1,5 +1,6 @@
 package eapli.ecafeteria.bootstrapers;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,8 +40,10 @@ public class UsersBootstrapperBase {
                     "»»» " + username);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             // assuming it is just a primary key violation due to the tentative
-            // of inserting a duplicated user. let's just lookup thast user
-            u = listUserController.find(new Username(username)).get();
+            // of inserting a duplicated user. let's just lookup that user
+            final Optional<SystemUser> ou = listUserController.find(new Username(username));
+            assert ou.isPresent();
+            u = ou.get();
         }
         return u;
     }

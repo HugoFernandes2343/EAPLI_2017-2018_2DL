@@ -19,6 +19,7 @@ public final class TestDataConstants {
 
     public static final String USER_900330 = "900330";
 
+    @SuppressWarnings("squid:S2068")
     public static final String PASSWORD1 = "Password1";
 
     private TestDataConstants() {

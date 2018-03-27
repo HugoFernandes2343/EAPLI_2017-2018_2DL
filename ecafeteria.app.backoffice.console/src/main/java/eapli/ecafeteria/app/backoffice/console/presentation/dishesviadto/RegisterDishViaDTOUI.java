@@ -24,6 +24,7 @@ public class RegisterDishViaDTOUI extends AbstractUI {
     }
 
     @Override
+    @SuppressWarnings("squid:S106")
     protected boolean doShow() {
         final Iterable<DishTypeDTO> dishTypes = this.theController.dishTypes();
 

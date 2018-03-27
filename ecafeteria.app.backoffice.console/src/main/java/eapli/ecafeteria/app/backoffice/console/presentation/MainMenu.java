@@ -183,9 +183,7 @@ public class MainMenu extends AbstractUI {
     private Menu buildUsersMenu() {
         final Menu menu = new Menu("Users >");
 
-        menu.add(new MenuItem(ADD_USER_OPTION, "Add User", () -> {
-            return new AddUserUI().show();
-        }));
+        menu.add(new MenuItem(ADD_USER_OPTION, "Add User", () -> new AddUserUI().show()));
         menu.add(new MenuItem(LIST_USERS_OPTION, "List all Users", new ListUsersAction()));
         menu.add(new MenuItem(DEACTIVATE_USER_OPTION, "Deactivate User",
                 new DeactivateUserAction()));
@@ -213,12 +211,10 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(DISH_REGISTER_OPTION, "Register new Dish", new RegisterDishAction()));
         menu.add(new MenuItem(DISH_LIST_OPTION, "List all Dish", new ListDishAction()));
 
-        menu.add(new MenuItem(DISH_REGISTER_DTO_OPTION, "Register new Dish (via DTO)", () -> {
-            return new RegisterDishViaDTOUI().show();
-        }));
-        menu.add(new MenuItem(DISH_LIST_DTO_OPTION, "List all Dish (via DTO)", () -> {
-            return new ListDishViaDTOUI().show();
-        }));
+        menu.add(new MenuItem(DISH_REGISTER_DTO_OPTION, "Register new Dish (via DTO)",
+                () -> new RegisterDishViaDTOUI().show()));
+        menu.add(new MenuItem(DISH_LIST_DTO_OPTION, "List all Dish (via DTO)",
+                () -> new ListDishViaDTOUI().show()));
 
         menu.add(new MenuItem(DISH_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Dish",
                 new ActivateDeactivateDishAction()));
@@ -259,20 +255,16 @@ public class MainMenu extends AbstractUI {
     private Menu buildReportingDishesMenu() {
         final Menu menu = new Menu("Reporting Dishes >");
 
-        menu.add(new MenuItem(REPORTING_DISHES_PER_DISHTYPE_OPTION, "Dishes per Dish Type", () -> {
-            return new ReportDishesPerDishTypeUI().show();
-        }));
-        menu.add(new MenuItem(REPORTING_HIGH_CALORIES_DISHES_OPTION, "High Calories Dishes", () -> {
-            return new ReportHighCaloriesDishesUI().show();
-        }));
+        menu.add(new MenuItem(REPORTING_DISHES_PER_DISHTYPE_OPTION, "Dishes per Dish Type",
+                () -> new ReportDishesPerDishTypeUI().show()));
+        menu.add(new MenuItem(REPORTING_HIGH_CALORIES_DISHES_OPTION, "High Calories Dishes",
+                () -> new ReportHighCaloriesDishesUI().show()));
         menu.add(new MenuItem(REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION,
-                "Dishes per Caloric Category", () -> {
-                    return new ReportDishesPerCaloricCategoryUI().show();
-                }));
+                "Dishes per Caloric Category",
+                () -> new ReportDishesPerCaloricCategoryUI().show()));
         menu.add(new MenuItem(REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION + 1,
-                "Dishes per Caloric Category (as tuples)", () -> {
-                    return new ReportDishesPerCaloricCategoryAsTuplesUI().show();
-                }));
+                "Dishes per Caloric Category (as tuples)",
+                () -> new ReportDishesPerCaloricCategoryAsTuplesUI().show()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
