@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
+import eapli.ecafeteria.dto.DishTypeDTO;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.util.Strings;
 
@@ -26,150 +27,156 @@ import eapli.framework.util.Strings;
 @Entity
 public class DishType implements AggregateRoot<String>, Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	// ORM primary key
-	@Id
-	@GeneratedValue
-	private Long pk;
-	@Version
-	private Long version;
+    // ORM primary key
+    @Id
+    @GeneratedValue
+    private Long pk;
+    @Version
+    private Long version;
 
-	// business ID
-	@Column(unique = true)
-	private String acronym;
-	private String description;
-	private boolean active;
+    // business ID
+    @Column(unique = true)
+    private String acronym;
+    private String description;
+    private boolean active;
 
-	protected DishType() {
-		// for ORM
-	}
+    protected DishType() {
+        // for ORM
+    }
 
-	/**
-	 * DishType constructor.
-	 *
-	 * @param name Mandatory
-	 * @param description Mandatory
-	 */
-	public DishType(String name, String description) {
-		setName(name);
-		setDescription(description);
-		this.active = true;
-	}
+    /**
+     * DishType constructor.
+     *
+     * @param name
+     *            Mandatory
+     * @param description
+     *            Mandatory
+     */
+    public DishType(String name, String description) {
+        setName(name);
+        setDescription(description);
+        this.active = true;
+    }
 
-	/**
-	 * Sets and validates newDescription.
-	 *
-	 * @param newDescription
-	 */
-	private void setDescription(String newDescription) {
-		if (descriptionMeetsMinimumRequirements(newDescription)) {
-			this.description = newDescription;
-		} else {
-			throw new IllegalArgumentException("Invalid Description");
-		}
-	}
+    /**
+     * Sets and validates newDescription.
+     *
+     * @param newDescription
+     */
+    private void setDescription(String newDescription) {
+        if (descriptionMeetsMinimumRequirements(newDescription)) {
+            this.description = newDescription;
+        } else {
+            throw new IllegalArgumentException("Invalid Description");
+        }
+    }
 
-	/**
-	 * Sets and validates newName.
-	 *
-	 * @param newName
-	 */
-	private void setName(String newName) {
-		if (nameMeetsMinimumRequirements(newName)) {
-			this.acronym = newName;
-		} else {
-			throw new IllegalArgumentException("Invalid Name");
-		}
-	}
+    /**
+     * Sets and validates newName.
+     *
+     * @param newName
+     */
+    private void setName(String newName) {
+        if (nameMeetsMinimumRequirements(newName)) {
+            this.acronym = newName;
+        } else {
+            throw new IllegalArgumentException("Invalid Name");
+        }
+    }
 
-	/**
-	 * Ensure name is not null or empty.
-	 *
-	 * @param name
-	 * @return True if name meets minimum requirements. False if name does not
-	 * meet minimum requirements.
-	 */
-	private boolean nameMeetsMinimumRequirements(String name) {
-		return !Strings.isNullOrEmpty(name);
-	}
+    /**
+     * Ensure name is not null or empty.
+     *
+     * @param name
+     * @return True if name meets minimum requirements. False if name does not
+     *         meet minimum requirements.
+     */
+    private boolean nameMeetsMinimumRequirements(String name) {
+        return !Strings.isNullOrEmpty(name);
+    }
 
-	/**
-	 * Ensure description is not null or empty.
-	 *
-	 * @param description
-	 * @return True if description meets minimum requirements. False if
-	 * description does not meet minimum requirements.
-	 */
-	private boolean descriptionMeetsMinimumRequirements(String description) {
-		return !Strings.isNullOrEmpty(description);
-	}
+    /**
+     * Ensure description is not null or empty.
+     *
+     * @param description
+     * @return True if description meets minimum requirements. False if
+     *         description does not meet minimum requirements.
+     */
+    private boolean descriptionMeetsMinimumRequirements(String description) {
+        return !Strings.isNullOrEmpty(description);
+    }
 
-	public String description() {
-		return this.description;
-	}
+    public String description() {
+        return this.description;
+    }
 
-	public boolean isActive() {
-		return this.active;
-	}
+    public boolean isActive() {
+        return this.active;
+    }
 
-	/**
-	 * Toggles the state of the dishtype, activating it or deactivating it
-	 * accordingly.
-	 *
-	 * @return whether the dishtype is active or not
-	 */
-	public boolean toogleState() {
+    /**
+     * Toggles the state of the dishtype, activating it or deactivating it
+     * accordingly.
+     *
+     * @return whether the dishtype is active or not
+     */
+    public boolean toogleState() {
 
-		this.active = !this.active;
-		return isActive();
-	}
+        this.active = !this.active;
+        return isActive();
+    }
 
-	/**
-	 * Change DishType description
-	 *
-	 * @param newDescription New description.
-	 */
-	public void changeDescriptionTo(String newDescription) {
-		if (!descriptionMeetsMinimumRequirements(newDescription)) {
-			throw new IllegalArgumentException();
-		}
-		this.description = newDescription;
-	}
+    /**
+     * Change DishType description
+     *
+     * @param newDescription
+     *            New description.
+     */
+    public void changeDescriptionTo(String newDescription) {
+        if (!descriptionMeetsMinimumRequirements(newDescription)) {
+            throw new IllegalArgumentException();
+        }
+        this.description = newDescription;
+    }
 
-	@Override
-	public boolean is(String id) {
-		return id.equalsIgnoreCase(this.acronym);
-	}
+    @Override
+    public boolean is(String id) {
+        return id.equalsIgnoreCase(this.acronym);
+    }
 
-	@Override
-	public String id() {
-		return this.acronym;
-	}
+    @Override
+    public String id() {
+        return this.acronym;
+    }
 
-	@Override
-	public boolean sameAs(Object other) {
-		final DishType dishType = (DishType) other;
-		return this.equals(dishType) && description().equals(dishType.description())
-				&& isActive() == dishType.isActive();
-	}
+    @Override
+    public boolean sameAs(Object other) {
+        final DishType dishType = (DishType) other;
+        return this.equals(dishType) && description().equals(dishType.description())
+                && isActive() == dishType.isActive();
+    }
 
-	@Override
-	public int hashCode() {
-		return this.acronym.hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return this.acronym.hashCode();
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof DishType)) {
-			return false;
-		}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DishType)) {
+            return false;
+        }
 
-		final DishType other = (DishType) o;
-		return id().equals(other.id());
-	}
+        final DishType other = (DishType) o;
+        return id().equals(other.id());
+    }
 
+    public DishTypeDTO toDTO() {
+        return new DishTypeDTO(acronym, description, active);
+    }
 }

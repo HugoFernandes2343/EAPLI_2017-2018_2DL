@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
   <persistence-unit name="eapli.eCafeteriaPU">
+      <!--
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    -->
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    
     <class>eapli.ecafeteria.domain.authz.SystemUser</class>
     <class>eapli.ecafeteria.domain.authz.Role</class>
     <class>eapli.ecafeteria.domain.authz.RoleSet</class>
