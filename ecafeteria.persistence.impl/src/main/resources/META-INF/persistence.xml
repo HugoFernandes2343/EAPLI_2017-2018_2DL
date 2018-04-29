@@ -14,6 +14,7 @@
     <class>eapli.ecafeteria.domain.cafeteriauser.SignupRequest</class>
     <class>eapli.ecafeteria.domain.dishes.Dish</class>
     <class>eapli.ecafeteria.domain.dishes.DishType</class>
+    <class>eapli.ecafeteria.domain.cafeteriauser.Movement</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--
