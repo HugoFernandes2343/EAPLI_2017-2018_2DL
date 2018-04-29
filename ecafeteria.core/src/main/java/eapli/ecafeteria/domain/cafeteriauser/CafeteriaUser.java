@@ -32,6 +32,9 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
 
     @EmbeddedId
     private MecanographicNumber mecanographicNumber;
+    
+    @EmbeddedId
+    private AccountCard accountcard;
 
     /**
      * cascade = CascadeType.NONE as the systemUser is part of another aggregate
@@ -45,6 +48,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         }
         this.systemUser = user;
         this.mecanographicNumber = mecanographicNumber;
+        this.accountcard = new AccountCard();
     }
 
     protected CafeteriaUser() {
