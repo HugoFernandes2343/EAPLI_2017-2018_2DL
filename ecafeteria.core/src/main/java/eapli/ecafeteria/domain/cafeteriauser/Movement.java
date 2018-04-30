@@ -75,7 +75,7 @@ public class Movement implements AggregateRoot<Long>, Serializable{
             return true;
         }
         
-        return this.date.equals(that.date) && this.user.sameAs(that.user) && this.value == that.value;
+        return this.id.equals(that.id);
     }
 
     @Override
@@ -86,5 +86,9 @@ public class Movement implements AggregateRoot<Long>, Serializable{
     @Override
     public Long id() {
         return this.id;
+    }
+    
+    public CafeteriaUser madeBy(){
+        return this.user;
     }
 }

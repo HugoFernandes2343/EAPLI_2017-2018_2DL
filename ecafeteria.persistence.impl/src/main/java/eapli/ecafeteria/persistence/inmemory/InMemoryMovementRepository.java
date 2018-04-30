@@ -18,7 +18,7 @@ public class InMemoryMovementRepository extends InMemoryRepository<Movement, Lon
 
     @Override
     public Iterable<Movement> allCafeteriaUserMovements(CafeteriaUser user) {
-        return match(e -> e.sameAs(user));
+        return match(e -> e.madeBy().sameAs(user));
     }
 
     @Override
