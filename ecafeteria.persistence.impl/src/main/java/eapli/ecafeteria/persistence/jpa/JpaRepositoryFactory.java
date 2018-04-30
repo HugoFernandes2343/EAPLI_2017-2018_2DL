@@ -5,6 +5,7 @@ import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -77,5 +78,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public ReservationRepository reservations() {
         return new JpaReservationRepository();
+    }
+    
+    @Override
+    public MovementRepository movements(){
+        return new JpaMovementRepository();
     }
 }

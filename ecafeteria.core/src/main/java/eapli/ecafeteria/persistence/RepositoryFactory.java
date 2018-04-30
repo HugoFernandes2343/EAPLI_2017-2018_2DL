@@ -74,6 +74,12 @@ public interface RepositoryFactory {
     ReservationRepository reservations();
     
     /**
+     * Repository to get movements
+     * @return 
+     */
+    MovementRepository movements();
+    
+    /**
      * ************************
      * reporting
      *************************
