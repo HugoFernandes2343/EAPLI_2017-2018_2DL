@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -83,5 +84,9 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public ReservationRepository reservations() {
         return new InMemoryReservationRepository();
+    }
+    
+    public MovementRepository movements() {
+        return new InMemoryMovementRepository();
     }
 }
