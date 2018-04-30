@@ -9,6 +9,7 @@ import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.HorizontalMenuRenderer;
@@ -31,6 +32,11 @@ public class MainMenu extends AbstractUI {
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
+    private static final int SALES_OPTION = 2;
+    
+    
+    // SALES
+    private static final int MEAL_DELIVERY_REGISTRATION_OPTION = 1;
 
     @Override
     public boolean show() {
@@ -69,7 +75,8 @@ public class MainMenu extends AbstractUI {
         }
 
         if (AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
-            // TODO
+            final Menu salesMenu = buildSalesMenu();
+            mainMenu.add(new SubMenu(SALES_OPTION, salesMenu, new ShowVerticalSubMenuAction(salesMenu)));
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -80,4 +87,13 @@ public class MainMenu extends AbstractUI {
 
         return mainMenu;
     }
+    
+     private Menu buildSalesMenu() {
+        final Menu menu = new Menu("Sales >");
+        menu.add(new MenuItem(MEAL_DELIVERY_REGISTRATION_OPTION, "Meal Delivery Registration",
+                new MealDeliveryReagistrationAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        return menu;
+    }
+
 }

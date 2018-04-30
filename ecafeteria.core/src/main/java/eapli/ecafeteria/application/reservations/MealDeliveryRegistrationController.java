@@ -8,14 +8,11 @@ package eapli.ecafeteria.application.reservations;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * MealDeliveryRegistrationController class
@@ -49,13 +46,11 @@ public class MealDeliveryRegistrationController implements Controller{
     /**
      * Confirms the save
      * @param res 
+     * @throws eapli.framework.persistence.DataConcurrencyException 
+     * @throws eapli.framework.persistence.DataIntegrityViolationException 
      */
-    public void confirmDelivery(Reservation res){
-        try {
-            rrp.save(res);
-        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-            Logger.getLogger(MealDeliveryRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void confirmDelivery(Reservation res) throws DataConcurrencyException, DataIntegrityViolationException{
+        rrp.save(res);
     }
 
 }

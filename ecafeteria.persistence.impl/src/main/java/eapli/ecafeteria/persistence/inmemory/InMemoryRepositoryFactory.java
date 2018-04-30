@@ -7,6 +7,7 @@ import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
+import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
@@ -77,5 +78,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public DishReportingRepository dishReporting() {
         return new InMemoryDishReportingRepository();
+    }
+
+    @Override
+    public ReservationRepository reservations() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

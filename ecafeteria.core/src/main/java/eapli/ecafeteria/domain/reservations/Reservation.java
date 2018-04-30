@@ -38,9 +38,13 @@ public class Reservation implements AggregateRoot<String>, Serializable {
 
     @Id
     @GeneratedValue
-    private String code;
+    private Long pk;
     @Version
     private Long version;
+    
+    // business ID
+    @Column(unique = true)
+    private String code;
     
     private String description;
 
