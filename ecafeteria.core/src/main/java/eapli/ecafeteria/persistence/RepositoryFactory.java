@@ -68,6 +68,12 @@ public interface RepositoryFactory {
     MaterialRepository materials();
 
     /**
+     * respository to return reservations
+     * @return 
+     */
+    ReservationRepository reservations();
+    
+    /**
      * ************************
      * reporting
      *************************
