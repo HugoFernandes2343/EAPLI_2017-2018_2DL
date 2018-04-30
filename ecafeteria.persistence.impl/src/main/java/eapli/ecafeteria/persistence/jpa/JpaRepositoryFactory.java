@@ -80,7 +80,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaReservationRepository();
     }
     
-    @Override
     public MovementRepository movements(){
         return new JpaMovementRepository();
     }
