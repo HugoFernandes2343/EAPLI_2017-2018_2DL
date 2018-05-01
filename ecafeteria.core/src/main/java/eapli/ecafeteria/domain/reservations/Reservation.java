@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -30,6 +30,10 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         
         public STATE changeToDelivered(){
             return STATE.DELIVERED;
+        }
+        
+        public STATE changeToExpired(){
+            return STATE.EXPIRED;
         }
     }
     
@@ -85,6 +89,10 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         return true;
     }
 
+    public boolean expire(){
+        this.state.changeToExpired();
+        return true;
+    }
     @Override
     public boolean sameAs(Object other) {
         return false;//Unfinished

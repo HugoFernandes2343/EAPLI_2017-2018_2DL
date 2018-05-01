@@ -5,31 +5,27 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.ecafeteria.domain.reservations.Reservation.ReservationState;
-import eapli.ecafeteria.persistence.ReservationRepository;
+import eapli.ecafeteria.domain.pos.POS;
+import eapli.ecafeteria.domain.pos.POSState;
+import eapli.ecafeteria.persistence.POSRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Optional;
 
 /**
  *
- * @author Utilizador
+ * @author hugod
  */
-public class InMemoryReservationRepository implements ReservationRepository {
-
-    public InMemoryReservationRepository() {
-        
+public class InMemoryPOSRepository implements POSRepository {
+    
+    
+    @Override
+    public Iterable<POS> findOpenned(POSState ps){
+      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Optional<Reservation> findByCode(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Reservation entity) throws DataIntegrityViolationException {
+    public void delete(POS entity) throws DataIntegrityViolationException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -39,17 +35,17 @@ public class InMemoryReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public Reservation save(Reservation entity) throws DataConcurrencyException, DataIntegrityViolationException {
+    public POS save(POS entity) throws DataConcurrencyException, DataIntegrityViolationException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> findAll() {
+    public Iterable<POS> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+    }
 
     @Override
-    public Optional<Reservation> findOne(Long id) {
+    public Optional<POS> findOne(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -57,17 +53,4 @@ public class InMemoryReservationRepository implements ReservationRepository {
     public long count() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public Iterable<Reservation> findByStateAndMeal(ReservationState.STATE state, Meal m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   
-    }
-    
-    @Override
-    public boolean addReservation(Reservation reservation) {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
