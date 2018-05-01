@@ -1,6 +1,7 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
 import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.domain.money.Money;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Movement implements AggregateRoot<Long>, Serializable{
     /**
      * Value of the movement
      */
-    private double value;
+    private Money value;
     
     /**
      * Date where the movement was made.
@@ -52,7 +53,7 @@ public class Movement implements AggregateRoot<Long>, Serializable{
      * @param value - value of the movement
      * @param description - description of the movement
      */
-    public Movement(CafeteriaUser user, double value, MovementDescription description){
+    public Movement(CafeteriaUser user, Money value, MovementDescription description){
         
         if(user == null || description == null || description == null){
             throw new IllegalArgumentException();
@@ -90,5 +91,9 @@ public class Movement implements AggregateRoot<Long>, Serializable{
     
     public CafeteriaUser madeBy(){
         return this.user;
+    }
+    
+    public Money value(){
+        return this.value;
     }
 }

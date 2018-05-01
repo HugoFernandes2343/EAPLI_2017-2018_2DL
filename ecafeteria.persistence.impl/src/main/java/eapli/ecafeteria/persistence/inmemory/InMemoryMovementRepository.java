@@ -10,6 +10,7 @@ import eapli.ecafeteria.domain.cafeteriauser.Movement;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import eapli.ecafeteria.domain.cafeteriauser.Movement;
+import eapli.framework.domain.money.Money;
 /**
  *
  * @author filip
@@ -24,6 +25,11 @@ public class InMemoryMovementRepository extends InMemoryRepository<Movement, Lon
     @Override
     protected Long newKeyFor(Movement entity) {
          return entity.id();
+    }
+
+    @Override
+    public boolean addBookingMovement(Money price) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

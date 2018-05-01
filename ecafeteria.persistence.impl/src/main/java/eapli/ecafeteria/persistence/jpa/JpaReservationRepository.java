@@ -19,5 +19,10 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     public Optional<Reservation> findByCode(String code) {
         return matchOne("e.code=:code", "code", code);
     }
+
+    @Override
+    public boolean addReservation(Reservation reservation) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

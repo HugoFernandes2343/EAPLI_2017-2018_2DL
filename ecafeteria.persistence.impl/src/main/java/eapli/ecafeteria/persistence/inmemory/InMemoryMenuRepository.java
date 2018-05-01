@@ -5,29 +5,29 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.ecafeteria.persistence.ReservationRepository;
+import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Calendar;
 import java.util.Optional;
 
 /**
  *
- * @author Utilizador
+ * @author João Vieira
  */
-public class InMemoryReservationRepository implements ReservationRepository {
+public class InMemoryMenuRepository implements MenuRepository {
 
-    public InMemoryReservationRepository() {
-        
+    public InMemoryMenuRepository() {
     }
 
     @Override
-    public Optional<Reservation> findByCode(String code) {
+    public Menu findByDate(Calendar date) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Reservation entity) throws DataIntegrityViolationException {
+    public void delete(Menu entity) throws DataIntegrityViolationException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -37,27 +37,22 @@ public class InMemoryReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public Reservation save(Reservation entity) throws DataConcurrencyException, DataIntegrityViolationException {
+    public Menu save(Menu entity) throws DataConcurrencyException, DataIntegrityViolationException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> findAll() {
+    public Iterable<Menu> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+    }
 
     @Override
-    public Optional<Reservation> findOne(Long id) {
+    public Optional<Menu> findOne(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public long count() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean addReservation(Reservation reservation) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
