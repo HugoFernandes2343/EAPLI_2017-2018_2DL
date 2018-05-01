@@ -18,7 +18,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public class PublishMenuController implements Controller{
     
-    private final MenuRepository mr = PersistenceContext.repositories().menuRepository();
+    private final MenuRepository mr = PersistenceContext.repositories().menus();
     private Menu me;
     
     
