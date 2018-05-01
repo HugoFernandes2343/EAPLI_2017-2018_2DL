@@ -29,7 +29,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.Registe
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ElaborateMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
-import eapli.ecafeteria.app.backoffice.presentation.menu.PublishMenuAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
