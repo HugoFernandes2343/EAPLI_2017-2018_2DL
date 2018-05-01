@@ -20,6 +20,7 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
     
     /**
      * Find Reservation given a code
+     * @param code
      * @return 
      */
     Optional<Reservation> findByCode(String code);
@@ -31,5 +32,8 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
      * @return
      */
     Iterable<Reservation> findByStateAndMeal(Reservation.ReservationState.STATE state,Meal m);
+
+    public boolean addReservation(Reservation reservation);
+
     
 }

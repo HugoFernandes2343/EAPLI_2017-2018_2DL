@@ -29,5 +29,9 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         createQuery.setParameter("state", state);
         return createQuery.getResultList();
     }
+    @Override
+    public boolean addReservation(Reservation reservation) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -8,6 +8,7 @@ import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
+import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ public class RechargeCardController implements Controller{
     }
     
     public boolean rechargeCard(CafeteriaUser user, double value) {
-        Movement mov = new Movement(user,value, MovementDescription.RECHARGE);
+        Movement mov = new Movement(user,Money.euros(value), MovementDescription.RECHARGE);
         try {
             repo2.save(mov);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {

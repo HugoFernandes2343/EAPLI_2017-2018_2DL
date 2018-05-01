@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.Movement;
+import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
@@ -16,5 +17,7 @@ import eapli.framework.persistence.repositories.DataRepository;
 public interface MovementRepository extends DataRepository<Movement, Long>{
     
     public Iterable<Movement> allCafeteriaUserMovements(CafeteriaUser user);
+    
+    public boolean addBookingMovement(Money price);
 
 }
