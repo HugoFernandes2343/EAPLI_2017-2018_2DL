@@ -31,7 +31,7 @@ public class MealPlan <M,Q> implements Serializable
     private Long id;
     
     @Enumerated(EnumType.STRING)
-    private MealPlanState menuPlanState;
+    private MealPlanState mealPlanState;
     
     @OneToMany
     private List<MealPlanItem> menuItems;
@@ -41,14 +41,14 @@ public class MealPlan <M,Q> implements Serializable
     
     public MealPlan(List<MealPlanItem> menuItems) 
     {
-        this.menuPlanState = IN_PROGRESS;
+        this.mealPlanState = IN_PROGRESS;
         this.menuItems = menuItems;
     }
 
     
     public MealPlan() 
     {
-        this.menuPlanState = IN_PROGRESS;
+        this.mealPlanState = IN_PROGRESS;
         this.menuItems = new ArrayList<MealPlanItem>();      
     }
     
@@ -56,12 +56,12 @@ public class MealPlan <M,Q> implements Serializable
     
     
     
-    public void updateMenuPlanState (MealPlan p) 
+    public void updateMalPlanState (MealPlan p) 
     {
         if (p.menuItems.isEmpty()) {
-            this.menuPlanState = IN_PROGRESS;
+            this.mealPlanState = IN_PROGRESS;
         }
-        else this.menuPlanState = PUBLISHED;            
+        else this.mealPlanState = PUBLISHED;            
     }
      
     

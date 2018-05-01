@@ -15,7 +15,7 @@ public class ElaborateMealPlanAction implements Action {
 
     @Override
     public boolean execute() {
-       new ElaborateMealPlanUI().setVisible(true);
+       new ElaborateUI().show();
        return true;
     }
     

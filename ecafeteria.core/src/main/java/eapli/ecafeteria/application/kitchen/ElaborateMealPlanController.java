@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ElaborateMealPlanController implements Controller{
     
-    private final MenuRepository repository = PersistenceContext.repositories().menus();
+    private final MenuRepository repository = PersistenceContext.repositories().menuRepository();
     
     private final ListMenuService listMenuService = new ListMenuService();
    
@@ -41,8 +41,7 @@ public class ElaborateMealPlanController implements Controller{
     {
         Iterable<Meal> meals = PersistenceContext.repositories().meals().findAll();
         List<Meal> belongingMeals = new ArrayList<>();
-        for (Meal meal : meals)             
-        {
+        for (Meal meal : meals){
             if (meal.belongsToMenu(m)) belongingMeals.add(meal);         
         }
         

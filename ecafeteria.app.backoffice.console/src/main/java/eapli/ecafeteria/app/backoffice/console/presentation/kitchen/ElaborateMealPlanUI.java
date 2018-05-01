@@ -22,11 +22,7 @@ public class ElaborateMealPlanUI extends javax.swing.JFrame {
         initComponents();
     }
     
-    private final ElaborateMealPlanController theController = new ElaborateMealPlanController();
-
-	protected Controller controller() {
-		return this.theController;
-	}
+    
 
     /**
      * @param args the command line arguments
