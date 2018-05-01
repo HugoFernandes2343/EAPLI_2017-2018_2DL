@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.reservations;
 
-import eapli.ecafeteria.app.backoffice.console.presentation.dishes.DishPrinter;
 import eapli.ecafeteria.application.reservations.ReserveMealController;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
@@ -13,7 +12,6 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.meals.MealType.MealTypes;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,9 +51,9 @@ public class ReserveMealUI extends AbstractUI {
 
         final String sDish = Console.readLine(menu.mealList() + "\nWhat dish you want?");
         Dish dish = null;
-        for (Dish di : menu.mealList()) {
-            if (di.name().toString().equals(sDish)) {
-                dish = di;
+        for (Meal meal : menu.mealList()) {
+            if (meal.dish().name().toString().equals(sDish)) {
+                dish = meal.dish();
             }
         }
         Meal m = new Meal(dish, new MealType(mealTypes), date);
