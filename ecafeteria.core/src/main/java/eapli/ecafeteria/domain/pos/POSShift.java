@@ -25,7 +25,6 @@ public class POSShift implements Serializable, AggregateRoot<Long>{
     @GeneratedValue
     private Long id;
     
-    @OneToMany(fetch = FetchType.EAGER)
     private ArrayList<Meal> meals;
 
     private Calendar date;
