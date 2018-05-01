@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
  * @author André Santos
  */
 @Entity
-public class MenuPlanItem implements Serializable
+public class MealPlanItem implements Serializable
 {
     @Id
     @GeneratedValue
@@ -29,12 +29,12 @@ public class MenuPlanItem implements Serializable
     
     private Integer DishQuantity;
 
-    public MenuPlanItem() {
+    public MealPlanItem() {
     }
 
     
     
-    public MenuPlanItem(Meal meal, Integer DishQuantity) {
+    public MealPlanItem(Meal meal, Integer DishQuantity) {
         this.meal = meal;
         this.DishQuantity = DishQuantity;
     }

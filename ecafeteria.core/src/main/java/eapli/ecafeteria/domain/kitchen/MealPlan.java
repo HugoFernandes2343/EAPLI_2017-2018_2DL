@@ -5,9 +5,9 @@
  */
 package eapli.ecafeteria.domain.Kitchen;
 
-import eapli.ecafeteria.domain.kitchen.MenuPlanItem;
-import static eapli.ecafeteria.domain.Kitchen.MenuPlanState.IN_PROGRESS;
-import static eapli.ecafeteria.domain.Kitchen.MenuPlanState.PUBLISHED;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import static eapli.ecafeteria.domain.Kitchen.MealPlanState.IN_PROGRESS;
+import static eapli.ecafeteria.domain.Kitchen.MealPlanState.PUBLISHED;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import javax.persistence.OneToMany;
  * @author André Santos
  */
 @Entity
-public class MenuPlan <M,Q> implements Serializable 
+public class MealPlan <M,Q> implements Serializable 
 {
     
     @Id
@@ -31,32 +31,32 @@ public class MenuPlan <M,Q> implements Serializable
     private Long id;
     
     @Enumerated(EnumType.STRING)
-    private MenuPlanState menuPlanState;
+    private MealPlanState menuPlanState;
     
     @OneToMany
-    private List<MenuPlanItem> menuItems;
+    private List<MealPlanItem> menuItems;
 
     
     
     
-    public MenuPlan(List<MenuPlanItem> menuItems) 
+    public MealPlan(List<MealPlanItem> menuItems) 
     {
         this.menuPlanState = IN_PROGRESS;
         this.menuItems = menuItems;
     }
 
     
-    public MenuPlan() 
+    public MealPlan() 
     {
         this.menuPlanState = IN_PROGRESS;
-        this.menuItems = new ArrayList<MenuPlanItem>();      
+        this.menuItems = new ArrayList<MealPlanItem>();      
     }
     
     
     
     
     
-    public void updateMenuPlanState (MenuPlan p) 
+    public void updateMenuPlanState (MealPlan p) 
     {
         if (p.menuItems.isEmpty()) {
             this.menuPlanState = IN_PROGRESS;

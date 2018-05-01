@@ -9,7 +9,7 @@ package eapli.ecafeteria.domain.Kitchen;
  *
  * @author André Santos
  */
-enum MenuPlanState 
+enum MealPlanState 
 {  
     IN_PROGRESS, PUBLISHED  
 }

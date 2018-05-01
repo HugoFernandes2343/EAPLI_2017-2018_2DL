@@ -7,9 +7,9 @@ package eapli.ecafeteria.application.kitchen;
 
 
 import eapli.ecafeteria.application.menu.ListMenuService;
-import eapli.ecafeteria.domain.Kitchen.MenuPlan;
+import eapli.ecafeteria.domain.Kitchen.MealPlan;
 import eapli.ecafeteria.domain.dishes.Dish;
-import eapli.ecafeteria.domain.kitchen.MenuPlanItem;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
 
@@ -63,17 +63,17 @@ public class ElaborateMealPlanController implements Controller{
     
     
     
-    public MenuPlan createNewMenuPlan (List<Integer> qts, List<Meal> ml) 
+    public MealPlan createNewMenuPlan (List<Integer> qts, List<Meal> ml) 
     {
-        List<MenuPlanItem> items = new ArrayList<>();
+        List<MealPlanItem> items = new ArrayList<>();
         
         for (Meal m : ml) 
         {
-            items.add(new MenuPlanItem(m, qts.get(0)));
+            items.add(new MealPlanItem(m, qts.get(0)));
             qts.remove(0);
         }
           
-        MenuPlan m = new MenuPlan(items);    
+        MealPlan m = new MealPlan(items);    
         
         //validate m
         
