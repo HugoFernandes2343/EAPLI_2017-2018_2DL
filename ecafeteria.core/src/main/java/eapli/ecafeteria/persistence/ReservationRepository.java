@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.persistence.repositories.DataRepository;
 
@@ -23,6 +24,12 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
      */
     Optional<Reservation> findByCode(String code);
     
-    
+    /**
+     * Finds reservation given a meal and a state
+     * @param state
+     * @param m
+     * @return
+     */
+    Iterable<Reservation> findByStateAndMeal(Reservation.ReservationState.STATE state,Meal m);
     
 }
