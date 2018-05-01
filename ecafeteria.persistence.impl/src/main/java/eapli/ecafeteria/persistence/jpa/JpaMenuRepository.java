@@ -6,17 +6,20 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Optional;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author João Vieira
  */
-public class JpaMenuRepository implements MenuRepository {
+public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> implements MenuRepository {
 
     public JpaMenuRepository() {
     }
@@ -58,12 +61,16 @@ public class JpaMenuRepository implements MenuRepository {
 
     @Override
     public Iterable<Menu> findWorkingMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu m where m.state =:st", Menu.class);
+        q.setParameter("st", MenuState.WORKING_MENU);
+        return q.getResultList();
     }
-
+    
     @Override
     public Iterable<Menu> findPublishedMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu m where m.state =:st", Menu.class);
+        q.setParameter("st", MenuState.PUBLISHED_MENU);
+        return q.getResultList();
     }
     
 }
