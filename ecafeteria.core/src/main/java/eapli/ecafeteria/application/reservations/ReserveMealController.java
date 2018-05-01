@@ -6,6 +6,7 @@
 package eapli.ecafeteria.application.reservations;
 
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserService;
 import eapli.ecafeteria.application.cafeteriauser.ListMovementService;
 import eapli.ecafeteria.application.menu.ListMenuService;
@@ -39,7 +40,7 @@ public class ReserveMealController {
     
     public boolean reserveMeal(Dish dish, MealType mealType, Calendar date){
         boolean state = false;
-        Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(Application.session().session().authenticatedUser().id());
+        Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         if(dish.currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())){
             Meal meal = new Meal(dish, mealType, date);
             String code = Calendar.DAY_OF_MONTH+"/"+Calendar.MONTH+"/"+Calendar.YEAR
