@@ -14,6 +14,8 @@ import java.util.Objects;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -25,8 +27,8 @@ import javax.persistence.Version;
  * @author David
  */
 public class Menu {
-    
-     private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
 
     // ORM primary key
     @Id
@@ -42,24 +44,38 @@ public class Menu {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar endingDate;
 
+    @Enumerated(EnumType.STRING)
+    private MenuState state;
+
     @ElementCollection
     @CollectionTable(name = "Menu_Meal")
     @Column(name = "Meal")
     @ManyToOne
     private List<Dish> mealList;
 
-   
-
     protected Menu() {
         // for ORM
     }
 
-    public Menu(Calendar startDate,Calendar endingDate) {
+    public Menu(Calendar startDate, Calendar endingDate) {
         this.startDate = startDate;
         this.endingDate = endingDate;
+        this.state = MenuState.WORKING_MENU;
         this.mealList = new ArrayList<>();
+
     }
 
+    public boolean publishedMenu() {
+        if (!workingMenu()) {
+            return false;
+        }
+        state = MenuState.PUBLISHED_MENU;
+        return true;
+    }
+
+    public boolean workingMenu() {
+        return this.state.equals(MenuState.WORKING_MENU);
+    }
 
     public List<Dish> mealList() {
         return this.mealList;
@@ -82,7 +98,7 @@ public class Menu {
     public boolean containsMeal(Dish m) {
         return mealList.contains(m);
     }
-    
+
     public Calendar startDate() {
         return this.startDate;
     }
@@ -90,8 +106,6 @@ public class Menu {
     public Calendar finishDate() {
         return this.endingDate;
     }
-
-
 
     @Override
     public int hashCode() {
@@ -148,15 +162,10 @@ public class Menu {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf= new SimpleDateFormat("dd-MM-yyyy");
-        String str1=sdf.format(startDate.getTime());
-        String str2= sdf.format(endingDate.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String str1 = sdf.format(startDate.getTime());
+        String str2 = sdf.format(endingDate.getTime());
         return "startDate=" + str1 + ", finishDate=" + str2;
     }
-    
-    
-    
-    
-    
-    
+
 }

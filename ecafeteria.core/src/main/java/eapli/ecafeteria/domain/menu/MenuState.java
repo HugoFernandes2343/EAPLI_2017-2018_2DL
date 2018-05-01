@@ -15,19 +15,19 @@ import javax.persistence.Embeddable;
 @Embeddable
 public enum MenuState {
     
-    WAITING {
+    WORKING_MENU {
         
         @Override
         public String toString(){
-            return "Waiting to be published";
+            return "Working menu";
         }
     },
     
-    PUBLISHED {
+    PUBLISHED_MENU {
         
         @Override
         public String toString(){
-            return "Published";
+            return "Published menu";
         }
     };
 }

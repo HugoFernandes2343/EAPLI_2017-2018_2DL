@@ -16,5 +16,6 @@ import java.util.Calendar;
 public interface MenuRepository extends DataRepository<Menu, Long>{
     
     public Menu findByDate(Calendar date);
-    
+    public Iterable<Menu> findWorkingMenu();
+    public Iterable<Menu> findPublishedMenu();
 }
