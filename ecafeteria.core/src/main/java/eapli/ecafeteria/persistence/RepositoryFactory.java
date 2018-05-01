@@ -74,6 +74,12 @@ public interface RepositoryFactory {
     ReservationRepository reservations();
     
     /**
+     * respository to return pos
+     * @return 
+     */
+    POSRepository pos();
+    
+    /**
      * Repository to get movements
      * @return 
      */
