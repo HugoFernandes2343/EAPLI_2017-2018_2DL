@@ -3,6 +3,7 @@
  */
 package eapli.ecafeteria;
 
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 
 /**
@@ -14,9 +15,9 @@ import eapli.ecafeteria.domain.authz.ActionRight;
 public class Application {
 
     private static final AppSettings SETTINGS = new AppSettings();
-    private static final AppSession SESSION = new AppSession();
+    private static final AuthorizationService SESSION = new AuthorizationService();
 
-    public static AppSession session() {
+    public static AuthorizationService session() {
 	return SESSION;
     }
 
