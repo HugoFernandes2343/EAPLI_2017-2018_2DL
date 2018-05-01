@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.menu.Menu;
 import java.util.Calendar;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -113,6 +114,14 @@ public class Meal {
         result = 31 * result + mealType.hashCode();
         result = 31 * result + date.hashCode();
         return result;
+    }
+
+    public boolean belongsToMenu(Menu m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Dish getDish() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
