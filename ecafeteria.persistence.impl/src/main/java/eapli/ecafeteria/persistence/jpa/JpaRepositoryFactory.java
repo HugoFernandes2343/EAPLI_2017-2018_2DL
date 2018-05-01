@@ -7,6 +7,7 @@ import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.MovementRepository;
+import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -89,5 +90,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MenuRepository menuRepository() {
         return new JpaMenuRepository();
+    }
+
+    @Override
+    public POSRepository pos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

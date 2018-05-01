@@ -5,6 +5,8 @@ import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +27,13 @@ public class CafeteriaShiftClosingUI extends AbstractUI {
         int win = JOptionPane.showConfirmDialog(null, "Close cafeteria shift?", "eCafeteria", 0);
 
         if (win == 0) {
-            controller.closeAllActivePOS();
+            try {
+                controller.closeAllActivePOS();
+            } catch (DataConcurrencyException ex) {
+                Logger.getLogger(CafeteriaShiftClosingUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DataIntegrityViolationException ex) {
+                Logger.getLogger(CafeteriaShiftClosingUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null, "Shift Closed!");
         } else {
             JOptionPane.showMessageDialog(null, "Operation Canceled!");
