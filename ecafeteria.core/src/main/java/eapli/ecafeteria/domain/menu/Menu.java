@@ -6,6 +6,9 @@
 package eapli.ecafeteria.domain.menu;
 
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.framework.domain.ddd.AggregateRoot;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +17,7 @@ import java.util.Objects;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -26,7 +30,8 @@ import javax.persistence.Version;
  *
  * @author David
  */
-public class Menu {
+@Entity
+public class Menu implements AggregateRoot<Long>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,7 +56,7 @@ public class Menu {
     @CollectionTable(name = "Menu_Meal")
     @Column(name = "Meal")
     @ManyToOne
-    private List<Dish> mealList;
+    private List<Meal> mealList;
 
     protected Menu() {
         // for ORM
@@ -77,25 +82,25 @@ public class Menu {
         return this.state.equals(MenuState.WORKING_MENU);
     }
 
-    public List<Dish> mealList() {
+    public List<Meal> mealList() {
         return this.mealList;
     }
 
-    public boolean addMeal(Dish meal) {
+    public boolean addMeal(Meal meal) {
         if (mealList.contains(meal)) {
             return false;
         }
         return mealList.add(meal);
     }
 
-    public boolean removeMeal(Dish meal) {
+    public boolean removeMeal(Meal meal) {
         if (!mealList.contains(meal)) {
             return false;
         }
         return mealList.remove(meal);
     }
 
-    public boolean containsMeal(Dish m) {
+    public boolean containsMeal(Meal m) {
         return mealList.contains(m);
     }
 
