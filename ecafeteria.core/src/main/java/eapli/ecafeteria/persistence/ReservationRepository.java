@@ -33,7 +33,7 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
      */
     Iterable<Reservation> findByStateAndMeal(Reservation.ReservationState.STATE state,Meal m);
 
-    public boolean addReservation(Reservation reservation);
+    public void addReservation(Reservation reservation);
 
     
 }

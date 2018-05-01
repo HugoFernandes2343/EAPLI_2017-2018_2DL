@@ -18,6 +18,6 @@ public interface MovementRepository extends DataRepository<Movement, Long>{
     
     public Iterable<Movement> allCafeteriaUserMovements(CafeteriaUser user);
     
-    public boolean addBookingMovement(Money price);
+    public void addBookingMovement(Money price);
 
 }

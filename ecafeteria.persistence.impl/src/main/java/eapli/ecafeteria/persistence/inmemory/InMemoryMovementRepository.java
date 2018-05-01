@@ -6,7 +6,6 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
-import eapli.ecafeteria.domain.cafeteriauser.Movement;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import eapli.ecafeteria.domain.cafeteriauser.Movement;
@@ -28,7 +27,7 @@ public class InMemoryMovementRepository extends InMemoryRepository<Movement, Lon
     }
 
     @Override
-    public boolean addBookingMovement(Money price) {
+    public void addBookingMovement(Money price) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

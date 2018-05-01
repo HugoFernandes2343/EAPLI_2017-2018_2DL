@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.application.reservations;
 
-import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserService;
 import eapli.ecafeteria.application.cafeteriauser.ListMovementService;
@@ -19,6 +18,7 @@ import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
+import eapli.framework.application.Controller;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ import java.util.Optional;
  *
  * @author João Vieira
  */
-public class ReserveMealController {
+public class ReserveMealController implements Controller {
     private final ReservationRepository reservationRepo = PersistenceContext.repositories().reservations();
     private final MovementRepository movementRepo = PersistenceContext.repositories().movements();
     private final ListMenuService listMenuService = new ListMenuService();

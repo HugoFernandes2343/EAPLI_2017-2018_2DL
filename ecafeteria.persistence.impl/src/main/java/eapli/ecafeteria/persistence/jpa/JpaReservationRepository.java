@@ -29,9 +29,18 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         createQuery.setParameter("state", state);
         return createQuery.getResultList();
     }
+
     @Override
-    public boolean addReservation(Reservation reservation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addReservation(Reservation reservation) {
+        if (reservation == null) {
+            throw new IllegalArgumentException();
+        }
+        EntityManager em = entityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.persist(reservation);
+        tx.commit();
+        em.close();
     }
-    
+
 }
