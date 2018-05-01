@@ -5,7 +5,12 @@
  */
 package eapli.ecafeteria.application.menu;
 
+import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.persistence.MenuRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 
 /**
  *
@@ -13,6 +18,26 @@ import eapli.framework.application.Controller;
  */
 public class PublishMenuController implements Controller{
     
-//    private final MenuRepository mr= // POR ACABAR
+    private final MenuRepository mr = PersistenceContext.repositories().menus();
+    private Menu me;
     
+    
+    public Iterable<Menu> workingMenuList() {
+        
+        
+        return mr.findWorkingMenu();
+        
+    }
+    
+    public void menu(Menu m){
+        this.me = m;
+    }
+    
+    public Menu publish(Menu m) throws DataConcurrencyException, DataIntegrityViolationException{
+        if(!m.publishedMenu()){
+            return null;
+        }
+        
+        return mr.save(me);
+    }
 }

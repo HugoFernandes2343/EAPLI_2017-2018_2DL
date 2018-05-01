@@ -7,8 +7,7 @@ package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -16,28 +15,13 @@ import java.util.Optional;
  *
  * @author João Vieira
  */
-public class InMemoryMenuRepository implements MenuRepository {
+public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> implements MenuRepository {
 
     public InMemoryMenuRepository() {
     }
 
     @Override
     public Menu findByDate(Calendar date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Menu entity) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Long entityId) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Menu save(Menu entity) throws DataConcurrencyException, DataIntegrityViolationException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -58,12 +42,17 @@ public class InMemoryMenuRepository implements MenuRepository {
 
     @Override
     public Iterable<Menu> findWorkingMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return match(e -> e.workingMenu());
     }
 
     @Override
     public Iterable<Menu> findPublishedMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return match(e -> e.publishedMenu());
+    }
+
+    @Override
+    protected Long newKeyFor(Menu entity) {
+        return entity.id();
     }
     
 }

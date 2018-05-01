@@ -26,8 +26,10 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.Rep
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportHighCaloriesDishesUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ElaborateMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
+import eapli.ecafeteria.app.backoffice.presentation.menu.PublishMenuAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -82,11 +84,15 @@ public class MainMenu extends AbstractUI {
     // MATERIALS
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
+    private static final int ELABORATE_MEAL_PLAN_OPTION = 3;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
     private static final int REPORTING_HIGH_CALORIES_DISHES_OPTION = 2;
     private static final int REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION = 3;
+
+    // MEALS
+    private static final int PUBLISH_MENU_OPTION = 1;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -232,9 +238,8 @@ public class MainMenu extends AbstractUI {
 
         menu.add(new MenuItem(MATERIAL_REGISTER_OPTION, "Register new material",
                 new RegisterMaterialAction()));
-        menu.add(
-                new MenuItem(MATERIAL_LIST_OPTION, "List all materials", new ListMaterialAction()));
-
+        menu.add(new MenuItem(MATERIAL_LIST_OPTION, "List all materials", new ListMaterialAction()));
+        menu.add(new MenuItem(ELABORATE_MEAL_PLAN_OPTION, "Elaborate Meal Plan", new ElaborateMealPlanAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
@@ -268,6 +273,14 @@ public class MainMenu extends AbstractUI {
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
+        return menu;
+    }
+    
+    private Menu buildMealsMenu(){
+        final Menu menu = new Menu("Meals >");
+        menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        
         return menu;
     }
 }
