@@ -33,7 +33,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @EmbeddedId
     private MecanographicNumber mecanographicNumber;
     
-    @EmbeddedId
+//    @EmbeddedId
     private AccountCard accountcard;
 
     /**
