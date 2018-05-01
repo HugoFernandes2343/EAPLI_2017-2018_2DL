@@ -22,7 +22,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     /**
      * Inner class to allow the use of a enum
      */
-    public static class ReservationState {
+    public static class ReservationState implements Serializable{
          /**
          * Different states for a determined Reservation
          */
@@ -52,9 +52,10 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     
     private String description;
 
+    @OneToOne
     private Meal meal;
     
-    private ReservationState state;
+    private ReservationState currentState;
 
     protected Reservation() {
         //ORM
@@ -85,12 +86,12 @@ public class Reservation implements AggregateRoot<String>, Serializable {
      * @return 
      */
     public boolean deliver() {
-        this.state.changeToDelivered();
+        this.currentState.changeToDelivered();
         return true;
     }
 
     public boolean expire(){
-        this.state.changeToExpired();
+        this.currentState.changeToExpired();
         return true;
     }
     @Override
