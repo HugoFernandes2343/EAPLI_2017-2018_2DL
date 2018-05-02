@@ -29,6 +29,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDis
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ElaborateMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.PublishMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
@@ -97,6 +98,7 @@ public class MainMenu extends AbstractUI {
     // MEALS
     private static final int REGISTER_MENU_OPTION = 1;
     private static final int PUBLISH_MENU_OPTION = 2;
+    private static final int PUBLISH_MEAL_OPTION=3;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -299,8 +301,8 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Menus >");
         menu.add(new MenuItem(REGISTER_MENU_OPTION, "Register Menu", new RegisterMenuAction()));
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
+        menu.add(new MenuItem(PUBLISH_MEAL_OPTION, "Publish Meal", new PublishMealAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
         return menu;
     }
 }

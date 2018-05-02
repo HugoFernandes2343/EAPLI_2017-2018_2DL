@@ -11,8 +11,10 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,11 +38,15 @@ public class Meal {
 
     @ManyToOne
     private Dish dish;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="menuID")
+    private Menu menu;
 
     @Embedded
     private MealType mealType;
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Calendar date;
     
     private int mealNumber = 0;
 
@@ -48,11 +54,8 @@ public class Meal {
         //for ORM
     }
 
-    public Meal(Dish dish, MealType mealType, Date date) {
-        if (dish == null || mealType == null || date == null) {
-            throw new IllegalStateException();
-        }
-
+    public Meal(Dish dish, MealType mealType, Calendar date, Menu menu) {
+        this.menu=menu;
         this.dish = dish;
         this.mealType = mealType;
         this.date = date;
@@ -63,7 +66,7 @@ public class Meal {
         return pk;
     }
 
-    public Date getDate() {
+    public Calendar date() {
         return date;
     }
 
@@ -93,13 +96,7 @@ public class Meal {
         }
 
         Meal meal = (Meal) o;
-
-        if (!pk.equals(meal.pk)) {
-            return false;
-        }
-        if (!version.equals(meal.version)) {
-            return false;
-        }
+        
         if (!dish.equals(meal.dish)) {
             return false;
         }
