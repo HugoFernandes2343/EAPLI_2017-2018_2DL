@@ -5,8 +5,8 @@
  */
 package eapli.ecafeteria.domain.meals;
 
-import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.domain.dishes.Dish;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Embedded;

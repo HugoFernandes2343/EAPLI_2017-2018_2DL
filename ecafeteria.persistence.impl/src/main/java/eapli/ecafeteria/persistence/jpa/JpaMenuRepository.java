@@ -25,7 +25,17 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
 
     @Override
     public Menu findByDate(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  
+         Optional<Menu> m = matchOne("e.date=:date", "date", date);
+         
+         if( m.isPresent()){
+             Menu ms = m.get();
+             return ms;
+         } else {
+             return null;
+         }
+         
+         
     }
 
     @Override

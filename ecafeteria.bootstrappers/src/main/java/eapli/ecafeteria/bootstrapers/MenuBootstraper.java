@@ -6,45 +6,51 @@
 package eapli.ecafeteria.bootstrapers;
 
 import eapli.ecafeteria.application.meal.PublishMealController;
+import eapli.ecafeteria.application.menu.PublishMenuController;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.domain.meals.MealType.MealTypes;
+import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.DishRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author David Santiago
+ * @author David
  */
-public class MealsBootstraper implements Action {
-    
-    private void register(MealType mealType, Dish dish, String date) throws DataConcurrencyException, DataIntegrityViolationException {
-        final PublishMealController mealController = new PublishMealController();
+public class MenuBootstraper implements Action {
+
+    private void register(String startingDate,String endingDate,List<Meal> meals) throws DataConcurrencyException, DataIntegrityViolationException {
         
-        Meal m = mealController.buildMeal(mealType, dish, date);
+        
+        final PublishMenuController menuController = new PublishMenuController();
+        
+        Menu m = menuController.buildMenu(startingDate, endingDate, meals);
 
            
-        mealController.saveMeal(m);
+        menuController.publish(m);
                    
     }
-
+    
+    
+    
+    
+    
     @Override
     public boolean execute() {
         
-        
-        
-        final DishRepository Dishrep = PersistenceContext.repositories().dishes();
-        final ArrayList<Dish> dishes = (ArrayList<Dish>) Dishrep.findAll();
-
+        final MealRepository mealrep = PersistenceContext.repositories().meals();
+        final ArrayList<Meal> meals = (ArrayList<Meal>) mealrep.findAll();
         
         return false;
     }
-
+    
     
     
 }

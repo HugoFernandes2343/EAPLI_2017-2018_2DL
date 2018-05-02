@@ -13,5 +13,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  * @author David
  */
 public interface MealRepository extends DataRepository<Meal, Long>{
-    
+   
 }

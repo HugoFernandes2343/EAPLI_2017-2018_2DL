@@ -14,22 +14,24 @@ import java.util.Date;
 
 /**
  *
- * @author João Vieira
+ * @author David Santiago
  */
 public class ListMenuService {
 
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
 
     public Iterable<Menu> allMenus() {
+        
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
         return this.menuRepository.findPublishedMenu();
     }
 
     public Menu listMenu(Date date) {
+        
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-
         return this.menuRepository.findByDate(date);
+        
     }
 
     public Menu listMenuBooking(Date date) {

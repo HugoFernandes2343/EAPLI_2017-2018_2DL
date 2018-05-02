@@ -6,6 +6,8 @@
 package eapli.ecafeteria.domain.menu;
 
 import eapli.ecafeteria.application.dishes.ListDishController;
+import eapli.ecafeteria.application.dishes.ListDishService;
+import eapli.ecafeteria.application.meal.ListMealService;
 import eapli.ecafeteria.application.meal.PublishMealController;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
@@ -28,12 +30,12 @@ import java.util.Currency;
  */
 public class main {
 
-    private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
-    private final MealRepository mealRepository = PersistenceContext.repositories().meals();
     
     public static void main(String[] args) throws DataConcurrencyException, DataIntegrityViolationException {
         
-
+           ListDishService ls = new ListDishService();
+           
+           System.out.println(ls.allDishes().iterator().next().name().toString());
         
          
 
