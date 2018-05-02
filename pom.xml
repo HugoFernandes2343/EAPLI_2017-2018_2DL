@@ -21,7 +21,6 @@
         <module>ecafeteria.app.user.console</module>
         <module>ecafeteria.app.pos.console</module>
         <module>ecafeteria.app.common.console</module>
-        <module>ecafeteria.app.bootstrap</module>
         <module>ecafeteria.bootstrappers</module>
         <module>ecafeteria.core</module>
         <module>ecafeteria.persistence.impl</module>

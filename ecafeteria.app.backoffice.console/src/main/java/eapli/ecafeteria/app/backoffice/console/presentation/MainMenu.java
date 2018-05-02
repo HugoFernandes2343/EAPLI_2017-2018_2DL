@@ -30,6 +30,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ElaborateMea
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -92,7 +93,8 @@ public class MainMenu extends AbstractUI {
     private static final int REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION = 3;
 
     // MEALS
-    private static final int PUBLISH_MENU_OPTION = 1;
+    private static final int REGISTER_MENU_OPTION = 1;
+    private static final int PUBLISH_MENU_OPTION = 2;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -290,7 +292,8 @@ public class MainMenu extends AbstractUI {
     }
 
     private Menu buildMealsMenu() {
-        final Menu menu = new Menu("Meals >");
+        final Menu menu = new Menu("Menus >");
+        menu.add(new MenuItem(REGISTER_MENU_OPTION, "Register Menu", new RegisterMenuAction()));
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
