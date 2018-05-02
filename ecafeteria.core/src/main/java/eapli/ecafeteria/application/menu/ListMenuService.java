@@ -21,13 +21,13 @@ public class ListMenuService {
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
 
     public Iterable<Menu> allMenus() {
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
-        return this.menuRepository.findAll();
+        return this.menuRepository.findPublishedMenu();
     }
 
     public Menu listMenu(Date date) {
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
         return this.menuRepository.findByDate(date);
     }
