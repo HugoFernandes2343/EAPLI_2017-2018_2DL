@@ -31,14 +31,15 @@ public class MealDeliveryRegistrationUI extends AbstractUI {
         Reservation reservation;
         try {
             reservation = theController.acquireReservation(code);
-            reservation.toString();
+            System.out.println(reservation.toString());
             final int option = Console.readInteger("Press any number to regect or 1 to confirm Delivery");
             if(option == 1){
                 reservation.deliver();
                 this.theController.confirmDelivery(reservation); 
+                System.out.println("Delivery has been successfull.");
             }
-        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-            System.out.println("This Meal has already been delivered or an error has ocurred.");
+        } catch (DataConcurrencyException | DataIntegrityViolationException | NullPointerException ex) {
+            System.out.println("An transactional error has ocurred. Please check data and try again.");
         } 
         return false;
     }
