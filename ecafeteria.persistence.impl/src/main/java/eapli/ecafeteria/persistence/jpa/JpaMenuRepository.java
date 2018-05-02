@@ -10,8 +10,7 @@ import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 import javax.persistence.TypedQuery;
 
@@ -25,7 +24,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     }
 
     @Override
-    public Menu findByDate(Calendar date) {
+    public Menu findByDate(Date date) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

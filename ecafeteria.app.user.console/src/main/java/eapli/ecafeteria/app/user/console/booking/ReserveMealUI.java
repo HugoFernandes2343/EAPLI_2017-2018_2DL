@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.reservations;
+package eapli.ecafeteria.app.user.console.booking;
 
 import eapli.ecafeteria.application.reservations.ReserveMealController;
 import eapli.ecafeteria.domain.dishes.Dish;
@@ -12,10 +12,12 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.meals.MealType.MealTypes;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
+import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,36 +36,24 @@ public class ReserveMealUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        final String d = Console.readLine("Choose a day for the reservation(dd/mm/yyyy)");
-        Calendar date = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        try {
-            date.setTime(sdf.parse(d));
-        } catch (ParseException ex) {
-            Logger.getLogger(ReserveMealUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        final String mealTy = Console.readLine("Is it LUNCH or DINNER?");
+        final Date date = Console.readDate("Choose a day for the reservation(dd/mm/yyyy)");
 
         eapli.ecafeteria.domain.menu.Menu menu = theController.getMenu(date);
 
-        MealTypes mealTypes = MealType.MealTypes.valueOf(mealTy);
-
-        final String sDish = Console.readLine(menu.mealList() + "\nWhat dish you want?");
-        Dish dish = null;
-        for (Meal meal : menu.mealList()) {
-            if (meal.dish().name().toString().equals(sDish)) {
-                dish = meal.dish();
-            }
+        Meal meal;
+        SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.mealList(), new MealPrinter());
+        selector.show();
+        meal = selector.selectedElement();
+        if (meal == null) {
+            return true;
         }
-        Meal m = new Meal(dish, new MealType(mealTypes), date);
-        final String confirm = Console.readLine(m.toString() + "\nDo you confirm the information?");
-        if (Boolean.valueOf(confirm)) {
-            theController.reserveMeal(dish, new MealType(mealTypes), date);
 
+        final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
+        if (Boolean.valueOf(confirm)) {
+            theController.reserveMeal(meal.dish(), meal.mealType(), date);
         }
         return true;
-         
+
     }
 
     @Override

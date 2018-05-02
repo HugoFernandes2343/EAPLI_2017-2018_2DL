@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -21,7 +22,7 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> imple
     }
 
     @Override
-    public Menu findByDate(Calendar date) {
+    public Menu findByDate(Date date) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

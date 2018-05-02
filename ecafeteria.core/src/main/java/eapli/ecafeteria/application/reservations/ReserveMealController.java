@@ -20,6 +20,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.application.Controller;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -34,11 +35,11 @@ public class ReserveMealController implements Controller {
     private final CafeteriaUserService userService = new CafeteriaUserService();
     
     
-    public Menu getMenu(Calendar date){
+    public Menu getMenu(Date date){
         return listMenuService.listMenu(date);
     }
     
-    public boolean reserveMeal(Dish dish, MealType mealType, Calendar date){
+    public boolean reserveMeal(Dish dish, MealType mealType, Date date){
         boolean state = false;
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         if(dish.currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())){

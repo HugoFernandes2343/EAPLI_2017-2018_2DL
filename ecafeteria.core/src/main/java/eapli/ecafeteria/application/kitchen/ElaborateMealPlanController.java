@@ -5,10 +5,6 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
-import eapli.ecafeteria.application.authz.AuthorizationService;
-import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.kitchen.Material;
-import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -19,7 +15,7 @@ import eapli.framework.application.Controller;
  */
 public class ElaborateMealPlanController implements Controller{
     
-    private final MenuRepository repository = PersistenceContext.repositories().menuRepository();
+    private final MenuRepository repository = PersistenceContext.repositories().menus();
     
    
 }

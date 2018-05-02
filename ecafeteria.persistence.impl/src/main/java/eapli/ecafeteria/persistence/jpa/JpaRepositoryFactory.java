@@ -89,7 +89,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public MenuRepository menuRepository() {
+    public MenuRepository menus() {
         return new JpaMenuRepository();
     }
 
@@ -100,11 +100,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public MealRepository meals() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public MenuRepository menus() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

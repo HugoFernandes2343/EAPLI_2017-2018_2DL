@@ -13,6 +13,7 @@ import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;
 import eapli.framework.presentation.console.ShowMessageAction;
+import eapli.framework.presentation.console.ShowUiAction;
 import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
@@ -94,8 +95,8 @@ class MainMenu extends CafeteriaUserBaseUI {
 
     private Menu buildBookingsMenu() {
         final Menu menu = new Menu("Bookings");
-        menu.add(new MenuItem(LIST_MENUS_OPTION, "List menus", new ShowMessageAction("Not implemented yet")));
-        menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ShowMessageAction("Not implemented yet")));
+        menu.add(new MenuItem(LIST_MENUS_OPTION, "List menus", new ShowUiAction(new ListMenuMenu())));
+        menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ShowUiAction(new ReserveMealMenu())));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

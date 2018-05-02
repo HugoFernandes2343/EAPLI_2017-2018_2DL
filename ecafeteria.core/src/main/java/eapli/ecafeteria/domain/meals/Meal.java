@@ -7,6 +7,7 @@ package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.dishes.Dish;
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Meal {
     @Embedded
     private MealType mealType;
     @Temporal(TemporalType.DATE)
-    private Calendar date;
+    private Date date;
     
     private int mealNumber = 0;
 
@@ -46,7 +47,7 @@ public class Meal {
         //for ORM
     }
 
-    public Meal(Dish dish, MealType mealType, Calendar date) {
+    public Meal(Dish dish, MealType mealType, Date date) {
         if (dish == null || mealType == null || date == null) {
             throw new IllegalStateException();
         }
@@ -61,7 +62,7 @@ public class Meal {
         return pk;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 

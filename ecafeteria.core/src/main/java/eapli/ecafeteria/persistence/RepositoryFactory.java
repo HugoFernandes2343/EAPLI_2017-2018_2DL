@@ -99,6 +99,4 @@ public interface RepositoryFactory {
      * @return
      */
     DishReportingRepository dishReporting();
-    
-     MenuRepository menuRepository();
 }
