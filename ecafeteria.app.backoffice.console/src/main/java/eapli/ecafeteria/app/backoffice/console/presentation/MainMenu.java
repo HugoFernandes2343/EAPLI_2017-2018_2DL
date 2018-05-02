@@ -236,8 +236,6 @@ public class MainMenu extends AbstractUI {
                 new ChangeDishTypeAction()));
         menu.add(new MenuItem(DISH_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Dish Type",
                 new ActivateDeactivateDishTypeAction()));
-        menu.add(new MenuItem(DISH_Allergen, "Dish Allergen",
-                new DishAllergernsListAction()));
 
         // dishes
         menu.add(new MenuItem(DISH_REGISTER_OPTION, "Register new Dish", new RegisterDishAction()));
@@ -253,6 +251,8 @@ public class MainMenu extends AbstractUI {
         final Menu changeDishMenu = buildChangeDishMenu();
         menu.add(new MenuItem(DISH_CHANGE_OPTION, "Change Dish Information",
                 new ShowVerticalSubMenuAction(changeDishMenu)));
+        menu.add(new MenuItem(DISH_Allergen, "Dish Allergen",
+                new DishAllergernsListAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
