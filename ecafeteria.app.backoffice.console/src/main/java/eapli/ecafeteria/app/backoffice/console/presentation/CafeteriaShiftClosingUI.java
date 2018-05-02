@@ -2,10 +2,13 @@ package eapli.ecafeteria.app.backoffice.console.presentation;
 
 import eapli.ecafeteria.application.kitchen.CafeteriaShiftClosingController;
 import eapli.framework.application.Controller;
+import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,6 +32,8 @@ public class CafeteriaShiftClosingUI extends AbstractUI {
                 controller.closeAllActivePOS();
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 System.out.println("An error has ocurred");
+            } catch (ReservationStateViolationException ex) {
+                Logger.getLogger(CafeteriaShiftClosingUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("Shift Closed!");
         } else {

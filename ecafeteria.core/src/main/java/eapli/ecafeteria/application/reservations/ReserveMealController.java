@@ -21,6 +21,7 @@ import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.util.DateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -41,11 +42,11 @@ public class ReserveMealController implements Controller {
         return listMenuService.listMenuBooking(date);
     }
 
-    public boolean reserveMeal(Dish dish, MealType mealType, Date date) {
+    public boolean reserveMeal(Dish dish, MealType mealType, Date date, Menu menu) {
         boolean state = false;
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         if (dish.currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
-            Meal meal = new Meal(dish, mealType, date);
+            Meal meal = new Meal(dish, mealType, DateTime.dateToCalendar(date), menu);
             String code = Calendar.DAY_OF_MONTH + "/" + Calendar.MONTH + "/" + Calendar.YEAR
                     + "//" + meal.mealNumber();
             Reservation reservation = new Reservation(code, meal.dish().nutricionalInfo().toString(), meal);

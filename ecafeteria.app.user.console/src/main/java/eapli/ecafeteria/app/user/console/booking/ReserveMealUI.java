@@ -54,7 +54,7 @@ public class ReserveMealUI extends AbstractUI {
 
             final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
             if (Boolean.valueOf(confirm)) {
-                theController.reserveMeal(meal.dish(), meal.mealType(), date);
+                theController.reserveMeal(meal.dish(), meal.mealType(), date, menu);
             }
             return true;
 

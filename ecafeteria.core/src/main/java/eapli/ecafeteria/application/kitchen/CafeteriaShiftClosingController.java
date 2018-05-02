@@ -5,6 +5,7 @@ import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
+import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class CafeteriaShiftClosingController implements Controller {
      * @throws DataConcurrencyException
      * @throws DataIntegrityViolationException 
      */
-    public void closeAllActivePOS() throws DataConcurrencyException, DataIntegrityViolationException {
+    public void closeAllActivePOS() throws DataConcurrencyException, DataIntegrityViolationException, ReservationStateViolationException {
         
         ArrayList<POS> list = new ArrayList<>();
         list = (ArrayList<POS>) posRP.findOpenned(POSState.OPEN);
