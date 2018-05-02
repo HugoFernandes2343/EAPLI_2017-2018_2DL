@@ -70,14 +70,14 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
 
     @Override
     public Iterable<Menu> findWorkingMenu() {
-        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu m where m.state =:st", Menu.class);
+        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu me where me.state =:st", Menu.class);
         q.setParameter("st", MenuState.WORKING_MENU);
         return q.getResultList();
     }
     
     @Override
     public Iterable<Menu> findPublishedMenu() {
-        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu m where m.state =:st", Menu.class);
+        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu me where me.state =:st", Menu.class);
         q.setParameter("st", MenuState.PUBLISHED_MENU);
         return q.getResultList();
     }

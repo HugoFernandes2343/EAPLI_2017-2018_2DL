@@ -101,6 +101,7 @@ public class MainMenu extends AbstractUI {
     private static final int DISH_TYPES_OPTION = 5;
     private static final int TRACEABILITY_OPTION = 6;
     private static final int REPORTING_DISHES_OPTION = 7;
+    private static final int MEALS_MENU_OPTION = 8;
 
     @Override
     public boolean show() {
@@ -165,6 +166,11 @@ public class MainMenu extends AbstractUI {
             final Menu reportingDishesMenu = buildReportingDishesMenu();
             mainMenu.add(new SubMenu(REPORTING_DISHES_OPTION, reportingDishesMenu,
                     new ShowVerticalSubMenuAction(reportingDishesMenu)));
+        }
+        
+        if(AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_MENUS)){
+            final Menu mealsMenu = buildMealsMenu();
+            mainMenu.add(new SubMenu(MEALS_MENU_OPTION, mealsMenu, new ShowVerticalSubMenuAction(mealsMenu)));
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
