@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.reservations;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.util.Strings;
 import java.io.Serializable;
@@ -30,20 +31,32 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         private String state;
         public enum STATE {DELIVERED,BOOKED,CANCELLED,EXPIRED};
         
-        private void changeToCancelled(){
-            state=STATE.CANCELLED.toString();
+        private void cancel() throws ReservationStateViolationException{
+            if(state.equals(STATE.BOOKED.toString())){
+                state=STATE.CANCELLED.toString();
+            } else {
+                throw new ReservationStateViolationException();
+            }
         }
         
-        private void changeToBooked(){
+        private void book(){
             state=STATE.BOOKED.toString();
         }
         
-        private void changeToDelivered(){
-            state=STATE.DELIVERED.toString();
+        private void deliver() throws ReservationStateViolationException{
+            if(state.equals(ReservationState.STATE.BOOKED.toString())){
+                state=STATE.DELIVERED.toString();
+            } else {
+                throw new ReservationStateViolationException();
+            }
         }
         
-        private void changeToExpired(){
-            state=STATE.EXPIRED.toString();
+        private void expire() throws ReservationStateViolationException{
+            if(state.equals(STATE.BOOKED.toString())){
+                state=STATE.EXPIRED.toString();
+            } else {
+                throw new ReservationStateViolationException();
+            }
         }
     }
     
@@ -85,7 +98,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         this.code = code;
         this.description = description;
         this.meal = meal;
-        currentState.changeToBooked();
+        currentState.book();
     }
 
     public String description() {
@@ -95,19 +108,20 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     /**
      * NEEDS TESTING
      * @return 
+     * @throws eapli.framework.domain.ReservationStateViolationException 
      */
-    public boolean deliver() {
-        this.currentState.changeToDelivered();
+    public boolean deliver() throws ReservationStateViolationException {
+        this.currentState.deliver();
         return true;
     }
 
-    public boolean expire(){
-        this.currentState.changeToExpired();
+    public boolean expire() throws ReservationStateViolationException{
+        this.currentState.expire();
         return true;
     }
      
-    public boolean cancel(){
-        this.currentState.changeToCancelled();
+    public boolean cancel() throws ReservationStateViolationException{
+        this.currentState.cancel();
         return true;
     }
     
@@ -144,4 +158,8 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         return this.code.hashCode();
     }
 
+    @Override
+    public String toString(){
+        return String.format("Code: %s\nDescription: %s\nState: %s\n", code,description,currentState.toString());
+    }
 }

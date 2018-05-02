@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
+import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -67,12 +68,12 @@ public class POS implements AggregateRoot<Long>, Serializable {
     /**
      * Closes the POS and changes all of the Reservations that are in a BOOKED state and changes them to an expired state
      */
-    public void closeShift(){
+    public void closeShift() throws ReservationStateViolationException{
         this.state = POSState.CLOSED;
        ReservationRepository reservationRepo = PersistenceContext.repositories().reservations();
        
        for(Meal m : shift.meals()){
-           ArrayList<Reservation> reservations = (ArrayList<Reservation>) reservationRepo.findByStateAndMeal(Reservation.ReservationState.STATE.EXPIRED, m);
+           ArrayList<Reservation> reservations = (ArrayList<Reservation>) reservationRepo.findByStateAndMeal(Reservation.ReservationState.STATE.BOOKED, m);
            for(Reservation r : reservations){
                r.expire();
            }
