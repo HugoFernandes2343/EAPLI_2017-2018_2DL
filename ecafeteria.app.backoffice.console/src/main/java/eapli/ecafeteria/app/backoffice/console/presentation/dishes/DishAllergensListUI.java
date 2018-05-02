@@ -11,7 +11,7 @@ import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.*;
-import eapli.util.io.Console;
+import eapli.framework.util.Console;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

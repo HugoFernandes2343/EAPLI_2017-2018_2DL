@@ -30,17 +30,4 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         return createQuery.getResultList();
     }
 
-    @Override
-    public void addReservation(Reservation reservation) {
-        if (reservation == null) {
-            throw new IllegalArgumentException();
-        }
-        EntityManager em = entityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.persist(reservation);
-        tx.commit();
-        em.close();
-    }
-
 }
