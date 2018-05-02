@@ -16,28 +16,27 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  *
  * @author jsant
  */
-public class PublishMenuController implements Controller{
-    
+public class PublishMenuController implements Controller {
+
     private final MenuRepository mr = PersistenceContext.repositories().menus();
     private Menu me;
     
-    
-    public Iterable<Menu> workingMenuList() {
-        
-        
-        return mr.findWorkingMenu();
-        
-    }
-    
-    public void menu(Menu m){
+
+    public void menu(Menu m) {
         this.me = m;
     }
-    
-    public Menu publish(Menu m) throws DataConcurrencyException, DataIntegrityViolationException{
-        if(!m.publishedMenu()){
+
+    public Iterable<Menu> workingMenuList() {
+
+        return mr.findWorkingMenu();
+
+    }
+
+    public Menu publish(Menu m) throws DataConcurrencyException, DataIntegrityViolationException {
+        if (!m.publishedMenu()) {
             return null;
         }
-        
+
         return mr.save(m);
     }
 }
