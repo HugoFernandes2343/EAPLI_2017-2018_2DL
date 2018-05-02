@@ -1,0 +1,11 @@
+
+______________
+
+Design
+______________
+
+* Utilizar a estrutura base standart da aplicação baseada em camdas
+
+Classes de domínio: MealPlan e as suas classes associadas
+Controlador: CloseMealPlanController
+Repository: MealPlanRepository
