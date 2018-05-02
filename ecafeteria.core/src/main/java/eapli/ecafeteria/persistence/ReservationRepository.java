@@ -8,6 +8,7 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.Date;
 
 import java.util.Optional;
 
@@ -35,5 +36,9 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
 
     public void addReservation(Reservation reservation);
 
+    Iterable<Reservation> selectTypeBooked(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
+    Iterable<Reservation> selectTypeDelivered(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
+    Iterable<Reservation> selectTypeCancelled(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
+    Iterable<Reservation> selectTypeExpired(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
     
 }

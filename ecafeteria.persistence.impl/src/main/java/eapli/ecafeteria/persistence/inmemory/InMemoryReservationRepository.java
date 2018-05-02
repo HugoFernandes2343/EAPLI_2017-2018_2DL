@@ -11,6 +11,7 @@ import eapli.ecafeteria.domain.reservations.Reservation.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.*;
 import java.util.Optional;
 
 /**
@@ -68,5 +69,24 @@ public class InMemoryReservationRepository implements ReservationRepository {
     public void addReservation(Reservation reservation) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public Iterable<Reservation> selectTypeBooked(Date startDate, Date endDate, ReservationState.STATE state) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<Reservation> selectTypeDelivered(Date startDate, Date endDate, ReservationState.STATE state) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<Reservation> selectTypeCancelled(Date startDate, Date endDate, ReservationState.STATE state) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<Reservation> selectTypeExpired(Date startDate, Date endDate, ReservationState.STATE state) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
