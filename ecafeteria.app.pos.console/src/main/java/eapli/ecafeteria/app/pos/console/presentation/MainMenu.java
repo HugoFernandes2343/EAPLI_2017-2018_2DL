@@ -37,6 +37,7 @@ public class MainMenu extends AbstractUI {
     
     // SALES
     private static final int MEAL_DELIVERY_REGISTRATION_OPTION = 1;
+    private static final int RECHARGE_CARD_OPTION = 2;
 
     @Override
     public boolean show() {
@@ -92,6 +93,8 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Sales >");
         menu.add(new MenuItem(MEAL_DELIVERY_REGISTRATION_OPTION, "Meal Delivery Registration",
                 new MealDeliveryReagistrationAction()));
+        menu.add(new MenuItem(RECHARGE_CARD_OPTION, "Recharge Card",
+                new RechargeCardAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

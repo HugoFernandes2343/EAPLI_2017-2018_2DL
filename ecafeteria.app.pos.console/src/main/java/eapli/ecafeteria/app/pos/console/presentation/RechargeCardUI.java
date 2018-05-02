@@ -31,7 +31,9 @@ public class RechargeCardUI extends AbstractUI{
         } else {
             System.out.println("Amount error, please enter a valid amount");
         } 
+        System.out.println("Cartao Carregado com sucesso!");
         return false;
+        
     }
 
     @Override
