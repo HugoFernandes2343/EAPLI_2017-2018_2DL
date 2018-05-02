@@ -36,7 +36,7 @@ public class ReserveMealController implements Controller {
     
     
     public Menu getMenu(Date date){
-        return listMenuService.listMenu(date);
+        return listMenuService.listMenuBooking(date);
     }
     
     public boolean reserveMeal(Dish dish, MealType mealType, Date date){

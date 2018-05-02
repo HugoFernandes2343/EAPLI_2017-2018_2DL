@@ -32,4 +32,10 @@ public class ListMenuService {
         return this.menuRepository.findByDate(date);
     }
 
+    public Menu listMenuBooking(Date date) {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SELECT_MEAL);
+
+        return this.menuRepository.findByDate(date);
+    }
+
 }
