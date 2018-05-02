@@ -10,6 +10,7 @@ import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.util.DateTime;
 import java.util.Date;
 import java.util.Optional;
 import javax.persistence.TypedQuery;
@@ -26,7 +27,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     @Override
     public Menu findByDate(Date date) {
   
-         Optional<Menu> m = matchOne("e.date=:date", "date", date);
+         Optional<Menu> m = matchOne("e.startDate<=:date and e.endingDate>=:date", "date", DateTime.dateToCalendar(date));
          
          if( m.isPresent()){
              Menu ms = m.get();

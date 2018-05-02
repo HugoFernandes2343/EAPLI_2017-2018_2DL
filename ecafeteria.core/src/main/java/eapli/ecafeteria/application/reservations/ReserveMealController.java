@@ -30,35 +30,34 @@ import java.util.Optional;
  * @author João Vieira
  */
 public class ReserveMealController implements Controller {
+
     private final ReservationRepository reservationRepo = PersistenceContext.repositories().reservations();
     private final MovementRepository movementRepo = PersistenceContext.repositories().movements();
     private final ListMenuService listMenuService = new ListMenuService();
     private final ListMovementService listMovementService = new ListMovementService();
     private final CafeteriaUserService userService = new CafeteriaUserService();
-    
-    
-    public Menu getMenu(Date date){
+
+    public Menu getMenu(Date date) {
         return listMenuService.listMenuBooking(date);
     }
-    
-    public boolean reserveMeal(Dish dish, MealType mealType, Date date){
+
+    public boolean reserveMeal(Dish dish, MealType mealType, Date date) {
         boolean state = false;
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
-        if(dish.currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())){
+        if (dish.currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
             Meal meal = new Meal(dish, mealType, date);
-            String code = Calendar.DAY_OF_MONTH+"/"+Calendar.MONTH+"/"+Calendar.YEAR
-                    +"//"+meal.mealNumber();
+            String code = Calendar.DAY_OF_MONTH + "/" + Calendar.MONTH + "/" + Calendar.YEAR
+                    + "//" + meal.mealNumber();
             Reservation reservation = new Reservation(code, meal.dish().nutricionalInfo().toString(), meal);
             movementRepo.addBookingMovement(dish.currentPrice());
-            try{
-            reservationRepo.save(reservation);
-            state = true;
+            try {
+                reservationRepo.save(reservation);
+                state = true;
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-            System.out.println("An transactional error has ocurred. Please check data and try again.");
-        } 
+                System.out.println("An transactional error has ocurred. Please check data and try again.");
+            }
         }
         return state;
     }
-    
-    
+
 }

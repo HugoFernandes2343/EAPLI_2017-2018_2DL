@@ -6,20 +6,15 @@
 package eapli.ecafeteria.app.user.console.booking;
 
 import eapli.ecafeteria.application.reservations.ReserveMealController;
-import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.domain.meals.MealType.MealTypes;
+import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import eapli.framework.util.DateTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -35,30 +30,52 @@ public class ReserveMealUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
+        Date date;
+        Menu menu;
 
-        final Date date = Console.readDate("Choose a day for the reservation(dd/mm/yyyy)");
+        do {
+            date = Console.readDate("Choose a day for the reservation(yyyy/mm/dd)");
+        } while (!validate(date));
 
-        eapli.ecafeteria.domain.menu.Menu menu = theController.getMenu(date);
-
-        Meal meal;
-        SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.listMeals(), new MealPrinter());
-        selector.show();
-        meal = selector.selectedElement();
-        if (meal == null) {
-            return true;
+        try {
+            menu = theController.getMenu(date);
+        } catch (NullPointerException ex){
+            System.out.println("There are no menus availabre for the given date!");
+                return true;
         }
 
-        final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
-        if (Boolean.valueOf(confirm)) {
-            theController.reserveMeal(meal.dish(), meal.mealType(), date);
+            Meal meal;
+            SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.listMeals(), new MealPrinter());
+            selector.show();
+            meal = selector.selectedElement();
+            if (meal == null) {
+                return true;
+            }
+
+            final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
+            if (Boolean.valueOf(confirm)) {
+                theController.reserveMeal(meal.dish(), meal.mealType(), date);
+            }
+            return true;
+
+        }
+
+        @Override
+        public String headline
+        
+            () {
+        return "Reserve Meal";
+        }
+
+    
+
+    private boolean validate(Date date) {
+        Calendar cal = DateTime.dateToCalendar(date);
+        if (DateTime.isBeforeToday(cal)) {
+            System.out.println("Insert Another Date!");
+            return false;
         }
         return true;
-
-    }
-
-    @Override
-    public String headline() {
-        return "Reserve Meal";
     }
 
 }
