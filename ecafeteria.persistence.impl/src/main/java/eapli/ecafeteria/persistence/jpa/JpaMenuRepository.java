@@ -10,8 +10,7 @@ import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 import javax.persistence.TypedQuery;
 
@@ -25,8 +24,18 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     }
 
     @Override
-    public Menu findByDate(Calendar date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Menu findByDate(Date date) {
+  
+         Optional<Menu> m = matchOne("e.date=:date", "date", date);
+         
+         if( m.isPresent()){
+             Menu ms = m.get();
+             return ms;
+         } else {
+             return null;
+         }
+         
+         
     }
 
     @Override
@@ -46,7 +55,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
 
     @Override
     public Iterable<Menu> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -61,14 +70,14 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
 
     @Override
     public Iterable<Menu> findWorkingMenu() {
-        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu m where m.state =:st", Menu.class);
+        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu me where me.state =:st", Menu.class);
         q.setParameter("st", MenuState.WORKING_MENU);
         return q.getResultList();
     }
     
     @Override
     public Iterable<Menu> findPublishedMenu() {
-        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu m where m.state =:st", Menu.class);
+        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu me where me.state =:st", Menu.class);
         q.setParameter("st", MenuState.PUBLISHED_MENU);
         return q.getResultList();
     }

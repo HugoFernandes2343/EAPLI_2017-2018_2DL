@@ -52,7 +52,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     
     private String description;
 
-    @OneToOne
+    @ManyToOne
     private Meal meal;
     
     private ReservationState currentState;

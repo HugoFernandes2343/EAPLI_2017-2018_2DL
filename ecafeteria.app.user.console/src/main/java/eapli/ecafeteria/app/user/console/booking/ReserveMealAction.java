@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.reservations;
+package eapli.ecafeteria.app.user.console.booking;
 
 import eapli.framework.actions.Action;
 
@@ -15,7 +15,7 @@ public class ReserveMealAction implements Action {
 
     @Override
     public boolean execute() {
-        return new ReserveMealUI().doShow();
+        return new ReserveMealUI().show();
     }
-    
+
 }

@@ -23,15 +23,24 @@ public class RechargeCardUI extends AbstractUI{
     protected boolean doShow() {
         final String mecanographicNumber = Console.readLine("Insert user mecanographic number");
         CafeteriaUser cafeteriaUser;
-        cafeteriaUser = theController.findCafeteriaUserByMecNumber(mecanographicNumber);
-        cafeteriaUser.toString();
-        double value = Console.readDouble("Insert the amount to recharge");
-        if(value > 0){
-            theController.rechargeCard(cafeteriaUser, value);
-        } else {
-            System.out.println("Amount error, please enter a valid amount");
-        } 
+        try{
+            cafeteriaUser = theController.findCafeteriaUserByMecNumber(mecanographicNumber);
+            System.out.println(cafeteriaUser.toString());
+            double value = Console.readDouble("Insert the amount to recharge");
+            if(value > 0){
+                String opt = Console.readLine("Confirm operation? (Y/N)");
+                if(opt.contains("Y")|opt.equalsIgnoreCase("Y")){
+                    theController.rechargeCard(cafeteriaUser, value);
+                    System.out.println("Cartao Carregado com sucesso!");
+                }
+            } else {
+                System.out.println("Amount error, please enter a valid amount");
+            }      
+        }catch(javax.persistence.NoResultException ex){
+            System.out.println("CafeteriaUser not found");
+        }
         return false;
+        
     }
 
     @Override

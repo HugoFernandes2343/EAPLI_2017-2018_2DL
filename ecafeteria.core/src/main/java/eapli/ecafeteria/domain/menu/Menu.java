@@ -7,6 +7,8 @@ package eapli.ecafeteria.domain.menu;
 
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -28,7 +30,7 @@ import javax.persistence.Version;
 
 /**
  *
- * @author David
+ * @author David Santiago
  */
 @Entity
 public class Menu implements AggregateRoot<Long>, Serializable {
@@ -55,7 +57,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     @ElementCollection
     @CollectionTable(name = "Menu_Meal")
     @Column(name = "Meal")
-    @ManyToOne
+    //@ManyToOne
     private List<Meal> mealList;
 
     protected Menu() {
@@ -63,10 +65,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     }
 
     public Menu(Calendar startDate, Calendar endingDate) {
-        this.startDate = startDate;
-        this.endingDate = endingDate;
         this.state = MenuState.WORKING_MENU;
         this.mealList = new ArrayList<>();
+        this.startDate = startDate;
+        this.endingDate = endingDate;
 
     }
 
@@ -82,26 +84,32 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         return this.state.equals(MenuState.WORKING_MENU);
     }
 
-    public List<Meal> mealList() {
+    public List<Meal> listMeals() {
         return this.mealList;
     }
 
+
+    public boolean containsMeal(Meal m) {
+        return mealList.contains(m);
+    }
+    
+    
     public boolean addMeal(Meal meal) {
         if (mealList.contains(meal)) {
             return false;
+        } else {
+            return mealList.add(meal);
         }
-        return mealList.add(meal);
+        
     }
 
     public boolean removeMeal(Meal meal) {
         if (!mealList.contains(meal)) {
             return false;
+        } else {
+            return mealList.remove(meal);
         }
-        return mealList.remove(meal);
-    }
-
-    public boolean containsMeal(Meal m) {
-        return mealList.contains(m);
+        
     }
 
     public Calendar startDate() {
@@ -117,60 +125,56 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         return this.startDate.hashCode();
     }
 
-    public boolean sameAs(Object other) {
-        if (!(other instanceof Menu)) {
-            return false;
-        }
+    
 
-        final Menu that = (Menu) other;
-        if (this == that) {
-            return true;
-        }
 
-        return id().equals(that.id());
-    }
-
-    public boolean is(Long id) {
-        return id().equals(id);
-    }
 
     public Long id() {
         return this.menuID;
     }
+    
+    public boolean compareID(Long id) {
+        return id().equals(id);
+    }
 
+    
+    
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object object) {
+        
+        
+        
+        if (this.equals(object)) {
             return true;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+       
 
-        final Menu other = (Menu) obj;
+        final Menu other = (Menu) object;
+        
+        
         if (!Objects.equals(this.startDate, other.startDate)) {
             return false;
         }
-
-        if (!Objects.equals(this.endingDate, other.endingDate)) {
+        
+        
+         if (getClass() != object.getClass() || !Objects.equals(this.endingDate, other.endingDate) || !Objects.equals(this.version, other.version) ) {
             return false;
         }
-        if (!Objects.equals(this.menuID, other.menuID)) {
-            return false;
-        }
-        if (!Objects.equals(this.version, other.version)) {
-            return false;
-        }
+      
 
         return true;
     }
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String str1 = sdf.format(startDate.getTime());
-        String str2 = sdf.format(endingDate.getTime());
-        return "startDate=" + str1 + ", finishDate=" + str2;
+        
+        return "Menu Starting date " +  startDate.getTime() + " Menu Ending Date= " + endingDate.getTime() + " Menu State: " + this.state.toString();
+       
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

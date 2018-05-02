@@ -19,27 +19,32 @@ import java.util.List;
 
 /**
  *
- * @author David
+ * @author David Santiago
  */
 public class RegisterMenuController {
     private Menu menu;
     
-    
-    private final MealRepository MealRepository = PersistenceContext.repositories().meals();
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
+    private final MealRepository MealRepository = PersistenceContext.repositories().meals();
     
     
     
     
-    public Menu elaborateMenu(Calendar startDate, Calendar finishDate) {
+    
+    public Menu MenuMaker(Calendar startDate, Calendar finishDate) {
+        
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-
-        menu = new Menu(startDate, finishDate);
-
-        if (startDate.before(finishDate)) {
+        
+        
+        
+         if (startDate.before(finishDate)) {
             return null;
         }
+         
+         
+        menu = new Menu(startDate, finishDate);
 
+      
         return menu;
     }
     
@@ -53,7 +58,7 @@ public class RegisterMenuController {
     }
     
     public List<Meal> menuMealList(){
-        return menu.mealList();
+        return menu.listMeals();
     }
     
     public Menu saveMenu() throws DataIntegrityViolationException, DataConcurrencyException {

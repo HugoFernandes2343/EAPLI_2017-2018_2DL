@@ -10,24 +10,32 @@ import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
- * @author João Vieira
+ * @author David Santiago
  */
 public class ListMenuService {
 
-    private final MenuRepository menuRepository = PersistenceContext.repositories().menuRepository();
+    private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
 
     public Iterable<Menu> allMenus() {
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
-        return this.menuRepository.findAll();
+        return this.menuRepository.findPublishedMenu();
     }
 
-    public Menu listMenu(Calendar date) {
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+    public Menu listMenu(Date date) {
+        
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return this.menuRepository.findByDate(date);
+        
+    }
+
+    public Menu listMenuBooking(Date date) {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SELECT_MEAL);
 
         return this.menuRepository.findByDate(date);
     }

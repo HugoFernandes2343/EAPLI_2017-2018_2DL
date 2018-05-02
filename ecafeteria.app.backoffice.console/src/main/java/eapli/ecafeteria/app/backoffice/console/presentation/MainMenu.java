@@ -97,11 +97,12 @@ public class MainMenu extends AbstractUI {
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
-    private static final int CAFETERIA_SHIFT_OPTION=3;
+    private static final int CAFETERIA_SHIFT_OPTION = 3;
     private static final int SETTINGS_OPTION = 4;
     private static final int DISH_TYPES_OPTION = 5;
     private static final int TRACEABILITY_OPTION = 6;
     private static final int REPORTING_DISHES_OPTION = 7;
+    private static final int MEALS_MENU_OPTION = 8;
 
     @Override
     public boolean show() {
@@ -140,7 +141,7 @@ public class MainMenu extends AbstractUI {
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
         }
-        
+
         if (AuthorizationService.session().authenticatedUser()
                 .isAuthorizedTo(ActionRight.ADMINISTER)) {
             final Menu usersMenu = buildUsersMenu();
@@ -156,8 +157,8 @@ public class MainMenu extends AbstractUI {
             mainMenu.add(new SubMenu(TRACEABILITY_OPTION, kitchenMenu,
                     new ShowVerticalSubMenuAction(kitchenMenu)));
             mainMenu.add(new MenuItem(CAFETERIA_SHIFT_OPTION, "Close Cafeteria Shift",
-                new CafeteriaShiftClosingAction()));
-            
+                    new CafeteriaShiftClosingAction()));
+
         }
         if (AuthorizationService.session().authenticatedUser()
                 .isAuthorizedTo(ActionRight.MANAGE_MENUS)) {
@@ -169,13 +170,21 @@ public class MainMenu extends AbstractUI {
             final Menu reportingDishesMenu = buildReportingDishesMenu();
             mainMenu.add(new SubMenu(REPORTING_DISHES_OPTION, reportingDishesMenu,
                     new ShowVerticalSubMenuAction(reportingDishesMenu)));
-        }                
+        }
 
-        if (!Application.settings().isMenuLayoutHorizontal()) {
+        if (AuthorizationService.session()
+                .authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_MENUS)) {
+            final Menu mealsMenu = buildMealsMenu();
+            mainMenu.add(new SubMenu(MEALS_MENU_OPTION, mealsMenu, new ShowVerticalSubMenuAction(mealsMenu)));
+        }
+
+        if (!Application.settings()
+                .isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
         }
 
-        mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
+        mainMenu.add(
+                new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
         return mainMenu;
     }
@@ -279,12 +288,12 @@ public class MainMenu extends AbstractUI {
 
         return menu;
     }
-    
-    private Menu buildMealsMenu(){
+
+    private Menu buildMealsMenu() {
         final Menu menu = new Menu("Meals >");
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-        
+
         return menu;
     }
 }

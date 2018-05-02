@@ -10,8 +10,8 @@ import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
- * @author David
+ * @author Paulo Jorge
  */
-public interface MealRepository extends DataRepository<Meal, Long>{
-   
+public interface MealPlanRepository extends DataRepository<Meal, Integer>{
+    
 }
