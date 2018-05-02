@@ -16,6 +16,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeact
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ChangeDishNutricionalInfoAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ChangeDishPriceAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ChangeDishTypeAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.dishes.DishAllergernsListAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ListDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ListDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.RegisterDishAction;
@@ -77,6 +78,7 @@ public class MainMenu extends AbstractUI {
     private static final int DISH_LIST_DTO_OPTION = 8;
     private static final int DISH_ACTIVATE_DEACTIVATE_OPTION = 9;
     private static final int DISH_CHANGE_OPTION = 10;
+    private static final int DISH_Allergen = 11;
 
     // DISH PROPERTIES
     private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
@@ -227,6 +229,8 @@ public class MainMenu extends AbstractUI {
                 new ChangeDishTypeAction()));
         menu.add(new MenuItem(DISH_TYPE_ACTIVATE_DEACTIVATE_OPTION, "Activate/Deactivate Dish Type",
                 new ActivateDeactivateDishTypeAction()));
+        menu.add(new MenuItem(DISH_Allergen, "Dish Allergen",
+                new DishAllergernsListAction()));
 
         // dishes
         menu.add(new MenuItem(DISH_REGISTER_OPTION, "Register new Dish", new RegisterDishAction()));
