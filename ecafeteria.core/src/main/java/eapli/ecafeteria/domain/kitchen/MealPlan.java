@@ -64,7 +64,9 @@ public class MealPlan <M,Q> implements Serializable
         else this.mealPlanState = PUBLISHED;            
     }
      
-    
+    public void closeMealPlan(){
+        this.mealPlanState=PUBLISHED;
+    }
     
     
     

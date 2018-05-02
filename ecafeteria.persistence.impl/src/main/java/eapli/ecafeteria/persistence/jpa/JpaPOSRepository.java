@@ -8,7 +8,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.pos.POS;
 import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.persistence.POSRepository;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 
 /**
  *
@@ -18,8 +18,9 @@ public class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> impl
     
     @Override
     public Iterable<POS> findOpenned(POSState ps){
-        final TypedQuery query = entityManager().createQuery("Select p from POS p WHERE p.shift =: state",POS.class);
-        query.setParameter("state",ps);
+//        final TypedQuery query = entityManager().createQuery("SELECT p FROM POS p WHERE p.shift = :state",POS.class);
+        final Query query = entityManager().createQuery("SELECT p FROM POS p WHERE p.state = :st");
+        query.setParameter("st", ps);
         return query.getResultList();
     }
 }

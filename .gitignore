@@ -211,3 +211,4 @@ db
 /framework/target/
 classes
 .sonarlint
+/ecafeteria.core/nbproject/

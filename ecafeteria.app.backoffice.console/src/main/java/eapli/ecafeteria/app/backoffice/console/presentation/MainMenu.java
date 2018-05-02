@@ -30,6 +30,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ElaborateMea
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -92,15 +93,18 @@ public class MainMenu extends AbstractUI {
     private static final int REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION = 3;
 
     // MEALS
-    private static final int PUBLISH_MENU_OPTION = 1;
+    private static final int REGISTER_MENU_OPTION = 1;
+    private static final int PUBLISH_MENU_OPTION = 2;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
+    private static final int CAFETERIA_SHIFT_OPTION = 3;
     private static final int SETTINGS_OPTION = 4;
     private static final int DISH_TYPES_OPTION = 5;
     private static final int TRACEABILITY_OPTION = 6;
     private static final int REPORTING_DISHES_OPTION = 7;
+    private static final int MEALS_MENU_OPTION = 8;
 
     @Override
     public boolean show() {
@@ -154,6 +158,9 @@ public class MainMenu extends AbstractUI {
             final Menu kitchenMenu = buildKitchenMenu();
             mainMenu.add(new SubMenu(TRACEABILITY_OPTION, kitchenMenu,
                     new ShowVerticalSubMenuAction(kitchenMenu)));
+            mainMenu.add(new MenuItem(CAFETERIA_SHIFT_OPTION, "Close Cafeteria Shift",
+                    new CafeteriaShiftClosingAction()));
+
         }
         if (AuthorizationService.session().authenticatedUser()
                 .isAuthorizedTo(ActionRight.MANAGE_MENUS)) {
@@ -167,11 +174,19 @@ public class MainMenu extends AbstractUI {
                     new ShowVerticalSubMenuAction(reportingDishesMenu)));
         }
 
-        if (!Application.settings().isMenuLayoutHorizontal()) {
+        if (AuthorizationService.session()
+                .authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_MENUS)) {
+            final Menu mealsMenu = buildMealsMenu();
+            mainMenu.add(new SubMenu(MEALS_MENU_OPTION, mealsMenu, new ShowVerticalSubMenuAction(mealsMenu)));
+        }
+
+        if (!Application.settings()
+                .isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
         }
 
-        mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
+        mainMenu.add(
+                new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
         return mainMenu;
     }
@@ -275,12 +290,13 @@ public class MainMenu extends AbstractUI {
 
         return menu;
     }
-    
-    private Menu buildMealsMenu(){
-        final Menu menu = new Menu("Meals >");
+
+    private Menu buildMealsMenu() {
+        final Menu menu = new Menu("Menus >");
+        menu.add(new MenuItem(REGISTER_MENU_OPTION, "Register Menu", new RegisterMenuAction()));
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-        
+
         return menu;
     }
 }

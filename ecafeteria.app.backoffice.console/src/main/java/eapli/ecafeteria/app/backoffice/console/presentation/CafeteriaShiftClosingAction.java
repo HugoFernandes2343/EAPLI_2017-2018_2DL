@@ -1,5 +1,5 @@
 
-package eapli.ecafeteria.app.pos.console.presentation;
+package eapli.ecafeteria.app.backoffice.console.presentation;
 
 import eapli.framework.actions.Action;
 

@@ -1,0 +1,13 @@
+
+
+Test Plan
+
+_______________________
+
+Cozinha UC16 - Fechar Plano de Refeições
+_______________________
+
+1. Fazer login com user da cozinha
+2. Escolher a opção fechar plano de refeições
+3. Escolher qual a plano de refeições que quer fechar
+4. Confirmar

@@ -1,0 +1,24 @@
+_____________
+
+Análise
+_____________
+
+Informação retirada no enunciado:
+
+A cozinha pode fechar o plano de refeições com uma antecedência mínima de 48 horas.
+
+_____________
+
+Regras do negócio
+_____________
+
+Depois das 48 mínimas de antecedencia a cozinha não pode alterar mais o plano de refeições
+
+_____________
+
+Testes Unitários
+_____________
+
++testarMostrarTodosMealPlans
++testarFecharMealPlan
++testatFecharAutomaticamenteAoFim48Minimas

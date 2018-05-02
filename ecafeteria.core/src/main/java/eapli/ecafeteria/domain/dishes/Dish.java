@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.dishes;
 
+import eapli.ecafeteria.domain.allergens.Allergen;
 import java.io.Serializable;
 
 import javax.persistence.ColumnResult;
@@ -15,6 +16,13 @@ import eapli.ecafeteria.dto.DishDTO;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * A Dish
@@ -24,7 +32,8 @@ import eapli.framework.domain.money.Money;
  */
 @Entity
 @SqlResultSetMapping(name = "DishesPerCaloricCategoryMapping", classes = @ConstructorResult(targetClass = DishesPerCaloricCategory.class, columns = {
-        @ColumnResult(name = "caloricCategory"), @ColumnResult(name = "n") }))
+    @ColumnResult(name = "caloricCategory")
+    , @ColumnResult(name = "n")}))
 public class Dish implements AggregateRoot<Designation>, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +48,12 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
      */
     @ManyToOne()
     private DishType dishType;
+
+    @ElementCollection
+    @CollectionTable(name = "Dish_Allergen")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Allergen")
+    private List<Allergen> allergenList;
     private NutricionalInfo nutricionalInfo;
     private Money price;
     private boolean active;
@@ -49,6 +64,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
             throw new IllegalArgumentException();
         }
 
+        this.allergenList = new ArrayList<>();
         this.dishType = dishType;
         this.name = name;
         this.nutricionalInfo = nutricionalInfo;
@@ -61,6 +77,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
             throw new IllegalArgumentException();
         }
 
+        this.allergenList = new ArrayList<>();
         this.dishType = dishType;
         this.name = name;
         this.nutricionalInfo = null;
@@ -174,6 +191,34 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
             throw new IllegalArgumentException();
         }
         this.price = price;
+    }
+
+    /**
+     *
+     * @return Returns the allergen list
+     */
+    public List<Allergen> allergenList() {
+        return this.allergenList;
+    }
+
+    public boolean addAllergen(Allergen allergen) {
+        if (allergen == null) {
+            throw new IllegalStateException();
+        }
+        if (allergenList.contains(allergen)) {
+            return false;
+        }
+        return allergenList.add(allergen);
+    }
+
+    public boolean removeAllergen(Allergen allergen) {
+        if (allergen == null) {
+            throw new IllegalStateException();
+        }
+        if (!allergenList.contains(allergen)) {
+            return false;
+        }
+        return allergenList.remove(allergen);
     }
 
     public DishDTO toDTO() {

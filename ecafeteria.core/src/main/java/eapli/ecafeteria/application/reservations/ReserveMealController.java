@@ -19,6 +19,8 @@ import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -48,8 +50,12 @@ public class ReserveMealController implements Controller {
                     +"//"+meal.mealNumber();
             Reservation reservation = new Reservation(code, meal.dish().nutricionalInfo().toString(), meal);
             movementRepo.addBookingMovement(dish.currentPrice());
-            reservationRepo.addReservation(reservation);
+            try{
+            reservationRepo.save(reservation);
             state = true;
+            } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            System.out.println("An transactional error has ocurred. Please check data and try again.");
+        } 
         }
         return state;
     }

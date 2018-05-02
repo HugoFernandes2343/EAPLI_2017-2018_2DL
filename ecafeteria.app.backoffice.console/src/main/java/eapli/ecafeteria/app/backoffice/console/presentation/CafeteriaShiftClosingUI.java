@@ -1,13 +1,11 @@
-package eapli.ecafeteria.app.pos.console.presentation;
+package eapli.ecafeteria.app.backoffice.console.presentation;
 
 import eapli.ecafeteria.application.kitchen.CafeteriaShiftClosingController;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import eapli.framework.util.Console;
 
 /**
  *
@@ -24,21 +22,19 @@ public class CafeteriaShiftClosingUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         
-        int win = JOptionPane.showConfirmDialog(null, "Close cafeteria shift?", "eCafeteria", 0);
+        String val = Console.readLine("Close cafeteria shift? (y | n)");
 
-        if (win == 0) {
+        if (val.equalsIgnoreCase("y") || val.equalsIgnoreCase("yes")) {
             try {
                 controller.closeAllActivePOS();
-            } catch (DataConcurrencyException ex) {
-                Logger.getLogger(CafeteriaShiftClosingUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (DataIntegrityViolationException ex) {
-                Logger.getLogger(CafeteriaShiftClosingUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+                System.out.println("An error has ocurred");
             }
-            JOptionPane.showMessageDialog(null, "Shift Closed!");
+            System.out.println("Shift Closed!");
         } else {
-            JOptionPane.showMessageDialog(null, "Operation Canceled!");
+            System.out.println("Operation Canceled!");
         }
-        return true;
+        return false;
     }
 
     @Override
