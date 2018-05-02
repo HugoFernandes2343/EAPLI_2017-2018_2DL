@@ -15,6 +15,7 @@ import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,58 +23,64 @@ import java.util.List;
  *
  * @author Paulo Jorge
  */
-public class ElaborateMealPlanController implements Controller{
-    
-    private final MenuRepository repository = PersistenceContext.repositories().menus();
-    
+public class ElaborateMealPlanController implements Controller {
+
     private final ListMenuService listMenuService = new ListMenuService();
-   
-    
-    public List<Menu> fetchAvailableMenus() 
-    {
-        return new ArrayList<>((Collection<? extends Menu>) listMenuService.allMenus());       
+
+    private List<Menu> listaMenu = new ArrayList<>();
+    private Menu menu = new Menu(Calendar.getInstance(), Calendar.getInstance());
+
+    public List<Menu> fetchAvailableMenus() {
+
+        listaMenu.add(menu);
+        // listaMenu = new ArrayList<>((Collection<? extends Menu>) listMenuService.allMenusPublished());
+        return listaMenu;
     }
-    
-    
-    public List<Meal> getMealsfromMenu (Menu m) 
-    {
+
+    public boolean verificarID(long id) {
+
+        for (Menu m : listaMenu) {
+            long valor = m.id();
+            if (valor == id) {
+                System.out.println("\nExiste!!!!!!!\n");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Meal> getMealsfromMenu(Menu m) {
         Iterable<Meal> meals = PersistenceContext.repositories().meals().findAll();
         List<Meal> belongingMeals = new ArrayList<>();
-        for (Meal meal : meals){
-            if (meal.belongsToMenu(m)) belongingMeals.add(meal);         
+        for (Meal meal : meals) {
+            if (meal.belongsToMenu(m)) {
+                belongingMeals.add(meal);
+            }
         }
-        
+
         return belongingMeals;
     }
-    
-    
-    private List<Dish> getDishesFromMeals (List<Meal> ml) 
-    {
+
+    private List<Dish> getDishesFromMeals(List<Meal> ml) {
         List<Dish> dl = new ArrayList<>();
-        for (Meal m : ml) 
-        {
+        for (Meal m : ml) {
             dl.add(m.getDish());
         }
-        
+
         return dl;
     }
-    
-    
-    
-    public MealPlan createNewMenuPlan (List<Integer> qts, List<Meal> ml) 
-    {
+
+    public MealPlan createNewMenuPlan(List<Integer> qts, List<Meal> ml) {
         List<MealPlanItem> items = new ArrayList<>();
-        
-        for (Meal m : ml) 
-        {
+
+        for (Meal m : ml) {
             items.add(new MealPlanItem(m, qts.get(0)));
             qts.remove(0);
         }
-          
-        MealPlan m = new MealPlan(items);    
-        
+
+        MealPlan m = new MealPlan(items);
+
         //validate m
-        
         return m;
     }
 }

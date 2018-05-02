@@ -27,7 +27,8 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.Rep
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportHighCaloriesDishesUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ElaborateMealPlanAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.EditMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.PublishMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
@@ -98,7 +99,7 @@ public class MainMenu extends AbstractUI {
     // MEALS
     private static final int REGISTER_MENU_OPTION = 1;
     private static final int PUBLISH_MENU_OPTION = 2;
-    private static final int PUBLISH_MEAL_OPTION=3;
+    private static final int PUBLISH_MEAL_OPTION = 3;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -109,6 +110,10 @@ public class MainMenu extends AbstractUI {
     private static final int TRACEABILITY_OPTION = 6;
     private static final int REPORTING_DISHES_OPTION = 7;
     private static final int MEALS_MENU_OPTION = 8;
+
+    //ELABORATE MENU
+    private static final int CREATE_MEAL_PLAN = 1;
+    private static final int EDIT_MEAL_PLAN = 2;
 
     @Override
     public boolean show() {
@@ -260,8 +265,18 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(MATERIAL_REGISTER_OPTION, "Register new material",
                 new RegisterMaterialAction()));
         menu.add(new MenuItem(MATERIAL_LIST_OPTION, "List all materials", new ListMaterialAction()));
-        menu.add(new MenuItem(ELABORATE_MEAL_PLAN_OPTION, "Elaborate Meal Plan", new ElaborateMealPlanAction()));
+        final Menu elaborateMealPlan = buildElaborateMealPlanMenu();
+        menu.add(new SubMenu(ELABORATE_MEAL_PLAN_OPTION, elaborateMealPlan, new ShowVerticalSubMenuAction(buildElaborateMealPlanMenu())));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
+        return menu;
+    }
+
+    private Menu buildElaborateMealPlanMenu() {
+
+        final Menu menu = new Menu("Elaborate Meal Plan");
+        menu.add(new MenuItem(CREATE_MEAL_PLAN, "Create meal plan", new CreateMealPlanAction()));
+        menu.add(new MenuItem(EDIT_MEAL_PLAN, "Edit meal plan", new EditMealPlanAction()));
 
         return menu;
     }

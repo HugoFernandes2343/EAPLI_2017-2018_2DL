@@ -13,6 +13,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import java.util.Date;
 import java.util.Optional;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -26,31 +27,34 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
 
     @Override
     public Menu findByDate(Date date) {
-  
-         Optional<Menu> m = matchOne("e.startDate<=:date and e.endingDate>=:date", "date", DateTime.dateToCalendar(date));
-         
-         if( m.isPresent()){
-             Menu ms = m.get();
-             return ms;
-         } else {
-             return null;
-         }
-         
-         
+
+        Optional<Menu> m = matchOne("e.startDate<=:date and e.endingDate>=:date", "date", DateTime.dateToCalendar(date));
+
+        if (m.isPresent()) {
+            Menu ms = m.get();
+            return ms;
+        } else {
+            return null;
+        }
+
     }
 
     @Override
     public Iterable<Menu> findWorkingMenu() {
-        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu me where me.state =:st", Menu.class);
-        q.setParameter("st", MenuState.WORKING_MENU);
+        final Query q;
+        String where = "2.menuState=:mstate";
+        q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
+        q.setParameter("mstate", MenuState.WORKING_MENU);
         return q.getResultList();
     }
-    
+
     @Override
     public Iterable<Menu> findPublishedMenu() {
-        TypedQuery<Menu> q = entityManager().createQuery("select me from Menu me where me.state =:st", Menu.class);
-        q.setParameter("st", MenuState.PUBLISHED_MENU);
+        final Query q;
+        String where = "2.menuState=:mstate";
+        q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
+        q.setParameter("mstate", MenuState.PUBLISHED_MENU);
         return q.getResultList();
     }
-    
+
 }
