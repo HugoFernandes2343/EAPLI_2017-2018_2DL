@@ -41,7 +41,7 @@ public class ReserveMealUI extends AbstractUI {
         eapli.ecafeteria.domain.menu.Menu menu = theController.getMenu(date);
 
         Meal meal;
-        SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.listMeals(), new MealPrinter());
+        SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.mealList(), new MealPrinter());
         selector.show();
         meal = selector.selectedElement();
         if (meal == null) {
