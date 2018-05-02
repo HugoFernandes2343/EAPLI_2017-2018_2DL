@@ -64,10 +64,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         // for ORM
     }
 
-    public Menu(Calendar startDate, Calendar endingDate) {
+    public Menu(Calendar startingDate, Calendar endingDate) {
         this.state = MenuState.WORKING_MENU;
         this.mealList = new ArrayList<>();
-        this.startDate = startDate;
+        this.startDate = startingDate;
         this.endingDate = endingDate;
 
     }
