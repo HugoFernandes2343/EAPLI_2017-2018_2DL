@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -25,6 +26,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
 
@@ -54,10 +56,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     @Enumerated(EnumType.STRING)
     private MenuState state;
 
-    @ElementCollection
-    @CollectionTable(name = "Menu_Meal")
-    @Column(name = "Meal")
-    //@ManyToOne
+    @OneToMany(mappedBy="menu",cascade=CascadeType.ALL)
     private List<Meal> mealList;
 
     protected Menu() {
@@ -175,6 +174,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     @Override
     public boolean sameAs(Object other) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean hasThisDay(Calendar date) {
+        return true;
     }
 
 }
