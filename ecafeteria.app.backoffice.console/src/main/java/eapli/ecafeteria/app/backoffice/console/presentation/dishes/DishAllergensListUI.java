@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 1150425 & 1150482
+ * @author 1150425
  */
 class DishAllergensListUI extends AbstractUI {
 
