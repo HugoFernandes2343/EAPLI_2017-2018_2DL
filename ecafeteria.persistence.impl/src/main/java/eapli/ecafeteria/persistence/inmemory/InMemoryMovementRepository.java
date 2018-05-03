@@ -6,6 +6,8 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
+import eapli.ecafeteria.domain.movement.Booking;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import eapli.ecafeteria.domain.movement.Movement;
@@ -18,7 +20,7 @@ import eapli.framework.domain.money.Money;
 public class InMemoryMovementRepository extends InMemoryRepository<Movement, Long> implements MovementRepository{
 
     @Override
-    public Iterable<Movement> allCafeteriaUserMovements(CafeteriaUser user) {
+    public Iterable<Movement> allCafeteriaUserMovements(MecanographicNumber user) {
         return match(e -> e.madeBy().sameAs(user));
     }
 
@@ -28,7 +30,7 @@ public class InMemoryMovementRepository extends InMemoryRepository<Movement, Lon
     }
 
     @Override
-    public void addBookingMovement(Money price) {
+    public void addBookingMovement(Booking booking) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

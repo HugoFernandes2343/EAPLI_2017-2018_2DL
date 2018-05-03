@@ -1,14 +1,17 @@
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.application.pos.RechargeCardController;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
+import eapli.ecafeteria.domain.movement.Booking;
 import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.persistence.MovementRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.money.Money;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author filip
@@ -16,30 +19,22 @@ import javax.persistence.TypedQuery;
 public class JpaMovementRepository extends CafeteriaJpaRepositoryBase<Movement, Long> implements MovementRepository{
 
     @Override
-    public Iterable<Movement> allCafeteriaUserMovements(CafeteriaUser user) {
+    public Iterable<Movement> allCafeteriaUserMovements(MecanographicNumber user) {
 
-        final Query q;
-        String where = "e.user_number=:number";
-        q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
-        q.setParameter("number", user.id());
-        return q.getResultList();
-        
-//        final TypedQuery query = entityManager().createQuery("Select m from Movement m WHERE m.user_number=:number", Movement.class);
-//        query.setParameter("number", user.id());
-//        return query.getResultList();
+        return match("e.user = user");
     }
 
     @Override
-    public void addBookingMovement(Money price) {
-        if (price == null) {
-            throw new IllegalArgumentException();
+    public void addBookingMovement(Booking booking) {
+        final MovementRepository rcc = PersistenceContext.repositories().movements();
+        
+        try {
+            rcc.save(booking);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(JpaMovementRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(JpaMovementRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
-        EntityManager em = entityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.persist(price);
-        tx.commit();
-        em.close();
     }
         
 }

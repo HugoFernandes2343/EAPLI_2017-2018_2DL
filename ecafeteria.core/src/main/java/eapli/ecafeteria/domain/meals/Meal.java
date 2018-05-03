@@ -11,6 +11,7 @@ import eapli.framework.util.DateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +39,7 @@ public class Meal {
     @Version
     private Long version;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Dish dish;
 
     @ManyToOne(fetch = FetchType.EAGER)

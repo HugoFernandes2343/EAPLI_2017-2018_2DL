@@ -23,7 +23,7 @@ public class ListMovementService {
     public Money calculateBalance(CafeteriaUser user) {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS.SELECT_MEAL);
 
-        Iterable<Movement> list = this.movementRepository.allCafeteriaUserMovements(user);
+        Iterable<Movement> list = this.movementRepository.allCafeteriaUserMovements(user.mecanographicNumber());
         
         double value = 0;
         

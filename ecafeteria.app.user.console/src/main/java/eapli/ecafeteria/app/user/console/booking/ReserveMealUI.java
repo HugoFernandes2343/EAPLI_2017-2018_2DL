@@ -39,36 +39,33 @@ public class ReserveMealUI extends AbstractUI {
 
         try {
             menu = theController.getMenu(date);
-        } catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             System.out.println("There are no menus available for the given date!");
-                return true;
-        }
-
-            Meal meal;
-            SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.listMeals(), new MealPrinter());
-            selector.show();
-            meal = selector.selectedElement();
-            if (meal == null) {
-                return true;
-            }
-
-            final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
-            if (confirm.equals("1")) {
-                theController.reserveMeal(meal.dish(), meal.mealType(), date, menu);
-                Console.readLine(meal.toString() + "\nSuccess!");
-            }
             return true;
-
         }
 
-        @Override
-        public String headline
-        
-            () {
+        Meal meal;
+        SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.listMeals(), new MealPrinter());
+        selector.show();
+        meal = selector.selectedElement();
+        if (meal == null) {
+            return true;
+        }
+
+        final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
+        if (confirm.equals("1")) {
+            if (theController.reserveMeal(meal.dish(), meal.mealType(), date, menu)) {
+                Console.readLine("\nSuccess!");
+            }
+        }
+        return true;
+
+    }
+
+    @Override
+    public String headline() {
         return "Reserve Meal";
-        }
-
-    
+    }
 
     private boolean validate(Date date) {
         Calendar cal = DateTime.dateToCalendar(date);
