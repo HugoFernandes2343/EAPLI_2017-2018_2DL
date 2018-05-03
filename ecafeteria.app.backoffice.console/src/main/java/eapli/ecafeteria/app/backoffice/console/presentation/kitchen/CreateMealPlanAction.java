@@ -11,12 +11,11 @@ import eapli.framework.actions.Action;
  *
  * @author Paulo Jorge
  */
-public class ElaborateMealPlanAction implements Action {
+public class CreateMealPlanAction implements Action {
 
     @Override
     public boolean execute() {
-       new ElaborateUI().show();
-       return true;
+        return new CreateMealPlanUI().show();
     }
-    
+
 }

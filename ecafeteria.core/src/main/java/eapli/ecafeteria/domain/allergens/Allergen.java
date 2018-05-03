@@ -11,7 +11,7 @@ import javax.persistence.Column;
 
 /**
  *
- * @author diogo
+ * @author João Silva
  */
 public enum Allergen implements Serializable {
 

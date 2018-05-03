@@ -17,23 +17,21 @@ import java.util.List;
 
 /**
  *
- * @author 1150425 & 1150482
+ * @author 1150425
  */
 public class DishAllergensListController {
 
-    private ListDishService svc = new ListDishService();
+    private final ListDishService svc = new ListDishService();
     private final DishRepository repository = PersistenceContext.repositories().dishes();
 
-    private EnumSet<Allergen> allergenList = EnumSet.allOf(Allergen.class);
+    private final EnumSet<Allergen> allergenList = EnumSet.allOf(Allergen.class);
 
     public Iterable<Dish> allDishes() {
         return this.svc.allDishes();
     }
 
     public Iterable<Allergen> allAllergens() {
-
         return this.allergenList;
-
     }
 
     /**
@@ -49,7 +47,6 @@ public class DishAllergensListController {
             dish.addAllergen(allergen);
         } else {
             dish.addAllergen(allergen);
-
         }
         return true;
     }
