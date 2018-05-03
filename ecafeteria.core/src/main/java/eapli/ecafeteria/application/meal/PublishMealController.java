@@ -29,11 +29,12 @@ public class PublishMealController implements Controller {
     
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
+    private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
     public PublishMealController() {
     }
 
-    public Meal buildMeal(Dish dish, MealType mealType, Calendar date, Menu menu) {
+    public Meal buildMeal(Dish dish, MealType mealType, Calendar date, Menu menu){
         Meal meal = new Meal(dish, mealType, date, menu);
         return meal;
     }
@@ -48,6 +49,10 @@ public class PublishMealController implements Controller {
 
     public void save(Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
         menuRepository.save(menu);
+    }
+
+    public void save(Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+        mealRepository.save(meal);
     }
 
 

@@ -40,7 +40,7 @@ public class ReserveMealUI extends AbstractUI {
         try {
             menu = theController.getMenu(date);
         } catch (NullPointerException ex){
-            System.out.println("There are no menus availabre for the given date!");
+            System.out.println("There are no menus available for the given date!");
                 return true;
         }
 
@@ -53,8 +53,9 @@ public class ReserveMealUI extends AbstractUI {
             }
 
             final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
-            if (Boolean.valueOf(confirm)) {
+            if (confirm.equals("1")) {
                 theController.reserveMeal(meal.dish(), meal.mealType(), date, menu);
+                Console.readLine(meal.toString() + "\nSuccess!");
             }
             return true;
 

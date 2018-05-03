@@ -5,14 +5,12 @@
  */
 package eapli.ecafeteria.domain.menu;
 
-import javax.persistence.Embeddable;
 
 /**
  *
  * @author jsant
  */
 
-@Embeddable
 public enum MenuState {
     
     WORKING_MENU {

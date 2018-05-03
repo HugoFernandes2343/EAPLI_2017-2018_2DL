@@ -21,7 +21,7 @@ public class ListMovementService {
     private final MovementRepository movementRepository = PersistenceContext.repositories().movements();
 
     public Money calculateBalance(CafeteriaUser user) {
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS.SELECT_MEAL);
 
         Iterable<Movement> list = this.movementRepository.allCafeteriaUserMovements(user);
         
