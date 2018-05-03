@@ -67,6 +67,7 @@ public class POS implements AggregateRoot<Long>, Serializable {
     
     /**
      * Closes the POS and changes all of the Reservations that are in a BOOKED state and changes them to an expired state
+     * @throws eapli.framework.domain.ReservationStateViolationException
      */
     public void closeShift() throws ReservationStateViolationException{
         this.state = POSState.CLOSED;
