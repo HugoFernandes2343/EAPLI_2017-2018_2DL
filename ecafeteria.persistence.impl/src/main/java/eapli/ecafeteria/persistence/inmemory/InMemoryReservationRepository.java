@@ -66,22 +66,22 @@ public class InMemoryReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public Iterable<Reservation> selectTypeBooked(Date startDate, Date endDate, ReservationState.STATE state) {
+    public Iterable<Reservation> selectTypeBooked() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> selectTypeDelivered(Date startDate, Date endDate, ReservationState.STATE state) {
+    public Iterable<Reservation> selectTypeDelivered() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> selectTypeCancelled(Date startDate, Date endDate, ReservationState.STATE state) {
+    public Iterable<Reservation> selectTypeCancelled() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> selectTypeExpired(Date startDate, Date endDate, ReservationState.STATE state) {
+    public Iterable<Reservation> selectTypeExpired() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
