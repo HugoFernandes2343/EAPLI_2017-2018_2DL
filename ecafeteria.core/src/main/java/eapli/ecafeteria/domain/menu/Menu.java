@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.MenuState;
+import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -45,6 +47,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     private Long menuID;
     @Version
     private Long version;
+    
+    
+ 
+    private Designation name;
 
     @Column(unique = true)
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -63,7 +69,20 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         // for ORM
     }
 
-    public Menu(Calendar startingDate, Calendar endingDate) {
+    public Menu(Calendar startingDate, Calendar endingDate,Designation name) {
+        
+        if (startingDate==null || endingDate==null || name==null || !startingDate.before(endingDate))
+            throw new IllegalArgumentException("Nenhum campo pode ser NULL");
+        
+        Calendar finishDate = startingDate;
+        finishDate.add(Calendar.DAY_OF_MONTH, 7); // adds 7 days to starting day
+        
+        if (!finishDate.equals(endingDate))
+            throw new IllegalArgumentException("As datas têm de distar obrigatoriamente 7 dias");
+        
+        
+        
+        this.name= name;
         this.state = MenuState.WORKING_MENU;
         this.mealList = new ArrayList<>();
         this.startDate = startingDate;
@@ -96,11 +115,16 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     }
 
     public boolean addMeal(Meal meal) {
-        if (mealList.contains(meal)) {
-            return false;
-        } else {
-            return mealList.add(meal);
+        if (mealList.contains(meal)) {        
+            throw new IllegalArgumentException("Não pode adicionar uma meal já existente ao menu");
         }
+        
+        //if (meal.date().compareTo(this.startDate)<=0 || meal.date().compareTo(this.endingDate)>=0 ){
+            //throw new IllegalArgumentException("a data da meal não se encontra dentro do intervalo de funcionamento do menu");
+        //}
+        
+       
+        return mealList.add(meal);
 
     }
 
