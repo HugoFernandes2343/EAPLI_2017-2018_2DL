@@ -39,12 +39,12 @@ public class ElaborateMealPlanController implements Controller {
 
     private List<Menu> listaMenu = new ArrayList<>();
     private List<MealPlanItem> listMealPlanItem = new ArrayList<>();
-    private Menu menu = new Menu(Calendar.getInstance(), Calendar.getInstance());
+    private Menu menu = new Menu(Calendar.getInstance(), Calendar.getInstance(),Designation.valueOf("TESTE::REMOVER"));
 
     public List<Menu> fetchAvailableMenus() {
         menu.setID(1);
         listaMenu.add(menu);
-        // listaMenu = new ArrayList<>((Collection<? extends Menu>) listMenuService.allMenus());
+        listaMenu = new ArrayList<>((Collection<? extends Menu>) listMenuService.allMenus());
         return listaMenu;
     }
 

@@ -6,8 +6,10 @@
 package eapli.ecafeteria.bootstrapers;
 
 import eapli.ecafeteria.application.menu.PublishMenuController;
+import eapli.ecafeteria.application.menu.RegisterMenuController;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.actions.Action;
+import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
@@ -23,14 +25,22 @@ public class MenuBootstrapper implements Action {
 
     @Override
     public boolean execute() {
+        
+        
+        Designation teste1 = Designation.valueOf("Menu NATAL");
+        Designation teste2 = Designation.valueOf("Menu CARNAVAL");
+        Designation teste3 = Designation.valueOf("Menu PASCOA");
+        Designation teste4 = Designation.valueOf("Menu QUEIMA");
+        Designation teste5 = Designation.valueOf("Menu EAPLI");
+        Designation teste6 = Designation.valueOf("Menu GERINGONÇA");
 
         try {
-            register(DateTime.newCalendar(2018, 4, 30), DateTime.newCalendar(2018, 5, 6));
-            register(DateTime.newCalendar(2018, 5, 7), DateTime.newCalendar(2018, 5, 13));
-            register(DateTime.newCalendar(2018, 5, 14), DateTime.newCalendar(2018, 5, 20));
-            register(DateTime.newCalendar(2018, 5, 21), DateTime.newCalendar(2018, 5, 27));
-            register(DateTime.newCalendar(2018, 5, 28), DateTime.newCalendar(2018, 6, 3));
-            register(DateTime.newCalendar(2018, 6, 4), DateTime.newCalendar(2018, 6, 10));
+            register(DateTime.newCalendar(2018, 4, 1), DateTime.newCalendar(2018, 4, 8),teste1);
+            register(DateTime.newCalendar(2018, 5, 1), DateTime.newCalendar(2018, 5, 8),teste2);
+            register(DateTime.newCalendar(2018, 6, 1), DateTime.newCalendar(2018, 6, 8),teste3);
+            register(DateTime.newCalendar(2018, 7, 1), DateTime.newCalendar(2018, 7, 8),teste4);
+            register(DateTime.newCalendar(2018, 8, 1), DateTime.newCalendar(2018, 8, 8),teste5);
+            register(DateTime.newCalendar(2018, 9, 1), DateTime.newCalendar(2018, 9, 8),teste6);
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {
@@ -43,9 +53,10 @@ public class MenuBootstrapper implements Action {
     /**
      *
      */
-    private void register(Calendar startDate, Calendar endDate) throws DataConcurrencyException, DataIntegrityViolationException {
-        final PublishMenuController controller = new PublishMenuController();
-        controller.publish(new Menu(startDate, endDate));
+    private void register(Calendar startDate, Calendar endDate, Designation name) throws DataConcurrencyException, DataIntegrityViolationException {
+        final RegisterMenuController controller = new RegisterMenuController();
+        controller.MenuMaker(startDate, endDate, name);
+        controller.saveMenu();
     }
     
 }

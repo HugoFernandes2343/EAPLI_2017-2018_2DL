@@ -12,6 +12,8 @@ import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.application.Controller;
+import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Calendar;
@@ -21,7 +23,9 @@ import java.util.List;
  *
  * @author David Santiago
  */
-public class RegisterMenuController {
+public class RegisterMenuController implements Controller{
+    
+    
     private Menu menu;
     
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
@@ -31,26 +35,21 @@ public class RegisterMenuController {
     
     
     
-    public Menu MenuMaker(Calendar startDate, Calendar finishDate) {
+    public Menu MenuMaker(Calendar startDate, Calendar finishDate, Designation name) throws DataConcurrencyException, DataIntegrityViolationException {
         
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
         
-        
-        
-         if (startDate.before(finishDate)) {
-            return null;
-        }
          
-         
-        menu = new Menu(startDate, finishDate);
+        menu = new Menu(startDate, finishDate, name);
 
-      
         return menu;
+        
     }
     
     
-    public boolean addMeal(Meal Meal) {
-        return menu.addMeal(Meal);
+    public boolean addMeal(Meal meal) {
+                
+        return menu.addMeal(meal);
     }
 
     public boolean removeMeal(Meal Meal) {
