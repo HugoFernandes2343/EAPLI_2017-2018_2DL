@@ -8,7 +8,7 @@ package eapli.ecafeteria.application.cafeteriauser;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
-import eapli.ecafeteria.domain.cafeteriauser.Movement;
+import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.money.Money;

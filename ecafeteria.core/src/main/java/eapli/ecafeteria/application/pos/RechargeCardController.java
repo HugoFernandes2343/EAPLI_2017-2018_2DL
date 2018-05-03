@@ -2,8 +2,7 @@ package eapli.ecafeteria.application.pos;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
-import eapli.ecafeteria.domain.cafeteriauser.Movement;
-import eapli.ecafeteria.domain.cafeteriauser.MovementDescription;
+import eapli.ecafeteria.domain.movement.Recharge;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -32,7 +31,7 @@ public class RechargeCardController implements Controller{
     }
     
     public boolean rechargeCard(CafeteriaUser user, double value) {
-        Movement mov = new Movement(user,Money.euros(value), MovementDescription.RECHARGE) {};
+        Recharge mov = new Recharge(user,Money.euros(value));
         try {
             repo2.save(mov);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
