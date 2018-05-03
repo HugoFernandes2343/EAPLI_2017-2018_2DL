@@ -22,9 +22,16 @@ public class JpaMovementRepository extends CafeteriaJpaRepositoryBase<Movement, 
 
     @Override
     public Iterable<Movement> allCafeteriaUserMovements(CafeteriaUser user) {
-        final TypedQuery query = entityManager().createQuery("Select m from Movement m WHERE m.user_number=:number", Movement.class);
-        query.setParameter("number", user.id());
-        return query.getResultList();
+
+        final Query q;
+        String where = "e.user_number=:number";
+        q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
+        q.setParameter("number", user.id());
+        return q.getResultList();
+        
+//        final TypedQuery query = entityManager().createQuery("Select m from Movement m WHERE m.user_number=:number", Movement.class);
+//        query.setParameter("number", user.id());
+//        return query.getResultList();
     }
 
     @Override
