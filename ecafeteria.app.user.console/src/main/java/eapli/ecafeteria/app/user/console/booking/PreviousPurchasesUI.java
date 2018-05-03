@@ -25,34 +25,34 @@ public class PreviousPurchasesUI extends AbstractUI{
         switch (state) {
             case 1: 
                 List <Reservation> deliveredList = (List <Reservation>) crController.findDelivered();
-                System.out.println("\nList of delivered reservations");
+                System.out.println("\n>> List of delivered reservations <<");
                 if (deliveredList.isEmpty()) {
                     System.out.println("No reservation has been consumed");
                 } else {
                     for (Reservation reservation : deliveredList) {
-                        System.out.println(reservation.id());
+                        System.out.println("ID: " + reservation.id() + "\tDescription: " + reservation.description());
                     }
                 }
                 break;
             case 2:
                 List <Reservation> cancelledList = (List <Reservation>) crController.findCancelled();
-                System.out.println("\nList of cancelled reservations");
+                System.out.println("\n>> List of cancelled reservations <<");
                 if (cancelledList.isEmpty()) {
                     System.out.println("No reservation has been cancelled");
                 } else {
                     for (Reservation reservation : cancelledList) {
-                        System.out.println(reservation.id());
+                        System.out.println("ID: " + reservation.id() + "\tDescription: " + reservation.description());
                     }
                 }                
                 break;
             case 3: 
                 List <Reservation> expiredList = (List <Reservation>) crController.findExpired();
-                System.out.println("\nList of expired reservations");
+                System.out.println("\n>> List of expired reservations <<");
                 if (expiredList.isEmpty()) {
                     System.out.println("No reservation has expired");
                 } else {
                     for (Reservation reservation : expiredList) {
-                        System.out.println(reservation.id());
+                        System.out.println("ID: " + reservation.id() + "\tDescription: " + reservation.description());
                     }
                 }
                 break;
