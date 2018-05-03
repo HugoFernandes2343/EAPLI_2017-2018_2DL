@@ -21,4 +21,9 @@ public class InMemoryMealPlanRepository extends InMemoryRepository<MealPlan, Int
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Iterable<MealPlan> findAllMealPlanInProgress() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

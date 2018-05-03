@@ -19,6 +19,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Date;
 import java.util.Optional;
 import javax.persistence.TypedQuery;
+
 /**
  *
  * @author João Vieira
@@ -30,15 +31,15 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> imple
 
     @Override
     public Menu findByDate(Date date) {
-        
-         Optional<Menu> m = matchOne(e -> e.startDate().equals(date));
-         
-         if( m.isPresent()){
-             Menu ms = m.get();
-             return ms;
-         } else {
-             return null;
-         }
+
+        Optional<Menu> m = matchOne(e -> e.startDate().equals(date));
+
+        if (m.isPresent()) {
+            Menu ms = m.get();
+            return ms;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -70,5 +71,10 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> imple
     protected Long newKeyFor(Menu entity) {
         return entity.id();
     }
-    
+
+    @Override
+    public Menu findByID(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

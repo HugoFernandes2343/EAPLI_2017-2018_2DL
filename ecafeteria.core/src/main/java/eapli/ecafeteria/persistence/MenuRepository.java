@@ -5,17 +5,21 @@
  */
 package eapli.ecafeteria.persistence;
 
-
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Date;
+
 /**
  *
  * @author David
  */
-public interface MenuRepository extends DataRepository<Menu, Long>{
-    
+public interface MenuRepository extends DataRepository<Menu, Long> {
+
     public Menu findByDate(Date date);
+
     public Iterable<Menu> findWorkingMenu();
+
     public Iterable<Menu> findPublishedMenu();
+
+    public Menu findByID(long id);
 }

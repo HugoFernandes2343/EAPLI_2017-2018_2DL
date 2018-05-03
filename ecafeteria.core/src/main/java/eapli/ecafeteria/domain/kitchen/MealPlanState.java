@@ -9,7 +9,19 @@ package eapli.ecafeteria.domain.kitchen;
  *
  * @author André Santos
  */
-enum MealPlanState 
-{  
-    IN_PROGRESS, PUBLISHED  
+public enum MealPlanState {
+    IN_PROGRESS {
+
+        @Override
+        public String toString() {
+            return "Progress";
+        }
+    },
+    PUBLISHED {
+
+        @Override
+        public String toString() {
+            return "Published";
+        }
+    };
 }

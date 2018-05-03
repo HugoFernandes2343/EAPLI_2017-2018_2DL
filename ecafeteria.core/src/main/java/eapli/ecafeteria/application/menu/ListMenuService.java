@@ -8,7 +8,6 @@ package eapli.ecafeteria.application.menu;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.menu.Menu;
-import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.Date;
@@ -26,6 +25,13 @@ public class ListMenuService {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
         return this.menuRepository.findPublishedMenu();
+    }
+
+    public Menu findByID(long id) {
+
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+
+        return this.menuRepository.findByID(id);
     }
 
     public Menu listMenu(Date date) {

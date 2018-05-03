@@ -15,7 +15,6 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,24 +34,38 @@ public class CreateMealPlanUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        System.out.println("Lista de Menus");
+        System.out.println("List Menus");
         List<Menu> listaMenu = theController.fetchAvailableMenus();
+
         for (Menu menu : listaMenu) {
-            System.out.println(menu.id() + "\n");
-        }
-        long id = Console.readLong("Insere o ID do menu que Pretende!");
-        theController.verificarID(id);
-        Iterable<Meal> listaMeals = theController.getMealsfromMenu(id);
-
-        List<Meal> listaMeal = (List<Meal>) listaMeals;
-        System.out.println("Meals do menu " + id);
-        for (Meal meal : listaMeal) {
-            System.out.println(meal.dish().name() + "\n");
+            System.out.println(menu.id());
         }
 
-        for (Meal meal : listaMeal) {
-            int quantidade = Console.readInteger("Insere a quantidade que pretende!");
+        boolean resposta = false;
+        long id = 0;
+        while (resposta == false) {
+            id = Console.readLong("Insere o ID do menu que pretende conforme a lista apresentada!");
+            resposta = theController.verificarID(id);
+        }
+
+        Menu m = theController.selectMenu(id);
+        System.out.println(m.id());
+
+        List<Meal> listaMeals = theController.getMealsfromMenu();
+
+        List<String> names = new ArrayList<>();
+        System.out.println("\n------------------Meals do menu---------------- " + id);
+
+        for (Meal meal : listaMeals) {
+            names.add(meal.dish().name().toString());
+            System.out.println(meal.dish().name());
+        }
+
+        int cont = 0;
+        for (Meal meal : listaMeals) {
+            int quantidade = Console.readInteger("Insere a quantidade que pretende para " + names.get(cont) + " !");
             theController.insertQuantityMeal(quantidade, meal);
+            cont++;
         }
         try {
             System.out.println(theController.createElaborateMealplan());
@@ -61,7 +74,6 @@ public class CreateMealPlanUI extends AbstractUI {
         } catch (DataIntegrityViolationException ex) {
             Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return true;
     }
 
