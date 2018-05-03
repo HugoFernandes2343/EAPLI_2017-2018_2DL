@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 public class PersistenceContext {
 
     private static volatile RepositoryFactory theFactory;
-
     private PersistenceContext() {
     }
 

@@ -42,7 +42,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     @Override
     public Iterable<Menu> findWorkingMenu() {
         final Query q;
-        String where = "2.menuState=:mstate";
+        String where = "e.menuState=:mstate";
         q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
         q.setParameter("mstate", MenuState.WORKING_MENU);
         return q.getResultList();
@@ -51,7 +51,7 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     @Override
     public Iterable<Menu> findPublishedMenu() {
         final Query q;
-        String where = "2.menuState=:mstate";
+        String where = "e.menuState=:mstate";
         q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
         q.setParameter("mstate", MenuState.PUBLISHED_MENU);
         return q.getResultList();

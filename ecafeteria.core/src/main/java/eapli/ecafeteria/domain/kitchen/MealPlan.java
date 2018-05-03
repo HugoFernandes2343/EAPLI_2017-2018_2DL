@@ -23,59 +23,38 @@ import javax.persistence.OneToMany;
  * @author André Santos
  */
 @Entity
-public class MealPlan <M,Q> implements Serializable 
-{
-    
+public class MealPlan<M, Q> implements Serializable {
+
     @Id
     @GeneratedValue
     private Long id;
-    
+
     @Enumerated(EnumType.STRING)
     private MealPlanState mealPlanState;
-    
+
     @OneToMany
     private List<MealPlanItem> menuItems;
 
-    
-    
-    
-    public MealPlan(List<MealPlanItem> menuItems) 
-    {
+    public MealPlan(List<MealPlanItem> menuItems) {
         this.mealPlanState = IN_PROGRESS;
         this.menuItems = menuItems;
     }
 
-    
-    public MealPlan() 
-    {
+    public MealPlan() {
         this.mealPlanState = IN_PROGRESS;
-        this.menuItems = new ArrayList<MealPlanItem>();      
+        this.menuItems = new ArrayList<MealPlanItem>();
     }
-    
-    
-    
-    
-    
-    public void updateMalPlanState (MealPlan p) 
-    {
+
+    public void updateMalPlanState(MealPlan p) {
         if (p.menuItems.isEmpty()) {
             this.mealPlanState = IN_PROGRESS;
+        } else {
+            this.mealPlanState = PUBLISHED;
         }
-        else this.mealPlanState = PUBLISHED;            
     }
-     
-    public void closeMealPlan(){
-        this.mealPlanState=PUBLISHED;
-    }
-    
-    
-    
-    
-    
 
-    
-    
- 
-    
-    
+    public void closeMealPlan() {
+        this.mealPlanState = PUBLISHED;
+    }
+
 }

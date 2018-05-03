@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.MovementRepository;
@@ -88,7 +89,7 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public ReservationRepository reservations() {
         return new InMemoryReservationRepository();
     }
-    
+
     public MovementRepository movements() {
         return new InMemoryMovementRepository();
     }
@@ -106,5 +107,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public MenuRepository menus() {
         return new InMemoryMenuRepository();
+    }
+
+    @Override
+    public MealPlanRepository mealPlan() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

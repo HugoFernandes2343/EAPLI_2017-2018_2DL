@@ -20,7 +20,6 @@ public class PublishMenuController implements Controller {
 
     private final MenuRepository mr = PersistenceContext.repositories().menus();
     private Menu me;
-    
 
     public void menu(Menu m) {
         this.me = m;

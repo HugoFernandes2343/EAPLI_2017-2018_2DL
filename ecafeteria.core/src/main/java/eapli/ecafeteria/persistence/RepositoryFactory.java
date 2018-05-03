@@ -24,7 +24,8 @@ public interface RepositoryFactory {
      * @param autoTx the transactional context to enrol
      * @return
      */
-    UserRepository users(TransactionalContext autoTx);
+    UserRepository
+            users(TransactionalContext autoTx);
 
     /**
      * repository will be created in auto transaction mode
@@ -66,34 +67,37 @@ public interface RepositoryFactory {
     DishRepository dishes();
 
     MaterialRepository materials();
-    
+
     MealRepository meals();
+
     MenuRepository menus();
-    
-    
 
     /**
      * respository to return reservations
-     * @return 
+     *
+     * @return
      */
     ReservationRepository reservations();
-    
+
     /**
      * respository to return pos
-     * @return 
+     *
+     * @return
      */
     POSRepository pos();
-    
+
     /**
      * Repository to get movements
-     * @return 
+     *
+     * @return
      */
     MovementRepository movements();
-    
+
+    MealPlanRepository mealPlan();
+
     /**
      * ************************
-     * reporting
-     *************************
+     * reporting ************************
      */
     /**
      * @return

@@ -38,16 +38,16 @@ public class Meal {
 
     @ManyToOne
     private Dish dish;
-    
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="menuID")
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "menuID")
     private Menu menu;
 
     @Embedded
     private MealType mealType;
     @Temporal(TemporalType.DATE)
     private Calendar date;
-    
+
     private int mealNumber = 0;
 
     protected Meal() {
@@ -55,7 +55,7 @@ public class Meal {
     }
 
     public Meal(Dish dish, MealType mealType, Calendar date, Menu menu) {
-        this.menu=menu;
+        this.menu = menu;
         this.dish = dish;
         this.mealType = mealType;
         this.date = date;
@@ -81,8 +81,8 @@ public class Meal {
     public boolean isOfMealType(MealType type) {
         return this.mealType.equals(type);
     }
-    
-    public int mealNumber(){
+
+    public int mealNumber() {
         return this.mealNumber;
     }
 
@@ -96,7 +96,7 @@ public class Meal {
         }
 
         Meal meal = (Meal) o;
-        
+
         if (!dish.equals(meal.dish)) {
             return false;
         }

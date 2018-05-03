@@ -5,13 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.Kitchen.MealPlan;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
  * @author Paulo Jorge
  */
-public interface MealPlanRepository extends DataRepository<Meal, Integer>{
-    
+public interface MealPlanRepository extends DataRepository<MealPlan, Integer> {
+
 }

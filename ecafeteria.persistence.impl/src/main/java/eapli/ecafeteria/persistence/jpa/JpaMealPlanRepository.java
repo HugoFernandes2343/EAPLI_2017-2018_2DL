@@ -5,14 +5,14 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.domain.Kitchen.MealPlan;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.MealPlanRepository;
-import java.io.Serializable;
 
 /**
  *
  * @author Paulo Jorge
  */
-public class JpaMealPlanRepository extends CafeteriaJpaRepositoryBase<Meal,Integer> implements MealPlanRepository{
-    
+public class JpaMealPlanRepository extends CafeteriaJpaRepositoryBase<MealPlan, Integer> implements MealPlanRepository {
+
 }

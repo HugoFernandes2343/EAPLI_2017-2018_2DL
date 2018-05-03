@@ -56,7 +56,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     @Enumerated(EnumType.STRING)
     private MenuState state;
 
-    @OneToMany(mappedBy="menu",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
     private List<Meal> mealList;
 
     protected Menu() {
@@ -69,6 +69,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         this.startDate = startingDate;
         this.endingDate = endingDate;
 
+    }
+
+    public void setID(long menuID) {
+        this.menuID = menuID;
     }
 
     public boolean publishedMenu() {
@@ -87,19 +91,17 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         return this.mealList;
     }
 
-
     public boolean containsMeal(Meal m) {
         return mealList.contains(m);
     }
-    
-    
+
     public boolean addMeal(Meal meal) {
         if (mealList.contains(meal)) {
             return false;
         } else {
             return mealList.add(meal);
         }
-        
+
     }
 
     public boolean removeMeal(Meal meal) {
@@ -108,7 +110,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         } else {
             return mealList.remove(meal);
         }
-        
+
     }
 
     public Calendar startDate() {
@@ -124,51 +126,39 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         return this.startDate.hashCode();
     }
 
-    
-
-
-
     public Long id() {
         return this.menuID;
     }
-    
+
     public boolean compareID(Long id) {
         return id().equals(id);
     }
 
-    
-    
     @Override
     public boolean equals(Object object) {
-        
-        
-        
+
         if (this.equals(object)) {
             return true;
         }
-       
 
         final Menu other = (Menu) object;
-        
-        
+
         if (!Objects.equals(this.startDate, other.startDate)) {
             return false;
         }
-        
-        
-         if (getClass() != object.getClass() || !Objects.equals(this.endingDate, other.endingDate) || !Objects.equals(this.version, other.version) ) {
+
+        if (getClass() != object.getClass() || !Objects.equals(this.endingDate, other.endingDate) || !Objects.equals(this.version, other.version)) {
             return false;
         }
-      
 
         return true;
     }
 
     @Override
     public String toString() {
-        
-        return "Menu Starting date " +  startDate.getTime() + " Menu Ending Date= " + endingDate.getTime() + " Menu State: " + this.state.toString();
-       
+
+        return "Menu Starting date " + startDate.getTime() + " Menu Ending Date= " + endingDate.getTime() + " Menu State: " + this.state.toString();
+
     }
 
     @Override
