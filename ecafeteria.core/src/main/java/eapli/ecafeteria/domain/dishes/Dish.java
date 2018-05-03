@@ -90,6 +90,11 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Dish{" + "version=" + version + ", name=" + name + ", dishType=" + dishType + ", allergenList=" + allergenList + ", nutricionalInfo=" + nutricionalInfo + ", price=" + price + ", active=" + active + '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

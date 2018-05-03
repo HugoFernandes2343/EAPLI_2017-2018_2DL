@@ -64,8 +64,6 @@ public class MealBootstrapper implements Action {
         final PublishMealController controller = new PublishMealController();
         Meal meal = controller.buildMeal(dish, mealType, date, menu);
         menu.addMeal(meal);
-        controller.save(menu);
-        controller.save(meal);
     }
 
 }
