@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.framework.domain.money.Money;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
