@@ -28,7 +28,7 @@ public class ListMovementService {
         double value = 0;
         
         for(Movement m : list){
-            value += m.value().amount();
+            value += m.value();
         }
         return Money.euros(value);
     }
