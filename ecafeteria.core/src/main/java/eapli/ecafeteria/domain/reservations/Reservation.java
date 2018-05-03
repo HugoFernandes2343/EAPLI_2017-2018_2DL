@@ -40,7 +40,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         }
         
         private void book(){
-            state=STATE.BOOKED.toString();
+            this.state=STATE.BOOKED.toString();
         }
         
         private void deliver() throws ReservationStateViolationException{
@@ -98,6 +98,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         this.code = code;
         this.description = description;
         this.meal = meal;
+        this.currentState = new ReservationState();
         currentState.book();
     }
 

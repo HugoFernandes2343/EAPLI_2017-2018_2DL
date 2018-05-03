@@ -62,10 +62,7 @@ public class MealBootstrapper implements Action {
      */
     private void register(Dish dish, MealType mealType, Calendar date, Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
         final PublishMealController controller = new PublishMealController();
-        Meal meal = controller.buildMeal(dish, mealType, date, menu);
-        menu.addMeal(meal);
-        controller.save(menu);
-        controller.save(meal);
+        controller.buildMeal(dish, mealType, date, menu);
     }
 
 }

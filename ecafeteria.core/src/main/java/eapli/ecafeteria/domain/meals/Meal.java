@@ -7,8 +7,11 @@ package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.framework.util.DateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +39,7 @@ public class Meal {
     @Version
     private Long version;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Dish dish;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -84,6 +87,13 @@ public class Meal {
 
     public int mealNumber() {
         return this.mealNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "\nMeal:\n- Dish: " + dish.name() + "\n- Meal Type: " +
+                mealType.mealType() + "\n- Date: " + DateTime.format(date) +
+                "\n- Meal Number: " + mealNumber + '\n';
     }
 
     @Override

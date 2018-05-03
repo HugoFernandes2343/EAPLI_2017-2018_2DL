@@ -26,7 +26,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> findByStateAndMeal(Reservation.ReservationState.STATE state, Meal m) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal=:meal r.state=:state");
-        createQuery.setParameter("meal", m);
+        createQuery.setParameter("meal", m.pk());
         createQuery.setParameter("state", state);
         return createQuery.getResultList();
     }

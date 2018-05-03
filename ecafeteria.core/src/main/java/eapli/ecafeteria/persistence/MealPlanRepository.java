@@ -14,4 +14,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface MealPlanRepository extends DataRepository<MealPlan, Integer> {
 
+    public Iterable<MealPlan> findAllMealPlanInProgress();
 }

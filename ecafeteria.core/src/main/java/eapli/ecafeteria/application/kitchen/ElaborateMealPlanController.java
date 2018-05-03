@@ -39,13 +39,17 @@ public class ElaborateMealPlanController implements Controller {
 
     private List<Menu> listaMenu = new ArrayList<>();
     private List<MealPlanItem> listMealPlanItem = new ArrayList<>();
-    private Menu menu = new Menu(Calendar.getInstance(), Calendar.getInstance());
+    private List<MealPlan> listMealPlan = new ArrayList<>();
+    private Menu menu;
 
     public List<Menu> fetchAvailableMenus() {
-        menu.setID(1);
-        listaMenu.add(menu);
-        // listaMenu = new ArrayList<>((Collection<? extends Menu>) listMenuService.allMenus());
+        listaMenu = new ArrayList<>((Collection<? extends Menu>) listMenuService.allMenus());
         return listaMenu;
+    }
+
+    public List<MealPlan> findAllMealPlanInProgress() {
+        listMealPlan = (List<MealPlan>) repository.findAllMealPlanInProgress();
+        return listMealPlan;
     }
 
     public boolean verificarID(long id) {
@@ -57,25 +61,18 @@ public class ElaborateMealPlanController implements Controller {
                 return true;
             }
         }
+        System.out.println("\nNão Existe!!!\n");
         return false;
     }
 
-    public List<Meal> getMealsfromMenu(long id) {
-        List<Meal> listMeals = new ArrayList<Meal>();
-        DishType type1 = new DishType("dish1", "descrição1");
-        Money money1 = new Money(1, Currency.getInstance(Locale.ITALY));
-        DishType type2 = new DishType("dish2", "descrição2");
-        Money money2 = new Money(2, Currency.getInstance(Locale.ITALY));
-        DishType type3 = new DishType("dish3", "descrição3");
-        Money money3 = new Money(3, Currency.getInstance(Locale.ITALY));
-        Meal meal1 = new Meal(new Dish(type1, Designation.valueOf("tipo1"), money1), new MealType(MealType.MealTypes.LUNCH), Calendar.getInstance(), menu);
-        Meal meal2 = new Meal(new Dish(type1, Designation.valueOf("tipo2"), money1), new MealType(MealType.MealTypes.LUNCH), Calendar.getInstance(), menu);
-        Meal meal3 = new Meal(new Dish(type1, Designation.valueOf("tipo3"), money1), new MealType(MealType.MealTypes.LUNCH), Calendar.getInstance(), menu);
-        listMeals.add(meal1);
-        listMeals.add(meal2);
-        listMeals.add(meal3);
+    public Menu selectMenu(long id) {
+        menu = listMenuService.findByID(id);
+        return menu;
+    }
 
-        //  listMeals = (List<Meal>) PersistenceContext.repositories().meals().findMealOneMenu(id);
+    public List<Meal> getMealsfromMenu() {
+        List<Meal> listMeals = new ArrayList<Meal>();
+        listMeals = (List<Meal>) PersistenceContext.repositories().meals().findMealOneMenu(menu);
         return listMeals;
     }
 

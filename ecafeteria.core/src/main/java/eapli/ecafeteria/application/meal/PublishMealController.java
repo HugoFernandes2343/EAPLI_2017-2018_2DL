@@ -34,9 +34,10 @@ public class PublishMealController implements Controller {
     public PublishMealController() {
     }
 
-    public Meal buildMeal(Dish dish, MealType mealType, Calendar date, Menu menu){
+    public Meal buildMeal(Dish dish, MealType mealType, Calendar date, Menu menu) throws DataConcurrencyException, DataIntegrityViolationException{
         Meal meal = new Meal(dish, mealType, date, menu);
-        return meal;
+        
+        return mealRepository.save(meal);
     }
 
     public Iterable<Dish> allActiveDishes() {
@@ -51,10 +52,4 @@ public class PublishMealController implements Controller {
         menuRepository.save(menu);
     }
 
-    public void save(Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
-        mealRepository.save(meal);
-    }
-
-
-    
 }

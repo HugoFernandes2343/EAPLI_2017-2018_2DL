@@ -13,7 +13,10 @@
     <class>eapli.ecafeteria.domain.cafeteriauser.SignupRequest</class>
     <class>eapli.ecafeteria.domain.dishes.Dish</class>
     <class>eapli.ecafeteria.domain.dishes.DishType</class>
-    <class>eapli.ecafeteria.domain.cafeteriauser.Movement</class>
+    <class>eapli.ecafeteria.domain.movement.Movement</class>
+    <class>eapli.ecafeteria.domain.movement.Recharge</class>
+    <class>eapli.ecafeteria.domain.movement.Booking</class>
+    <class>eapli.ecafeteria.domain.movement.Refund</class>
     <class>eapli.ecafeteria.domain.reservations.Reservation</class>
     <class>eapli.ecafeteria.domain.pos.POS</class>
     <class>eapli.ecafeteria.domain.meals.Meal</class>

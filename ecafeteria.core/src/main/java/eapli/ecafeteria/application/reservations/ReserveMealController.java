@@ -14,6 +14,7 @@ import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.domain.movement.Booking;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -21,6 +22,7 @@ import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.util.Console;
 import eapli.framework.util.DateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,18 +49,24 @@ public class ReserveMealController implements Controller {
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         if (dish.currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
             Meal meal = new Meal(dish, mealType, DateTime.dateToCalendar(date), menu);
-            String code = Calendar.DAY_OF_MONTH + "/" + Calendar.MONTH + "/" + Calendar.YEAR
-                    + "//" + meal.mealNumber();
-            Reservation reservation = new Reservation(code, meal.dish().nutricionalInfo().toString(), meal);
-            movementRepo.addBookingMovement(dish.currentPrice());
+            String code = DateTime.format(DateTime.dateToCalendar(date)) + "//" + meal.mealNumber();
+            Reservation reservation = new Reservation(code, meal.dish().name().toString(), meal);
+            Booking booking = new Booking(user.get(), dish.currentPrice().negate());
             try {
-                reservationRepo.save(reservation);
+                addReservation(reservation);
+                movementRepo.addBookingMovement(booking);
                 state = true;
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 System.out.println("An transactional error has ocurred. Please check data and try again.");
             }
+        } else {
+            Console.readLine("\nSuccess!");
         }
         return state;
+    }
+
+    private Reservation addReservation(Reservation reservation) throws DataConcurrencyException, DataIntegrityViolationException {
+        return reservationRepo.save(reservation);
     }
 
 }
