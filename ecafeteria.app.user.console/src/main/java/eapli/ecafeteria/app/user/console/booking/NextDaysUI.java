@@ -24,7 +24,7 @@ public class NextDaysUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
-        System.out.println(">> List of booked reservations <<");
+        System.out.println(">> Reservations made <<");
         
         List <Reservation> bookedList = (List <Reservation>) crController.findBooked();
         if (bookedList.isEmpty()) {
