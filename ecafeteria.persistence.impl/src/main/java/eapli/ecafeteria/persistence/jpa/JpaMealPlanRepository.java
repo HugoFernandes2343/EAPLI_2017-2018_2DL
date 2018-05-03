@@ -5,8 +5,7 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
-import eapli.ecafeteria.domain.Kitchen.MealPlan;
-import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 
 /**

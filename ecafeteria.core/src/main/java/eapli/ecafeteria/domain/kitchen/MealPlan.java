@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.domain.Kitchen;
+package eapli.ecafeteria.domain.kitchen;
 
-import eapli.ecafeteria.domain.kitchen.MealPlanItem;
-import static eapli.ecafeteria.domain.Kitchen.MealPlanState.IN_PROGRESS;
-import static eapli.ecafeteria.domain.Kitchen.MealPlanState.PUBLISHED;
+import static eapli.ecafeteria.domain.kitchen.MealPlanState.IN_PROGRESS;
+import static eapli.ecafeteria.domain.kitchen.MealPlanState.PUBLISHED;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

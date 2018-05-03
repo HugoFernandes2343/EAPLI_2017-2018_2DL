@@ -6,7 +6,7 @@
 package eapli.ecafeteria.application.kitchen;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
-import eapli.ecafeteria.domain.Kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;

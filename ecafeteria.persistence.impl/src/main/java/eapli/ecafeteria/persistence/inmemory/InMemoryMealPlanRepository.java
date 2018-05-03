@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafeteria.domain.Kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
 
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;

@@ -6,7 +6,7 @@
 package eapli.ecafeteria.application.kitchen;
 
 import eapli.ecafeteria.application.menu.ListMenuService;
-import eapli.ecafeteria.domain.Kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
