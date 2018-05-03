@@ -8,7 +8,8 @@ package eapli.ecafeteria.persistence.inmemory;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
-import eapli.ecafeteria.domain.cafeteriauser.Movement;
+import eapli.ecafeteria.domain.movement.Movement;
+import eapli.ecafeteria.domain.movement.Recharge;
 import eapli.framework.domain.money.Money;
 /**
  *

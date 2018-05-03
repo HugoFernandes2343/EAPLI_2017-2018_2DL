@@ -1,5 +1,6 @@
-package eapli.ecafeteria.domain.cafeteriauser;
+package eapli.ecafeteria.domain.movement;
 
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
 import java.io.Serializable;
