@@ -32,7 +32,7 @@ public class RechargeCardController implements Controller{
     }
     
     public boolean rechargeCard(CafeteriaUser user, double value) {
-        Movement mov = new Movement(user,Money.euros(value), MovementDescription.RECHARGE);
+        Movement mov = new Movement(user,Money.euros(value), MovementDescription.RECHARGE) {};
         try {
             repo2.save(mov);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {

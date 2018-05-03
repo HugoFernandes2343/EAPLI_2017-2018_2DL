@@ -12,7 +12,10 @@ import javax.persistence.*;
  * @author 1161213; 1161110
  */
 @Entity
-public class Movement implements AggregateRoot<Long>, Serializable{
+@Table(name="MOVEMENT")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="Type")
+public abstract class Movement implements AggregateRoot<Long>, Serializable{
     
     /**
      * Attribute to keep the id of the movement
@@ -54,8 +57,14 @@ public class Movement implements AggregateRoot<Long>, Serializable{
      * @param description - description of the movement
      */
     public Movement(CafeteriaUser user, Money value, MovementDescription description){
-        
+        Money test = Money.euros(0.0);
         if(user == null || description == null || description == null){
+            throw new IllegalArgumentException();
+        }
+        
+        if(value.greaterThanOrEqual(test) && description.toString().equals(MovementDescription.BOOKING.toString())){
+            throw new IllegalArgumentException();
+        }else if(value.lessThanOrEqual(test)){
             throw new IllegalArgumentException();
         }
         
@@ -93,7 +102,7 @@ public class Movement implements AggregateRoot<Long>, Serializable{
         return this.user;
     }
     
-    public Money value(){
-        return this.value;
+    public double value(){
+        return this.value.amount();
     }
 }
