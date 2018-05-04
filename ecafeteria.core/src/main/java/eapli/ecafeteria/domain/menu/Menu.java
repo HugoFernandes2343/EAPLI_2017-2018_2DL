@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.TimeZone;
 import javax.persistence.*;
 
 /**
@@ -58,11 +59,17 @@ public class Menu implements AggregateRoot<Long>, Serializable {
             throw new IllegalArgumentException("Nenhum campo pode ser NULL");
         
         Calendar finishDate = startingDate;
-        finishDate.add(Calendar.DAY_OF_MONTH, 6); // adds 7 days to starting day
+        finishDate.add(Calendar.DAY_OF_MONTH, 6); // adds 6 days to starting day
         
         if (!finishDate.equals(endingDate))
             throw new IllegalArgumentException("As datas têm de distar obrigatoriamente 7 dias");
         
+        
+        Calendar today = Calendar.getInstance(TimeZone.getDefault());
+        
+        if (startingDate.before(today)){
+            throw new IllegalArgumentException("A Data de inicio é anterior à data atual");
+        }
         
         
         this.name= name;

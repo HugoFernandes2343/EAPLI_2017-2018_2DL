@@ -35,12 +35,12 @@ public class MenuBootstrapper implements Action {
         Designation teste6 = Designation.valueOf("Menu GERINGONÇA");
 
         try {
-            register(DateTime.newCalendar(2018, 4, 1), DateTime.newCalendar(2018, 4, 7),teste1);
-            register(DateTime.newCalendar(2018, 5, 1), DateTime.newCalendar(2018, 5, 7),teste2);
-            register(DateTime.newCalendar(2018, 6, 1), DateTime.newCalendar(2018, 6, 7),teste3);
-            register(DateTime.newCalendar(2018, 7, 1), DateTime.newCalendar(2018, 7, 7),teste4);
-            register(DateTime.newCalendar(2018, 8, 1), DateTime.newCalendar(2018, 8, 7),teste5);
-            register(DateTime.newCalendar(2018, 9, 1), DateTime.newCalendar(2018, 9, 7),teste6);
+            register(DateTime.newCalendar(2019, 4, 1), DateTime.newCalendar(2019, 4, 7),teste1);
+            register(DateTime.newCalendar(2019, 5, 1), DateTime.newCalendar(2019, 5, 7),teste2);
+            register(DateTime.newCalendar(2019, 6, 1), DateTime.newCalendar(2019, 6, 7),teste3);
+            register(DateTime.newCalendar(2019, 7, 1), DateTime.newCalendar(2019, 7, 7),teste4);
+            register(DateTime.newCalendar(2019, 8, 1), DateTime.newCalendar(2019, 8, 7),teste5);
+            register(DateTime.newCalendar(2019, 9, 1), DateTime.newCalendar(2019, 9, 7),teste6);
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {
