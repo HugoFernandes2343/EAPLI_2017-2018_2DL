@@ -18,10 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
-/**
- *
- * @author André Santos
- */
 @Entity
 public class MealPlanItem implements Serializable {
 
@@ -30,13 +26,9 @@ public class MealPlanItem implements Serializable {
     @Column(name = "ID")
     private Long id;
 
-    @Version
-    private Long version;
-
     @OneToOne
     private Meal meal;
 
-    @Embedded
     private Integer DishQuantity;
 
     @OneToOne
@@ -46,7 +38,7 @@ public class MealPlanItem implements Serializable {
 
     }
 
-    public MealPlanItem(MealPlan mp, Meal meal, Integer DishQuantity) {
+    public MealPlanItem(MealPlan mp, Meal meal, int DishQuantity) {
         this.meal = meal;
         this.mealPlan = mp;
         this.DishQuantity = DishQuantity;
