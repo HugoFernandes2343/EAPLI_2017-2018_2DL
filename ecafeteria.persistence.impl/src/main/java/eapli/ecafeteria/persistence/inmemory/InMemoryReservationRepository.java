@@ -60,7 +60,7 @@ public class InMemoryReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public Iterable<Reservation> findByStateAndMeal(ReservationState.STATE state, Meal m) {
+    public Iterable<Reservation> findByStateAndMeal(String state, Meal m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    
     }

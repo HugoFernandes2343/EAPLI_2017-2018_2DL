@@ -2,10 +2,12 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
+import java.util.Calendar;
 import java.util.Optional;
 
 /**
@@ -20,7 +22,7 @@ public class InMemoryMealRepository implements MealRepository{
     }
 
     @Override
-    public Iterable<Meal> findMealsByDateAndMealType(DateTime d, String type) {
+    public Iterable<Meal> findMealsByDateAndMealType(Calendar d, MealType type) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

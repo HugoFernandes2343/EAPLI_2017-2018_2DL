@@ -11,30 +11,39 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author João Vieira
+ * @author
  */
 @Embeddable
 public class MealType implements ValueObject, Serializable {
 
-    private MealTypes mealType;
+    private String mealType;
 
     protected MealType() {
     } // For ORM
+
+    public enum MealTypes {
+        LUNCH, DINNER
+    }
 
     public MealType(MealTypes mealType) {
         if (mealType == null) {
             throw new IllegalStateException();
         }
-        this.mealType = mealType;
+        this.mealType = mealType.toString();
     }
 
     public String mealType() {
-        return this.mealType.name();
+        return this.mealType;
     }
 
-    public enum MealTypes {
-        LUNCH, DINNER
+     public void lunch() {
+        mealType = MealTypes.LUNCH.toString();
     }
+
+    public void dinner() {
+        mealType = MealTypes.DINNER.toString();
+    }
+
 
     /**
      * It checks if the meal type (enum) is the same as this meal type.

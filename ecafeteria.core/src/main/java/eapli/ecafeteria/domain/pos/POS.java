@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
+import eapli.framework.domain.POSStateViolationException;
 import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
@@ -22,19 +23,49 @@ import javax.persistence.*;
 @Entity
 public class POS implements AggregateRoot<Long>, Serializable {
 
-    //POSState Open or Closed
-    @Enumerated(EnumType.STRING)
-    public POSState state;
-    @Id
-    private Long posID;
+    @Embeddable
+    public static class POSState implements Serializable {
 
-    @OneToOne
-    public POSShift shift;
+        private String state;
+
+        public enum STATE {
+            OPENED, CLOSED
+        };
+
+        private void open() {
+            state = STATE.CLOSED.toString();
+        }
+
+        private void close() throws POSStateViolationException {
+            if (state.equals(STATE.OPENED.toString())) {
+                state = STATE.OPENED.toString();
+            } else {
+                throw new POSStateViolationException();
+            }
+        }
+
+        public String state() {
+            return state;
+        }
+    }
+
+   
+  
     
-    public POS() {
-        this.state = POSState.CLOSED;
-        this.posID = new Long(1);
-        this.shift = null;
+    @Id
+    @GeneratedValue
+    private Long posID;
+    
+    private int code;
+    
+    private POSState state;
+    
+    public POS(){
+    }
+    
+    public POS(int code) throws POSStateViolationException {
+        state.open();
+        this.code = code;
     }
 
     @Override
@@ -65,21 +96,17 @@ public class POS implements AggregateRoot<Long>, Serializable {
         return posID;
     }
     
-    /**
-     * Closes the POS and changes all of the Reservations that are in a BOOKED state and changes them to an expired state
-     * @throws eapli.framework.domain.ReservationStateViolationException
-     */
-    public void closeShift() throws ReservationStateViolationException{
-        this.state = POSState.CLOSED;
-       ReservationRepository reservationRepo = PersistenceContext.repositories().reservations();
-       
-       for(Meal m : shift.meals()){
-           ArrayList<Reservation> reservations = (ArrayList<Reservation>) reservationRepo.findByStateAndMeal(Reservation.ReservationState.STATE.BOOKED, m);
-           for(Reservation r : reservations){
-               r.expire();
-           }
-       }
-        
+    public POSState state(){
+        return state;
     }
     
+    /**
+     *
+     * @throws eapli.framework.domain.POSStateViolationException
+     */
+    public boolean close() throws POSStateViolationException {
+        state.close();
+        return true;
+    }
+
 }

@@ -6,10 +6,12 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.framework.util.DateTime;
+import java.util.Calendar;
 import javax.persistence.Query;
 
 /**
@@ -28,8 +30,8 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
     }
 
     @Override
-    public Iterable<Meal> findMealsByDateAndMealType(DateTime d, String type) {
-        final Query q = entityManager().createQuery("SELECT m FROM Meal m WHERE m.date=:dt AND m.mealType:=tp", this.entityClass);
+    public Iterable<Meal> findMealsByDateAndMealType(Calendar d, MealType type) {
+        final Query q = entityManager().createQuery("SELECT m FROM Meal m WHERE m.date=:dt AND m.mealType=:tp", this.entityClass);
         q.setParameter("dt", d);
         q.setParameter("tp", type);
         return q.getResultList();

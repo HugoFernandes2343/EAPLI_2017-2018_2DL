@@ -7,7 +7,9 @@ package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.util.DateTime;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -29,9 +31,9 @@ import javax.persistence.Version;
  * @author Utilizador
  */
 @Entity
-public class Meal {
-
-    private static final Long serialVersionUID = 1L;
+public class Meal implements Serializable, AggregateRoot<Long>{
+    
+    private static final Long serialVersionUID = 95848L;
 
     @Id
     @GeneratedValue
@@ -130,6 +132,31 @@ public class Meal {
 
     public Dish getDish() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+         if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+
+        Meal meal = (Meal) other;
+
+        if (!dish.equals(meal.dish)) {
+            return false;
+        }
+        if (!mealType.equals(meal.mealType)) {
+            return false;
+        }
+        return date.equals(meal.date);
+    }
+
+    @Override
+    public Long id() {
+       return pk;
     }
 
 }
