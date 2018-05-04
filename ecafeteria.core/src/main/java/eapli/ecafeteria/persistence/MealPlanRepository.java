@@ -21,4 +21,5 @@ public interface MealPlanRepository extends DataRepository<MealPlan, Integer> {
             
     public List<MealPlanItem> getMealPlanItemsFromMealPlan(MealPlan mealPlan);
     
+    public MealPlan findByIDMealPlan(Long id);
 }

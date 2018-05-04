@@ -8,20 +8,12 @@ package eapli.ecafeteria.domain.kitchen;
 import eapli.ecafeteria.domain.meals.Meal;
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Version;
 
-/**
- *
- * @author André Santos
- */
 @Entity
 public class MealPlanItem implements Serializable {
 
@@ -30,13 +22,9 @@ public class MealPlanItem implements Serializable {
     @Column(name = "ID")
     private Long id;
 
-    @Version
-    private Long version;
-
     @OneToOne
     private Meal meal;
 
-    @Embedded
     private Integer DishQuantity;
 
     @OneToOne
@@ -46,13 +34,24 @@ public class MealPlanItem implements Serializable {
 
     }
 
-    public MealPlanItem(MealPlan mp, Meal meal, Integer DishQuantity) {
+    public MealPlanItem(MealPlan mp, Meal meal, int DishQuantity) {
         this.meal = meal;
         this.mealPlan = mp;
         this.DishQuantity = DishQuantity;
     }
 
+
     public int getDishQuantity(){
         return this.DishQuantity;
     }
+
+    public Long id() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "ID= " + id + "   DishQuantity=" + DishQuantity;
+    }
+
 }

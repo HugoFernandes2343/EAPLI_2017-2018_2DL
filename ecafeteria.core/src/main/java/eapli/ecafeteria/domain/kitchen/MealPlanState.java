@@ -5,10 +5,6 @@
  */
 package eapli.ecafeteria.domain.kitchen;
 
-/**
- *
- * @author André Santos
- */
 public enum MealPlanState {
     IN_PROGRESS {
 

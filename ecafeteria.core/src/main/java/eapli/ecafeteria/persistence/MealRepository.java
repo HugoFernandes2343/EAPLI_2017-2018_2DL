@@ -6,9 +6,10 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
-import eapli.framework.util.DateTime;
+import java.util.Calendar;
 
 /**
  *
@@ -16,7 +17,9 @@ import eapli.framework.util.DateTime;
  */
 public interface MealRepository extends DataRepository<Meal, Long> {
 
+
+    Iterable<Meal> findMealsByDateAndMealType(Calendar d, MealType type);
+
     Iterable<Meal> findMealOneMenu(Menu menu);
 
-    Iterable<Meal> findMealsByDateAndMealType(DateTime d, String type);
 }

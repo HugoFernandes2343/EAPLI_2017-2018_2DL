@@ -37,7 +37,10 @@ public class CreateMealPlanUI extends AbstractUI {
 
         System.out.println("List Menus");
         List<Menu> listaMenu = theController.fetchAvailableMenus();
-
+        if (listaMenu.isEmpty()) {
+            System.out.println("No exist menus");
+            return false;
+        }
         for (Menu menu : listaMenu) {
             System.out.println(menu.id());
         }
@@ -46,16 +49,18 @@ public class CreateMealPlanUI extends AbstractUI {
         long id = 0;
         while (resposta == false) {
             id = Console.readLong("Insere o ID do menu que pretende conforme a lista apresentada!");
-            resposta = theController.verificarID(id);
+            resposta = theController.verificarIDMenu(id);
         }
 
         Menu m = theController.selectMenu(id);
-        System.out.println(m.id());
 
         List<Meal> listaMeals = theController.getMealsfromMenu();
-
+        if (listaMeals.isEmpty()) {
+            System.out.println("No exist mseals");
+            return false;
+        }
         List<String> names = new ArrayList<>();
-        System.out.println("\n------------------Meals do menu---------------- " + id);
+        System.out.println("\n------------------Meals do menu " + id + "---------------- ");
 
         for (Meal meal : listaMeals) {
             names.add(meal.dish().name().toString());

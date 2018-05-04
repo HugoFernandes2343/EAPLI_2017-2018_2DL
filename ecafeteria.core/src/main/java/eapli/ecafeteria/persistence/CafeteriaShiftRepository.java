@@ -5,15 +5,15 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.pos.POS;
-import eapli.ecafeteria.domain.pos.POS.POSState;
+import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShift;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
  * @author hugod
  */
-public interface POSRepository extends DataRepository<POS, Long>{
+public interface CafeteriaShiftRepository extends DataRepository<CafeteriaShift,Long> {
     
-     public Iterable<POS> findOpenned(POSState state);
+    public CafeteriaShift findCafeteriaShift();
+    
 }

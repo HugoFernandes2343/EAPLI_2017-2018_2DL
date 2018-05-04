@@ -105,4 +105,6 @@ public interface RepositoryFactory {
      * @return
      */
     DishReportingRepository dishReporting();
+
+    CafeteriaShiftRepository cafeteriaShift();
 }

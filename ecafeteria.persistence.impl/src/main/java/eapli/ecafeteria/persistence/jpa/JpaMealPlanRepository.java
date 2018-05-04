@@ -24,18 +24,27 @@ public class JpaMealPlanRepository extends CafeteriaJpaRepositoryBase<MealPlan, 
     public Iterable<MealPlan> findAllMealPlanInProgress() {
         final Query q;
         String where = "e.mealPlanState=:mealPlanState";
-        q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
+        q = entityManager().createQuery("SELECT e FROM MealPlan e WHERE " + where, this.entityClass);
         q.setParameter("mealPlanState", MealPlanState.IN_PROGRESS);
         return q.getResultList();
     }
 
     @Override
+    public MealPlan findByIDMealPlan(Long id) {
+
+        Optional<MealPlan> mp = matchOne("e.id=:id", "id", id);
+
+        if (mp.isPresent()) {
+            MealPlan ms = mp.get();
+            return ms;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public List<MealPlanItem> getMealPlanItemsFromMealPlan(MealPlan mealPlan) {
-        final Query q;
-        String where = "e.mealPlan=:mealPlan";
-        q = entityManager().createQuery("SELECT e FROM MealPlan e WHERE " + where, this.entityClass);
-        q.setParameter("mealPlanItem", MealPlanState.IN_PROGRESS);
-        return q.getResultList();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

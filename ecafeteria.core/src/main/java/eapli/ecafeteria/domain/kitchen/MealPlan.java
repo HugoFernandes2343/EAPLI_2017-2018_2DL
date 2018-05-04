@@ -23,10 +23,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-/**
- *
- * @author André Santos
- */
 @Entity
 public class MealPlan<M, Q> implements Serializable {
 
@@ -67,4 +63,10 @@ public class MealPlan<M, Q> implements Serializable {
         }
         return true;
     }
+    
+    public Long id() {
+        return id;
+    }
+
+
 }
