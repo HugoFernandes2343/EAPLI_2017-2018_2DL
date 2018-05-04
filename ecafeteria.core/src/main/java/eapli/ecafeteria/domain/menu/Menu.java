@@ -5,32 +5,15 @@
  */
 package eapli.ecafeteria.domain.menu;
 
-import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 /**
  *
@@ -53,10 +36,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     private Designation name;
 
     @Column(unique = true)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Calendar startDate;
     @Column(unique = true)
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Calendar endingDate;
 
     @Enumerated(EnumType.STRING)
@@ -194,4 +177,11 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         return true;
     }
 
+    public Designation designation() {
+        return this.name;
+    }
+
+    public List<Meal> meals(){
+        return this.mealList;
+    }
 }

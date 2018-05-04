@@ -130,10 +130,6 @@ public class Meal implements Serializable, AggregateRoot<Long>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Dish getDish() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public boolean sameAs(Object other) {
          if (this == other) {
