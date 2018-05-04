@@ -15,22 +15,23 @@ import java.util.List;
  * @author David
  */
 public class ListMenuController implements Controller{
-    
+
     ListMenuService lsc = new ListMenuService();
-    
-    
+
+    private final ListMenuService listMenuS = new ListMenuService();
+
     public Iterable<Menu> listAll(){
         return lsc.allMenus();
     }
-    
-    
+
+
     public Menu listMenu(Date date){
-        
+
         return lsc.listMenu(date);
-        
+
     }
-    
-    
-    
-    
+
+
+
+
 }

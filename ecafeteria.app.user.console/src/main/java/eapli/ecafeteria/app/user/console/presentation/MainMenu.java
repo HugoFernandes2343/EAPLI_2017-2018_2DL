@@ -22,6 +22,7 @@ import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
+import eapli.ecafeteria.app.user.console.presentation.consultMenu.ConsultMenuAction;
 
 /**
  * @author Paulo Gandra Sousa
@@ -40,6 +41,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int LIST_MENUS_OPTION = 1;
     private static final int BOOK_A_MEAL_OPTION = 2;
     private static final int CONSULT_RESERVATIONS = 3;
+    private static final int CONSULT_MENU = 4;
 
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
@@ -103,10 +105,11 @@ class MainMenu extends CafeteriaUserBaseUI {
         menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ReserveMealAction()));
         final Menu menuConsult = buildConsultReservationsMenu();
         menu.add(new SubMenu(CONSULT_RESERVATIONS, menuConsult, new ShowVerticalSubMenuAction(buildConsultReservationsMenu())));
+        menu.add(new MenuItem(CONSULT_MENU, "Consult menu", new ConsultMenuAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
-    
+
     private Menu buildConsultReservationsMenu() {
         final Menu menu = new Menu("Consult Reservations");
 
@@ -116,7 +119,7 @@ class MainMenu extends CafeteriaUserBaseUI {
 
         return menu;
     }
-         
+
     private Menu buildAdminSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 

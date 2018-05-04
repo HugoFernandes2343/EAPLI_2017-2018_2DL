@@ -9,7 +9,7 @@ import eapli.ecafetaria.domain.menu.Menu;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;
-import eapli.ecafeteria.application.dishes.ConsultMenuController;
+import eapli.ecafeteria.application.menu.ListMenuController;
 
 /**
  *
@@ -17,7 +17,7 @@ import eapli.ecafeteria.application.dishes.ConsultMenuController;
  */
 public class ConsultMenuUI extends AbstractListUI<Menu> {
 
-    private final ConsultMenuController theController = new ConsultMenuController();
+    private final ListMenuController theController = new ListMenuController();
 
     protected Controller controller() {
         return this.theController;
@@ -25,7 +25,7 @@ public class ConsultMenuUI extends AbstractListUI<Menu> {
 
     @Override
     protected Iterable<Menu> elements() {
-        return this.theController.weekMenu();
+        return this.theController.listAll();
     }
 
     @Override
