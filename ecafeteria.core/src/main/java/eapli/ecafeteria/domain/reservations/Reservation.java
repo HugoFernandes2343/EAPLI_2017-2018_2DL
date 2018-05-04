@@ -75,7 +75,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Meal meal;
     
     private ReservationState currentState;
