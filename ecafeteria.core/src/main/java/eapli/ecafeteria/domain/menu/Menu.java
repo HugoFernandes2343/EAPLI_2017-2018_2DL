@@ -58,7 +58,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         if (startingDate==null || endingDate==null || name==null || !startingDate.before(endingDate))
             throw new IllegalArgumentException("Nenhum campo pode ser NULL");
         
-        Calendar finishDate = startingDate;
+        Calendar finishDate = (Calendar) startingDate.clone();
         finishDate.add(Calendar.DAY_OF_MONTH, 6); // adds 6 days to starting day
         
         if (!finishDate.equals(endingDate))
