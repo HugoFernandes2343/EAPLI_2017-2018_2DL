@@ -11,7 +11,6 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,7 +38,7 @@ public class Meal implements Serializable, AggregateRoot<Long>{
     @Version
     private Long version;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private Dish dish;
 
     @ManyToOne(fetch = FetchType.EAGER)
