@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.app.user.console.presentation.consultMenu;
 
-import eapli.ecafetaria.domain.menu.Menu;
+import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractListUI;
 import eapli.framework.visitor.Visitor;

@@ -7,8 +7,8 @@
 package eapli.ecafeteria.app.user.console.presentation.consultMenu;
 
 
-import eapli.ecafetaria.domain.meals.Meal;
-import eapli.ecafetaria.domain.menu.Menu;
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.visitor.Visitor;
 
 /**
@@ -19,10 +19,10 @@ public class MenuPrinter implements Visitor<Menu>{
 
     @Override
     public void visit(Menu visitee) {
-        System.out.printf("Menu title: %s \n", visitee.getTitle());
-        for (Meal meal : visitee.getMeals()) {
+        System.out.printf("Menu title: %s \n", visitee.designation().toString());
+        for (Meal meal : visitee.meals()) {
             System.out.println("Meal:\n");
-            System.out.println("\nDish Name: " + meal.dishName().toString());
+            System.out.println("\nDish Name: " + meal.dish().name().toString());
             System.out.println("\nMeal Type" + meal.mealType());
             System.out.println("\nDate " + meal.date().getCalendarType());
         }
