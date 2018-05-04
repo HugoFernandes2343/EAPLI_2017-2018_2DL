@@ -11,6 +11,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -34,6 +35,8 @@ public class CafeteriaShiftClosingUI extends AbstractUI {
                 controller.closeAllActivePOS();
             } catch (DataConcurrencyException | DataIntegrityViolationException | ReservationStateViolationException | POSStateViolationException | CafeteriaShiftStateViolationException ex) {
                 System.out.println("An error has ocurred");
+            } catch(NoResultException ex){
+                 System.out.println("The cafeteria shift is not opened therefore can't be closed");
             }
             System.out.println("Shift Closed!");
         } else {

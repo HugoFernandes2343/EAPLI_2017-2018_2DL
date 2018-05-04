@@ -19,6 +19,7 @@ import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -39,7 +40,7 @@ public class CafeteriaShiftClosingController implements Controller {
      * @throws POSStateViolationException
      * @throws CafeteriaShiftStateViolationException
      */
-    public void closeAllActivePOS() throws DataConcurrencyException, DataIntegrityViolationException, ReservationStateViolationException, POSStateViolationException, CafeteriaShiftStateViolationException {
+    public void closeAllActivePOS() throws DataConcurrencyException, DataIntegrityViolationException, ReservationStateViolationException, POSStateViolationException, CafeteriaShiftStateViolationException, NoResultException {
 
         ArrayList<POS> list_pos = new ArrayList<>();
 
@@ -52,8 +53,10 @@ public class CafeteriaShiftClosingController implements Controller {
             
             posRP.save(p);
         }
-
+        
+        
         CafeteriaShift cs = cfRP.findCafeteriaShift();
+       
         MealType mealT = null;
         if (cs.dayTimeCheck().equalsIgnoreCase("lunch")) {
              mealT = new MealType(MealType.MealTypes.LUNCH);
