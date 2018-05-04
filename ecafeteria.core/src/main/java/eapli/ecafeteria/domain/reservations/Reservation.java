@@ -140,7 +140,11 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     public String id() {
         return this.code;
     }
-
+    
+    public ReservationState state(){
+        return this.currentState;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {

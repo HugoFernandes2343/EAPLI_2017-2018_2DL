@@ -33,12 +33,12 @@ public class POS implements AggregateRoot<Long>, Serializable {
         };
 
         private void open() {
-            state = STATE.CLOSED.toString();
+            state = STATE.OPENED.toString();
         }
 
         private void close() throws POSStateViolationException {
             if (state.equals(STATE.OPENED.toString())) {
-                state = STATE.OPENED.toString();
+                state = STATE.CLOSED.toString();
             } else {
                 throw new POSStateViolationException();
             }
@@ -64,6 +64,7 @@ public class POS implements AggregateRoot<Long>, Serializable {
     }
     
     public POS(int code) throws POSStateViolationException {
+        this.state = new POSState();
         state.open();
         this.code = code;
     }

@@ -32,7 +32,7 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
      * @param m
      * @return
      */
-    Iterable<Reservation> findByStateAndMeal(String state,Meal m);
+    Iterable<Reservation> findByStateAndMeal(Reservation.ReservationState state,Meal m);
 
 
     Iterable<Reservation> selectTypeBooked();

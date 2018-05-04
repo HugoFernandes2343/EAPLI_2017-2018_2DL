@@ -8,7 +8,6 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.ReservationRepository;
-import java.util.*;
 import java.util.Optional;
 import javax.persistence.*;
 
@@ -24,10 +23,10 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     }
 
     @Override
-    public Iterable<Reservation> findByStateAndMeal(String state, Meal m) {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal=:meal r.state=:state");
-        createQuery.setParameter("meal", m.pk());
-        createQuery.setParameter("state", state);
+    public Iterable<Reservation> findByStateAndMeal(Reservation.ReservationState state, Meal m) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal=:me AND r.currentState=:st");
+        createQuery.setParameter("me", m);
+        createQuery.setParameter("st", state);
         return createQuery.getResultList();
     }
 

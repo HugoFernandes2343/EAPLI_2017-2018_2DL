@@ -17,7 +17,7 @@ public class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> impl
 
     @Override
     public Iterable<POS> findOpenned(POS.POSState s) {
-        final TypedQuery query = entityManager().createQuery("SELECT p FROM POS p WHERE p.state = :st", this.entityClass);
+        final TypedQuery query = entityManager().createQuery("SELECT p FROM POS p WHERE p.state=:st", this.entityClass);
         query.setParameter("st", s);
         return query.getResultList();
     }

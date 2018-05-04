@@ -31,12 +31,12 @@ public class CafeteriaShift implements Serializable, AggregateRoot<Long> {
         };
 
         private void open() {
-            sstate = STATE.CLOSED.toString();
+            sstate = STATE.OPENED.toString();
         }
 
         private void close() throws CafeteriaShiftStateViolationException {
             if (sstate.equals(STATE.OPENED.toString())) {
-                sstate = STATE.OPENED.toString();
+                sstate = STATE.CLOSED.toString();
             } else {
                 throw new CafeteriaShiftStateViolationException();
             }
