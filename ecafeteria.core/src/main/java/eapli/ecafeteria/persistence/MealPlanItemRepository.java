@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.framework.persistence.repositories.DataRepository;
 
@@ -14,4 +15,9 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface MealPlanItemRepository extends DataRepository<MealPlanItem, Long> {
 
+    public Iterable<MealPlanItem> getMealPlanItemList(MealPlan mp);
+
+    public MealPlanItem findByIDMealPlanItem(Long id);
+
+    public void updateTable(Long id, int quantidades);
 }

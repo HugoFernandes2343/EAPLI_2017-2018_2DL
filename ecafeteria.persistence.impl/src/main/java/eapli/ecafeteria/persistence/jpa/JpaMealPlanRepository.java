@@ -7,7 +7,9 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.kitchen.MealPlanState;
+import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.MealPlanRepository;
+import java.util.Optional;
 import javax.persistence.Query;
 
 /**
@@ -20,9 +22,22 @@ public class JpaMealPlanRepository extends CafeteriaJpaRepositoryBase<MealPlan, 
     public Iterable<MealPlan> findAllMealPlanInProgress() {
         final Query q;
         String where = "e.mealPlanState=:mealPlanState";
-        q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
+        q = entityManager().createQuery("SELECT e FROM MealPlan e WHERE " + where, this.entityClass);
         q.setParameter("mealPlanState", MealPlanState.IN_PROGRESS);
         return q.getResultList();
+    }
+
+    @Override
+    public MealPlan findByIDMealPlan(Long id) {
+
+        Optional<MealPlan> mp = matchOne("e.id=:id", "id", id);
+
+        if (mp.isPresent()) {
+            MealPlan ms = mp.get();
+            return ms;
+        } else {
+            return null;
+        }
     }
 
 }

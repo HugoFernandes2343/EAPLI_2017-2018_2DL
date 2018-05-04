@@ -37,7 +37,10 @@ public class ElaborateMealPlanController implements Controller {
     private final MealPlanItemRepository mealPlanItemRepository = PersistenceContext.repositories().mealPlanItemRepository();
     private List<Menu> listaMenu = new ArrayList<>();
     private List<MealPlan> listMealPlan = new ArrayList<>();
+    private List<MealPlanItem> listMPI = new ArrayList<>();
     private Menu menu;
+    private MealPlan mp;
+    private MealPlanItem mpi;
 
     public List<Menu> fetchAvailableMenus() {
         listaMenu = new ArrayList<>((Collection<? extends Menu>) listMenuService.allMenus());
@@ -49,16 +52,36 @@ public class ElaborateMealPlanController implements Controller {
         return listMealPlan;
     }
 
-    public boolean verificarID(long id) {
+    public boolean verificarIDMenu(long id) {
 
         for (Menu m : listaMenu) {
             long valor = m.id();
             if (valor == id) {
-                System.out.println("\nExiste!!!!!!!\n");
                 return true;
             }
         }
-        System.out.println("\nNão Existe!!!\n");
+        return false;
+    }
+
+    public boolean verificarIDMealPlanItem(long id) {
+
+        for (MealPlanItem m : listMPI) {
+            long valor = m.id();
+            if (valor == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarIDMealPlan(long id) {
+
+        for (MealPlan mp : listMealPlan) {
+            long valor = mp.id();
+            if (valor == id) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -67,10 +90,25 @@ public class ElaborateMealPlanController implements Controller {
         return menu;
     }
 
+    public MealPlan selectMealPlan(long id) {
+        mp = repository.findByIDMealPlan(id);
+        return mp;
+    }
+
+    public MealPlanItem selectMealPlanItem(long id) {
+        mpi = mealPlanItemRepository.findByIDMealPlanItem(id);
+        return mpi;
+    }
+
     public List<Meal> getMealsfromMenu() {
         List<Meal> listMeals = new ArrayList<Meal>();
         listMeals = (List<Meal>) PersistenceContext.repositories().meals().findMealOneMenu(menu);
         return listMeals;
+    }
+
+    public List<MealPlanItem> getMealPlanItemList() {
+        listMPI = (List<MealPlanItem>) mealPlanItemRepository.getMealPlanItemList(mp);
+        return listMPI;
     }
 
     public MealPlan createElaborateMealplan() throws DataConcurrencyException, DataIntegrityViolationException {
@@ -83,6 +121,10 @@ public class ElaborateMealPlanController implements Controller {
         MealPlanItem mealPlanItem = new MealPlanItem(mp, meal, quantidade);
         mealPlanItemRepository.save(mealPlanItem);
 
+    }
+
+    public void changeQuantity(long id, int quantidade) {
+        mealPlanItemRepository.updateTable(id, quantidade);
     }
 
 }

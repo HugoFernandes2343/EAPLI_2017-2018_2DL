@@ -45,4 +45,8 @@ public class MealPlan<M, Q> implements Serializable {
         this.mealPlanState = PUBLISHED;
     }
 
+    public Long id() {
+        return id;
+    }
+
 }
