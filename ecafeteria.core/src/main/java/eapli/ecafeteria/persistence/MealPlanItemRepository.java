@@ -5,14 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
  * @author Paulo Jorge
  */
-public interface MealPlanRepository extends DataRepository<MealPlan, Integer> {
+public interface MealPlanItemRepository extends DataRepository<MealPlanItem, Long> {
 
-    public Iterable<MealPlan> findAllMealPlanInProgress();
 }

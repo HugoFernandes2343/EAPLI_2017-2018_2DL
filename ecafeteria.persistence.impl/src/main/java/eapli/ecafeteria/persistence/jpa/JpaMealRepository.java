@@ -21,11 +21,11 @@ import javax.persistence.Query;
 public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> implements MealRepository {
 
     @Override
-    public Iterable<Meal> findMealOneMenu(long id) {
+    public Iterable<Meal> findMealOneMenu(Menu menu) {
         final Query q;
-        String where = "e.menuID=:menuID";
-        q = entityManager().createQuery("SELECT e FROM Menu e WHERE " + where, this.entityClass);
-        q.setParameter("menuID", id);
+        String where = "e.menu=:menu";
+        q = entityManager().createQuery("SELECT e FROM Meal e WHERE " + where, this.entityClass);
+        q.setParameter("menu", menu);
         return q.getResultList();
     }
 
@@ -36,6 +36,5 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         q.setParameter("tp", type);
         return q.getResultList();
     }
-    
-    
+
 }

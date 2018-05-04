@@ -35,10 +35,10 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
     Iterable<Reservation> findByStateAndMeal(String state,Meal m);
 
 
-    Iterable<Reservation> selectTypeBooked(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
-    Iterable<Reservation> selectTypeDelivered(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
-    Iterable<Reservation> selectTypeCancelled(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
-    Iterable<Reservation> selectTypeExpired(Date startDate, Date endDate, Reservation.ReservationState.STATE state);
+    Iterable<Reservation> selectTypeBooked();
+    Iterable<Reservation> selectTypeDelivered();
+    Iterable<Reservation> selectTypeCancelled();
+    Iterable<Reservation> selectTypeExpired();
 
     
 }

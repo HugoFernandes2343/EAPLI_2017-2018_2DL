@@ -95,6 +95,8 @@ public interface RepositoryFactory {
 
     MealPlanRepository mealPlan();
 
+    MealPlanItemRepository mealPlanItemRepository();
+
     /**
      * ************************
      * reporting ************************

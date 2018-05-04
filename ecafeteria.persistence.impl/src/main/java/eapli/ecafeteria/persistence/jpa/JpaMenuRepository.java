@@ -57,4 +57,17 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
         return q.getResultList();
     }
 
+    @Override
+    public Menu findByID(long menuID) {
+
+        Optional<Menu> m = matchOne("e.menuID=:menuID", "menuID", menuID);
+
+        if (m.isPresent()) {
+            Menu ms = m.get();
+            return ms;
+        } else {
+            return null;
+        }
+    }
+
 }

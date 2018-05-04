@@ -17,24 +17,22 @@ import java.util.*;
 public class ConsultReservationsController implements Controller{
     
     private final ListReservationService listReservationService = new ListReservationService();
-    private final ReservationRepository reservationRepo = PersistenceContext.repositories().reservations();
-
-    public Iterable<Reservation> findBooked(Date startDate, Date endDate, Reservation.ReservationState.STATE state){
-        return listReservationService.findBooked(startDate, endDate, state);
+    
+    public Iterable<Reservation> findBooked(){
+        return listReservationService.findBooked();
     }
     
-    public Iterable<Reservation> findDelivered(Date startDate, Date endDate, Reservation.ReservationState.STATE state){
-        return listReservationService.findDelivered(startDate, endDate, state);
+    public Iterable<Reservation> findDelivered(){
+        return listReservationService.findDelivered();
     }
     
-    public Iterable<Reservation> findCancelled(Date startDate, Date endDate, Reservation.ReservationState.STATE state){
-        return listReservationService.findCancelled(startDate, endDate, state);
+    public Iterable<Reservation> findCancelled(){
+        return listReservationService.findCancelled();
     }
     
-    public Iterable<Reservation> findExpired(Date startDate, Date endDate, Reservation.ReservationState.STATE state){
-        return listReservationService.findExpired(startDate, endDate, state);
+    public Iterable<Reservation> findExpired(){
+        return listReservationService.findExpired();
     }
-    
     
 }
 

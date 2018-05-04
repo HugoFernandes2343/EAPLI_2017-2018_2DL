@@ -14,19 +14,19 @@ public class ListReservationService {
     
     private final ReservationRepository reservationRepository = PersistenceContext.repositories().reservations();
     
-    public Iterable<Reservation> findBooked(Date startDate, Date endDate, Reservation.ReservationState.STATE state){        
-        return reservationRepository.selectTypeBooked(startDate, endDate, state);
+    public Iterable<Reservation> findBooked(){        
+        return reservationRepository.selectTypeBooked();
     }
     
-    public Iterable<Reservation> findDelivered(Date startDate, Date endDate, Reservation.ReservationState.STATE state){        
-        return reservationRepository.selectTypeDelivered(startDate, endDate, state);
+    public Iterable<Reservation> findDelivered(){        
+        return reservationRepository.selectTypeDelivered();
     }
 
-    public Iterable<Reservation> findCancelled(Date startDate, Date endDate, Reservation.ReservationState.STATE state){        
-        return reservationRepository.selectTypeCancelled(startDate, endDate, state);
+    public Iterable<Reservation> findCancelled(){        
+        return reservationRepository.selectTypeCancelled();
     }
     
-    public Iterable<Reservation> findExpired(Date startDate, Date endDate, Reservation.ReservationState.STATE state){        
-        return reservationRepository.selectTypeExpired(startDate, endDate, state);
+    public Iterable<Reservation> findExpired(){        
+        return reservationRepository.selectTypeExpired();
     }
 }

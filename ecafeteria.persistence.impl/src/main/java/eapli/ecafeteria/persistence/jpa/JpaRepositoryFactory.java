@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -112,6 +113,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public CafeteriaShiftRepository cafeteriaShift() {
-       return new JPACafeteriaShiftRepository();
+        return new JPACafeteriaShiftRepository();
+    }
+
+    @Override
+    public MealPlanItemRepository mealPlanItemRepository() {
+        return new JpaMealPlanItemRepository();
+
     }
 }

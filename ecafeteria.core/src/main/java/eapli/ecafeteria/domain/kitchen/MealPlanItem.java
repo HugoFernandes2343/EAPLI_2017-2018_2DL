@@ -7,37 +7,49 @@ package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 /**
  *
  * @author André Santos
  */
 @Entity
-public class MealPlanItem implements Serializable
-{
+public class MealPlanItem implements Serializable {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
-        
-    @OneToMany
+
+    @Version
+    private Long version;
+
+    @OneToOne
     private Meal meal;
-    
-    
+
+    @Embedded
     private Integer DishQuantity;
 
-    public MealPlanItem() {
+    @OneToOne
+    private MealPlan mealPlan;
+
+    protected MealPlanItem() {
+
     }
 
-    
-    
-    public MealPlanItem(Meal meal, Integer DishQuantity) {
+    public MealPlanItem(MealPlan mp, Meal meal, Integer DishQuantity) {
         this.meal = meal;
+        this.mealPlan = mp;
         this.DishQuantity = DishQuantity;
     }
-       
-    
+
 }

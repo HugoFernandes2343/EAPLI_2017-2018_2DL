@@ -32,37 +32,31 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     }
 
     
-    public Iterable<Reservation> selectTypeBooked(Date startDate, Date endDate, Reservation.ReservationState.STATE state){
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.date BETWEEN (startDate, endDate) AND state=: state");
-        createQuery.setParameter("startDate", startDate);
-        createQuery.setParameter("endDate", endDate);
-        createQuery.setParameter(("state"), state);
+    @Override
+    public Iterable<Reservation> selectTypeBooked(){
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE state=:state");
+        createQuery.setParameter(("state"), Reservation.ReservationState.STATE.BOOKED.toString());
         return createQuery.getResultList();
     }
     
-    public Iterable<Reservation> selectTypeDelivered(Date startDate, Date endDate, Reservation.ReservationState.STATE state) {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.date BETWEEN (startDate, endDate) AND state=: state");
-        createQuery.setParameter("startDate", startDate);
-        createQuery.setParameter("endDate", endDate);
-        createQuery.setParameter(("state"), state);
+    @Override
+    public Iterable<Reservation> selectTypeDelivered() {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE state=:state");
+        createQuery.setParameter(("state"), Reservation.ReservationState.STATE.DELIVERED.toString());
         return createQuery.getResultList();
     }
 
     @Override
-    public Iterable<Reservation> selectTypeCancelled(Date startDate, Date endDate, Reservation.ReservationState.STATE state) {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.date BETWEEN (startDate, endDate) AND state=: state");
-        createQuery.setParameter("startDate", startDate);
-        createQuery.setParameter("endDate", endDate);
-        createQuery.setParameter(("state"), state);
+    public Iterable<Reservation> selectTypeCancelled() {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE state=:state");
+        createQuery.setParameter(("state"), Reservation.ReservationState.STATE.CANCELLED.toString());
         return createQuery.getResultList();
     }
 
     @Override
-    public Iterable<Reservation> selectTypeExpired(Date startDate, Date endDate, Reservation.ReservationState.STATE state) {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.date BETWEEN (startDate, endDate) AND state=: state");
-        createQuery.setParameter("startDate", startDate);
-        createQuery.setParameter("endDate", endDate);
-        createQuery.setParameter(("state"), state);
+    public Iterable<Reservation> selectTypeExpired() {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE state=:state");
+        createQuery.setParameter(("state"), Reservation.ReservationState.STATE.EXPIRED.toString());
         return createQuery.getResultList();
     }
 

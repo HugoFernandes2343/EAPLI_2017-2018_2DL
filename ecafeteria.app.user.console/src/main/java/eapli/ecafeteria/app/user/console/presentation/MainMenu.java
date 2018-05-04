@@ -6,7 +6,9 @@
 package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
-import eapli.ecafeteria.app.user.console.booking.ConsultReservationsUI;
+import eapli.ecafeteria.app.user.console.booking.NextDaysAction;
+import eapli.ecafeteria.app.user.console.booking.NextDaysUI;
+import eapli.ecafeteria.app.user.console.booking.PreviousPurchasesAction;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.ExitWithMessageAction;
@@ -99,11 +101,22 @@ class MainMenu extends CafeteriaUserBaseUI {
         final Menu menu = new Menu("Bookings");
         menu.add(new MenuItem(LIST_MENUS_OPTION, "List menus", new ShowUiAction(new ListMenuMenu())));
         menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ShowUiAction(new ReserveMealMenu())));
-        menu.add(new MenuItem(CONSULT_RESERVATIONS, "Consult reservations", new ShowUiAction(new ConsultReservationsUI())));
+        final Menu menuConsult = buildConsultReservationsMenu();
+        menu.add(new SubMenu(CONSULT_RESERVATIONS, menuConsult, new ShowVerticalSubMenuAction(buildConsultReservationsMenu())));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
+    
+    private Menu buildConsultReservationsMenu() {
+        final Menu menu = new Menu("Consult Reservations");
 
+        menu.add(new MenuItem(1, "Next days", new NextDaysAction()));
+        menu.add(new MenuItem(2, "Previous purchases", new PreviousPurchasesAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
+        return menu;
+    }
+         
     private Menu buildAdminSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 
