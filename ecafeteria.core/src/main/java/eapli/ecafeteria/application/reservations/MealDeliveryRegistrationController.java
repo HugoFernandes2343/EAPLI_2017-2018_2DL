@@ -18,7 +18,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  * MealDeliveryRegistrationController class
  * Created on 20/04/2018
  * 
- * @author Marco
+ * @author 1160777 & 1161569
  */
 public class MealDeliveryRegistrationController implements Controller{
     

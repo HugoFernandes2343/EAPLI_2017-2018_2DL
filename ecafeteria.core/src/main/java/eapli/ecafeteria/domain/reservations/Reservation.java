@@ -15,7 +15,7 @@ import javax.persistence.*;
 /**
  * Class Reservation
  *
- * @author Marco
+ * @author 1160777 & 1161569
  */
 @Entity
 public class Reservation implements AggregateRoot<String>, Serializable {
