@@ -7,15 +7,19 @@ package eapli.ecafeteria.domain.kitchen;
 
 import static eapli.ecafeteria.domain.kitchen.MealPlanState.IN_PROGRESS;
 import static eapli.ecafeteria.domain.kitchen.MealPlanState.PUBLISHED;
+import eapli.ecafeteria.domain.menu.Menu;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -25,31 +29,23 @@ import javax.persistence.OneToMany;
 public class MealPlan<M, Q> implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private MealPlanState mealPlanState;
 
-    @OneToMany
-    private List<MealPlanItem> menuItems;
+    @OneToOne
+    private Menu menu;
 
-    public MealPlan(List<MealPlanItem> menuItems) {
+    public MealPlan(Menu menu) {
         this.mealPlanState = IN_PROGRESS;
-        this.menuItems = menuItems;
+        this.menu = menu;
     }
 
-    public MealPlan() {
-        this.mealPlanState = IN_PROGRESS;
-        this.menuItems = new ArrayList<MealPlanItem>();
-    }
+    protected MealPlan() {
 
-    public void updateMalPlanState(MealPlan p) {
-        if (p.menuItems.isEmpty()) {
-            this.mealPlanState = IN_PROGRESS;
-        } else {
-            this.mealPlanState = PUBLISHED;
-        }
     }
 
     public void closeMealPlan() {

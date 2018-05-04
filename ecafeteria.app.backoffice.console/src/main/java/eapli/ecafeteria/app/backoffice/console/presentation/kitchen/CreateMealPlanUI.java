@@ -7,6 +7,7 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.ElaborateMealPlanController;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.application.Controller;
@@ -60,20 +61,27 @@ public class CreateMealPlanUI extends AbstractUI {
             names.add(meal.dish().name().toString());
             System.out.println(meal.dish().name());
         }
-
-        int cont = 0;
-        for (Meal meal : listaMeals) {
-            int quantidade = Console.readInteger("Insere a quantidade que pretende para " + names.get(cont) + " !");
-            theController.insertQuantityMeal(quantidade, meal);
-            cont++;
-        }
+        MealPlan mp = null;
         try {
-            System.out.println(theController.createElaborateMealplan());
+            mp = theController.createElaborateMealplan();
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {
             Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        int cont = 0;
+        for (Meal meal : listaMeals) {
+            int quantidade = Console.readInteger("Insere a quantidade que pretende para " + names.get(cont) + " !");
+            try {
+                theController.insertQuantityMeal(quantidade, meal, mp);
+            } catch (DataConcurrencyException ex) {
+                Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DataIntegrityViolationException ex) {
+                Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            cont++;
+        }
+
         return true;
     }
 
