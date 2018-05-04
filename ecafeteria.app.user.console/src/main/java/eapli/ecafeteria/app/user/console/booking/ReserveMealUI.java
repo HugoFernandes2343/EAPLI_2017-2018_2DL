@@ -8,6 +8,7 @@ package eapli.ecafeteria.app.user.console.booking;
 import eapli.ecafeteria.application.reservations.ReserveMealController;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
@@ -54,8 +55,9 @@ public class ReserveMealUI extends AbstractUI {
 
         final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
         if (confirm.equals("1")) {
-            if (theController.reserveMeal(meal.dish(), meal.mealType(), date, menu)) {
-                Console.readLine("\nSuccess!");
+            Reservation reservation = theController.reserveMeal(meal);
+            if (reservation != null) {
+                Console.readLine("\nSuccess! Your Reservation code is " + reservation.id());
             }
         }
         return true;

@@ -75,7 +75,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private Meal meal;
     
     private ReservationState currentState;
@@ -165,6 +165,6 @@ public class Reservation implements AggregateRoot<String>, Serializable {
 
     @Override
     public String toString(){
-        return String.format("Code: %s\nDescription: %s\nState: %s\n", code,description,currentState.toString());
+        return String.format("Code: %s\nDescription: %s\nState: %s\n%s", code,description,currentState.state, meal.toString());
     }
 }

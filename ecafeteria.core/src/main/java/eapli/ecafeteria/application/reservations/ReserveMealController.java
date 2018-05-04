@@ -10,9 +10,7 @@ import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserService;
 import eapli.ecafeteria.application.cafeteriauser.ListMovementService;
 import eapli.ecafeteria.application.menu.ListMenuService;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
-import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.movement.Booking;
 import eapli.ecafeteria.domain.reservations.Reservation;
@@ -24,7 +22,6 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.Console;
 import eapli.framework.util.DateTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -44,25 +41,23 @@ public class ReserveMealController implements Controller {
         return listMenuService.listMenuBooking(date);
     }
 
-    public boolean reserveMeal(Dish dish, MealType mealType, Date date, Menu menu) {
-        boolean state = false;
+    public Reservation reserveMeal(Meal meal) {
+        Reservation reservationAdded = null;
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
-        if (dish.currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
-            Meal meal = new Meal(dish, mealType, DateTime.dateToCalendar(date), menu);
-            String code = DateTime.format(DateTime.dateToCalendar(date)) + "//" + meal.mealNumber();
+        if (meal.dish().currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
+            String code = DateTime.format(DateTime.dateToCalendar(meal.date().getTime())) + "//" + meal.mealNumber();
             Reservation reservation = new Reservation(code, meal.dish().name().toString(), meal);
-            Booking booking = new Booking(user.get(), dish.currentPrice().negate());
+            Booking booking = new Booking(user.get(), meal.dish().currentPrice().negate());
             try {
-                addReservation(reservation);
+                reservationAdded = addReservation(reservation);
                 movementRepo.addBookingMovement(booking);
-                state = true;
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 System.out.println("An transactional error has ocurred. Please check data and try again.");
             }
         } else {
             Console.readLine("\nInsufficient funds!");
         }
-        return state;
+        return reservationAdded;
     }
 
     private Reservation addReservation(Reservation reservation) throws DataConcurrencyException, DataIntegrityViolationException {

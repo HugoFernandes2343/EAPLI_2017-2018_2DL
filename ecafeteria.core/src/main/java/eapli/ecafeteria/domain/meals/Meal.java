@@ -11,8 +11,6 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -26,14 +24,14 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 /**
- * PlaceHolder class
+ * Meal class
  *
- * @author Utilizador
+ * @author 1161569
  */
 @Entity
 public class Meal implements Serializable, AggregateRoot<Long>{
     
-    private static final Long serialVersionUID = 95848L;
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
