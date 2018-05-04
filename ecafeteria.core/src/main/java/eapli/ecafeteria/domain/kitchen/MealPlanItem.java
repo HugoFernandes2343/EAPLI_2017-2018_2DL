@@ -52,4 +52,7 @@ public class MealPlanItem implements Serializable {
         this.DishQuantity = DishQuantity;
     }
 
+    public int getDishQuantity(){
+        return this.DishQuantity;
+    }
 }

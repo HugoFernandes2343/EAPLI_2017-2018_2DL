@@ -94,7 +94,7 @@ public interface RepositoryFactory {
     MovementRepository movements();
 
     MealPlanRepository mealPlan();
-
+    
     MealPlanItemRepository mealPlanItemRepository();
 
     /**

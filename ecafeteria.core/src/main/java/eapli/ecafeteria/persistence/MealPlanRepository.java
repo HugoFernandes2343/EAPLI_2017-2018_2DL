@@ -6,7 +6,10 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.List;
 
 /**
  *
@@ -15,4 +18,7 @@ import eapli.framework.persistence.repositories.DataRepository;
 public interface MealPlanRepository extends DataRepository<MealPlan, Integer> {
 
     public Iterable<MealPlan> findAllMealPlanInProgress();
+            
+    public List<MealPlanItem> getMealPlanItemsFromMealPlan(MealPlan mealPlan);
+    
 }

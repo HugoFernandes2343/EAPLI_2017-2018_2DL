@@ -6,9 +6,12 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import eapli.ecafeteria.domain.menu.Menu;
 
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
+import java.util.List;
 
 /**
  *
@@ -23,6 +26,12 @@ public class InMemoryMealPlanRepository extends InMemoryRepository<MealPlan, Int
 
     @Override
     public Iterable<MealPlan> findAllMealPlanInProgress() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public List<MealPlanItem> getMealPlanItemsFromMealPlan(MealPlan mealPlan) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

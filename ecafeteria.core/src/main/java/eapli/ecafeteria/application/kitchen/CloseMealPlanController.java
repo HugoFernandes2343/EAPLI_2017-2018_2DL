@@ -8,25 +8,42 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.List;
 
 /**
  *
  * @author Cerqueira
  */
 public class CloseMealPlanController {
-    
-//    private final MealPlanRepository repository = PersistenceContext.repositories().mealPlan();
 
-//    public Iterable<MealPlan> listMealPlan(){
-//        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-//        return this.repository.findAll();
-//    }
-    
-    public void closeMealPlan(MealPlan mealPlan) {
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-        mealPlan.closeMealPlan();
+    private Iterable<MealPlan> lmp;
+
+    private final MealPlanRepository mpr = PersistenceContext.repositories().mealPlan();
+
+    private final MealPlanItemRepository mpir = PersistenceContext.repositories().mealPlanItemRepository();
+
+    public Iterable<MealPlan> getMealPlans() {
+        lmp = mpr.findAllMealPlanInProgress();
+        return lmp;
     }
-    
+
+    public boolean validateMealPlan(MealPlan mp) {
+        return mp.isInTime(this.mpr);
+    }
+
+    public void saveMealPlan(MealPlan mp) throws DataConcurrencyException, DataIntegrityViolationException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        mpr.save(mp);
+    }
+
+    public void changeStatus(MealPlan mp) {
+        mp.closeMealPlan();
+    }
+
 }
