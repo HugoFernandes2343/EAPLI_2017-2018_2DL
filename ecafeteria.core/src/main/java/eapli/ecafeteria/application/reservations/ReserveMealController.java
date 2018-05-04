@@ -60,7 +60,7 @@ public class ReserveMealController implements Controller {
                 System.out.println("An transactional error has ocurred. Please check data and try again.");
             }
         } else {
-            Console.readLine("\nSuccess!");
+            Console.readLine("\nInsufficient funds!");
         }
         return state;
     }
