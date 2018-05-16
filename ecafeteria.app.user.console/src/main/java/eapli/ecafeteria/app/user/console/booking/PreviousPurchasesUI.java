@@ -21,7 +21,7 @@ public class PreviousPurchasesUI extends AbstractUI{
 
     @Override
     protected boolean doShow() {
-        final int state = Console.readInteger("Types:\n1. Delivered\n2. Cancelled\n3. Expired\n\nPlease choose an option");
+        final int state = Console.readInteger("Types:\n1. Consumed\n2. Cancelled\n3. Expired\n\nPlease choose an option");
         switch (state) {
             case 1: 
                 List <Reservation> deliveredList = (List <Reservation>) crController.findDelivered();
