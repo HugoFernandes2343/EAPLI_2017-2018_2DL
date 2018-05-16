@@ -5,13 +5,13 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.*;
 import java.util.Optional;
 
 /**
@@ -66,22 +66,22 @@ public class InMemoryReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public Iterable<Reservation> selectTypeBooked() {
+    public Iterable<Reservation> selectTypeBooked(CafeteriaUser user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> selectTypeDelivered() {
+    public Iterable<Reservation> selectTypeDelivered(CafeteriaUser user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> selectTypeCancelled() {
+    public Iterable<Reservation> selectTypeCancelled(CafeteriaUser user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Iterable<Reservation> selectTypeExpired() {
+    public Iterable<Reservation> selectTypeExpired(CafeteriaUser user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

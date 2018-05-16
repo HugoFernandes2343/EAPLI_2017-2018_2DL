@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.reservations;
 
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -37,6 +38,8 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     @ManyToOne()
     private Meal meal;
     
+    @ManyToOne()
+    private CafeteriaUser user;
     
     @Enumerated(EnumType.STRING)
     private ReservationState currentState;
@@ -52,7 +55,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
      * @param description
      * @param meal 
      */
-    public Reservation(String code, String description, Meal meal) {
+    public Reservation(String code, String description, Meal meal, CafeteriaUser user) {
         if (Strings.isNullOrEmpty(code)) {
             throw new IllegalArgumentException();
         }
@@ -60,6 +63,7 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         this.description = description;
         this.meal = meal;
         this.currentState = ReservationState.BOOKED;
+        this.user=user;
     }
 
     public String description() {

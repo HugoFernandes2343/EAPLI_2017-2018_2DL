@@ -46,7 +46,7 @@ public class ReserveMealController implements Controller {
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         if (meal.dish().currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
             String code = DateTime.format(DateTime.dateToCalendar(meal.date().getTime())) + "//" + meal.mealNumber();
-            Reservation reservation = new Reservation(code, meal.dish().name().toString(), meal);
+            Reservation reservation = new Reservation(code, meal.dish().name().toString(), meal, user.get());
             Booking booking = new Booking(user.get(), meal.dish().currentPrice().negate());
             try {
                 reservationAdded = addReservation(reservation);

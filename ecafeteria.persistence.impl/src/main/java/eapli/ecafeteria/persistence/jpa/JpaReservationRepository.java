@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
@@ -33,30 +34,31 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
 
     
     @Override
-    public Iterable<Reservation> selectTypeBooked(){
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state");
+    public Iterable<Reservation> selectTypeBooked(CafeteriaUser user){
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
         createQuery.setParameter(("state"), ReservationState.BOOKED);
+        createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
     
     @Override
-    public Iterable<Reservation> selectTypeDelivered() {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state");
-        createQuery.setParameter(("state"), ReservationState.DELIVERED);
+    public Iterable<Reservation> selectTypeDelivered(CafeteriaUser user) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
 
     @Override
-    public Iterable<Reservation> selectTypeCancelled() {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state");
-        createQuery.setParameter(("state"), ReservationState.CANCELLED);
+    public Iterable<Reservation> selectTypeCancelled(CafeteriaUser user) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
 
     @Override
-    public Iterable<Reservation> selectTypeExpired() {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state");
-        createQuery.setParameter(("state"), ReservationState.EXPIRED);
+    public Iterable<Reservation> selectTypeExpired(CafeteriaUser user) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
 
