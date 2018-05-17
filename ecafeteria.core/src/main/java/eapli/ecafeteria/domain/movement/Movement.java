@@ -58,14 +58,7 @@ public abstract class Movement implements AggregateRoot<Long>, Serializable{
      * @param description - description of the movement
      */
     public Movement(CafeteriaUser user, Money value, MovementDescription description){
-        Money test = Money.euros(0.0);
-        if(user == null || description == null || description == null){
-            throw new IllegalArgumentException();
-        }
-        
-        if(value.greaterThanOrEqual(test) && description.toString().equals(MovementDescription.BOOKING.toString())){
-            throw new IllegalArgumentException();
-        }else if(value.lessThanOrEqual(test) && !description.toString().equals(MovementDescription.BOOKING.toString())){
+        if(user == null || description == null){
             throw new IllegalArgumentException();
         }
         
