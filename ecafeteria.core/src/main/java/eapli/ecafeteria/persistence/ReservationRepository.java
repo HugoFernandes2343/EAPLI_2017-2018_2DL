@@ -41,5 +41,11 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
     Iterable<Reservation> selectTypeCancelled(CafeteriaUser user);
     Iterable<Reservation> selectTypeExpired(CafeteriaUser user);
 
+    /**
+     * FindNextReservation searches for the next reservation for a user based on the state and state
+     * @param user user
+     * @return
+     */
+    Iterable<Reservation> findNextReservation(CafeteriaUser user);
     
 }

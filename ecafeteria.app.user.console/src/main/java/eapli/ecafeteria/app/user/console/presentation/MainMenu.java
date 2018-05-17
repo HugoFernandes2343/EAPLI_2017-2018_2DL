@@ -6,10 +6,7 @@
 package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
-import eapli.ecafeteria.app.user.console.booking.NextDaysAction;
-import eapli.ecafeteria.app.user.console.booking.NextDaysUI;
-import eapli.ecafeteria.app.user.console.booking.PreviousPurchasesAction;
-import eapli.ecafeteria.app.user.console.booking.ReserveMealAction;
+import eapli.ecafeteria.app.user.console.booking.*;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.ExitWithMessageAction;
@@ -42,6 +39,11 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int BOOK_A_MEAL_OPTION = 2;
     private static final int CONSULT_RESERVATIONS = 3;
     private static final int CONSULT_MENU = 4;
+
+    //RESERVATIONS SUB_MENU
+    private static final int CONSULT_NEXT_RESERVATION = 1;
+    private static final int LIST_NEXT_RESERVATIONS = 2;
+    private static final int LIST_PREVIOUS_PURCHASES = 3;
 
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
@@ -93,6 +95,11 @@ class MainMenu extends CafeteriaUserBaseUI {
         return mainMenu;
     }
 
+    /**
+     * Builds the user account information such as account movements
+     *
+     * @return
+     */
     private Menu buildAccountMenu() {
         final Menu menu = new Menu("Account");
         menu.add(new MenuItem(LIST_MOVEMENTS_OPTION, "List movements", new ShowMessageAction("Not implemented yet")));
@@ -100,6 +107,11 @@ class MainMenu extends CafeteriaUserBaseUI {
         return menu;
     }
 
+    /**
+     * Builds the user booking data regarding booking meals and consulting Reservations
+     *
+     * @return
+     */
     private Menu buildBookingsMenu() {
         final Menu menu = new Menu("Bookings");
         menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ReserveMealAction()));
@@ -110,16 +122,27 @@ class MainMenu extends CafeteriaUserBaseUI {
         return menu;
     }
 
+    /**
+     * Builds the sub menu that displays options to show previous and following reservations
+     *
+     * @return
+     */
     private Menu buildConsultReservationsMenu() {
         final Menu menu = new Menu("Consult Reservations");
 
-        menu.add(new MenuItem(1, "Next days", new NextDaysAction()));
-        menu.add(new MenuItem(2, "Previous purchases", new PreviousPurchasesAction()));
+        menu.add(new MenuItem(CONSULT_NEXT_RESERVATION, "Next Reservation", new NextReservationAction()));
+        menu.add(new MenuItem(LIST_NEXT_RESERVATIONS, "Next days", new NextDaysAction()));
+        menu.add(new MenuItem(LIST_PREVIOUS_PURCHASES, "Previous purchases", new PreviousPurchasesAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
     }
 
+    /**
+     * Admin only menu
+     *
+     * @return
+     */
     private Menu buildAdminSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 

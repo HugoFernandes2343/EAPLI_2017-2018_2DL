@@ -10,11 +10,11 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
+
 import java.util.Optional;
 import javax.persistence.*;
 
 /**
- *
  * @author Hugo
  */
 public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reservation, Long> implements ReservationRepository {
@@ -32,15 +32,15 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         return createQuery.getResultList();
     }
 
-    
+
     @Override
-    public Iterable<Reservation> selectTypeBooked(CafeteriaUser user){
+    public Iterable<Reservation> selectTypeBooked(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
         createQuery.setParameter(("state"), ReservationState.BOOKED);
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
-    
+
     @Override
     public Iterable<Reservation> selectTypeDelivered(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
@@ -58,6 +58,21 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> selectTypeExpired(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("u"), user);
+        return createQuery.getResultList();
+    }
+
+
+    /**
+     * Searches for the next Reservation in the database
+     *
+     * @param user user reference to the user who needs to see it's next reservation
+     * @return the next reservation
+     */
+    @Override
+    public Iterable<Reservation> findNextReservation(CafeteriaUser user) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation WHERE r.currentState=:state AND r.user=:u" +
+                "AND  ");//Acabar o SQL statement
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }

@@ -84,4 +84,9 @@ public class InMemoryReservationRepository implements ReservationRepository {
     public Iterable<Reservation> selectTypeExpired(CafeteriaUser user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Iterable<Reservation> findNextReservation(CafeteriaUser user) {
+        return null;
+    }
 }
