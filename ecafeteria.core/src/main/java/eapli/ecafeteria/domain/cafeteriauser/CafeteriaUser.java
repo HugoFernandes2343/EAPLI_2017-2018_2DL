@@ -3,10 +3,7 @@ package eapli.ecafeteria.domain.cafeteriauser;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 /**
  * A Cafeteria User.
@@ -33,7 +30,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @EmbeddedId
     private MecanographicNumber mecanographicNumber;
     
-//    @EmbeddedId
+    @OneToOne(cascade = CascadeType.ALL)
     private AccountCard accountcard;
 
     /**

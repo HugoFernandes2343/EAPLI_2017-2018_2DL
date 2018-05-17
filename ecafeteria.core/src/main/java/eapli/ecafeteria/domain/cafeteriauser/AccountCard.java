@@ -1,32 +1,24 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
-import eapli.framework.domain.ddd.ValueObject;
+import eapli.framework.domain.ddd.DomainEntity;
 import java.io.Serializable;
-import javax.persistence.Embeddable;
-import javax.persistence.Transient;
+import javax.persistence.*;
+import javax.persistence.GeneratedValue;
 
 /**
  *
  * @author 1161110 & 1161213
  */
-@Embeddable
-public class AccountCard implements ValueObject, Serializable{
+@Entity
+public class AccountCard implements Serializable, DomainEntity<Long>{
 
     private static final long serialVersionUID = 1L;
-    
-    //every user starts with 0€ on balance 
-    private static final double INITIAL_BALANCE = 0;
-    
-    //initial balance limit for warnings, must be configured
-    private static final double INITIAL_BALANCE_LIMIT = -1;
 
-
-    
-    @Transient
-    private double balance;
-    
-    
-    private double balance_limit;
+    @Id
+    @GeneratedValue
+    private Long id;
+        
+    private BalanceLimit balanceLimit;
     
 //    protected AccountCard(){
 //        //for ORM
@@ -36,10 +28,30 @@ public class AccountCard implements ValueObject, Serializable{
      * New Account Card Constructor and for ORM use
      */
     public AccountCard() {
-        this.balance = INITIAL_BALANCE;
-        this.balance_limit = INITIAL_BALANCE_LIMIT;
+        this.balanceLimit = new BalanceLimit();
     }
-    
-    
-    
+
+    @Override
+    public boolean is(Long otherId) {
+        return this.id.compareTo(otherId) == 0;
+    }
+
+    @Override
+    public Long id() {
+        return this.id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

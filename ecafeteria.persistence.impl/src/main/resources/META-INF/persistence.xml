@@ -25,6 +25,7 @@
     <class>eapli.ecafeteria.domain.menu.Menu</class>
     <class>eapli.ecafeteria.domain.pos.POSShift</class>
     <class>eapli.ecafeteria.domain.cafeteriashift.CafeteriaShift</class>
+    <class>eapli.ecafeteria.domain.cafeteriauser.AccountCard</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--
