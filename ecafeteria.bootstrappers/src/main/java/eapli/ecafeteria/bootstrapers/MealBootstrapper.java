@@ -16,11 +16,8 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.util.DateTime;
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -33,25 +30,20 @@ public class MealBootstrapper implements Action {
         final DishRepository dishRepo = PersistenceContext.repositories().dishes();
         final MenuRepository menuRepo = PersistenceContext.repositories().menus();
 
-        Iterable<Dish> dishes = dishRepo.findAll();
+        Dish dish = dishRepo.findAll().iterator().next();
         Iterable<Menu> menus = menuRepo.findAll();
 
-        Iterator<Dish> dishesI = dishes.iterator();
         Iterator<Menu> menusI = menus.iterator();
 
-        while (dishesI.hasNext() && menusI.hasNext()) {
+        while (menusI.hasNext()) {
             
-            Dish d = dishesI.next();
             Menu m = menusI.next();
             
             try {
-                register(d, new MealType(MealType.MealTypes.LUNCH), DateTime.newCalendar(2018, 05, 4), m);
-            } catch (DataConcurrencyException ex) {
-                Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (DataIntegrityViolationException ex) {
-                Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+                register(dish, new MealType(MealType.MealTypes.LUNCH), m.finishDate(),m);
+            } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+                System.out.println("Error while adding the meals");
+            } 
         }
         
         return true;
@@ -62,7 +54,8 @@ public class MealBootstrapper implements Action {
      */
     private void register(Dish dish, MealType mealType, Calendar date, Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
         final PublishMealController controller = new PublishMealController();
-        controller.buildMeal(dish, mealType, date, menu);
+        final Meal meal=controller.buildMeal(dish, mealType, date, menu);
+        controller.save(meal);
     }
 
 }

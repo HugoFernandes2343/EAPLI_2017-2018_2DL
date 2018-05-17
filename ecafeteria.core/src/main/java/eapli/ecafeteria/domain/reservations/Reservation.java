@@ -32,8 +32,6 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     // business ID
     @Column(unique = true)
     private String code;
-    
-    private String description;
 
     @ManyToOne()
     private Meal meal;
@@ -52,23 +50,19 @@ public class Reservation implements AggregateRoot<String>, Serializable {
      * Reservation Class
      * 
      * @param code
-     * @param description
+     * @param user
      * @param meal 
      */
-    public Reservation(String code, String description, Meal meal, CafeteriaUser user) {
+    public Reservation(String code, Meal meal, CafeteriaUser user) {
         if (Strings.isNullOrEmpty(code)) {
             throw new IllegalArgumentException();
         }
         this.code = code;
-        this.description = description;
         this.meal = meal;
         this.currentState = ReservationState.BOOKED;
         this.user=user;
     }
 
-    public String description() {
-        return this.description;
-    }
 
    public void cancel() throws ReservationStateViolationException{
         if(this.currentState == ReservationState.BOOKED){
@@ -133,6 +127,6 @@ public class Reservation implements AggregateRoot<String>, Serializable {
 
     @Override
     public String toString(){
-        return String.format("Code: %s\nDescription: %s\nState: %s\n%s", code,description,currentState, meal.toString());
+        return String.format("Code: %s\nState: %s\n%s", code,currentState, meal.toString());
     }
 }

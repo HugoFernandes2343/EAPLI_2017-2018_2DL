@@ -8,18 +8,17 @@ package eapli.ecafeteria.domain.meals;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.domain.ddd.AggregateRoot;
-import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 /**
@@ -28,6 +27,9 @@ import javax.persistence.Version;
  * @author 1161569
  */
 @Entity
+@Table(uniqueConstraints={
+    @UniqueConstraint(columnNames = {"dish_name", "mealType", "date"})
+}) 
 public class Meal implements Serializable, AggregateRoot<Long>{
     
     private static final Long serialVersionUID = 1L;
@@ -41,8 +43,7 @@ public class Meal implements Serializable, AggregateRoot<Long>{
     @ManyToOne()
     private Dish dish;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menuID")
+    @ManyToOne()
     private Menu menu;
 
     @Embedded
@@ -91,7 +92,7 @@ public class Meal implements Serializable, AggregateRoot<Long>{
     @Override
     public String toString() {
         return "\nMeal:\n- Dish: " + dish.name() + "\n- Meal Type: " +
-                mealType.mealType() + "\n- Date: " + DateTime.format(date) +
+                mealType.mealType() + "\n- Date: " + date.getTime() +
                 "\n- Meal Number: " + mealNumber + '\n';
     }
 

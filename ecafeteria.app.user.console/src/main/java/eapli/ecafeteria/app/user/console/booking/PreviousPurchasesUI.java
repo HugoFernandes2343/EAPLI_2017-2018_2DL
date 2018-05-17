@@ -30,7 +30,7 @@ public class PreviousPurchasesUI extends AbstractUI{
                     System.out.println("No reservation has been consumed");
                 } else {
                     for (Reservation reservation : deliveredList) {
-                        System.out.println("ID: " + reservation.id() + "\tDescription: " + reservation.description());
+                        System.out.println(reservation.toString());
                     }
                 }
                 break;
@@ -41,7 +41,7 @@ public class PreviousPurchasesUI extends AbstractUI{
                     System.out.println("No reservation has been cancelled");
                 } else {
                     for (Reservation reservation : cancelledList) {
-                        System.out.println("ID: " + reservation.id() + "\tDescription: " + reservation.description());
+                        System.out.println(reservation.toString());
                     }
                 }                
                 break;
@@ -52,7 +52,7 @@ public class PreviousPurchasesUI extends AbstractUI{
                     System.out.println("No reservation has expired");
                 } else {
                     for (Reservation reservation : expiredList) {
-                        System.out.println("ID: " + reservation.id() + "\tDescription: " + reservation.description());
+                        System.out.println(reservation.toString());
                     }
                 }
                 break;

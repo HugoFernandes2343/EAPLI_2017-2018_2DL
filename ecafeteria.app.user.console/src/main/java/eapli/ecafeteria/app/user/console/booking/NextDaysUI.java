@@ -31,7 +31,7 @@ public class NextDaysUI extends AbstractUI {
             System.out.println("Without reservations");
         } else {
             for (Reservation reservation : bookedList) {
-                System.out.println("ID: " + reservation.id() + "\tDescription: " + reservation.description());
+                System.out.println(reservation.toString());
             }
         }    
         return true;
