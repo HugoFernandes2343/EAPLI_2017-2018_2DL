@@ -15,7 +15,7 @@ import java.util.Optional;
 import javax.persistence.*;
 
 /**
- * @author Hugo
+ * @author  <1160777@isep.ipp.pt && 1161569@isep.ipp.pt>Marco && Hugo Carvalho</1160777@isep.ipp.pt && 1161569@isep.ipp.pt>
  */
 public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reservation, Long> implements ReservationRepository {
 
