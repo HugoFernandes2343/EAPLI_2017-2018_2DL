@@ -11,11 +11,11 @@ import eapli.framework.actions.Action;
  *
  * @author João Vieira
  */
-public class ListMovementAction implements Action {
+public class ConsultMovementsAction implements Action {
 
     @Override
     public boolean execute() {
-        return new ListMovementUI().show();
+        return new ConsultMovementsUI().show();
     }
     
 }

@@ -7,6 +7,7 @@ package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.app.user.console.booking.*;
+import eapli.ecafeteria.app.user.console.movement.ConsultMovementsAction;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.ExitWithMessageAction;
@@ -102,7 +103,7 @@ class MainMenu extends CafeteriaUserBaseUI {
      */
     private Menu buildAccountMenu() {
         final Menu menu = new Menu("Account");
-        menu.add(new MenuItem(LIST_MOVEMENTS_OPTION, "List movements", new ShowMessageAction("Not implemented yet")));
+        menu.add(new MenuItem(LIST_MOVEMENTS_OPTION, "List movements", new ConsultMovementsAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

@@ -33,9 +33,14 @@ public class ListMovementService {
         return Money.euros(value);
     }
     
-    public Iterable<Movement> listMovements(CafeteriaUser user){
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS.SELECT_MEAL);
-
+    public Iterable<Movement> listUserMovements(CafeteriaUser user){
+        
+        Iterable<Movement> list = this.movementRepository.allCafeteriaUserMovements(user.mecanographicNumber());
+        
+        if(!list.iterator().hasNext()){
+            throw new IllegalStateException("There aren't any movements registered for this user");
+        }
+        
         return this.movementRepository.allCafeteriaUserMovements(user.mecanographicNumber());
     }
 

@@ -5,36 +5,39 @@
  */
 package eapli.ecafeteria.app.user.console.movement;
 
-import eapli.ecafeteria.application.authz.AuthorizationService;
-import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserService;
-import eapli.ecafeteria.application.cafeteriauser.ListMovementService;
-import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.application.cafeteriauser.ConsultMovementsController;
 import eapli.ecafeteria.domain.movement.Movement;
+import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
-import java.util.Optional;
 
 /**
  *
  * @author João Vieira
  */
-public class ListMovementUI extends AbstractUI
-{
-    private final ListMovementService service = new ListMovementService();
-    private final CafeteriaUserService userService = new CafeteriaUserService();
+public class ConsultMovementsUI extends AbstractUI{
 
+    private final ConsultMovementsController theController = new ConsultMovementsController();
+    
+     protected Controller controller() {
+        return this.theController;
+    }
+    
     @Override
     protected boolean doShow() {
         System.out.println("+= Your Movements =+");
+        try{
+        Iterable<Movement> movementList = this.theController.findUserMovements();
         
-        Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
-        Iterable<Movement> movementList =  service.listMovements(user.get());
         
         for(Movement m : movementList){
             System.out.println(m);
         }
         
         Console.readLine("");
+        }catch(IllegalStateException ex){
+            System.out.println(ex.getMessage());
+        }
         
         return true;
     }
