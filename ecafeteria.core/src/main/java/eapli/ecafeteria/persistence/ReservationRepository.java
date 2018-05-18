@@ -5,10 +5,11 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.reservations.Reservation;
+import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.framework.persistence.repositories.DataRepository;
-import java.util.Date;
 
 import java.util.Optional;
 
@@ -32,13 +33,19 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
      * @param m
      * @return
      */
-    Iterable<Reservation> findByStateAndMeal(Reservation.ReservationState state,Meal m);
+    Iterable<Reservation> findByStateAndMeal(ReservationState state,Meal m);
 
 
-    Iterable<Reservation> selectTypeBooked();
-    Iterable<Reservation> selectTypeDelivered();
-    Iterable<Reservation> selectTypeCancelled();
-    Iterable<Reservation> selectTypeExpired();
+    Iterable<Reservation> selectTypeBooked(CafeteriaUser user);
+    Iterable<Reservation> selectTypeDelivered(CafeteriaUser user);
+    Iterable<Reservation> selectTypeCancelled(CafeteriaUser user);
+    Iterable<Reservation> selectTypeExpired(CafeteriaUser user);
 
+    /**
+     * FindNextReservation searches for the next reservation for a user based on the state and state
+     * @param user user
+     * @return
+     */
+    Iterable<Reservation> findNextReservation(CafeteriaUser user);
     
 }

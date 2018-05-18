@@ -5,8 +5,7 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.pos.POS;
 import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.ecafeteria.domain.reservations.Reservation.ReservationState;
-import static eapli.ecafeteria.domain.reservations.Reservation.ReservationState.STATE.BOOKED;
+import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.CafeteriaShiftRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.POSRepository;
@@ -69,14 +68,17 @@ public class CafeteriaShiftClosingController implements Controller {
 
         for (Meal m : list_meal) {
             ArrayList<Reservation> list_reserv = new ArrayList<>();
-            Reservation temp_r = new Reservation("Temp","Temp",m);
-            list_reserv = (ArrayList<Reservation>) reservRP.findByStateAndMeal(temp_r.state(), m);
+            list_reserv = (ArrayList<Reservation>) reservRP.findByStateAndMeal(ReservationState.BOOKED, m);
             for (Reservation r : list_reserv) {
-                if (r.expire()) {
+                try{
+                    r.expire();
                     reservRP.save(r);
+                } catch(ReservationStateViolationException ex){
+                
                 }
             }
         }
+        
 
         cs.closeShift();
         cfRP.save(cs);

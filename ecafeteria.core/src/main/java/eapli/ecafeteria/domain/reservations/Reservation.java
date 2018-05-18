@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.reservations;
 
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -20,47 +21,6 @@ import javax.persistence.*;
 @Entity
 public class Reservation implements AggregateRoot<String>, Serializable {
     
-    /**
-     * Inner class to allow the use of a enum
-     */
-    @Embeddable
-    public static class ReservationState implements Serializable{
-         /**
-         * Different states for a determined Reservation
-         */
-        private String state;
-        public enum STATE {DELIVERED,BOOKED,CANCELLED,EXPIRED};
-        
-        private void cancel() throws ReservationStateViolationException{
-            if(state.equals(STATE.BOOKED.toString())){
-                state=STATE.CANCELLED.toString();
-            } else {
-                throw new ReservationStateViolationException();
-            }
-        }
-        
-        private void book(){
-            this.state=STATE.BOOKED.toString();
-        }
-        
-        private void deliver() throws ReservationStateViolationException{
-            if(state.equals(ReservationState.STATE.BOOKED.toString())){
-                state=STATE.DELIVERED.toString();
-            } else {
-                throw new ReservationStateViolationException();
-            }
-        }
-        
-        private void expire() throws ReservationStateViolationException{
-            if(state.equals(STATE.BOOKED.toString())){
-                state=STATE.EXPIRED.toString();
-            } else {
-                throw new ReservationStateViolationException();
-            }
-        }
-    }
-    
-    
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -72,12 +32,14 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     // business ID
     @Column(unique = true)
     private String code;
-    
-    private String description;
 
     @ManyToOne()
     private Meal meal;
     
+    @ManyToOne()
+    private CafeteriaUser user;
+    
+    @Enumerated(EnumType.STRING)
     private ReservationState currentState;
 
     protected Reservation() {
@@ -88,42 +50,42 @@ public class Reservation implements AggregateRoot<String>, Serializable {
      * Reservation Class
      * 
      * @param code
-     * @param description
+     * @param user
      * @param meal 
      */
-    public Reservation(String code, String description, Meal meal) {
+    public Reservation(String code, Meal meal, CafeteriaUser user) {
         if (Strings.isNullOrEmpty(code)) {
             throw new IllegalArgumentException();
         }
         this.code = code;
-        this.description = description;
         this.meal = meal;
-        this.currentState = new ReservationState();
-        currentState.book();
+        this.currentState = ReservationState.BOOKED;
+        this.user=user;
     }
 
-    public String description() {
-        return this.description;
-    }
 
-    /**
-     * NEEDS TESTING
-     * @return 
-     * @throws eapli.framework.domain.ReservationStateViolationException 
-     */
-    public boolean deliver() throws ReservationStateViolationException {
-        this.currentState.deliver();
-        return true;
+   public void cancel() throws ReservationStateViolationException{
+        if(this.currentState == ReservationState.BOOKED){
+           this.currentState=ReservationState.CANCELLED;
+        } else {
+            throw new ReservationStateViolationException();
+        }
     }
-
-    public boolean expire() throws ReservationStateViolationException{
-        this.currentState.expire();
-        return true;
+        
+   public void deliver() throws ReservationStateViolationException{
+        if(this.currentState == ReservationState.BOOKED){
+           this.currentState=ReservationState.DELIVERED;
+        } else {
+            throw new ReservationStateViolationException();
+        }
     }
-     
-    public boolean cancel() throws ReservationStateViolationException{
-        this.currentState.cancel();
-        return true;
+        
+    public void expire() throws ReservationStateViolationException{
+        if(this.currentState == ReservationState.BOOKED){
+           this.currentState=ReservationState.EXPIRED;
+        } else {
+            throw new ReservationStateViolationException();
+        }
     }
     
     @Override
@@ -165,6 +127,6 @@ public class Reservation implements AggregateRoot<String>, Serializable {
 
     @Override
     public String toString(){
-        return String.format("Code: %s\nDescription: %s\nState: %s\n%s", code,description,currentState.state, meal.toString());
+        return String.format("Code: %s\nState: %s\n%s", code,currentState, meal.toString());
     }
 }

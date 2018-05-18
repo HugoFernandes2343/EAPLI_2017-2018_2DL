@@ -16,10 +16,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.util.DateTime;
-import java.sql.Date;
 import java.util.Calendar;
-import java.util.Optional;
 
 /**
  *
@@ -34,10 +31,9 @@ public class PublishMealController implements Controller {
     public PublishMealController() {
     }
 
-    public Meal buildMeal(Dish dish, MealType mealType, Calendar date, Menu menu) throws DataConcurrencyException, DataIntegrityViolationException{
+    public Meal buildMeal(Dish dish, MealType mealType, Calendar date, Menu menu){
         Meal meal = new Meal(dish, mealType, date, menu);
-        
-        return mealRepository.save(meal);
+        return meal;
     }
 
     public Iterable<Dish> allActiveDishes() {
@@ -48,8 +44,8 @@ public class PublishMealController implements Controller {
         return menuRepository.findOne(menuID).get();
     }
 
-    public void save(Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
-        menuRepository.save(menu);
+    public void save(Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+        mealRepository.save(meal);
     }
 
 }

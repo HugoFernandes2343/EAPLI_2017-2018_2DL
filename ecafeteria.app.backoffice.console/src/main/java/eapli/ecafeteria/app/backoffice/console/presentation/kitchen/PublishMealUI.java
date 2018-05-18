@@ -17,8 +17,6 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -34,10 +32,10 @@ public class PublishMealUI extends AbstractUI {
         Menu menu = theController.requestMenu(menuID);
         final Iterable<Dish> allDishes = this.theController.allActiveDishes();
         final SelectWidget<Dish> dishSelector = new SelectWidget<>("Dishes:", allDishes, new DishPrinter());
-        System.out.println("Choose the dish in which you want to add allergens.");
+        System.out.println("Choose the dish.");
         dishSelector.show();
         final Dish selectedDish = dishSelector.selectedElement();
-        final Calendar date=Console.readCalendar("Please choose day of meal", "yyyy-mm-dd");
+        final Calendar date=Console.readCalendar("Please choose day of meal(yyyy-mm-dd)", "yyyy-MM-dd");
         if(menu.hasThisDay(date)){
              MealType type;
              System.out.println("Press 1 for Lunch. Press 2 for Dinner. Press 0 to exit");
@@ -50,21 +48,16 @@ public class PublishMealUI extends AbstractUI {
                  } else {
                      type=new MealType(MealType.MealTypes.DINNER);
                  }
-                 Meal meal = null;
-                 try {
-                     meal = theController.buildMeal(selectedDish, type, date, menu);
-                 } catch (DataConcurrencyException ex) {
-                     Logger.getLogger(PublishMealUI.class.getName()).log(Level.SEVERE, null, ex);
-                 } catch (DataIntegrityViolationException ex) {
-                     Logger.getLogger(PublishMealUI.class.getName()).log(Level.SEVERE, null, ex);
-                 }
+                 Meal meal = theController.buildMeal(selectedDish, type, date, menu);
+                 System.out.print(meal.toString());
                  op=Console.readInteger("Press 1 to confirm");
                  if(op==1){
                      try {
-                         menu.addMeal(meal);
-                         theController.save(menu);
+                         theController.save(meal);
                      }  catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-                         System.out.println("Error while persisting changes");
+                         System.out.printf("One of the following errors has ocurred:\n"
+                                 + "1. An error has ocurred while persisting the meal\n"
+                                 + "2. The created meal might already exist in the database. Please check.\n");
                      }
                  }
              }
