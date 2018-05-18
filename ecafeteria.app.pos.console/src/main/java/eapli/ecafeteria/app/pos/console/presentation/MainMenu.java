@@ -33,6 +33,7 @@ public class MainMenu extends AbstractUI {
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int SALES_OPTION = 2;
+    private static final int CLOSE_POS_OPTION = 3;
     
     
     // SALES
@@ -70,7 +71,7 @@ public class MainMenu extends AbstractUI {
 
         final Menu myUserMenu = new MyUserMenu();
         mainMenu.add(new SubMenu(MY_USER_OPTION, myUserMenu, new ShowVerticalSubMenuAction(myUserMenu)));
-
+       
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
         }
@@ -79,6 +80,8 @@ public class MainMenu extends AbstractUI {
             final Menu salesMenu = buildSalesMenu();
             mainMenu.add(new SubMenu(SALES_OPTION, salesMenu, new ShowVerticalSubMenuAction(salesMenu)));
         }
+        
+        mainMenu.add(new MenuItem(CLOSE_POS_OPTION, "Close POS", new ClosePosAction()));
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
