@@ -1,0 +1,85 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eapli.ecafeteria.application.menu;
+
+import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.application.meal.PublishMealController;
+import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.domain.menu.Menu;
+import eapli.framework.domain.Designation;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.List;
+
+/**
+ *
+ * @author David Santiago <1161109@isep.ipp.pt>
+ */
+public class CopyMenuService {
+
+    RegisterMenuController rmc = new RegisterMenuController();
+    PublishMealController pmc = new PublishMealController();
+
+    public void copyMenu(Menu m, Calendar startDate, Designation newName) throws DataConcurrencyException, DataIntegrityViolationException {
+
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        
+        Calendar mStartDate = m.startDate(); //Starting date of the original menu
+
+        Calendar endingDate = (Calendar) startDate.clone();
+        endingDate.add(Calendar.DAY_OF_MONTH, 7);
+
+        Menu menu = rmc.MenuMaker(startDate, endingDate, newName);
+        rmc.saveMenu();
+
+    }
+
+    private long dateDistance(Calendar menuStartingDate, Calendar newMenuStartingDate) {
+
+        long distanceL = ChronoUnit.DAYS.between(menuStartingDate.toInstant(), newMenuStartingDate.toInstant());
+
+        if (distanceL > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("A Distância entre as datas é superior à suportada");
+        }
+
+        int distance = (int) distanceL;
+
+        return distance;
+
+    }
+
+    private void addDays(Calendar date, int days) {
+
+        date.add(Calendar.DAY_OF_MONTH, days);
+
+    }
+
+    private void addMeals(List<Meal> meals, int daysDif,Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
+
+        for (Meal e : meals) {
+            
+            Calendar date = e.date();
+            Dish dish = e.dish();
+            MealType mtp = e.mealType();
+            
+            Calendar newDate = (Calendar) date.clone();
+            addDays(newDate,daysDif);
+            
+            pmc.buildMeal(dish, mtp, newDate, menu);
+            
+            
+            
+            
+        }
+
+    }
+
+}

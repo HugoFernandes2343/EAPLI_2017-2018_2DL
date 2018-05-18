@@ -46,8 +46,8 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     @Enumerated(EnumType.STRING)
     private MenuState state;
 
-    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
-    private List<Meal> mealList;
+//    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
+//    private List<Meal> mealList;
 
     protected Menu() {
         // for ORM
@@ -74,7 +74,6 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         
         this.name= name;
         this.state = MenuState.WORKING_MENU;
-        this.mealList = new ArrayList<>();
         this.startDate = startingDate;
         this.endingDate = endingDate;
 
@@ -96,36 +95,37 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         return this.state.equals(MenuState.WORKING_MENU);
     }
 
-    public List<Meal> listMeals() {
-        return this.mealList;
-    }
+//    public List<Meal> listMeals() {
+//        return this.mealList;
+//    }
+//
+//    public boolean containsMeal(Meal m) {
+//        return mealList.contains(m);
+//    }
 
-    public boolean containsMeal(Meal m) {
-        return mealList.contains(m);
-    }
+//    public boolean addMeal(Meal meal) {
+//        
+//        if (mealList.contains(meal)) {        
+//            throw new IllegalArgumentException("Não pode adicionar uma meal já existente ao menu");
+//        }
+//        
+//        //if (meal.date().compareTo(this.startDate)<=0 || meal.date().compareTo(this.endingDate)>=0 ){
+//            //throw new IllegalArgumentException("a data da meal não se encontra dentro do intervalo de funcionamento do menu");
+//        //}
+//        
+//       
+//        return mealList.add(meal);
+//
+//    }
 
-    public boolean addMeal(Meal meal) {
-        if (mealList.contains(meal)) {        
-            throw new IllegalArgumentException("Não pode adicionar uma meal já existente ao menu");
-        }
-        
-        //if (meal.date().compareTo(this.startDate)<=0 || meal.date().compareTo(this.endingDate)>=0 ){
-            //throw new IllegalArgumentException("a data da meal não se encontra dentro do intervalo de funcionamento do menu");
-        //}
-        
-       
-        return mealList.add(meal);
-
-    }
-
-    public boolean removeMeal(Meal meal) {
-        if (!mealList.contains(meal)) {
-            return false;
-        } else {
-            return mealList.remove(meal);
-        }
-
-    }
+//    public boolean removeMeal(Meal meal) {
+//        if (!mealList.contains(meal)) {
+//            return false;
+//        } else {
+//            return mealList.remove(meal);
+//        }
+//
+//    }
 
     public Calendar startDate() {
         return this.startDate;
@@ -187,8 +187,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     public Designation designation() {
         return this.name;
     }
+    
 
-    public List<Meal> meals(){
-        return this.mealList;
-    }
+
+//    public List<Meal> meals(){
+//        return this.mealList;
+//    }
 }

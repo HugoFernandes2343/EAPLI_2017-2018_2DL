@@ -84,7 +84,7 @@ public class RegisterMenuUI extends AbstractUI {
                 
                 
 
-                rmc.addMeal(mchooser.selectedElement());
+                //rmc.addMeal(mchooser.selectedElement()); --------
 
                 System.out.println("0 para terminar - outro número para continuar");
 
