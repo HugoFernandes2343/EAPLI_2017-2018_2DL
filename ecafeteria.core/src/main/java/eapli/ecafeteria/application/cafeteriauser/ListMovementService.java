@@ -32,5 +32,11 @@ public class ListMovementService {
         }
         return Money.euros(value);
     }
+    
+    public Iterable<Movement> listMovements(CafeteriaUser user){
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS.SELECT_MEAL);
+
+        return this.movementRepository.allCafeteriaUserMovements(user.mecanographicNumber());
+    }
 
 }
