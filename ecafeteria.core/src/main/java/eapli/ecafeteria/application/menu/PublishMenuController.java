@@ -37,5 +37,6 @@ public class PublishMenuController implements Controller {
         }
 
         return mr.save(m);
+       
     }
 }

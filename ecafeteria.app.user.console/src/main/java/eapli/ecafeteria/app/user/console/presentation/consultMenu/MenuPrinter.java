@@ -19,13 +19,9 @@ public class MenuPrinter implements Visitor<Menu>{
 
     @Override
     public void visit(Menu visitee) {
-        System.out.printf("Menu title: %s \n", visitee.designation().toString());
-        for (Meal meal : visitee.meals()) {
-            System.out.println("Meal:\n");
-            System.out.println("\nDish Name: " + meal.dish().name().toString());
-            System.out.println("\nMeal Type" + meal.mealType());
-            System.out.println("\nDate " + meal.date().getCalendarType());
-        }
+        //Does not work due to changes to menu.
+        //Menu does no longer have a meal list
+        //If you want to search meal by menu use the MealRepsitory method that searches by menu
     }
 
     @Override

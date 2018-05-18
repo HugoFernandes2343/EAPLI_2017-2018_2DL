@@ -47,18 +47,18 @@ public class RegisterMenuController implements Controller{
     }
     
     
-    public boolean addMeal(Meal meal) {
-                
-        return menu.addMeal(meal);
-    }
-
-    public boolean removeMeal(Meal Meal) {
-        return menu.removeMeal(Meal);
-    }
-    
-    public List<Meal> menuMealList(){
-        return menu.listMeals();
-    }
+//    public boolean addMeal(Meal meal) {
+//                
+//        return menu.addMeal(meal);
+//    }
+//
+//    public boolean removeMeal(Meal Meal) {
+//        return menu.removeMeal(Meal);
+//    }
+//    
+//    public List<Meal> menuMealList(){
+//        return menu.listMeals();
+//    }
     
     public Menu saveMenu() throws DataIntegrityViolationException, DataConcurrencyException {
         return menuRepository.save(menu);

@@ -63,5 +63,9 @@ public class ReserveMealController implements Controller {
     private Reservation addReservation(Reservation reservation) throws DataConcurrencyException, DataIntegrityViolationException {
         return reservationRepo.save(reservation);
     }
+    
+    public Iterable<Meal> menuMealsList(Menu menu){
+        return listMenuService.findMealByMenu(menu);
+    }
 
 }
