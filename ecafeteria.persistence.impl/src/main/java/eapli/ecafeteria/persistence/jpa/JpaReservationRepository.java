@@ -26,8 +26,8 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
 
     @Override
     public Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m) {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal=:me AND r.currentState=:st");
-        createQuery.setParameter("me", m);
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal_pk=:me_pk AND r.currentState=:st");
+        createQuery.setParameter("me_pk", m.pk());
         createQuery.setParameter("st", state);
         return createQuery.getResultList();
     }
@@ -65,14 +65,16 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
 
     /**
      * Searches for the next Reservation in the database
+     * Selects the booked reservation in which the meal has the lowest date
      *
      * @param user user reference to the user who needs to see it's next reservation
      * @return the next reservation
      */
     @Override
     public Iterable<Reservation> findNextReservation(CafeteriaUser user) {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation WHERE r.currentState=:state AND r.user=:u" +
-                "AND  ");//Acabar o SQL statement
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation WHERE r.currentState=:state AND r.user=:u AND r.meal_pk = " +
+                "(select m.meal_pk FROM Meal where m.date = " +
+                "(SELECT MIN(m2.date) FROM Meal m2))");
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
