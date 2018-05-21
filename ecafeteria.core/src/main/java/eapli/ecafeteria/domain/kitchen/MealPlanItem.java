@@ -12,8 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+/**
+ *
+ * @author Paulo Jorge
+ */
 @Entity
 public class MealPlanItem implements Serializable {
 
@@ -26,22 +31,20 @@ public class MealPlanItem implements Serializable {
     private Meal meal;
 
     private Integer DishQuantity;
-
-    @OneToOne
+    
+    @ManyToOne
     private MealPlan mealPlan;
 
     protected MealPlanItem() {
 
     }
 
-    public MealPlanItem(MealPlan mp, Meal meal, int DishQuantity) {
+    public MealPlanItem(Meal meal, int DishQuantity) {
         this.meal = meal;
-        this.mealPlan = mp;
         this.DishQuantity = DishQuantity;
     }
 
-
-    public int getDishQuantity(){
+    public int getDishQuantity() {
         return this.DishQuantity;
     }
 

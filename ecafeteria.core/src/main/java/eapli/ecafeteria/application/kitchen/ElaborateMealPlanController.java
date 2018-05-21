@@ -117,8 +117,8 @@ public class ElaborateMealPlanController implements Controller {
         return mealplan;
     }
 
-    public void insertQuantityMeal(int quantidade, Meal meal, MealPlan mp) throws DataConcurrencyException, DataIntegrityViolationException {
-        MealPlanItem mealPlanItem = new MealPlanItem(mp, meal, quantidade);
+    public void insertQuantityMeal(int quantidade, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+        MealPlanItem mealPlanItem = new MealPlanItem(meal, quantidade);
         mealPlanItemRepository.save(mealPlanItem);
 
     }
