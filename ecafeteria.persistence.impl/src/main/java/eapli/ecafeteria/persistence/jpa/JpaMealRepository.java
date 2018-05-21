@@ -21,7 +21,7 @@ import javax.persistence.Query;
 public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> implements MealRepository {
 
     @Override
-    public Iterable<Meal> findMealOneMenu(Menu menu) {
+    public Iterable<Meal> findMealByMenu(Menu menu) {
         final Query q;
         String where = "e.menu=:menu";
         q = entityManager().createQuery("SELECT e FROM Meal e WHERE " + where, this.entityClass);

@@ -102,7 +102,7 @@ public class ElaborateMealPlanController implements Controller {
 
     public List<Meal> getMealsfromMenu() {
         List<Meal> listMeals = new ArrayList<Meal>();
-        listMeals = (List<Meal>) PersistenceContext.repositories().meals().findMealOneMenu(menu);
+        listMeals = (List<Meal>) PersistenceContext.repositories().meals().findMealByMenu(menu);
         return listMeals;
     }
 

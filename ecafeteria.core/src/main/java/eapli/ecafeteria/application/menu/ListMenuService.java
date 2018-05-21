@@ -51,7 +51,7 @@ public class ListMenuService {
     }
 
     public Iterable<Meal> findMealByMenu(Menu menu) {
-        return this.findMealByMenu(menu);
+        return this.mealRepository.findMealByMenu(menu);
     }
 
 }

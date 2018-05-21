@@ -20,7 +20,7 @@ import java.util.Optional;
 public class InMemoryMealRepository implements MealRepository {
 
     @Override
-    public Iterable<Meal> findMealOneMenu(Menu id) {
+    public Iterable<Meal> findMealByMenu(Menu id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
