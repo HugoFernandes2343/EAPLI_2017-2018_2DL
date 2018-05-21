@@ -9,8 +9,11 @@ import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.domain.money.Money;
+import eapli.framework.util.DateTime;
 import eapli.framework.util.Strings;
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.persistence.*;
 
 /**
@@ -129,4 +132,17 @@ public class Reservation implements AggregateRoot<String>, Serializable {
     public String toString(){
         return String.format("Code: %s\nState: %s\n%s", code,currentState, meal.toString());
     }
+
+    public Money acquireRefundValue() {
+        Money value=meal.dish().currentPrice();
+        Money errantPenniesMoney[];
+        Calendar actual=DateTime.now();
+        Calendar booked=meal.date();
+        if(DateTime.isSameDate(actual, booked)){
+            errantPenniesMoney=value.divide(2);
+            return errantPenniesMoney[0];
+        }
+        return value;
+    }
+
 }

@@ -44,6 +44,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> selectTypeDelivered(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("state"), ReservationState.DELIVERED);
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
@@ -51,6 +52,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> selectTypeCancelled(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("state"), ReservationState.CANCELLED);
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
@@ -58,6 +60,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> selectTypeExpired(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("state"), ReservationState.EXPIRED);
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
