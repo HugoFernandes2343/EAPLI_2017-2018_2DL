@@ -10,6 +10,8 @@ import eapli.ecafeteria.domain.movement.Movement;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,9 +31,13 @@ public class ConsultMovementsUI extends AbstractUI{
         try{
         Iterable<Movement> movementList = this.theController.findUserMovements();
         
-        
+        List<Movement> history = new ArrayList<>();
         for(Movement m : movementList){
-            System.out.println(m);
+            history.add(m);
+        }
+        
+        for (int i = history.size()-1; i >= 0; i--) {
+            System.out.println(history.remove(i).toString());
         }
         
         Console.readLine("");
