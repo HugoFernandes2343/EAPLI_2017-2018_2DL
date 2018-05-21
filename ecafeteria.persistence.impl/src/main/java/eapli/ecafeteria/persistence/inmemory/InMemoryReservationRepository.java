@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
@@ -84,5 +85,10 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
             }
         }
         return nextRes;
+    }
+
+    @Override
+    public Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date, MealType mt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

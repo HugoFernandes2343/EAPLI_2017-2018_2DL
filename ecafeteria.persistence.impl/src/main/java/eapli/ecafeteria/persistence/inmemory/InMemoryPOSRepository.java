@@ -6,6 +6,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.pos.POS;
+import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -19,7 +20,7 @@ public class InMemoryPOSRepository implements POSRepository {
     
     
     @Override
-    public Iterable<POS> findOpenned(POS.POSState s){
+    public Iterable<POS> findOpenned(POSState s){
       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

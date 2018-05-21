@@ -6,18 +6,19 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.pos.POS;
+import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.persistence.POSRepository;
 import javax.persistence.*;
 
 /**
  *
- * @author hugod
+ * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
  */
 public class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements POSRepository {
 
     @Override
-    public Iterable<POS> findOpenned(POS.POSState s) {
-        final TypedQuery query = entityManager().createQuery("SELECT p FROM POS p WHERE p.state=:st", this.entityClass);
+    public Iterable<POS> findOpenned(POSState s) {
+        final TypedQuery query = entityManager().createQuery("SELECT p FROM POS p WHERE p.currentState=:st", this.entityClass);
         query.setParameter("st", s);
         return query.getResultList();
     }
