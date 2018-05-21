@@ -76,7 +76,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> findNextReservation(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation WHERE r.currentState=:state AND r.user=:u AND r.meal_pk = " +
-                "(select m.meal_pk FROM Meal where m.date = " +
+                "(SELECT m.meal_pk FROM Meal where m.date = " +
                 "(SELECT MIN(m2.date) FROM Meal m2))");
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();

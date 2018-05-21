@@ -12,46 +12,28 @@ import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.Optional;
+import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
+
+import java.util.*;
 
 /**
- *
  * @author Utilizador
  */
-public class InMemoryReservationRepository implements ReservationRepository {
-
-    public InMemoryReservationRepository() {
-        
-    }
+public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<Reservation> implements ReservationRepository {
 
     @Override
     public Optional<Reservation> findByCode(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Reservation entity) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Long entityId) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Reservation save(Reservation entity) throws DataConcurrencyException, DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return matchOne(r -> r.id().equals(code));
     }
 
     @Override
     public Iterable<Reservation> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }   
+        return match(r -> r.isCreated());
+    }
 
     @Override
     public Optional<Reservation> findOne(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Deprecated method! Do not use!");
     }
 
     @Override
@@ -62,7 +44,7 @@ public class InMemoryReservationRepository implements ReservationRepository {
     @Override
     public Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   
+
     }
 
     @Override
@@ -87,6 +69,20 @@ public class InMemoryReservationRepository implements ReservationRepository {
 
     @Override
     public Iterable<Reservation> findNextReservation(CafeteriaUser user) {
-        return null;
+
+
+        ArrayList<Reservation> nextRes = new ArrayList<>(1);
+        Iterable<Reservation> allReserv = match(r -> r.isCreated());
+        Calendar lowest = allReserv.iterator().next().meal().date();/*Creates a temp lowest date*/
+
+        for(Reservation res : allReserv) {
+            if(res.user().equals(user)){
+                if(res.meal().date().before(lowest) && res.state() == ReservationState.BOOKED){
+                    lowest = res.meal().date();
+                    nextRes.add(res);
+                }
+            }
+        }
+        return nextRes;
     }
 }
