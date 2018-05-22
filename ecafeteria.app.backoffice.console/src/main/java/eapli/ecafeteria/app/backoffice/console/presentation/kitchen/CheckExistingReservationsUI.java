@@ -148,7 +148,8 @@ public class CheckExistingReservationsUI extends AbstractUI {
             System.out.println("Available Dishes: ");
             int i=0;
             for (Dish next : dishes){
-                System.out.println ( i + " - " + next.toDTO().toString() );
+               // System.out.println ( i + " - " + next.toDTO().toString() );
+               System.out.println ( i + " - " + next.id().toString() );
                 i++;
             }
             int dishInt = Console.readInteger(prompt);
