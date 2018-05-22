@@ -6,10 +6,14 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
+import java.util.Calendar;
 
 import java.util.Optional;
 import javax.persistence.*;
@@ -32,7 +36,12 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         return createQuery.getResultList();
     }
 
+    @Override
+    public Iterable<Reservation> checkExistingReservations(Calendar date, DishType dishType, Dish dish, MealType mealType) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    
     @Override
     public Iterable<Reservation> selectTypeBooked(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
