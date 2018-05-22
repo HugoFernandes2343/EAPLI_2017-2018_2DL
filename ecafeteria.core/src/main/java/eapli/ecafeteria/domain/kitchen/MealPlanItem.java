@@ -7,6 +7,7 @@ package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,16 +33,17 @@ public class MealPlanItem implements Serializable {
 
     private Integer DishQuantity;
     
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     private MealPlan mealPlan;
 
     protected MealPlanItem() {
 
     }
 
-    public MealPlanItem(Meal meal, int DishQuantity) {
+    public MealPlanItem(Meal meal, int DishQuantity,MealPlan mp) {
         this.meal = meal;
         this.DishQuantity = DishQuantity;
+        this.mealPlan=mp;
     }
 
     public int getDishQuantity() {
