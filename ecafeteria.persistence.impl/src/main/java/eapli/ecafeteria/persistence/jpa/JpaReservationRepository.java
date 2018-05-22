@@ -38,8 +38,11 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     }
 
     @Override
-    public Iterable<Reservation> checkExistingReservations(Calendar date, DishType dishType, Dish dish, MealType mealType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Iterable<Reservation> findReservationsBy(Calendar date, Dish dish) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal IN (SELECT m FROM Meal m WHERE m.date=:dt AND m.dish=:dish)");
+        createQuery.setParameter("dt", date);
+        createQuery.setParameter("dish", dish);
+        return createQuery.getResultList();
     }
     
     @Override

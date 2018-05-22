@@ -55,7 +55,7 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
     }
 
     @Override
-    public Iterable<Reservation> checkExistingReservations(Calendar date, DishType dishType, Dish dish, MealType mealType) {
+    public Iterable<Reservation> findReservationsBy(Calendar date, Dish dish) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

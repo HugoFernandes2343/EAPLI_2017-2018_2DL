@@ -49,7 +49,7 @@ public interface ReservationRepository extends DataRepository<Reservation, Long>
      * @param mealType
      * @return 
      */
-    Iterable<Reservation> checkExistingReservations (Calendar date, DishType dishType, Dish dish, MealType mealType);
+    Iterable<Reservation> findReservationsBy(Calendar date, Dish dish);
     
     Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date,MealType mt);
 
