@@ -35,21 +35,32 @@ public class CreateMealPlanUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        System.out.println("List Menus");
         List<Menu> listaMenu = theController.fetchAvailableMenus();
+
         if (listaMenu.isEmpty()) {
             System.out.println("No exist menus");
             return false;
         }
+
+        System.out.println("\n\n");
+        System.out.println("List Menus");
         for (Menu menu : listaMenu) {
-            System.out.println(menu.id());
+
+            System.out.println("ID:" + menu.id()
+                    + "\nStart Date:" + menu.startDate().getTime()
+                    + "\nEnd Date:" + menu.finishDate().getTime()
+                    + "\nDesignation:" + menu.designation());
+            System.out.println("\n\n");
         }
 
         boolean resposta = false;
-        long id = 0;
+        long id = -1;
         while (resposta == false) {
-            id = Console.readLong("Insere o ID do menu que pretende conforme a lista apresentada!");
+            id = Console.readLong("Insere o ID do menu que pretende conforme a lista apresentada! (ou insira 0 para acabar)");
             resposta = theController.verificarIDMenu(id);
+            if (id == 0) {
+                return false;
+            }
         }
 
         Menu m = theController.selectMenu(id);
@@ -59,31 +70,23 @@ public class CreateMealPlanUI extends AbstractUI {
             System.out.println("No exist mseals");
             return false;
         }
-        List<String> names = new ArrayList<>();
-        System.out.println("\n------------------Meals do menu " + id + "---------------- ");
 
-        for (Meal meal : listaMeals) {
-            names.add(meal.dish().name().toString());
-            System.out.println(meal.dish().name());
-        }
         MealPlan mp = null;
         try {
             mp = theController.createElaborateMealplan();
-        } catch (DataConcurrencyException ex) {
-            Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DataIntegrityViolationException ex) {
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+       
         int cont = 0;
         for (Meal meal : listaMeals) {
-            System.out.println("\n" + mp + "\n");
-            System.out.println(meal);
-            int quantidade = Console.readInteger("Insere a quantidade que pretende para " + names.get(cont) + " !");
+            System.out.println(meal.toString());
+            int quantidade = Console.readInteger("Insere a quantidade que pretende para " + listaMeals.get(cont).dish().name() + " !");
             try {
-                theController.insertQuantityMeal(quantidade, meal);
-            } catch (DataConcurrencyException ex) {
-                Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (DataIntegrityViolationException ex) {
+                theController.insertQuantityMeal(quantidade, meal, mp);
+            } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             cont++;
