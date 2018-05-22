@@ -33,6 +33,10 @@ public class MealPlanItem implements Serializable {
 
     private Integer DishQuantity;
     
+    private int NonDeliveredMeals;
+    
+    private int DeliveredMeals;
+    
     @ManyToOne(cascade=CascadeType.ALL)
     private MealPlan mealPlan;
 
@@ -57,6 +61,11 @@ public class MealPlanItem implements Serializable {
     @Override
     public String toString() {
         return "ID= " + id + "   DishQuantity=" + DishQuantity;
+    }
+
+    public void calculateWastedMeals(int n) {
+        this.NonDeliveredMeals = n;
+        this.DeliveredMeals = this.DishQuantity - n;
     }
 
 }
