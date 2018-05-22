@@ -12,6 +12,8 @@ import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.persistence.MealRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -27,6 +29,7 @@ public class CopyMenuService {
 
     RegisterMenuController rmc = new RegisterMenuController();
     PublishMealController pmc = new PublishMealController();
+    MealRepository jmr = PersistenceContext.repositories().meals();
 
     public void copyMenu(Menu m, Calendar startDate, Designation newName) throws DataConcurrencyException, DataIntegrityViolationException {
 
@@ -35,14 +38,19 @@ public class CopyMenuService {
         Calendar mStartDate = m.startDate(); //Starting date of the original menu
 
         Calendar endingDate = (Calendar) startDate.clone();
-        endingDate.add(Calendar.DAY_OF_MONTH, 7);
+        endingDate.add(Calendar.DAY_OF_MONTH, 6);
 
-        Menu menu = rmc.MenuMaker(startDate, endingDate, newName);
-        rmc.saveMenu();
-
+        rmc.MenuMaker(startDate, endingDate, newName);
+        Menu menu = rmc.saveMenu();
+       
+        Iterable<Meal> itmeal= jmr.findMealByMenu(m);
+        
+        addMeals(itmeal,dateDistance(mStartDate,startDate),menu);
+        
+        
     }
 
-    private long dateDistance(Calendar menuStartingDate, Calendar newMenuStartingDate) {
+    private int dateDistance(Calendar menuStartingDate, Calendar newMenuStartingDate) {
 
         long distanceL = ChronoUnit.DAYS.between(menuStartingDate.toInstant(), newMenuStartingDate.toInstant());
 
@@ -62,9 +70,12 @@ public class CopyMenuService {
 
     }
 
-    private void addMeals(List<Meal> meals, int daysDif,Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
-
+    private void addMeals(Iterable<Meal> meals, int daysDif,Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
+        
+        System.out.println("entrou 1");
         for (Meal e : meals) {
+            
+            System.out.println("entrou 2");
             
             Calendar date = e.date();
             Dish dish = e.dish();
@@ -72,12 +83,10 @@ public class CopyMenuService {
             
             Calendar newDate = (Calendar) date.clone();
             addDays(newDate,daysDif);
-            
-            pmc.buildMeal(dish, mtp, newDate, menu);
-            
-            
-            
-            
+            System.out.println("vai gravar meal");
+            Meal newMeal =pmc.buildMeal(dish, mtp, newDate, menu);
+            pmc.save(newMeal);
+                 
         }
 
     }
