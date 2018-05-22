@@ -21,6 +21,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Collections;
 import eapli.framework.util.Console;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -46,14 +47,20 @@ public class CheckExistingReservationsUI extends AbstractUI {
         
         MealType mealType = askForMealType ("Please choose a Meal time, respecting the casing of the available options:");
         
-        Iterable<DishType> dishTypes = null;
-        try{
+        List<DishType> dishTypes = null;
+        /*try{
             dishTypes = controller.findDishTypesByDateAndMealType (date, mealType);
+            
+            
         } catch (DataIntegrityViolationException ex){
             System.out.println ("DataIntegrityViolationException has ocurred");
         } catch (DataConcurrencyException ex) {
             System.out.println ("DataConcurrencyException has ocurred");
-        }
+        }*/
+        dishTypes = new ArrayList<DishType>();
+        dishTypes.add(new DishType("meat", "meat dish"));
+        dishTypes.add(new DishType("fish", "fish dish"));
+        dishTypes.add(new DishType("vegie", "vegetarian dish"));
         
         DishType dishType = askForDishType ("Please select a Dish Type from the available ones:", dishTypes);
         
