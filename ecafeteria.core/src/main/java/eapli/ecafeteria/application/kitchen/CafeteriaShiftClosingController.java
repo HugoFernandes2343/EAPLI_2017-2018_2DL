@@ -8,7 +8,6 @@ import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.CafeteriaShiftRepository;
-import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
@@ -43,7 +42,7 @@ public class CafeteriaShiftClosingController implements Controller {
 
         ArrayList<POS> list_pos = new ArrayList<>();
 
-        list_pos = (ArrayList<POS>) posRP.findOpenned(POSState.OPENED);
+        list_pos = (ArrayList<POS>) posRP.findByState(POSState.OPENED);
 
         for (POS p : list_pos) {
 
@@ -51,7 +50,7 @@ public class CafeteriaShiftClosingController implements Controller {
 
             posRP.save(p);
         }
-
+        
         CafeteriaShift cs = cfRP.findCafeteriaShift();
 
         MealType mealT = null;

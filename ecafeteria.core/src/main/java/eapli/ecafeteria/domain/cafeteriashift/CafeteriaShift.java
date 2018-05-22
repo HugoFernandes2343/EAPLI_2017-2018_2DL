@@ -112,4 +112,18 @@ public class CafeteriaShift implements Serializable, AggregateRoot<Long> {
         return id;
     }
 
+    public boolean isClosed() {
+        if (this.shiftState.equals(CafeteriaShiftState.CLOSED)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void update(CafeteriaShiftState csS, CafeteriaShiftDayTimeState dt, Calendar date) {
+        this.date = date;
+        this.dtState = dt;
+        this.shiftState = csS;
+    }
+
 }

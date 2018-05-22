@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements POSRepository {
 
     @Override
-    public Iterable<POS> findOpenned(POSState s) {
+    public Iterable<POS> findByState(POSState s) {
         final TypedQuery query = entityManager().createQuery("SELECT p FROM POS p WHERE p.currentState=:st", this.entityClass);
         query.setParameter("st", s);
         return query.getResultList();
