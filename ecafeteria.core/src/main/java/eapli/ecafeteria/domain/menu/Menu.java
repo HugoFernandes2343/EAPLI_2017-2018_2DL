@@ -79,10 +79,6 @@ public class Menu implements AggregateRoot<Long>, Serializable {
 
     }
 
-    public void setID(long menuID) {
-        this.menuID = menuID;
-    }
-
     public boolean publishedMenu() {
         if (!workingMenu()) {
             return false;

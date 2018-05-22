@@ -52,38 +52,7 @@ public class ElaborateMealPlanController implements Controller {
         return listMealPlan;
     }
 
-    public boolean verificarIDMenu(long id) {
-
-        for (Menu m : listaMenu) {
-            long valor = m.id();
-            if (valor == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean verificarIDMealPlanItem(long id) {
-
-        for (MealPlanItem m : listMPI) {
-            long valor = m.id();
-            if (valor == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean verificarIDMealPlan(long id) {
-
-        for (MealPlan mp : listMealPlan) {
-            long valor = mp.id();
-            if (valor == id) {
-                return true;
-            }
-        }
-        return false;
-    }
+   
 
     public Menu selectMenu(long id) {
         menu = listMenuService.findByID(id);
@@ -117,8 +86,8 @@ public class ElaborateMealPlanController implements Controller {
         return mealplan;
     }
 
-    public void insertQuantityMeal(int quantidade, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
-        MealPlanItem mealPlanItem = new MealPlanItem(meal, quantidade);
+    public void insertQuantityMeal(int quantidade, Meal meal,MealPlan mp) throws DataConcurrencyException, DataIntegrityViolationException {
+        MealPlanItem mealPlanItem = new MealPlanItem(meal, quantidade,mp);
         mealPlanItemRepository.save(mealPlanItem);
 
     }
@@ -127,4 +96,34 @@ public class ElaborateMealPlanController implements Controller {
         mealPlanItemRepository.updateTable(id, quantidade);
     }
 
+     public boolean verificarIDMenu(long id) {
+        for (Menu m : listaMenu) {
+            long valor = m.id();
+            if (valor == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarIDMealPlanItem(long id) {
+        for (MealPlanItem m : listMPI) {
+            long valor = m.id();
+            if (valor == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarIDMealPlan(long id) {
+
+        for (MealPlan mp : listMealPlan) {
+            long valor = mp.id();
+            if (valor == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
