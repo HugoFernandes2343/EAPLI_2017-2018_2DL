@@ -171,10 +171,10 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     @Override
     public String toString() {
 
-        return "Menu Starting date " + startDate.getTime() + " Menu Ending Date= " + endingDate.getTime() + " Menu State: " + this.state.toString();
+        return name + "\nStarting date: " + startDate.getTime() + "\nEnding Date: " + endingDate.getTime() + "\nState: " + this.state.toString();
 
     }
-
+    
     @Override
     public boolean sameAs(Object other) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
