@@ -32,6 +32,13 @@ public class MealType implements ValueObject, Serializable {
         this.mealType = mealType.toString();
     }
 
+    public MealType(String mealType) {
+        if (mealType == null) {
+            throw new IllegalStateException();
+        }
+        this.mealType = mealType;
+    }
+    
     public String mealType() {
         return this.mealType;
     }

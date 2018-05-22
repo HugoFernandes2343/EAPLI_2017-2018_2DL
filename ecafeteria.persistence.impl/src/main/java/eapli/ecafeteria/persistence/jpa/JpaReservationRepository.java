@@ -7,6 +7,8 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShiftDayTimeState;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.reservations.Reservation;
@@ -36,6 +38,14 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     }
 
     @Override
+    public Iterable<Reservation> findReservationsBy(Calendar date, Dish dish) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal IN (SELECT m FROM Meal m WHERE m.date=:dt AND m.dish=:dish)");
+        createQuery.setParameter("dt", date);
+        createQuery.setParameter("dish", dish);
+        return createQuery.getResultList();
+    }
+    
+    @Override
     public Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date, MealType mt) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:st AND r.meal IN (SELECT m FROM Meal m WHERE m.date=:dt AND m.mealType=:mt)");
         createQuery.setParameter("mt", mt);
@@ -44,6 +54,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         return createQuery.getResultList();
     }
 
+    
     @Override
     public Iterable<Reservation> selectTypeBooked(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
