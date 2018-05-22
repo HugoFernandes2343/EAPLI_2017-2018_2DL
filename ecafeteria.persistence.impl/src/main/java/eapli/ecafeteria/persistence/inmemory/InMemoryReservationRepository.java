@@ -15,14 +15,13 @@ import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-<<<<<<< HEAD
+
 import java.util.Calendar;
 import java.util.Optional;
-=======
+
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
 
 import java.util.*;
->>>>>>> 55fab3873fd455e88d3154529aaef0a60231cd4c
 
 /**
  * @author Utilizador
