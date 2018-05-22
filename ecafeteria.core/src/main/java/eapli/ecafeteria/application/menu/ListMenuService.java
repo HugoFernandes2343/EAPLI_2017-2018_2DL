@@ -7,7 +7,9 @@ package eapli.ecafeteria.application.menu;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.Date;
@@ -19,6 +21,7 @@ import java.util.Date;
 public class ListMenuService {
 
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
+    private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
     public Iterable<Menu> allMenus() {
 
@@ -45,6 +48,10 @@ public class ListMenuService {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SELECT_MEAL);
 
         return this.menuRepository.findByDate(date);
+    }
+
+    public Iterable<Meal> findMealByMenu(Menu menu) {
+        return this.mealRepository.findMealByMenu(menu);
     }
 
 }

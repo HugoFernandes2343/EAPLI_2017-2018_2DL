@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
+import eapli.ecafeteria.persistence.KitchenAlertsRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
@@ -124,5 +125,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public MealPlanItemRepository mealPlanItemRepository() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public KitchenAlertsRepository KitchenAlertsRepository() {
+       return new InMemoryKitchenAlertRepository();
     }
 }

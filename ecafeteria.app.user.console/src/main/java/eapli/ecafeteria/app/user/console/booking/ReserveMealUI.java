@@ -46,7 +46,7 @@ public class ReserveMealUI extends AbstractUI {
         }
 
         Meal meal;
-        SelectWidget<Meal> selector = new SelectWidget<>("Meals:", menu.listMeals(), new MealPrinter());
+        SelectWidget<Meal> selector = new SelectWidget<>("Meals:", theController.menuMealsList(menu), new MealPrinter());
         selector.show();
         meal = selector.selectedElement();
         if (meal == null) {

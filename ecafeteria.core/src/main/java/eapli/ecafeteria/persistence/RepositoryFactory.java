@@ -107,4 +107,6 @@ public interface RepositoryFactory {
     DishReportingRepository dishReporting();
 
     CafeteriaShiftRepository cafeteriaShift();
+
+     KitchenAlertsRepository KitchenAlertsRepository();
 }

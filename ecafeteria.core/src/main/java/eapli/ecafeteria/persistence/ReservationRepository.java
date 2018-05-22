@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShiftDayTimeState;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
@@ -21,23 +22,24 @@ import java.util.Optional;
  *
  * @author Utilizador
  */
-public interface ReservationRepository extends DataRepository<Reservation,Long>{
-    
-    
+public interface ReservationRepository extends DataRepository<Reservation, Long> {
+
     /**
      * Find Reservation given a code
+     *
      * @param code
-     * @return 
+     * @return
      */
     Optional<Reservation> findByCode(String code);
-    
+
     /**
      * Finds reservation given a meal and a state
+     *
      * @param state
      * @param m
      * @return
      */
-    Iterable<Reservation> findByStateAndMeal(ReservationState state,Meal m);
+    Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m);
 
     /**
      * Finds all Reservations pertaining to a specific "date" for given "dishType", "dish" and "mealType"
@@ -49,16 +51,24 @@ public interface ReservationRepository extends DataRepository<Reservation,Long>{
      */
     Iterable<Reservation> checkExistingReservations (Calendar date, DishType dishType, Dish dish, MealType mealType);
     
+    Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date,MealType mt);
+
+
     Iterable<Reservation> selectTypeBooked(CafeteriaUser user);
+
     Iterable<Reservation> selectTypeDelivered(CafeteriaUser user);
+
     Iterable<Reservation> selectTypeCancelled(CafeteriaUser user);
+
     Iterable<Reservation> selectTypeExpired(CafeteriaUser user);
 
     /**
-     * FindNextReservation searches for the next reservation for a user based on the state and state
+     * FindNextReservation searches for the next reservation for a user based on
+     * the state and state
+     *
      * @param user user
      * @return
      */
     Iterable<Reservation> findNextReservation(CafeteriaUser user);
-    
+
 }

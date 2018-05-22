@@ -99,4 +99,9 @@ public abstract class Movement implements AggregateRoot<Long>, Serializable{
     public double value(){
         return this.value.amount();
     }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + "\nUser: " + user + "\nValue: " + value + "€\nDate: " + date + "\nDescription: " + description + '\n';
+    }
 }

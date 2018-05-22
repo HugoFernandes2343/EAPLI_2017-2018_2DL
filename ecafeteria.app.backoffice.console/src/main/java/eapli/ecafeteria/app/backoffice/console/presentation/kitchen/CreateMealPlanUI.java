@@ -76,9 +76,11 @@ public class CreateMealPlanUI extends AbstractUI {
         }
         int cont = 0;
         for (Meal meal : listaMeals) {
+            System.out.println("\n" + mp + "\n");
+            System.out.println(meal);
             int quantidade = Console.readInteger("Insere a quantidade que pretende para " + names.get(cont) + " !");
             try {
-                theController.insertQuantityMeal(quantidade, meal, mp);
+                theController.insertQuantityMeal(quantidade, meal);
             } catch (DataConcurrencyException ex) {
                 Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (DataIntegrityViolationException ex) {

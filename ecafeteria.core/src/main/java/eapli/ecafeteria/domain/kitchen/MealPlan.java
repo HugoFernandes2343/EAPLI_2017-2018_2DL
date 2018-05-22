@@ -8,11 +8,10 @@ package eapli.ecafeteria.domain.kitchen;
 import static eapli.ecafeteria.domain.kitchen.MealPlanState.IN_PROGRESS;
 import static eapli.ecafeteria.domain.kitchen.MealPlanState.PUBLISHED;
 import eapli.ecafeteria.domain.menu.Menu;
-import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.framework.util.DateTime;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,8 +20,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+/**
+ *
+ * @author Paulo Jorge
+ */
 @Entity
 public class MealPlan<M, Q> implements Serializable {
 
@@ -37,21 +41,26 @@ public class MealPlan<M, Q> implements Serializable {
     @OneToOne
     private Menu menu;
 
-    public MealPlan(Menu menu) {
-        this.mealPlanState = IN_PROGRESS;
-        this.menu = menu;
-    }
+    @OneToMany
+    private List<MealPlanItem> listaMealPlanItem;
 
     protected MealPlan() {
 
+    }
+
+    public MealPlan(Menu menu) {
+        this.mealPlanState = IN_PROGRESS;
+        this.menu = menu;
+        listaMealPlanItem = new ArrayList<>();
     }
 
     public void closeMealPlan() {
         this.mealPlanState = PUBLISHED;
     }
 
+    
     public boolean isInTime(MealPlanRepository mpir) {
-        
+
         List<MealPlanItem> lista = mpir.getMealPlanItemsFromMealPlan(this);
         for (MealPlanItem mpi : lista) {
             if (mpi.getDishQuantity() < 0) {
@@ -63,10 +72,16 @@ public class MealPlan<M, Q> implements Serializable {
         }
         return true;
     }
-    
+
     public Long id() {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "MealPlan{" + "id=" + id + ", mealPlanState=" + mealPlanState + ", menu=" + menu + ", listaMealPlanItem=" + listaMealPlanItem + '}';
+    }
+    
+    
 
 }

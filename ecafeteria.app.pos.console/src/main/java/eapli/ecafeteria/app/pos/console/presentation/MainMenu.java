@@ -33,8 +33,9 @@ public class MainMenu extends AbstractUI {
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int SALES_OPTION = 2;
-    
-    
+    private static final int OPEN_POS_OPTION = 3;
+    private static final int CLOSE_POS_OPTION = 4;
+
     // SALES
     private static final int MEAL_DELIVERY_REGISTRATION_OPTION = 1;
     private static final int RECHARGE_CARD_OPTION = 2;
@@ -80,6 +81,14 @@ public class MainMenu extends AbstractUI {
             mainMenu.add(new SubMenu(SALES_OPTION, salesMenu, new ShowVerticalSubMenuAction(salesMenu)));
         }
 
+        mainMenu.add(new MenuItem(OPEN_POS_OPTION, "Open POS", new OpenPosAction()));
+
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.add(VerticalSeparator.separator());
+        }
+
+        mainMenu.add(new MenuItem(CLOSE_POS_OPTION, "Close POS", new ClosePosAction()));
+
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
         }
@@ -88,8 +97,8 @@ public class MainMenu extends AbstractUI {
 
         return mainMenu;
     }
-    
-     private Menu buildSalesMenu() {
+
+    private Menu buildSalesMenu() {
         final Menu menu = new Menu("Sales >");
         menu.add(new MenuItem(MEAL_DELIVERY_REGISTRATION_OPTION, "Meal Delivery Registration",
                 new MealDeliveryReagistrationAction()));

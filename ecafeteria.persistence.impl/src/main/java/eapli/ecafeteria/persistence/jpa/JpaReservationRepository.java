@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShiftDayTimeState;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
@@ -30,8 +31,8 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
 
     @Override
     public Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m) {
-        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal_pk=:me_pk AND r.currentState=:st");
-        createQuery.setParameter("me_pk", m.pk());
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal=:me_pk AND r.currentState=:st");
+        createQuery.setParameter("me_pk", m);
         createQuery.setParameter("st", state);
         return createQuery.getResultList();
     }
@@ -39,6 +40,15 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> checkExistingReservations(Calendar date, DishType dishType, Dish dish, MealType mealType) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date, MealType mt) {
+        Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:st AND r.meal IN (SELECT m FROM Meal m WHERE m.date=:dt AND m.mealType=:mt)");
+        createQuery.setParameter("mt", mt);
+        createQuery.setParameter("dt", date);
+        createQuery.setParameter("st", state);
+        return createQuery.getResultList();
     }
 
     
@@ -53,6 +63,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> selectTypeDelivered(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("state"), ReservationState.DELIVERED);
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
@@ -60,6 +71,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> selectTypeCancelled(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("state"), ReservationState.CANCELLED);
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
@@ -67,6 +79,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> selectTypeExpired(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.currentState=:state AND r.user=:u");
+        createQuery.setParameter(("state"), ReservationState.EXPIRED);
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
@@ -82,7 +95,7 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
     @Override
     public Iterable<Reservation> findNextReservation(CafeteriaUser user) {
         Query createQuery = entityManager().createQuery("SELECT r FROM Reservation WHERE r.currentState=:state AND r.user=:u AND r.meal_pk = " +
-                "(select m.meal_pk FROM Meal where m.date = " +
+                "(SELECT m.meal_pk FROM Meal where m.date = " +
                 "(SELECT MIN(m2.date) FROM Meal m2))");
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
