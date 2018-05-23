@@ -72,10 +72,8 @@ public class CopyMenuService {
 
     private void addMeals(Iterable<Meal> meals, int daysDif,Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
         
-        System.out.println("entrou 1");
         for (Meal e : meals) {
             
-            System.out.println("entrou 2");
             
             Calendar date = e.date();
             Dish dish = e.dish();
@@ -83,7 +81,6 @@ public class CopyMenuService {
             
             Calendar newDate = (Calendar) date.clone();
             addDays(newDate,daysDif);
-            System.out.println("vai gravar meal");
             Meal newMeal =pmc.buildMeal(dish, mtp, newDate, menu);
             pmc.save(newMeal);
                  
