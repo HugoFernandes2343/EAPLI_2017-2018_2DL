@@ -1,6 +1,7 @@
 package eapli.ecafeteria.application.pos;
 
 import eapli.ecafeteria.domain.pos.POS;
+import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -9,16 +10,19 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
+ */
 public class ClosePosController implements Controller {
 
     private final POSRepository posRP = PersistenceContext.repositories().pos();
 
-    
+    private ArrayList<POS> list_pos = new ArrayList<>();
 
     public boolean ListAllActivePOS() throws POSStateViolationException {
-        ArrayList<POS> list_pos = new ArrayList<>();
-        POS temp = new POS(1);
-        list_pos = (ArrayList<POS>) posRP.findOpenned(temp.state());
+
+        list_pos = (ArrayList<POS>) posRP.findByState(POSState.OPENED);
         
         if(list_pos.isEmpty()){
             System.out.println("No POS currently open!");
@@ -37,9 +41,6 @@ public class ClosePosController implements Controller {
     
     
     public boolean CloseAndSavePOS(Long id) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException{
-        ArrayList<POS> list_pos = new ArrayList<>();
-        POS temp = new POS(1);
-        list_pos = (ArrayList<POS>) posRP.findOpenned(temp.state());
         
         for(POS p : list_pos){
             if(p.id() == id){

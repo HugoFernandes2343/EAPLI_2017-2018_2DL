@@ -6,12 +6,19 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+
+import java.util.Calendar;
+import java.util.Optional;
+
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
 
 import java.util.*;
@@ -47,6 +54,11 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
 
     }
 
+    @Override
+    public Iterable<Reservation> findReservationsBy(Calendar date, Dish dish) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     @Override
     public Iterable<Reservation> selectTypeBooked(CafeteriaUser user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -84,5 +96,10 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
             }
         }
         return nextRes;
+    }
+
+    @Override
+    public Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date, MealType mt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

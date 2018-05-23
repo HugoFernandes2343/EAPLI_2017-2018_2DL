@@ -5,52 +5,17 @@
  */
 package eapli.ecafeteria.domain.pos;
 
-import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.ecafeteria.persistence.PersistenceContext;
-import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.domain.POSStateViolationException;
-import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.*;
 
 /**
  *
- * @author hugod
+ * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
  */
 @Entity
 public class POS implements AggregateRoot<Long>, Serializable {
-
-    @Embeddable
-    public static class POSState implements Serializable {
-
-        private String state;
-
-        public enum STATE {
-            OPENED, CLOSED
-        };
-
-        private void open() {
-            state = STATE.OPENED.toString();
-        }
-
-        private void close() throws POSStateViolationException {
-            if (state.equals(STATE.OPENED.toString())) {
-                state = STATE.CLOSED.toString();
-            } else {
-                throw new POSStateViolationException();
-            }
-        }
-
-        public String state() {
-            return state;
-        }
-    }
-
-   
-  
     
     @Id
     @GeneratedValue
@@ -58,17 +23,30 @@ public class POS implements AggregateRoot<Long>, Serializable {
     
     private int code;
     
-    private POSState state;
+    @Enumerated(EnumType.STRING)
+    private POSState currentState;
     
     public POS(){
     }
     
     public POS(int code) throws POSStateViolationException {
-        this.state = new POSState();
-        state.open();
+        this.currentState = POSState.OPENED;
         this.code = code;
     }
 
+    
+    public void open() {
+            currentState = POSState.OPENED;
+    }
+    
+    public void close() throws POSStateViolationException {
+            if (currentState.equals(POSState.OPENED)) {
+                currentState = POSState.CLOSED;
+            } else {
+                throw new POSStateViolationException();
+            }
+    }
+    
     @Override
     public boolean sameAs(Object other) {
         if (!(other instanceof POS)) {
@@ -96,18 +74,7 @@ public class POS implements AggregateRoot<Long>, Serializable {
     public Long id() {
         return posID;
     }
-    
-    public POSState state(){
-        return state;
-    }
-    
-    /**
-     *
-     * @throws eapli.framework.domain.POSStateViolationException
-     */
-    public boolean close() throws POSStateViolationException {
-        state.close();
-        return true;
-    }
+       
+
 
 }

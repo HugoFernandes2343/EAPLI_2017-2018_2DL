@@ -15,59 +15,11 @@ import javax.persistence.*;
 
 /**
  *
- * @author hugod
+ * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
  */
 @Entity
 @Table(name = "CafeteriaShift")
 public class CafeteriaShift implements Serializable, AggregateRoot<Long> {
-
-    @Embeddable
-    public static class ShiftState implements Serializable {
-
-        private String sstate;
-
-        public enum STATE {
-            OPENED, CLOSED
-        };
-
-        private void open() {
-            sstate = STATE.OPENED.toString();
-        }
-
-        private void close() throws CafeteriaShiftStateViolationException {
-            if (sstate.equals(STATE.OPENED.toString())) {
-                sstate = STATE.CLOSED.toString();
-            } else {
-                throw new CafeteriaShiftStateViolationException();
-            }
-        }
-    }
-
-    @Embeddable
-    public static class DayTimeState implements Serializable {
-
-        private String dtstate;
-
-        public enum STATE {
-            LUNCH, DINNER
-        };
-
-        private void lunch() {
-            dtstate = STATE.LUNCH.toString();
-        }
-
-        private void dinner() {
-            dtstate = STATE.DINNER.toString();
-        }
-
-        private boolean isLunch() {
-            return dtstate.equalsIgnoreCase(STATE.LUNCH.toString());
-        }
-
-        private boolean isDinner() {
-            return dtstate.equalsIgnoreCase(STATE.DINNER.toString());
-        }
-    }
 
     @Id
     @GeneratedValue
@@ -76,9 +28,11 @@ public class CafeteriaShift implements Serializable, AggregateRoot<Long> {
     @Temporal(TemporalType.DATE)
     private Calendar date;
 
-    private ShiftState shiftState;
+    @Enumerated(EnumType.STRING)
+    private CafeteriaShiftState shiftState;
 
-    private DayTimeState dtState;
+    @Enumerated(EnumType.STRING)
+    private CafeteriaShiftDayTimeState dtState;
 
     public CafeteriaShift() {
     }
@@ -90,18 +44,25 @@ public class CafeteriaShift implements Serializable, AggregateRoot<Long> {
         if (Strings.isNullOrEmpty(dt)) {
             throw new IllegalArgumentException();
         } else if (dt.equalsIgnoreCase("LUNCH")) {
-            dtState.lunch();
+            dtState = CafeteriaShiftDayTimeState.LUNCH;
         } else if (dt.equalsIgnoreCase("DINNER")) {
-            dtState.dinner();
+            dtState = CafeteriaShiftDayTimeState.DINNER;
         }
 
         this.date = date;
-        shiftState.open();
+        shiftState = CafeteriaShiftState.OPENED;
     }
 
-    public boolean closeShift() throws CafeteriaShiftStateViolationException {
-        shiftState.close();
-        return true;
+    public void openShift() {
+        shiftState = CafeteriaShiftState.OPENED;
+    }
+
+    public void closeShift() throws CafeteriaShiftStateViolationException {
+        if (shiftState.equals(CafeteriaShiftState.OPENED)) {
+            shiftState = CafeteriaShiftState.CLOSED;
+        } else {
+            throw new CafeteriaShiftStateViolationException();
+        }
     }
 
     public Calendar date() {
@@ -115,7 +76,7 @@ public class CafeteriaShift implements Serializable, AggregateRoot<Long> {
      * @throws CafeteriaShiftStateViolationException
      */
     public String dayTimeCheck() throws CafeteriaShiftStateViolationException {
-        if (dtState.isLunch()) {
+        if (dtState.equals(CafeteriaShiftDayTimeState.LUNCH)) {
             return "LUNCH";
         } else {
             return "DINNER";
@@ -149,6 +110,20 @@ public class CafeteriaShift implements Serializable, AggregateRoot<Long> {
     @Override
     public Long id() {
         return id;
+    }
+
+    public boolean isClosed() {
+        if (this.shiftState.equals(CafeteriaShiftState.CLOSED)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void update(CafeteriaShiftState csS, CafeteriaShiftDayTimeState dt, Calendar date) {
+        this.date = date;
+        this.dtState = dt;
+        this.shiftState = csS;
     }
 
 }

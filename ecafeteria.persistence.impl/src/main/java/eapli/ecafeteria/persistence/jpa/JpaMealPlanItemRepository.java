@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MealPlanItemRepository;
@@ -47,6 +48,14 @@ public class JpaMealPlanItemRepository extends CafeteriaJpaRepositoryBase<MealPl
         q.setParameter("quantidade", quantidade);
         q.setParameter("id", id);
 
+    }
+
+    @Override
+    public MealPlanItem findByMeal(Meal m) {
+        final Query q;
+        q = entityManager().createQuery("SELECT mpi FROM MealPlanItem mpi WHERE mpi.meal=:m", this.entityClass);
+        q.setParameter("m", m);
+        return (MealPlanItem) q.getSingleResult();
     }
 
 }
