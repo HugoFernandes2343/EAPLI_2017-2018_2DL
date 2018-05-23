@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
-import eapli.ecafeteria.application.kitchen.CafeteriaShiftClosingController;
 import eapli.ecafeteria.application.kitchen.CheckExistingReservationsController;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
@@ -13,24 +12,12 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.application.Controller;
 
-import eapli.framework.domain.CafeteriaShiftStateViolationException;
-import eapli.framework.domain.Designation;
-import eapli.framework.domain.POSStateViolationException;
-import eapli.framework.domain.ReservationStateViolationException;
-import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.util.Collections;
 import eapli.framework.util.Console;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Currency;
 import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.NoResultException;
 
 /**
  *

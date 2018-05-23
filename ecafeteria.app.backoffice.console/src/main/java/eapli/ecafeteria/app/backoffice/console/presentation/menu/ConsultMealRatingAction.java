@@ -5,16 +5,18 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.menu;
 
+import eapli.framework.actions.Action;
+
 /**
  *
- * @author David Santiago <1161109@isep.ipp.pt>
+ * @author João Santiago <1160696@isep.ipp.pt>
  */
-public class mainTeste {
-    
-    public static void main(String [] args)
-	{
-		new CopyMenuUI();
-	}
+public class ConsultMealRatingAction implements Action{
 
+    @Override
+    public boolean execute() {
+        return new ConsultMealRatingUI().show();
+    }
+    
     
 }
