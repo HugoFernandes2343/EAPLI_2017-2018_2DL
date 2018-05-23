@@ -7,13 +7,19 @@ package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+/**
+ *
+ * @author Paulo Jorge
+ */
 @Entity
 public class MealPlanItem implements Serializable {
 
@@ -26,22 +32,25 @@ public class MealPlanItem implements Serializable {
     private Meal meal;
 
     private Integer DishQuantity;
-
-    @OneToOne
+    
+    private int NonDeliveredMeals;
+    
+    private int DeliveredMeals;
+    
+    @ManyToOne(cascade=CascadeType.ALL)
     private MealPlan mealPlan;
 
     protected MealPlanItem() {
 
     }
 
-    public MealPlanItem(MealPlan mp, Meal meal, int DishQuantity) {
+    public MealPlanItem(Meal meal, int DishQuantity,MealPlan mp) {
         this.meal = meal;
-        this.mealPlan = mp;
         this.DishQuantity = DishQuantity;
+        this.mealPlan=mp;
     }
 
-
-    public int getDishQuantity(){
+    public int getDishQuantity() {
         return this.DishQuantity;
     }
 
@@ -52,6 +61,11 @@ public class MealPlanItem implements Serializable {
     @Override
     public String toString() {
         return "ID= " + id + "   DishQuantity=" + DishQuantity;
+    }
+
+    public void calculateWastedMeals(int n) {
+        this.NonDeliveredMeals = n;
+        this.DeliveredMeals = this.DishQuantity - n;
     }
 
 }

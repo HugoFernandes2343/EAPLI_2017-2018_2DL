@@ -20,7 +20,7 @@ public class InMemoryPOSRepository implements POSRepository {
     
     
     @Override
-    public Iterable<POS> findOpenned(POSState s){
+    public Iterable<POS> findByState(POSState s){
       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -22,7 +22,7 @@ public class ClosePosController implements Controller {
 
     public boolean ListAllActivePOS() throws POSStateViolationException {
 
-        list_pos = (ArrayList<POS>) posRP.findOpenned(POSState.OPENED);
+        list_pos = (ArrayList<POS>) posRP.findByState(POSState.OPENED);
         
         if(list_pos.isEmpty()){
             System.out.println("No POS currently open!");

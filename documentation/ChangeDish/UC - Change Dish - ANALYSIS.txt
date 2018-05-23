@@ -7,8 +7,8 @@
 	Reuni„o com o cliente  em 2017.03.23
 
 	* Passa a ser possivel alterar informaÁ„o sobre o prato (Dish)
-	* A informaÁ„o do prato passÌvel de ser alterada È o PreÁo (Price) e a InformaÁ„o Nutricional (NutricionalInfo)	
-	* O utilizador que pode efetuar esta alteraÁ„o È do tipo ìmenu managerî
+	* A informaÁ„o do prato pass˙ìel de ser alterada ÅEo PreÁo (Price) e a InformaÁ„o Nutricional (NutricionalInfo)	
+	* O utilizador que pode efetuar esta alteraÁ„o ÅEdo tipo ìmenu managerÅE
 
 
 	______________________
@@ -17,7 +17,7 @@
 	_____________________
 
 
-	* N„o È possivel alterar informaÁ„o sensivel do prato como o seu nome (Name) e o seu tipo (DishType)
+	* N„o ÅEpossivel alterar informaÁ„o sensivel do prato como o seu nome (Name) e o seu tipo (DishType)
 
 
 	______________________
@@ -26,6 +26,6 @@
 	_____________________
 
 
-	* testchangeNutricionalInfoToMustNotBeNull
-	* testchangePriceToMustNotBeNull
-	* testchangePriceToCanNotBeNegative
+	* ensureCannotChangeNutricionalInfoToNull
+	* ensureCannotChangePriceToNull
+	* ensureCannotChangePriceToNegative

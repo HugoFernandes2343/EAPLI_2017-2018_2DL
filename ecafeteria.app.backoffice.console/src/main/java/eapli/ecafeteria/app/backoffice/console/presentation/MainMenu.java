@@ -27,11 +27,14 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.Rep
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportHighCaloriesDishesUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CheckExistingReservationsAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.EditMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.PublishMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menu.ConsultMealRatingAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menu.CopyMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
@@ -80,12 +83,15 @@ public class MainMenu extends AbstractUI {
     private static final int DISH_LIST_DTO_OPTION = 8;
     private static final int DISH_ACTIVATE_DEACTIVATE_OPTION = 9;
     private static final int DISH_CHANGE_OPTION = 10;
-    private static final int DISH_Allergen = 11;
+    private static final int DISH_ALLERGEN = 11;
 
     // DISH PROPERTIES
     private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
     private static final int CHANGE_DISH_PRICE_OPTION = 2;
 
+    // RESERVATIONS
+    private static final int CHECK_RESERVATIONS_OPTION = 1;
+    
     // MATERIALS
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
@@ -99,7 +105,9 @@ public class MainMenu extends AbstractUI {
     // MEALS
     private static final int REGISTER_MENU_OPTION = 1;
     private static final int PUBLISH_MENU_OPTION = 2;
-    private static final int PUBLISH_MEAL_OPTION = 3;
+    private static final int COPY_MENU_OPTION = 3;
+    private static final int PUBLISH_MEAL_OPTION = 4;
+    private static final int CONSULT_MEALS_RATING = 5;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -110,7 +118,8 @@ public class MainMenu extends AbstractUI {
     private static final int TRACEABILITY_OPTION = 6;
     private static final int REPORTING_DISHES_OPTION = 7;
     private static final int MEALS_MENU_OPTION = 8;
-
+    private static final int RESERVATIONS_MENU_OPTION = 9;
+    
     //ELABORATE MENU
     private static final int CREATE_MEAL_PLAN = 1;
     private static final int EDIT_MEAL_PLAN = 2;
@@ -164,6 +173,12 @@ public class MainMenu extends AbstractUI {
         }
         if (AuthorizationService.session().authenticatedUser()
                 .isAuthorizedTo(ActionRight.MANAGE_KITCHEN)) {
+            //Reservations
+            final Menu reservationsMenu = buildReservationsMenu();
+            mainMenu.add(new SubMenu(RESERVATIONS_MENU_OPTION, reservationsMenu,
+                    new ShowVerticalSubMenuAction(reservationsMenu)));
+            
+            //Traceability
             final Menu kitchenMenu = buildKitchenMenu();
             mainMenu.add(new SubMenu(TRACEABILITY_OPTION, kitchenMenu,
                     new ShowVerticalSubMenuAction(kitchenMenu)));
@@ -251,7 +266,7 @@ public class MainMenu extends AbstractUI {
         final Menu changeDishMenu = buildChangeDishMenu();
         menu.add(new MenuItem(DISH_CHANGE_OPTION, "Change Dish Information",
                 new ShowVerticalSubMenuAction(changeDishMenu)));
-        menu.add(new MenuItem(DISH_Allergen, "Dish Allergen",
+        menu.add(new MenuItem(DISH_ALLERGEN, "Dish Allergen",
                 new DishAllergernsListAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
@@ -259,6 +274,15 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
+    private Menu buildReservationsMenu() {
+        final Menu menu = new Menu("Reservations >");
+        
+        menu.add(new MenuItem(CHECK_RESERVATIONS_OPTION, "Check Existing Reservations",
+                new CheckExistingReservationsAction()));
+        
+        return menu;
+    }
+    
     private Menu buildKitchenMenu() {
         final Menu menu = new Menu("Traceability >");
 
@@ -316,7 +340,9 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Menus >");
         menu.add(new MenuItem(REGISTER_MENU_OPTION, "Register Menu", new RegisterMenuAction()));
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
+        menu.add(new MenuItem(COPY_MENU_OPTION, "Copy Menu", new CopyMenuAction()));
         menu.add(new MenuItem(PUBLISH_MEAL_OPTION, "Publish Meal", new PublishMealAction()));
+        menu.add(new MenuItem(CONSULT_MEALS_RATING, "Consult Meals Ratings", new ConsultMealRatingAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

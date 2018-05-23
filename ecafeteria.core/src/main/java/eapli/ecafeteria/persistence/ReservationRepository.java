@@ -7,6 +7,8 @@ package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShiftDayTimeState;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.reservations.Reservation;
@@ -39,9 +41,21 @@ public interface ReservationRepository extends DataRepository<Reservation, Long>
      */
     Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m);
 
+    /**
+     * Finds all Reservations pertaining to a specific "date" for given "dishType", "dish" and "mealType"
+     * @param date
+     * @param dishType
+     * @param dish
+     * @param mealType
+     * @return 
+     */
+    Iterable<Reservation> findReservationsBy(Calendar date, Dish dish);
+    
     Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date,MealType mt);
 
+
     Iterable<Reservation> selectTypeBooked(CafeteriaUser user);
+
     Iterable<Reservation> selectTypeDelivered(CafeteriaUser user);
 
     Iterable<Reservation> selectTypeCancelled(CafeteriaUser user);
