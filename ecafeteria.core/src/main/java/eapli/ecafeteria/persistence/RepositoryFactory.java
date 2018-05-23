@@ -105,12 +105,20 @@ public interface RepositoryFactory {
      * ************************
      * reporting ************************
      */
+    DishReportingRepository dishReporting();
     /**
      * @return
      */
-    DishReportingRepository dishReporting();
 
     CafeteriaShiftRepository cafeteriaShift();
 
     KitchenAlertsRepository KitchenAlertsRepository();
+    
+    MealRatingRepository ratings();
+
+    /**
+     * Repo for obtaining complaints
+     * @return
+     */
+    ComplaintRepository complaints();
 }

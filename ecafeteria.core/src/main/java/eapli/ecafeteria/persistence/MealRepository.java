@@ -23,6 +23,6 @@ public interface MealRepository extends DataRepository<Meal, Long> {
 
     Iterable<Meal> findMealByMenu(Menu menu);
     
-    Iterable<Meal> findRatingsByMeal(Meal meal);
+//    Iterable<Meal> findRatingsByMeal(Meal meal);
 
 }

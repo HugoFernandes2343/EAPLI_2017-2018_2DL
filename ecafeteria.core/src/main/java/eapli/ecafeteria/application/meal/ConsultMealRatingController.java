@@ -20,20 +20,20 @@ public class ConsultMealRatingController implements Controller {
     
     private final MealRepository mr = PersistenceContext.repositories().meals();
 //    private final MealRatingService mrs = new MealRatingService();
-    private final MealRepository rr = PersistenceContext.repositories().ratings();
+//    private final MealRepository rr = PersistenceContext.repositories().ratings();
     
     public Iterable<Meal> allMeals(){
         return mr.findAll();
     }
     
-    public Iterable<MealRating> allRatings(Meal m){
-        return mrs.mealsRatingList(m);
-        
-    }
+//    public Iterable<MealRating> allRatings(Meal m){
+//        return mrs.mealsRatingList(m);
+//        
+//    }
     
-    public void answerToComment(MealRating r, String reply){
-        Comment c = r.comment(reply);
-        c.answer(reply);
-        rr.save(r);
-    }
+//    public void answerToComment(MealRating r, String reply){
+//        Comment c = r.comment(reply);
+//        c.answer(reply);
+//        rr.save(r);
+//    }
 }
