@@ -166,16 +166,29 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         return String.format("Code: %s\nState: %s\n%s", code, currentState, meal.toString());
     }
 
-    public Money acquireRefundValue() {
-        Money value = meal.dish().currentPrice();
+        public Money acquireRefundValue() {
+        int diff;
+        Money value=meal.dish().currentPrice();
         Money errantPenniesMoney[];
-        Calendar actual = DateTime.now();
-        Calendar booked = meal.date();
-        if (DateTime.isSameDate(actual, booked)) {
-            errantPenniesMoney = value.divide(2);
-            return errantPenniesMoney[0];
+        Calendar actual=DateTime.now();
+        Calendar booked=meal.date();
+        if(!DateTime.isSameDate(actual, booked)){
+            return value;
         }
-        return value;
+        if(meal.isLunch()){
+            diff=12-actual.get(Calendar.HOUR_OF_DAY);
+            if(diff>=10){
+                return value;
+            }
+        } 
+        if(meal.isDinner()){
+            diff=19-actual.get(Calendar.HOUR_OF_DAY);
+            if(diff>=16){
+                return value;
+            }
+        }
+        errantPenniesMoney=value.divide(2);
+        return errantPenniesMoney[1];
     }
 
 }

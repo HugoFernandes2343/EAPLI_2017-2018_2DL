@@ -153,4 +153,11 @@ public class Meal implements Serializable, AggregateRoot<Long>{
        return pk;
     }
 
+    public boolean isLunch() {
+        return this.mealType.isOf(MealType.MealTypes.LUNCH);
+    }
+
+    public boolean isDinner() {
+        return this.mealType.isOf(MealType.MealTypes.DINNER);
+    }
 }
