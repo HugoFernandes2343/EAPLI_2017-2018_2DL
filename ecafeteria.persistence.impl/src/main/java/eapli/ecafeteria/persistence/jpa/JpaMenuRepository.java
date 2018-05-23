@@ -11,6 +11,7 @@ import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 import javax.persistence.Query;
@@ -69,5 +70,19 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
             return null;
         }
     }
+
+    
+    @Override
+    public Iterable<Menu> findMenuBetweenDates(Calendar start,Calendar end) {
+        
+        final Query q;
+        q = entityManager().createQuery("SELECT * FROM Menu e WHERE e.STARTDATE >=:start and  STARTDATE<=:end  OR  ENDINGDATE>=:start and  ENDINGDATE<=:end", this.entityClass);
+        q.setParameter("start",start);
+        q.setParameter("end",end);
+        return q.getResultList();
+        
+    }
+
+   
 
 }

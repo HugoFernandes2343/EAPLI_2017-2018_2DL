@@ -77,4 +77,9 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> imple
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Iterable<Menu> findMenuBetweenDates(Calendar start, Calendar end) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

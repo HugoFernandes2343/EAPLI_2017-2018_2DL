@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -22,4 +23,6 @@ public interface MenuRepository extends DataRepository<Menu, Long> {
     public Iterable<Menu> findPublishedMenu();
 
     public Menu findByID(long id);
+    
+    public Iterable<Menu> findMenuBetweenDates(Calendar start,Calendar end);
 }

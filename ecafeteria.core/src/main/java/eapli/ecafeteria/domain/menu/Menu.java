@@ -6,6 +6,8 @@
 package eapli.ecafeteria.domain.menu;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.persistence.MealRepository;
+import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
@@ -20,9 +22,13 @@ import javax.persistence.*;
  *
  * @author David Santiago
  */
+
+
+
 @Entity
 public class Menu implements AggregateRoot<Long>, Serializable {
-
+    MenuRepository jmr = eapli.ecafeteria.persistence.PersistenceContext.repositories().menus();
+    
     private static final long serialVersionUID = 1L;
 
     // ORM primary key
@@ -72,6 +78,12 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         }
         
         
+      
+        
+        if (jmr.findMenuBetweenDates(startingDate, endingDate).iterator().hasNext()){
+            throw new IllegalArgumentException("Já existe um menu com as datas sobrepostas às datas do menu que está a tentar criar");
+        }       
+        
         this.name= name;
         this.state = MenuState.WORKING_MENU;
         this.startDate = startingDate;
@@ -90,38 +102,6 @@ public class Menu implements AggregateRoot<Long>, Serializable {
     public boolean workingMenu() {
         return this.state.equals(MenuState.WORKING_MENU);
     }
-
-//    public List<Meal> listMeals() {
-//        return this.mealList;
-//    }
-//
-//    public boolean containsMeal(Meal m) {
-//        return mealList.contains(m);
-//    }
-
-//    public boolean addMeal(Meal meal) {
-//        
-//        if (mealList.contains(meal)) {        
-//            throw new IllegalArgumentException("Não pode adicionar uma meal já existente ao menu");
-//        }
-//        
-//        //if (meal.date().compareTo(this.startDate)<=0 || meal.date().compareTo(this.endingDate)>=0 ){
-//            //throw new IllegalArgumentException("a data da meal não se encontra dentro do intervalo de funcionamento do menu");
-//        //}
-//        
-//       
-//        return mealList.add(meal);
-//
-//    }
-
-//    public boolean removeMeal(Meal meal) {
-//        if (!mealList.contains(meal)) {
-//            return false;
-//        } else {
-//            return mealList.remove(meal);
-//        }
-//
-//    }
 
     public Calendar startDate() {
         return this.startDate;
