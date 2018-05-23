@@ -27,7 +27,9 @@ import javax.persistence.*;
 
 @Entity
 public class Menu implements AggregateRoot<Long>, Serializable {
-    MenuRepository jmr = eapli.ecafeteria.persistence.PersistenceContext.repositories().menus();
+    
+    
+//    MenuRepository jmr = eapli.ecafeteria.persistence.PersistenceContext.repositories().menus();
     
     private static final long serialVersionUID = 1L;
 
@@ -80,9 +82,9 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         
       
         
-        if (jmr.findMenuBetweenDates(startingDate, endingDate).iterator().hasNext()){
-            throw new IllegalArgumentException("Já existe um menu com as datas sobrepostas às datas do menu que está a tentar criar");
-        }       
+//        if (jmr.findMenuBetweenDates(startingDate, endingDate).iterator().hasNext()){
+//            throw new IllegalArgumentException("Já existe um menu com as datas sobrepostas às datas do menu que está a tentar criar");
+//        }       
         
         this.name= name;
         this.state = MenuState.WORKING_MENU;

@@ -75,11 +75,12 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     @Override
     public Iterable<Menu> findMenuBetweenDates(Calendar start,Calendar end) {
         
-        final Query q;
-        q = entityManager().createQuery("SELECT * FROM Menu e WHERE e.STARTDATE >=:start and  STARTDATE<=:end  OR  ENDINGDATE>=:start and  ENDINGDATE<=:end", this.entityClass);
-        q.setParameter("start",start);
-        q.setParameter("end",end);
-        return q.getResultList();
+//        final Query q;
+//        q = entityManager().createQuery("SELECT * FROM Menu e WHERE e.STARTDATE >=:start and  STARTDATE<=:end  OR  ENDINGDATE>=:start and  ENDINGDATE<=:end", this.entityClass);
+//        q.setParameter("start",start);
+//        q.setParameter("end",end);
+//        return q.getResultList();
+        return null;
         
     }
 
