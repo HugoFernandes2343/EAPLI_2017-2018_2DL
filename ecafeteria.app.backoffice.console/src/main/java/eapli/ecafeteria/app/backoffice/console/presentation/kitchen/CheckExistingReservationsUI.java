@@ -58,20 +58,26 @@ public class CheckExistingReservationsUI extends AbstractUI {
         } catch (DataConcurrencyException ex) {
             System.out.println ("DataConcurrencyException has ocurred");
         }
-        /*dishTypes = new ArrayList<DishType>();
-        dishTypes.add(new DishType("meat", "meat dish"));
-        dishTypes.add(new DishType("fish", "fish dish"));
-        dishTypes.add(new DishType("vegie", "vegetarian dish"));*/
         
-        DishType dishType = askForDishType ("Please select a Dish Type from the available ones:", dishTypes);
+        if (dishTypes.iterator().hasNext()){
+            DishType dishType = askForDishType ("Please select a Dish Type from the available ones:", dishTypes);
         
-        Iterable<Dish> dishes = controller.findDishesByDishType(dishType);
-        
-        Dish dish = askForDish ("Please select a Dish from the available ones:", dishes);
-        //dish = new Dish(dishType, Designation.valueOf("picanha"), new Money(499.00, Currency.getInstance("EUR")));
-        Iterable<Reservation> reservations = controller.findReservationsBy(date, dishType, dish, mealType);
-        
-        showReservations ("Here are the existing Reservations:", reservations);
+            Iterable<Dish> dishes = controller.findDishesByDishType(dishType);
+
+            Dish dish = askForDish ("Please select a Dish from the available ones:", dishes);
+
+            Iterable<Reservation> reservations = controller.findReservationsBy(date, dishType, dish, mealType);
+            
+            if (reservations.iterator().hasNext()){
+                showReservations ("Here are the existing Reservations:", reservations);
+            }
+            else{
+                System.out.println("--------There are no Reservations for the selected date (Booked or otherwise)--------------");
+            }
+        }
+        else{
+            System.out.println("--------There are no Meals planned for the selected date--------------");
+        }
         
         return true;
     }
