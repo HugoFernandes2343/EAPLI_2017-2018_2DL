@@ -8,14 +8,13 @@ package eapli.ecafeteria.app.user.console.presentation;
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.app.user.console.booking.*;
 import eapli.ecafeteria.app.user.console.movement.ConsultMovementsAction;
+import eapli.ecafeteria.app.user.console.movement.SetUserAlertLimitAction;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;
-import eapli.framework.presentation.console.ShowMessageAction;
-import eapli.framework.presentation.console.ShowUiAction;
 import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
@@ -36,8 +35,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int SETTINGS_OPTION = 4;
 
     // BOOKINGS MENU
-    private static final int LIST_MENUS_OPTION = 1;
-    private static final int BOOK_A_MEAL_OPTION = 2;
+    private static final int BOOK_A_MEAL_OPTION = 1;
     private static final int CONSULT_RESERVATIONS = 3;
     private static final int CONSULT_MENU = 4;
      private static final int CANCEL_RESERVATION_OPTION = 5;
@@ -150,7 +148,7 @@ class MainMenu extends CafeteriaUserBaseUI {
         final Menu menu = new Menu("Settings >");
 
         menu.add(new MenuItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit",
-                new ShowMessageAction("Not implemented yet")));
+                new SetUserAlertLimitAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;

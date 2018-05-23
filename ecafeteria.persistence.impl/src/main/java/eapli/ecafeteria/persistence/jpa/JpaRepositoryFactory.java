@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.persistence.AccountCardRepository;
 import eapli.ecafeteria.persistence.CafeteriaShiftRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
@@ -126,5 +127,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public KitchenAlertsRepository KitchenAlertsRepository() {
        return new JpaKitchenAlertRepository();
+    }
+
+    @Override
+    public AccountCardRepository accounts() {
+        return new JpaAccountCardRepository();
     }
 }

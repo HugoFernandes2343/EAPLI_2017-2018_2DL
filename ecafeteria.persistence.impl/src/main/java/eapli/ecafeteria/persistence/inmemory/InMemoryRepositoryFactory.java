@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstrapper;
+import eapli.ecafeteria.persistence.AccountCardRepository;
 import eapli.ecafeteria.persistence.CafeteriaShiftRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
@@ -130,5 +131,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public KitchenAlertsRepository KitchenAlertsRepository() {
        return new InMemoryKitchenAlertRepository();
+    }
+
+    @Override
+    public AccountCardRepository accounts() {
+        return new InMemoryAccountCardRepository();
     }
 }

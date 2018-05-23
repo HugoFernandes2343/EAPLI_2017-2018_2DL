@@ -71,6 +71,8 @@ public interface RepositoryFactory {
     MealRepository meals();
 
     MenuRepository menus();
+    
+    AccountCardRepository accounts();
 
     /**
      * respository to return reservations
