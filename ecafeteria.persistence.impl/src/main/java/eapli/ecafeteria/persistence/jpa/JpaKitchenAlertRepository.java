@@ -8,6 +8,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.kitchen.KitchenAlerts;
 import eapli.ecafeteria.persistence.KitchenAlertsRepository;
 import java.util.Optional;
+import javax.persistence.Query;
 
 /**
  *
@@ -20,4 +21,17 @@ public class JpaKitchenAlertRepository extends CafeteriaJpaRepositoryBase<Kitche
         return matchOne("e.name=:name", "name", name);
     }
 
+    @Override
+    public int getYellowValue() {
+        final Query q;
+        q = entityManager().createQuery("SELECT YellowAlert FROM KitchenAlerts");
+        return q.getFirstResult();
+    }
+
+    @Override
+    public int getRedValue() {
+        final Query q;
+        q = entityManager().createQuery("SELECT RedAlert FROM KitchenAlerts");
+        return q.getFirstResult();
+    }
 }
