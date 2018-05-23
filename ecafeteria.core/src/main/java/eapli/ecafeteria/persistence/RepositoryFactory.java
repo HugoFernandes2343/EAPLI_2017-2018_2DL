@@ -69,6 +69,8 @@ public interface RepositoryFactory {
     MaterialRepository materials();
 
     MealRepository meals();
+    
+    MealRepository ratings();
 
     MenuRepository menus();
 

@@ -17,16 +17,29 @@ import javax.persistence.Embeddable;
 public class Comment implements ValueObject, Serializable{
     
     private String comment;
+    private Reply reply;
 
     public Comment() {
     }
 
     public Comment(String comment) {
         this.comment = comment;
+        this.reply = null;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+    
+    public String reply(){
+        if (this.reply != null){
+            return this.reply.toString();
+        }
+        return null;
+    }
+    
+    public void answerReply(String answer){
+        this.reply = new Reply(answer);
     }
        
 }
