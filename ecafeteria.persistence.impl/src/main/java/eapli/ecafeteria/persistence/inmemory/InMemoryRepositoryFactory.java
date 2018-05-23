@@ -10,6 +10,7 @@ import eapli.ecafeteria.persistence.KitchenAlertsRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
+import eapli.ecafeteria.persistence.MealRatingRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.MovementRepository;
@@ -130,5 +131,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public KitchenAlertsRepository KitchenAlertsRepository() {
        return new InMemoryKitchenAlertRepository();
+    }
+
+    @Override
+    public MealRatingRepository ratings() {
+        return new InMemoryMealRatingRepository();
     }
 }

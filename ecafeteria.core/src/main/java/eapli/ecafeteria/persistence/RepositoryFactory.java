@@ -109,4 +109,6 @@ public interface RepositoryFactory {
     CafeteriaShiftRepository cafeteriaShift();
 
      KitchenAlertsRepository KitchenAlertsRepository();
+     
+     MealRatingRepository ratings();
 }
