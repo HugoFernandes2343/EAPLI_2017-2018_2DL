@@ -33,6 +33,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.EditMealPlan
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.PublishMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menu.ConsultMealRatingAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.CopyMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
@@ -106,6 +107,7 @@ public class MainMenu extends AbstractUI {
     private static final int PUBLISH_MENU_OPTION = 2;
     private static final int COPY_MENU_OPTION = 3;
     private static final int PUBLISH_MEAL_OPTION = 4;
+    private static final int CONSULT_MEALS_RATING = 5;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -340,6 +342,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
         menu.add(new MenuItem(COPY_MENU_OPTION, "Copy Menu", new CopyMenuAction()));
         menu.add(new MenuItem(PUBLISH_MEAL_OPTION, "Publish Meal", new PublishMealAction()));
+        menu.add(new MenuItem(CONSULT_MEALS_RATING, "Consult Meals Ratings", new ConsultMealRatingAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

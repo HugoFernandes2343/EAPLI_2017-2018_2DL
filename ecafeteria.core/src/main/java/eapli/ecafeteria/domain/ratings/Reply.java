@@ -16,33 +16,33 @@ import javax.persistence.Embeddable;
  * @author João Santiago <1160696@isep.ipp.pt>
  */
 @Embeddable
-public class Answer implements ValueObject, Serializable{
+public class Reply implements ValueObject, Serializable{
     
     private static final long serialVersionUID = 1L; 
-    private String answer;
+    private String reply;
 
     /**
      * Needed for ORM
      */
-    protected Answer() {
+    protected Reply() {
 
     }
 
-    public Answer(String answer) {
-        validateAnswer(answer);
-        this.answer = answer;
+    public Reply(String reply) {
+        validateReply(reply);
+        this.reply = reply;
     }
     
-    private void validateAnswer(String answer){
+    private void validateReply(String answer){
         if(Strings.isNullOrEmpty(answer)){
-            throw new IllegalArgumentException("The answer to a comment can´t be empty!");
+            throw new IllegalArgumentException("The reply to a comment can´t be empty!");
         }
     }
     
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.answer);
+        hash = 97 * hash + Objects.hashCode(this.reply);
         return hash;
     }
 
@@ -57,8 +57,8 @@ public class Answer implements ValueObject, Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Answer other = (Answer) obj;
-        if (!Objects.equals(this.answer, other.answer)) {
+        final Reply other = (Reply) obj;
+        if (!Objects.equals(this.reply, other.reply)) {
             return false;
         }
         return true;
@@ -66,7 +66,7 @@ public class Answer implements ValueObject, Serializable{
 
     @Override
     public String toString() {
-        return "Answer to the comment: " + answer;
+        return "Reply to the comment: " + reply;
     }
     
     
