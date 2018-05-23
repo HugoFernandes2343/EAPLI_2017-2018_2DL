@@ -9,6 +9,8 @@ import eapli.framework.persistence.repositories.TransactionalContext;
  * @author Paulo Gandra Sousa
  *
  */
+
+
 public interface RepositoryFactory {
 
     /**
@@ -72,6 +74,8 @@ public interface RepositoryFactory {
 
     MenuRepository menus();
 
+    AccountCardRepository accounts();
+
     /**
      * respository to return reservations
      *
@@ -94,7 +98,7 @@ public interface RepositoryFactory {
     MovementRepository movements();
 
     MealPlanRepository mealPlan();
-    
+
     MealPlanItemRepository mealPlanItemRepository();
 
     /**
@@ -108,7 +112,7 @@ public interface RepositoryFactory {
 
     CafeteriaShiftRepository cafeteriaShift();
 
-     KitchenAlertsRepository KitchenAlertsRepository();
-     
-     MealRatingRepository ratings();
+    KitchenAlertsRepository KitchenAlertsRepository();
+    
+    MealRatingRepository ratings();   
 }

@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
 import eapli.framework.domain.ddd.ValueObject;
+import eapli.framework.domain.money.Money;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -14,21 +15,28 @@ import javax.persistence.*;
  * @author filip
  */
 @Embeddable
-public class BalanceLimit implements ValueObject, Serializable{
-    
-    private double value;
-            
-    public BalanceLimit(){
-        this.value = -1;
+public class BalanceLimit implements ValueObject, Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private Money balanceLimit;
+
+    protected BalanceLimit() {
+        this.balanceLimit = Money.euros(-1);
     }
-    
-    public void defineLimit(double value){
-        
-        if(value <= 0.0){
-            throw new IllegalArgumentException("Not possible to define a limit with a negative value.");
+
+    public boolean defineLimit(double value) {
+        boolean operationConcluded = false;
+        if (value < 0.0) {
+            System.out.println("Não é possível definir um limite inferior a 0€.");
+        } else {
+            this.balanceLimit = Money.euros(value);
+            operationConcluded = true;
         }
-        
-        this.value = value;
-        
+        return operationConcluded;
     }
+    
+    public double limit(){
+        return balanceLimit.amount();
+    }
+    
 }

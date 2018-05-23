@@ -13,11 +13,14 @@ import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.movement.Booking;
+import eapli.ecafeteria.domain.movement.MovementBuilder;
+import eapli.ecafeteria.domain.movement.MovementDescription;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.application.Controller;
+import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.Console;
@@ -47,10 +50,12 @@ public class ReserveMealController implements Controller {
         if (meal.dish().currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
             String code = DateTime.format(DateTime.dateToCalendar(meal.date().getTime())) + "//" + meal.mealNumber();
             Reservation reservation = new Reservation(code, meal, user.get());
-            Booking booking = new Booking(user.get(), meal.dish().currentPrice().negate());
+            final MovementBuilder movementBuilder = new MovementBuilder();
+            movementBuilder.withCafeteriaUser(user.get()).withDescriptionAndMoney(MovementDescription.BOOKING, Money.euros(meal.dish().currentPrice().negate().amount()));
+            Booking mov = (Booking) movementBuilder.build();
             try {
                 reservationAdded = addReservation(reservation);
-                movementRepo.addBookingMovement(booking);
+                movementRepo.addBookingMovement(mov);
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 System.out.println("An transactional error has ocurred. Please check data and try again.");
             }
@@ -63,8 +68,8 @@ public class ReserveMealController implements Controller {
     private Reservation addReservation(Reservation reservation) throws DataConcurrencyException, DataIntegrityViolationException {
         return reservationRepo.save(reservation);
     }
-    
-    public Iterable<Meal> menuMealsList(Menu menu){
+
+    public Iterable<Meal> menuMealsList(Menu menu) {
         return listMenuService.findMealByMenu(menu);
     }
 

@@ -45,7 +45,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         }
         this.systemUser = user;
         this.mecanographicNumber = mecanographicNumber;
-        this.accountcard = new AccountCard();
+        this.accountcard = new AccountCard(mecanographicNumber);
     }
 
     protected CafeteriaUser() {
@@ -54,6 +54,10 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
 
     public SystemUser user() {
         return this.systemUser;
+    }
+    
+    public AccountCard accountCard(){
+        return this.accountcard;
     }
 
     @Override
