@@ -6,8 +6,11 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.kitchen.Lot;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.LotRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
+
+import java.util.List;
 
 /**
  *
@@ -22,5 +25,9 @@ public class InMemoryLotRepository extends InMemoryRepository<Lot, String> imple
     protected String newKeyFor(Lot entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public List<Meal> getMealsUsed(Lot lot) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
