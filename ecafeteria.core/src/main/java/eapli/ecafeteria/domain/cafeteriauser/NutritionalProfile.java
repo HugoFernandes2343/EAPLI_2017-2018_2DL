@@ -7,7 +7,9 @@ package eapli.ecafeteria.domain.cafeteriauser;
 
 import eapli.ecafeteria.domain.allergens.Allergen;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -22,10 +24,54 @@ import javax.persistence.Version;
  */
 
 public class NutritionalProfile implements Serializable {
-    private double mealSalt;
-    private double weekSalt;
-    private double mealCalories;
-    private double weekCalories;
+    private List<NutritionalProfileField> fields;    
+    private List<Allergen> allergens;
+
+    public NutritionalProfile(List<NutritionalProfileField> fields, List<Allergen> allergens) {
+        this.fields = fields;
+        this.allergens = allergens;
+    }
+
+    public NutritionalProfile() {
+        fields = new ArrayList<NutritionalProfileField>();
+        allergens = new ArrayList<Allergen>();        
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 11 * hash + Objects.hashCode(this.fields);
+        hash = 11 * hash + Objects.hashCode(this.allergens);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NutritionalProfile other = (NutritionalProfile) obj;
+        if (!Objects.equals(this.fields, other.fields)) {
+            return false;
+        }
+        if (!Objects.equals(this.allergens, other.allergens)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "NutritionalProfile{" + "fields=" + fields + ", allergens=" + allergens + '}';
+    }
+
     
-    private Set<Allergen> allergens;
+    
+    
 }

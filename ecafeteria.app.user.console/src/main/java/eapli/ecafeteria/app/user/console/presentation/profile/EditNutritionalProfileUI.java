@@ -7,7 +7,7 @@ package eapli.ecafeteria.app.user.console.presentation.profile;
 
 import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
-import eapli.framework.presentation.console.AbstractUI;
+import eapli.ecafeteria.application.cafeteriauser.profile.EditNutritionalProfileController;
 import eapli.framework.util.Console;
 
 /**
@@ -16,6 +16,8 @@ import eapli.framework.util.Console;
  */
 public class EditNutritionalProfileUI extends CafeteriaUserBaseUI{
 
+    private final EditNutritionalProfileController controller = new EditNutritionalProfileController();
+    
     @Override
     protected CafeteriaUserBaseController controller() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
