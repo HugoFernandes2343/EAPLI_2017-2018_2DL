@@ -27,12 +27,16 @@ public class ClosePosService {
             if (p.id() == id) {
                 p.close();
 
-                posRP.save(p);
+                SavePOS(p);
 
                 return true;
             }
         }
 
         return false;
+    }
+    
+    public POS SavePOS(POS p) throws DataConcurrencyException, DataIntegrityViolationException{
+        return posRP.save(p);
     }
 }

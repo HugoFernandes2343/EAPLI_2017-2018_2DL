@@ -85,6 +85,10 @@ public class CafeteriaShiftClosingController implements Controller {
         }
 
         cs.closeShift();
-        cfRP.save(cs);
+        SaveCafeteriaShift(cs);
+    }
+    
+    public CafeteriaShift SaveCafeteriaShift(CafeteriaShift cs) throws DataConcurrencyException, DataIntegrityViolationException{
+        return cfRP.save(cs);
     }
 }

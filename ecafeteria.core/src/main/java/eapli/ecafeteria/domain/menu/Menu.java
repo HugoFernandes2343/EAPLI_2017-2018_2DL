@@ -74,6 +74,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
         
         
         Calendar today = Calendar.getInstance(TimeZone.getDefault());
+        today.add(Calendar.DATE, -1);
         
         if (startingDate.before(today)){
             throw new IllegalArgumentException("A Data de inicio é anterior à data atual");
