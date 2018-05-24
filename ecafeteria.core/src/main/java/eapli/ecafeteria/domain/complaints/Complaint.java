@@ -7,7 +7,6 @@ import eapli.framework.domain.ddd.DomainEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
 
 /**
  * @author <1160777@isep.ipp.pt>Marco Carneiro</1160777@isep.ipp.pt>
@@ -22,9 +21,6 @@ public class Complaint implements Serializable, DomainEntity<Long> {
     private Long pk;
     @Version
     private Long version;
-
-    @Column(unique = true)
-    private Long id;
 
     @ManyToOne()
     private Meal meal;
@@ -67,7 +63,6 @@ public class Complaint implements Serializable, DomainEntity<Long> {
      * @param description
      */
     public Complaint(CafeteriaUser user, String title, String description) {
-        this.meal = meal;
         this.user = user;
         this.title = title;
         this.description = description;
@@ -135,13 +130,13 @@ public class Complaint implements Serializable, DomainEntity<Long> {
     }
 
     /**
-     * Returns the ID of this complaint.
+     * [Not usable here]Returns the ID of this complaint.
      *
      * @return
      */
     @Override
     public Long id() {
-        return this.id;
+        return null;
     }
 
     @Override
@@ -159,12 +154,13 @@ public class Complaint implements Serializable, DomainEntity<Long> {
 
     @Override
     public int hashCode() {
-        return this.id.hashCode();
+        return this.title.hashCode()
+                +this.description.hashCode();
     }
 
     @Override
     public String toString() {
-        return String.format("Code: %s\nUser: %s\nMeal: %s", id, user, meal.toString());
+        return String.format("User: %s\nMeal: %s\nTitle: %s\nDescription%s\n", user, meal.toString(),title,description);
     }
 
 }

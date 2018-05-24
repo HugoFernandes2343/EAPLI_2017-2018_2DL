@@ -50,8 +50,19 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
 
     @Override
     public Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Reservation> list_reserv = new ArrayList<>();
+        
+        list_reserv = (ArrayList<Reservation>) match(r->r.state().toString().equalsIgnoreCase(state.toString()));
 
+        ArrayList<Reservation> ret = new ArrayList<>();
+
+        for (Reservation r : list_reserv) {
+            if (r.meal().equals(m)) {
+                ret.add(r);
+            }
+        }
+        
+        return ret;
     }
 
     @Override
@@ -102,4 +113,5 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
     public Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date, MealType mt) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

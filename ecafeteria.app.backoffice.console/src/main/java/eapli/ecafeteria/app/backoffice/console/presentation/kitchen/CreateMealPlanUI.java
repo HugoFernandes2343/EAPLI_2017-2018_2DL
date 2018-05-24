@@ -15,7 +15,6 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,27 +35,24 @@ public class CreateMealPlanUI extends AbstractUI {
     protected boolean doShow() {
 
         List<Menu> listaMenu = theController.fetchAvailableMenus();
-
         if (listaMenu.isEmpty()) {
             System.out.println("No exist menus");
             return false;
         }
 
-        System.out.println("\n\n");
-        System.out.println("List Menus");
-        for (Menu menu : listaMenu) {
 
+        System.out.println("\n\nList Menus");
+        for (Menu menu : listaMenu) {
             System.out.println("ID:" + menu.id()
                     + "\nStart Date:" + menu.startDate().getTime()
                     + "\nEnd Date:" + menu.finishDate().getTime()
-                    + "\nDesignation:" + menu.designation());
-            System.out.println("\n\n");
+                    + "\nDesignation:" + menu.designation()+"\n\n");
         }
 
         boolean resposta = false;
         long id = -1;
         while (resposta == false) {
-            id = Console.readLong("Insere o ID do menu que pretende conforme a lista apresentada! (ou insira 0 para acabar)");
+            id = Console.readLong("Enter the ID of the menu you want according to the displayed list! (0 the end)");
             resposta = theController.verificarIDMenu(id);
             if (id == 0) {
                 return false;
@@ -72,18 +68,14 @@ public class CreateMealPlanUI extends AbstractUI {
         }
 
         MealPlan mp = null;
-        try {
-            mp = theController.createElaborateMealplan();
-        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-            Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-       
+        String nameMenu = Console.readLine("\n\nEnter the name for the meal plan");
+        mp = theController.createElaborateMealplan(nameMenu);
+
+
         int cont = 0;
         for (Meal meal : listaMeals) {
             System.out.println(meal.toString());
-            int quantidade = Console.readInteger("Insere a quantidade que pretende para " + listaMeals.get(cont).dish().name() + " !");
+            int quantidade = Console.readInteger("Enter the quantity you want for " + listaMeals.get(cont).dish().name() + " !");
             try {
                 theController.insertQuantityMeal(quantidade, meal, mp);
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
@@ -92,6 +84,11 @@ public class CreateMealPlanUI extends AbstractUI {
             cont++;
         }
 
+        try {
+            theController.saveMealPlan(mp);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(CreateMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 

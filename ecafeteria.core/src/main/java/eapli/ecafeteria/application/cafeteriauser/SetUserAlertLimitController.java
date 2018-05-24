@@ -38,6 +38,6 @@ public class SetUserAlertLimitController implements Controller {
 
     public double getUserAlertLimit() {
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
-        return user.get().accountCard().balanceLimit().limit();
+        return user.get().accountCard().balanceLimit().limit().amount();
     }
 }

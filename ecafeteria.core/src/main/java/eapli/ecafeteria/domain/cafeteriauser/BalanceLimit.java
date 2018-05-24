@@ -35,8 +35,8 @@ public class BalanceLimit implements ValueObject, Serializable {
         return operationConcluded;
     }
     
-    public double limit(){
-        return balanceLimit.amount();
+    public Money limit(){
+        return balanceLimit;
     }
     
 }

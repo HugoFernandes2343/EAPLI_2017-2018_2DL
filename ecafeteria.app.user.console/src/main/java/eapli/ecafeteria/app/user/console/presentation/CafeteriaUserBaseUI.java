@@ -7,16 +7,26 @@ package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.application.cafeteriauser.BalanceAlertService;
+import eapli.ecafeteria.domain.movement.MovementBuilder;
 import eapli.framework.presentation.console.AbstractUI;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author mcn
  */
-public abstract class CafeteriaUserBaseUI extends AbstractUI {
+public abstract class CafeteriaUserBaseUI extends AbstractUI implements Observer {
 
     protected abstract CafeteriaUserBaseController controller();
+    
+    private MovementBuilder mv;
 
+    public void defineObservable(MovementBuilder mv) {
+        this.mv = mv;
+    }
+    
     public String showBalance() {
         return "CURRENT BALANCE OF YOUR USERCARD: " + controller().balance().toString();
     }
@@ -33,4 +43,25 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI {
         System.out.println(titleBorder);
         drawFormBorder();
     }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        BalanceAlertService bas = new BalanceAlertService();
+        boolean temp = bas.verifyAlert();
+        if(temp){
+            System.out.println("**********************************************\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("***            Balance Alert               ***\n");
+            System.out.println("***      Balance lower than the limit      ***\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("**********************************************\n");
+        }
+    }
+
+    public void defineObserver(MovementBuilder mvb) {
+        mvb.addObserver(this);
+    }
+   
 }

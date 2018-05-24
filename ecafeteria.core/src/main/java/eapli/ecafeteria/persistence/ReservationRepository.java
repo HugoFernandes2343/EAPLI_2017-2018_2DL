@@ -15,6 +15,7 @@ import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Calendar;
+import java.util.Date;
 
 import java.util.Optional;
 
@@ -70,5 +71,4 @@ public interface ReservationRepository extends DataRepository<Reservation, Long>
      * @return
      */
     Iterable<Reservation> findNextReservation(CafeteriaUser user);
-
 }

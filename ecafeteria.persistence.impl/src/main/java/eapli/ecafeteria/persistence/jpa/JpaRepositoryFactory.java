@@ -112,6 +112,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
        return new JpaKitchenAlertRepository();
     }
 
+    @Override
     public MealRatingRepository ratings() {
         return new JpaMealRatingRepository();
     }
@@ -124,4 +125,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public ComplaintRepository complaints() {   return new JpaComplaintRepository();    }
 
+    @Override
+    public eapli.ecafeteria.persistence.LotRepository lots() {
+        return new JpaLotRepository();
+    }
 }

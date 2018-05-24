@@ -33,7 +33,7 @@ public class RegisterComplaintController implements Controller {
      */
     public void formulateComplaint(boolean isUserShown, String mealCode, String title, String description) throws DataConcurrencyException, DataIntegrityViolationException {
 
-        //AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SELECT_MEAL);
 
         Complaint complaintToAdd;
         Meal mealToAdd;

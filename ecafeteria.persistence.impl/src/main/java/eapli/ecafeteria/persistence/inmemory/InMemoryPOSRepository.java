@@ -10,33 +10,21 @@ import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
  *
  * @author hugod
  */
-public class InMemoryPOSRepository implements POSRepository {
-    
-    
-    @Override
-    public Iterable<POS> findByState(POSState s){
-      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class InMemoryPOSRepository extends InMemoryRepositoryWithLongPK<POS> implements POSRepository {
 
     @Override
-    public void delete(POS entity) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Long entityId) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public POS save(POS entity) throws DataConcurrencyException, DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Iterable<POS> findByState(POSState s) {
+        ArrayList<POS> list_pos = new ArrayList<>();
+        list_pos = (ArrayList<POS>) match(pos -> pos.state().equalsIgnoreCase(s.toString()));
+        return list_pos;
     }
 
     @Override

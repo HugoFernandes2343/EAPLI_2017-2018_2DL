@@ -29,11 +29,13 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDis
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CheckExistingReservationsAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CloseMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.EditMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.PublishMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.ConsultMealRatingAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterUsedLotAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.CopyMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
@@ -108,6 +110,7 @@ public class MainMenu extends AbstractUI {
     private static final int COPY_MENU_OPTION = 3;
     private static final int PUBLISH_MEAL_OPTION = 4;
     private static final int CONSULT_MEALS_RATING = 5;
+    private static final int REGISTER_USED_LOT_OPTION = 6;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -123,6 +126,7 @@ public class MainMenu extends AbstractUI {
     //ELABORATE MENU
     private static final int CREATE_MEAL_PLAN = 1;
     private static final int EDIT_MEAL_PLAN = 2;
+    private static final int CLOSE_MEAL_PLAN = 3;
 
     @Override
     public boolean show() {
@@ -301,7 +305,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Elaborate Meal Plan");
         menu.add(new MenuItem(CREATE_MEAL_PLAN, "Create meal plan", new CreateMealPlanAction()));
         menu.add(new MenuItem(EDIT_MEAL_PLAN, "Edit meal plan", new EditMealPlanAction()));
-
+        menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
         return menu;
     }
 
@@ -343,6 +347,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(COPY_MENU_OPTION, "Copy Menu", new CopyMenuAction()));
         menu.add(new MenuItem(PUBLISH_MEAL_OPTION, "Publish Meal", new PublishMealAction()));
         menu.add(new MenuItem(CONSULT_MEALS_RATING, "Consult Meals Ratings", new ConsultMealRatingAction()));
+        menu.add(new MenuItem(REGISTER_USED_LOT_OPTION, "Register Used Lot", new RegisterUsedLotAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

@@ -9,6 +9,7 @@ import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import eapli.ecafeteria.domain.kitchen.MealPlanState;
 import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -28,7 +29,7 @@ public class CloseMealPlanController {
 
     private final MealPlanItemRepository mpir = PersistenceContext.repositories().mealPlanItemRepository();
 
-    public Iterable<MealPlan> getMealPlans() {
+    public Iterable<MealPlan> getMealPlansInProgress() {
         lmp = mpr.findAllMealPlanInProgress();
         return lmp;
     }
@@ -42,7 +43,7 @@ public class CloseMealPlanController {
         mpr.save(mp);
     }
 
-    public void changeStatus(MealPlan mp) {
+    public void closeMealPlan(MealPlan mp) {
         mp.closeMealPlan();
     }
 

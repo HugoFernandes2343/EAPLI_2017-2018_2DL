@@ -15,6 +15,7 @@ import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import java.util.Calendar;
+import java.util.Date;
 
 import java.util.Optional;
 import javax.persistence.*;
@@ -102,6 +103,6 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
                 "(SELECT MIN(m2.date) FROM Meal m2))");
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
-    }
+    }     
 
 }
