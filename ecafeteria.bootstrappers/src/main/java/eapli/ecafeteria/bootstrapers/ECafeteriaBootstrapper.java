@@ -20,7 +20,7 @@ public class ECafeteriaBootstrapper implements Action {
         // declare bootstrap actions
         final Action[] actions = {new MasterUsersBootstrapper(), new BackofficeUsersBootstrapper(), new DishTypesBootstrapper(),
             new CafeteriaUserBootstrapper(), new DishBootstrapper(), new MaterialsBootstrapper(), new MenuBootstrapper(), new MealBootstrapper(),
-            new KitchenBootstrapper(), new ReservationBootstrapper(), new CafeteriaShiftBootstrapper()};
+            new KitchenBootstrapper(), new ReservationBootstrapper(), new CafeteriaShiftBootstrapper(), new POSBootstrapper()};
 
         authenticateSuperUser();
 
