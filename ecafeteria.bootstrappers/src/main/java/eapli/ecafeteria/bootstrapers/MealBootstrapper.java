@@ -50,12 +50,14 @@ public class MealBootstrapper implements Action {
         Dish dish1 = dishRepo.findByName(Designation.valueOf("Hamburger")).get();
         Dish dish2 = dishRepo.findByName(Designation.valueOf("picanha")).get();
         Dish dish3 = dishRepo.findByName(Designation.valueOf("tofu grelhado")).get();
-        Menu menu1 = menuRepo.findByID(33);
 
+        Calendar tomorrow = DateTime.now();
+        tomorrow.add(Calendar.DATE, 1);
+        Menu menu1 = menuRepo.findByDate(tomorrow.getTime());
         try {
-            register(dish1, new MealType(MealType.MealTypes.LUNCH), DateTime.now(), menu1);
-            register(dish2, new MealType(MealType.MealTypes.LUNCH), DateTime.now(), menu1);
-            register(dish3, new MealType(MealType.MealTypes.LUNCH), DateTime.now(), menu1);
+            register(dish1, new MealType(MealType.MealTypes.LUNCH), tomorrow, menu1);
+            register(dish2, new MealType(MealType.MealTypes.LUNCH), tomorrow, menu1);
+            register(dish3, new MealType(MealType.MealTypes.LUNCH), tomorrow, menu1);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             System.out.println("Error while adding the meals");
         }

@@ -5,17 +5,13 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.application.menu.PublishMenuController;
 import eapli.ecafeteria.application.menu.RegisterMenuController;
-import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -42,13 +38,13 @@ public class MenuBootstrapper implements Action {
             register(DateTime.newCalendar(2019, 7, 1), DateTime.newCalendar(2019, 7, 7),teste4);
             register(DateTime.newCalendar(2019, 8, 1), DateTime.newCalendar(2019, 8, 7),teste5);
             register(DateTime.newCalendar(2019, 9, 1), DateTime.newCalendar(2019, 9, 7),teste6);
-            Calendar inAWeek = Calendar.getInstance();
-            inAWeek.add(Calendar.DATE, 6);
-            register(DateTime.now(),inAWeek,teste7);
-        } catch (DataConcurrencyException ex) {
-            Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DataIntegrityViolationException ex) {
-            Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
+            Calendar tomorrow = DateTime.now();
+            Calendar inAWeek = DateTime.now();
+            tomorrow.add(Calendar.DATE, 1);
+            inAWeek.add(Calendar.DATE, 7);
+            register(tomorrow,inAWeek,teste7);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            System.out.println("Erro a registar menu");
         }
         return true;
     }
