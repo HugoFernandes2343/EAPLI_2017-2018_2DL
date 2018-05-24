@@ -58,10 +58,10 @@ public class ReserveMealController implements Controller {
             Reservation reservation = new Reservation(code, meal, user.get());
             movementBuilder.withCafeteriaUser(user.get()).withDescriptionAndMoney(MovementDescription.BOOKING, Money.euros(meal.dish().currentPrice().negate().amount()));
             Booking mov = (Booking) movementBuilder.build();
-            
             try {
                 reservationAdded = addReservation(reservation);
                 movementRepo.addBookingMovement(mov);
+                this.movementBuilder.notifyObs();
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 System.out.println("An transactional error has ocurred. Please check data and try again.");
             }

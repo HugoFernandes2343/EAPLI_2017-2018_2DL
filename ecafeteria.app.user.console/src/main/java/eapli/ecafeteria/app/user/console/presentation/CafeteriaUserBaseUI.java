@@ -7,6 +7,7 @@ package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.application.cafeteriauser.BalanceAlertService;
 import eapli.ecafeteria.domain.movement.MovementBuilder;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.Observable;
@@ -45,9 +46,18 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI implements Observer
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("******************************************************\n");
-        System.out.println("**********************Alert Trigerred*****************\n");
-        System.out.println("******************************************************\n");
+        BalanceAlertService bas = new BalanceAlertService();
+        boolean temp = bas.verifyAlert();
+        if(temp){
+            System.out.println("**********************************************\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("***            Balance Alert               ***\n");
+            System.out.println("***      Balance lower than the limit      ***\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("***                                        ***\n");
+            System.out.println("**********************************************\n");
+        }
     }
 
     public void defineObserver(MovementBuilder mvb) {

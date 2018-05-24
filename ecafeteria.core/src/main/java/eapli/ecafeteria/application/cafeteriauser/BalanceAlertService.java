@@ -27,7 +27,6 @@ public class BalanceAlertService {
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         CafeteriaUser cafUser = user.get();
         BalanceLimit limit = cafUser.accountCard().balanceLimit();
-        
         return calculate(limit, cafUser);
     }
 

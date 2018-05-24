@@ -58,6 +58,7 @@ public class ReserveMealUI extends CafeteriaUserBaseUI {
             super.defineObserver(temp);
             /*-----*/
             Reservation reservation = theController.reserveMeal(meal);
+            
             if (reservation != null) {
                 Console.readLine("\nSuccess! Your Reservation code is " + reservation.id());
             }

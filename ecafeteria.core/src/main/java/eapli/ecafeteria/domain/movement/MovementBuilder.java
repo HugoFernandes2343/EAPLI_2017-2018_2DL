@@ -71,13 +71,16 @@ public class MovementBuilder extends Observable  implements  DomainFactory<Movem
             /*Notifies Observer classes*/
             this.state = 1;
             setChanged();
-            notifyObservers();
            return new Booking(user, value);
         }else if(description.toString().equals(MovementDescription.RECHARGE.toString())){
             return new Recharge(user, value);
         }else{
             return new Refund(user, value);
         }
+    }
+    
+    public void notifyObs(){
+        notifyObservers();
     }
     
 }
