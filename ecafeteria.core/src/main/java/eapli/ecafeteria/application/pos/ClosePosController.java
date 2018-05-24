@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ClosePosController implements Controller {
 
     private final POSRepository posRP = PersistenceContext.repositories().pos();
+    private final ClosePosService cpS = new ClosePosService();
 
     private ArrayList<POS> list_pos = new ArrayList<>();
 
@@ -42,17 +43,7 @@ public class ClosePosController implements Controller {
     
     public boolean CloseAndSavePOS(Long id) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException{
         
-        for(POS p : list_pos){
-            if(p.id() == id){
-                p.close();
-                
-                posRP.save(p);
-                
-                return true;
-            }
-        }
-        
-        return false;
+        return cpS.CloseAndSavePOS(id, list_pos);
     }
 
 }

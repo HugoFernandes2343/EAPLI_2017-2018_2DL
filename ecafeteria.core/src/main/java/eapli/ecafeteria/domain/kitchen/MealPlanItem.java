@@ -7,6 +7,7 @@ package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,22 +33,18 @@ public class MealPlanItem implements Serializable {
     private Meal meal;
 
     private Integer DishQuantity;
-    
+
     private int NonDeliveredMeals;
-    
+
     private int DeliveredMeals;
-    
-    @ManyToOne(cascade=CascadeType.ALL)
-    private MealPlan mealPlan;
 
     protected MealPlanItem() {
 
     }
 
-    public MealPlanItem(Meal meal, int DishQuantity,MealPlan mp) {
+    public MealPlanItem(Meal meal, int DishQuantity) {
         this.meal = meal;
         this.DishQuantity = DishQuantity;
-        this.mealPlan=mp;
     }
 
     public int getDishQuantity() {
@@ -60,12 +57,55 @@ public class MealPlanItem implements Serializable {
 
     @Override
     public String toString() {
-        return "ID= " + id + "   DishQuantity=" + DishQuantity;
+        return  "\nDishQuantity=" + DishQuantity +meal+"NonDelivered Meals =" + NonDeliveredMeals;
+    }
+
+    public void setDishQuantity(Integer DishQuantity) {
+        this.DishQuantity = DishQuantity;
     }
 
     public void calculateWastedMeals(int n) {
         this.NonDeliveredMeals = n;
         this.DeliveredMeals = this.DishQuantity - n;
+    }
+
+    public boolean checkMeal(Meal m) {
+        if (m.equals(this.meal)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.meal);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MealPlanItem other = (MealPlanItem) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.meal, other.meal)) {
+            return false;
+        }
+
+        return true;
     }
 
 }

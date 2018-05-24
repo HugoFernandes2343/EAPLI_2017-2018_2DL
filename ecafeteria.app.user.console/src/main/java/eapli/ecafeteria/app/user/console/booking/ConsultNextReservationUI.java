@@ -1,5 +1,7 @@
 package eapli.ecafeteria.app.user.console.booking;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.reservations.ConsultNextReservationController;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.presentation.console.AbstractUI;
@@ -8,7 +10,7 @@ import eapli.framework.presentation.console.AbstractUI;
 /**
  * @author <1160777@isep.ipp.pt>Marco Carneiro</1160777@isep.ipp.pt>
  */
-public class ConsultNextReservationUI extends AbstractUI {
+public class ConsultNextReservationUI extends CafeteriaUserBaseUI {
 
     ConsultNextReservationController cnrc = new ConsultNextReservationController();
 
@@ -31,7 +33,7 @@ public class ConsultNextReservationUI extends AbstractUI {
     }
 
     @Override
-    public String headline() {
-        return ("Next Reservation");
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
 }

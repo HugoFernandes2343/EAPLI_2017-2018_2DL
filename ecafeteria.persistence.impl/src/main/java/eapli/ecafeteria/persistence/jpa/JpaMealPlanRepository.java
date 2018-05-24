@@ -10,6 +10,7 @@ import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.domain.kitchen.MealPlanState;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.MealPlanRepository;
+import eapli.framework.domain.Designation;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.Query;
@@ -30,10 +31,9 @@ public class JpaMealPlanRepository extends CafeteriaJpaRepositoryBase<MealPlan, 
     }
 
     @Override
-    public MealPlan findByIDMealPlan(Long id) {
+    public MealPlan findByIDMealPlan(Designation name) {
 
-        Optional<MealPlan> mp = matchOne("e.id=:id", "id", id);
-
+        Optional<MealPlan> mp = matchOne("e.name=:name", "name", name);
         if (mp.isPresent()) {
             MealPlan ms = mp.get();
             return ms;

@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 
 import eapli.ecafeteria.persistence.MealPlanRepository;
+import eapli.framework.domain.Designation;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class InMemoryMealPlanRepository extends InMemoryRepository<MealPlan, Int
     }
 
      @Override
-    public MealPlan findByIDMealPlan(Long id) {
+    public MealPlan findByIDMealPlan(Designation name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

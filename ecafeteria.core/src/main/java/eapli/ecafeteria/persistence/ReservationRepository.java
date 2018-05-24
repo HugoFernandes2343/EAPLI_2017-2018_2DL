@@ -21,7 +21,7 @@ import java.util.Optional;
 
 /**
  *
- * @author Utilizador
+ * @author <1160777@isep.ipp.pt>Marco Carneiro</1160777@isep.ipp.pt>
  */
 public interface ReservationRepository extends DataRepository<Reservation, Long> {
 

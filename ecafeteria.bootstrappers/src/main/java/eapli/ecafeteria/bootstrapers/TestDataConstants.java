@@ -16,6 +16,7 @@ public final class TestDataConstants {
     public static final String DISH_NAME_BACALHAU_A_BRAZ = "bacalhau à braz";
     public static final String DISH_NAME_LENTILHAS_SALTEADAS = "lentilhas salteadas";
     public static final String DISH_NAME_TOFU_GRELHADO = "tofu grelhado";
+    public static final String DISH_NAME_HAMBURGER = "Hamburger";
 
     public static final String USER_900330 = "900330";
 

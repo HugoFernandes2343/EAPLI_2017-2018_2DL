@@ -7,6 +7,7 @@ package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.app.user.console.booking.*;
+import eapli.ecafeteria.app.user.console.complaint.RegisterComplaintAction;
 import eapli.ecafeteria.app.user.console.movement.ConsultMovementsAction;
 import eapli.ecafeteria.app.user.console.movement.SetUserAlertLimitAction;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
@@ -32,13 +33,14 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int MY_USER_OPTION = 1;
     private static final int BOOKINGS_OPTION = 2;
     private static final int ACCOUNT_OPTION = 3;
-    private static final int SETTINGS_OPTION = 4;
+    private static final int COMPLAINT_OPTION = 4;
+    private static final int SETTINGS_OPTION = 5;
 
     // BOOKINGS MENU
     private static final int BOOK_A_MEAL_OPTION = 1;
     private static final int CONSULT_RESERVATIONS = 3;
     private static final int CONSULT_MENU = 4;
-     private static final int CANCEL_RESERVATION_OPTION = 5;
+    private static final int CANCEL_RESERVATION_OPTION = 5;
 
     //RESERVATIONS SUB_MENU
     private static final int CONSULT_NEXT_RESERVATION = 1;
@@ -47,6 +49,9 @@ class MainMenu extends CafeteriaUserBaseUI {
 
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
+
+    //COMPLAINTS MENU
+    private static final int FILE_COMPLAINTS = 1;
 
     // SETTINGS
     private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
@@ -82,6 +87,11 @@ class MainMenu extends CafeteriaUserBaseUI {
 
         final Menu accountMenu = buildAccountMenu();
         mainMenu.add(new SubMenu(ACCOUNT_OPTION, accountMenu, new ShowVerticalSubMenuAction(accountMenu)));
+
+        mainMenu.add(VerticalSeparator.separator());
+
+        final Menu complaintMenu = buildComplaintMenu();
+        mainMenu.add(new SubMenu(COMPLAINT_OPTION, complaintMenu, new ShowVerticalSubMenuAction(complaintMenu)));
 
         mainMenu.add(VerticalSeparator.separator());
 
@@ -149,6 +159,16 @@ class MainMenu extends CafeteriaUserBaseUI {
 
         menu.add(new MenuItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit",
                 new SetUserAlertLimitAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
+        return menu;
+    }
+
+    private Menu buildComplaintMenu(){
+        final Menu menu = new Menu("File Complaints >");
+
+        menu.add(new MenuItem(FILE_COMPLAINTS, "Create a complaint",
+                new RegisterComplaintAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;

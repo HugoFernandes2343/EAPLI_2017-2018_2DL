@@ -33,7 +33,7 @@ public class OpenPosController implements Controller {
 
     public boolean IsTheCafeteriaShiftClosed() {
         CafeteriaShift cs = cfRP.findCafeteriaShift();
-
+        
         if (cs.isClosed()) {
             return true;
         } else {
