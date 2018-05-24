@@ -15,6 +15,7 @@
     <class>eapli.ecafeteria.domain.dishes.DishType</class>
     <class>eapli.ecafeteria.domain.kitchen.MealPlan</class>
     <class>eapli.ecafeteria.domain.kitchen.MealPlanItem</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealPlanState</class>
     <class>eapli.ecafeteria.domain.movement.Movement</class>
     <class>eapli.ecafeteria.domain.movement.Recharge</class>
     <class>eapli.ecafeteria.domain.movement.Booking</class>

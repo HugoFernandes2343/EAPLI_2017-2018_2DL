@@ -7,7 +7,6 @@ package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
-import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.domain.Designation;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.List;

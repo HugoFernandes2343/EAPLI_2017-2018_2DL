@@ -29,6 +29,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDis
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CheckExistingReservationsAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CloseMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.EditMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.PublishMealAction;
@@ -125,6 +126,7 @@ public class MainMenu extends AbstractUI {
     //ELABORATE MENU
     private static final int CREATE_MEAL_PLAN = 1;
     private static final int EDIT_MEAL_PLAN = 2;
+    private static final int CLOSE_MEAL_PLAN = 3;
 
     @Override
     public boolean show() {
@@ -303,7 +305,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Elaborate Meal Plan");
         menu.add(new MenuItem(CREATE_MEAL_PLAN, "Create meal plan", new CreateMealPlanAction()));
         menu.add(new MenuItem(EDIT_MEAL_PLAN, "Edit meal plan", new EditMealPlanAction()));
-
+        menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
         return menu;
     }
 
