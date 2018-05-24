@@ -33,4 +33,11 @@ public class InMemoryCafeteriaUserRepository extends InMemoryRepository<Cafeteri
     public Iterable<CafeteriaUser> findAllActive() {
         return match(e -> e.user().isActive());
     }
+
+    @Override
+    public void updateUser(CafeteriaUser user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }
