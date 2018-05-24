@@ -105,17 +105,22 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return this.mecanographicNumber;
     }
 
-    public NutritionalProfile getNutritionalProfile() {
-        return nutritionalProfile;
+    public boolean updateNutritionalProfileFieldValue (NutritionalProfileField field){
+        return nutritionalProfile.updateFieldValue(field, field.value());
     }
-
-    public void setNutritionalProfile(NutritionalProfile nutritionalProfile) {
-        this.nutritionalProfile = nutritionalProfile;
-    }
+    
     
     @Override
     public String toString() {
         return "CafeteriaUser mecanographicNumber " + mecanographicNumber;
+    }
+
+    /**
+     * 
+     * @return A deep clone, to ensure no accidental modifications. Explicitly use "updateNutritionalProfileFieldValue" instead
+     */
+    public NutritionalProfile getNutritionalProfile() {
+        return nutritionalProfile.clone();
     }
     
     

@@ -8,6 +8,8 @@ package eapli.ecafeteria.app.user.console.presentation.profile;
 import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.cafeteriauser.profile.EditNutritionalProfileController;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile;
 import eapli.ecafeteria.domain.cafeteriauser.NutritionalProfileField;
 import eapli.framework.util.Console;
 import java.util.Iterator;
@@ -27,7 +29,10 @@ public class EditNutritionalProfileUI extends CafeteriaUserBaseUI{
 
     @Override
     protected boolean doShow() {
-        Iterable<NutritionalProfileField> nutritionalProfileFields = controller.findEditableFields(); 
+        CafeteriaUser user = controller.findUser();
+        NutritionalProfile nutritionalProfile = user.getNutritionalProfile();
+        
+        Iterable<NutritionalProfileField> nutritionalProfileFields = nutritionalProfile.getFields();
         
         if (!nutritionalProfileFields.iterator().hasNext()){ //If empty
             System.out.println ("Looks like you haven't created your Nutritional Profile yet! Please select the appropriate option in the preceding menu.");
@@ -37,8 +42,8 @@ public class EditNutritionalProfileUI extends CafeteriaUserBaseUI{
         
         editNutritionalProfileFieldValue (nutriField);
         
-        boolean editSuccess = controller.updateNutritionalField(nutriField);
-        displayEditSuccess (editSuccess, nutriField);
+        controller.updateNutritionalProfileField (user, nutriField);
+        displayEditSuccess (true, nutriField);
         
         return true;
     }

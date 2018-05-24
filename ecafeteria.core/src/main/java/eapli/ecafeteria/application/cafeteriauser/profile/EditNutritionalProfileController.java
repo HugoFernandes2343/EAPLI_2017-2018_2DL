@@ -22,21 +22,23 @@ import java.util.Optional;
  * @author Rodrigo Soares <1140420@isep.ipp.pt>
  */
 public class EditNutritionalProfileController implements Controller{
-    private Optional<CafeteriaUser> user;
-    private Optional<NutritionalProfile> nutriProfile;
-    private NutritionalProfileRepository nutriProfileRepo;
+    //private Optional<NutritionalProfile> nutriProfile;
+    //private NutritionalProfileRepository nutriProfileRepo;
+    private CafeteriaUserService userService;
     
-    public Iterable<NutritionalProfileField> findEditableFields(){
-        CafeteriaUserService userService = new CafeteriaUserService();
-        user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
+    public CafeteriaUser findUser(){
+        userService = new CafeteriaUserService();
+        Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         
         //nutriProfileRepo = PersistenceContext.repositories().nutritionalProfiles();
         //nutriProfile = nutriProfileRepo.findByUsername(user.get().user().username());
         
-        return user.get().getNutritionalProfile().getFields();
+        return user.get();
     }
     
-    public boolean updateNutritionalField (NutritionalProfileField chosenField){
-        return nutriProfileRepo.updateField(chosenField);
+    public void updateNutritionalProfileField (CafeteriaUser user, NutritionalProfileField newField){
+        user.updateNutritionalProfileFieldValue(newField);
+        
+        userService.updateUser(user);
     }
 }

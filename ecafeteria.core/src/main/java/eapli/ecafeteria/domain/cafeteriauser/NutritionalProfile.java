@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.allergens.Allergen;
 import eapli.framework.domain.ddd.ValueObject;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,6 +62,25 @@ public class NutritionalProfile implements ValueObject, Serializable {
         return fields;
     }    
     
+    /**
+     * 
+     * @param field The field to be updated. Must already exist in "fields"
+     * @param newValue 
+     * @return "true" if it managed to find the "field" and update it, "false" otherwise
+     */
+    public boolean updateFieldValue (NutritionalProfileField field, double newValue){
+        Iterator<NutritionalProfileField> it = fields.iterator();
+        
+        while (it.hasNext()){
+            NutritionalProfileField next = it.next();
+            if (next.equals(field)){
+                next.setValue (newValue);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -90,6 +110,14 @@ public class NutritionalProfile implements ValueObject, Serializable {
         return true;
     }
 
+    @Override
+    public NutritionalProfile clone() {
+        List<NutritionalProfileField> clonedFields = new ArrayList<NutritionalProfileField>(fields);
+        List<Allergen> clonedAllergens = new ArrayList<Allergen>(allergens);
+        return new NutritionalProfile (clonedFields, clonedAllergens);
+    }
+
+    
     @Override
     public String toString() {
         return "NutritionalProfile{" + "fields=" + fields + ", allergens=" + allergens + '}';
