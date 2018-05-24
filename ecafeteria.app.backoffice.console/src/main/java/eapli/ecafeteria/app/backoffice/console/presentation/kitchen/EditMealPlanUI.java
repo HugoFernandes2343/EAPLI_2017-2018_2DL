@@ -42,40 +42,40 @@ public class EditMealPlanUI extends AbstractUI {
         for (MealPlan mealPlan : listaMenu) {
             System.out.println(mealPlan.toString() + "\n\n");
         }
-     
+
         boolean resposta = false;
-       
-        String name=null;
-          
+
+        String name = null;
+
         while (resposta == false) {
-            name = Console.readLine("Insere o ID do menu que pretende conforme a lista apresentada!");
+            name = Console.readLine("Enter the ID of the menu you want according to the displayed list!");
             resposta = theController.verificarIDMealPlan(name);
         }
 
         MealPlan mp = theController.selectMealPlan(name);
-        
+
         if (mp.getLmpi().isEmpty()) {
             System.out.println("No exist Meal Plan Items");
             return false;
         }
-        
-        System.out.println("List MealPlanItem \nID--Quantity");
-        for (MealPlanItem mealPlanItem : mp.getLmpi()) {
-            System.out.println(mealPlanItem.toString());
+
+        System.out.println("List MealPlanItem\n");
+        for (int i = 0; i < mp.getLmpi().size(); i++) {
+            System.out.println("ID:" + i + mp.getLmpi().get(i)+"\n");
         }
-        
-        
-        
-        
-        
-        int quantidade = Console.readInteger("Insere a nova quantidade!");
-        mp.getLmpi().get(0).setDishQuantity(quantidade);
+        int id = -1;
+        while (id > mp.getLmpi().size() || id < 0) {
+            id = Console.readInteger("Enter the ID you want according to the displayed list!");
+        }
+
+        int quantity = Console.readInteger("Insert new quantity!");
+        mp.getLmpi().get(id).setDishQuantity(quantity);
         try {
             theController.saveMealPlan(mp);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(EditMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return true;
     }
 
