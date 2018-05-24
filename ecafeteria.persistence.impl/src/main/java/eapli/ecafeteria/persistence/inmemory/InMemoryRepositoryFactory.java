@@ -128,4 +128,10 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public AccountCardRepository accounts() {
         return new InMemoryAccountCardRepository();
     }
+
+    @Override
+    public LotRepository lots(){
+        return new InMemoryLotRepository();
+
+    }
 }
