@@ -53,7 +53,7 @@ public class CafeteriaShiftClosingController implements Controller {
 
         for (POS p : list_pos) {
 
-            cpS.CloseAndSavePOS(p.id(), list_pos);
+            cpS.CloseAndSavePOS(p.code(), list_pos);
         }
 
         CafeteriaShift cs = cfRP.findCafeteriaShift();
