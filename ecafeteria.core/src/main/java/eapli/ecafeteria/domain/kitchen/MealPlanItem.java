@@ -33,22 +33,18 @@ public class MealPlanItem implements Serializable {
     private Meal meal;
 
     private Integer DishQuantity;
-    
+
     private int NonDeliveredMeals;
-    
+
     private int DeliveredMeals;
-    
-    @ManyToOne(cascade=CascadeType.ALL)
-    private MealPlan mealPlan;
 
     protected MealPlanItem() {
 
     }
 
-    public MealPlanItem(Meal meal, int DishQuantity,MealPlan mp) {
+    public MealPlanItem(Meal meal, int DishQuantity) {
         this.meal = meal;
         this.DishQuantity = DishQuantity;
-        this.mealPlan=mp;
     }
 
     public int getDishQuantity() {
@@ -64,18 +60,22 @@ public class MealPlanItem implements Serializable {
         return "ID= " + id + "   DishQuantity=" + DishQuantity + "NonDelivered Meals =" + NonDeliveredMeals;
     }
 
+    public void setDishQuantity(Integer DishQuantity) {
+        this.DishQuantity = DishQuantity;
+    }
+
     public void calculateWastedMeals(int n) {
         this.NonDeliveredMeals = n;
         this.DeliveredMeals = this.DishQuantity - n;
     }
-    
-    public boolean checkMeal(Meal m){
-        if(m.equals(this.meal)){
+
+    public boolean checkMeal(Meal m) {
+        if (m.equals(this.meal)) {
             return true;
-        }else{
+        } else {
             return false;
         }
-        
+
     }
 
     @Override
@@ -83,7 +83,6 @@ public class MealPlanItem implements Serializable {
         int hash = 7;
         hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + Objects.hashCode(this.meal);
-        hash = 97 * hash + Objects.hashCode(this.mealPlan);
         return hash;
     }
 
@@ -105,9 +104,7 @@ public class MealPlanItem implements Serializable {
         if (!Objects.equals(this.meal, other.meal)) {
             return false;
         }
-        if (!Objects.equals(this.mealPlan, other.mealPlan)) {
-            return false;
-        }
+
         return true;
     }
 

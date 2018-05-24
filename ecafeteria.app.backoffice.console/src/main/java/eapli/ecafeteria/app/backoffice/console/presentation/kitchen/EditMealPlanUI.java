@@ -8,11 +8,15 @@ package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 import eapli.ecafeteria.application.kitchen.ElaborateMealPlanController;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
-import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,49 +32,50 @@ public class EditMealPlanUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
-        System.out.println("List Meals Plans");
         List<MealPlan> listaMenu = theController.findAllMealPlanInProgress();
         if (listaMenu.isEmpty()) {
             System.out.println("No exist Meal Plans");
             return false;
         }
+
+        System.out.println("\n\nList Meals Plans");
         for (MealPlan mealPlan : listaMenu) {
-            System.out.println(mealPlan.id());
+            System.out.println(mealPlan.toString() + "\n\n");
         }
+     
         boolean resposta = false;
-        long id = 0;
+       
+        String name=null;
+          
         while (resposta == false) {
-            id = Console.readLong("Insere o ID do menu que pretende conforme a lista apresentada!");
-            resposta = theController.verificarIDMealPlan(id);
+            name = Console.readLine("Insere o ID do menu que pretende conforme a lista apresentada!");
+            resposta = theController.verificarIDMealPlan(name);
         }
 
-        MealPlan mp = theController.selectMealPlan(id);
-
-        List<MealPlanItem> listMPI = theController.getMealPlanItemList();
-        if (listMPI.isEmpty()) {
+        MealPlan mp = theController.selectMealPlan(name);
+        
+        if (mp.getLmpi().isEmpty()) {
             System.out.println("No exist Meal Plan Items");
             return false;
         }
-        System.out.println("List MealPlanItem ID--Quantity");
-        for (MealPlanItem mealPlanItem : listMPI) {
+        
+        System.out.println("List MealPlanItem \nID--Quantity");
+        for (MealPlanItem mealPlanItem : mp.getLmpi()) {
             System.out.println(mealPlanItem.toString());
         }
-        resposta = false;
-        long id1 = 0;
-        while (resposta == false) {
-            id1 = Console.readLong("Insere o ID do menu que pretende conforme a lista apresentada!");
-            resposta = theController.verificarIDMealPlanItem(id1);
+        
+        
+        
+        
+        
+        int quantidade = Console.readInteger("Insere a nova quantidade!");
+        mp.getLmpi().get(0).setDishQuantity(quantidade);
+        try {
+            theController.saveMealPlan(mp);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(EditMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int quantidade = -1;
-
-        while (quantidade < 0) {
-            quantidade = Console.readInteger("Insere a nova quantidade!");
-        }
-
-        MealPlanItem MPI = theController.selectMealPlanItem(id1);
-
-        theController.changeQuantity(id1, quantidade);
-
+        
         return true;
     }
 
