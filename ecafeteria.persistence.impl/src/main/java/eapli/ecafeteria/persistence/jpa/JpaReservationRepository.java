@@ -15,6 +15,7 @@ import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.domain.reservations.ReservationState;
 import eapli.ecafeteria.persistence.ReservationRepository;
 import java.util.Calendar;
+import java.util.Date;
 
 import java.util.Optional;
 import javax.persistence.*;
@@ -103,5 +104,45 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         createQuery.setParameter(("u"), user);
         return createQuery.getResultList();
     }
+    
+    @Override
+    public Reservation checkIfReservationExists(CafeteriaUser user, ReservationState state, Meal meal, Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        Reservation rv = null;
+        
+        Query createQuery = entityManager().createQuery(("SELECT DISTINCT (r) FROM Reservation r, Meal m " 
+                            + "WHERE r.user=:u"
+                            + "AND m.meal=:meal"
+                            + "AND m.date=:mealDate"
+                            + "AND r.currentState=:state"));
+        
+        createQuery.setParameter("u", user);
+        createQuery.setParameter("meal", meal);
+        createQuery.setParameter("mealDate", cal);
+        createQuery.setParameter("state", state);
+        
+        try {
+            rv = (Reservation)createQuery.getSingleResult();
+        } catch (NoResultException ex) {
+            System.out.println("No meal was consumed on the specified date");
+        }
+                
+        return rv;
+    }
+    
+    @Override
+    public Reservation findByID(Long pk) {
+        Optional<Reservation> r = matchOne("e.pk=:pk", "pk", pk);
+        if (r.isPresent()) {
+            Reservation rv = r.get();
+            return rv;
+        } else {
+            return null;
+        }
+    }
+
+    
+   
 
 }

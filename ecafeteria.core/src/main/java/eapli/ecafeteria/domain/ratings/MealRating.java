@@ -2,6 +2,7 @@ package eapli.ecafeteria.domain.ratings;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,23 +23,31 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
 
     @Embedded
     private Score ratingNumber;
-
+       
+    @Embedded
+    private Comment comment;
+    
     @ManyToOne
-    private CafeteriaUser user;
-
-    @ManyToOne
-    private Meal meal;
+    private Reservation reservation;
 
     public MealRating() {
     }
 
-    public MealRating(CafeteriaUser user, Meal meal, int ratingNumber) {
-        if (user == null || meal == null) {
+    public MealRating(Reservation reservation, int ratingNumber) {
+        if (reservation == null) {
             throw new IllegalStateException();
         }
-        this.user = user;
-        this.meal = meal;
+        this.reservation = reservation;
         setRating(new Score(ratingNumber));
+    }
+    
+    public MealRating(Reservation reservation, int ratingNumber, String comment) {
+        if (reservation == null) {
+            throw new IllegalStateException();
+        }
+        this.reservation = reservation;
+        setRating(new Score(ratingNumber));
+        setComment(new Comment(comment));
     }
 
     private void setRating(Score newRating) {
@@ -58,17 +67,29 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
             return true;
         }
     }
-
-    public CafeteriaUser user() {
-        return user;
+    
+    private void setComment(Comment newComment) {
+        if (checkComment(newComment)) {
+            this.comment = newComment;
+        } else {
+            throw new IllegalArgumentException("Invalid comment");
+        }
+    }
+    
+    private boolean checkComment(Comment newComment) {
+        if (newComment.toString().length() < 0) {
+            throw new IllegalArgumentException("Insert a valid comment");
+        } else {
+            return true;
+        }
     }
 
-    public Meal meal() {
-        return meal;
+    public Reservation reservation() {
+        return reservation;
     }
-
+    
     public Score ratingNumber() {
-        return ratingNumber;
+        return ratingNumber; 
     }
 
     @Override
@@ -78,11 +99,10 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.ratingNumber);
-        hash = 97 * hash + Objects.hashCode(this.user);
-        hash = 97 * hash + Objects.hashCode(this.meal);
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.ratingNumber);
+        hash = 47 * hash + Objects.hashCode(this.reservation);
         return hash;
     }
 
@@ -98,20 +118,20 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
             return false;
         }
         final MealRating other = (MealRating) obj;
-        if (this.ratingNumber != other.ratingNumber) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.user, other.user)) {
+        if (!Objects.equals(this.ratingNumber, other.ratingNumber)) {
             return false;
         }
-        if (!Objects.equals(this.meal, other.meal)) {
+        if (!Objects.equals(this.reservation, other.reservation)) {
             return false;
         }
         return true;
     }
+
+    
+    
 
     @Override
     public boolean sameAs(Object other) {
@@ -119,28 +139,17 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
             return false;
         }
 
-        final MealRating mr = (MealRating) other;
-        if (this == mr) {
+        final MealRating that = (MealRating) other;
+        if (this == that) {
             return true;
         }
 
-        if (!this.id.equals(mr.id)) {
-            return false;
-        }
-
-        if (!this.user.equals(mr.user)) {
-            return false;
-        }
-
-        if (!this.meal.equals(mr.meal)) {
-            return false;
-        }
-
-        return true;
+        return id().equals(that.id()) && ratingNumber.equals(that.ratingNumber)
+                && comment.equals(that.comment) && reservation.equals(that.reservation);
     }
 
     @Override
     public String toString() {
-        return ("Meal Rating ->     Date the meal was consumed: " + meal.date() + "     Meal: " + meal.toString() + "       Rating: " + ratingNumber);
+        return ("Meal Rating ->     Date the meal was consumed: " + reservation.meal().date() + "     Meal: " + reservation.meal().toString() + "       Rating: " + ratingNumber);
     }
 }

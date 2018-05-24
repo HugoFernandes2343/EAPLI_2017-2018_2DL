@@ -102,4 +102,14 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
     public Iterable<Reservation> findByStateAndDate(ReservationState state, Calendar date, MealType mt) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Reservation checkIfReservationExists(CafeteriaUser user, ReservationState state, Meal meal, Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Reservation findByID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
