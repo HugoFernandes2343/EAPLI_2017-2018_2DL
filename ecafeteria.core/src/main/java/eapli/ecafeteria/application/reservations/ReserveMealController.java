@@ -10,6 +10,7 @@ import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserService;
 import eapli.ecafeteria.application.cafeteriauser.ListMovementService;
 import eapli.ecafeteria.application.menu.ListMenuService;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.kitchen.KitchenAlertWatchdog;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.movement.Booking;
@@ -41,6 +42,7 @@ public class ReserveMealController implements Controller {
     private final CafeteriaUserService userService = new CafeteriaUserService();
     
     private MovementBuilder movementBuilder = new MovementBuilder();
+    private KitchenAlertWatchdog watchdog = new KitchenAlertWatchdog();
 
     public Menu getMenu(Date date) {
         return listMenuService.listMenuBooking(date);
@@ -62,6 +64,7 @@ public class ReserveMealController implements Controller {
                 reservationAdded = addReservation(reservation);
                 movementRepo.addBookingMovement(mov);
                 this.movementBuilder.notifyObs();
+                this.watchdog.notifyObs(meal);
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 System.out.println("An transactional error has ocurred. Please check data and try again.");
             }
