@@ -23,9 +23,6 @@ public class Complaint implements Serializable, DomainEntity<Long> {
     @Version
     private Long version;
 
-    @Column(unique = true)
-    private Long id;
-
     @ManyToOne()
     private Meal meal;
 
@@ -135,13 +132,13 @@ public class Complaint implements Serializable, DomainEntity<Long> {
     }
 
     /**
-     * Returns the ID of this complaint.
+     * [Not usable here]Returns the ID of this complaint.
      *
      * @return
      */
     @Override
     public Long id() {
-        return this.id;
+        return null;
     }
 
     @Override
@@ -159,12 +156,13 @@ public class Complaint implements Serializable, DomainEntity<Long> {
 
     @Override
     public int hashCode() {
-        return this.id.hashCode();
+        return this.title.hashCode()
+                +this.description.hashCode();
     }
 
     @Override
     public String toString() {
-        return String.format("Code: %s\nUser: %s\nMeal: %s", id, user, meal.toString());
+        return String.format("User: %s\nMeal: %s\nTitle: %s\nDescription%s\n", user, meal.toString(),title,description);
     }
 
 }
