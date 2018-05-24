@@ -38,31 +38,22 @@ public class RegisterMealRatingController implements Controller {
 
     Optional<CafeteriaUser> u = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
 
+    public CafeteriaUser getUser() {
+        return u.get();
+    }
+    
     public List<Reservation> lstReservations(CafeteriaUser user) {
         return (List<Reservation>) reservationRepo.selectTypeDelivered(user);
     }
 
-    public Reservation selectReservation(Long id) {
-        r = reservationRepo.findByID(id);
+    public Reservation selectReservation(String code) {
+        r = reservationRepo.findByCode(code).get();        
         return r;
     }
 
-    public MealRating registerMealRating(Meal meal, int rating) {
-        return null;
-    }
-
-    private MealRating registerMealRatingWithoutComment(Reservation reservation, int rating)
-            throws DataConcurrencyException, DataIntegrityViolationException {
+    public MealRating registerMealRating(Reservation reservation, int rating) throws DataConcurrencyException, DataIntegrityViolationException {
         MealRating mr = new MealRating(reservation, rating);
-        return mealRatingRepo.save(mr);
-    }
-
-    public boolean checkReservation(Date mealDate, Meal meal) {
-        Reservation r = reservationRepo.checkIfReservationExists(u.get(), ReservationState.DELIVERED, meal, mealDate);
-        if (r == null) {
-            return false;
-        } else {
-            return true;
-        }
+        mealRatingRepo.save(mr);
+        return mr;
     }
 }

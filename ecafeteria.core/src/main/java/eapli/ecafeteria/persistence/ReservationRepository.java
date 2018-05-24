@@ -71,9 +71,4 @@ public interface ReservationRepository extends DataRepository<Reservation, Long>
      * @return
      */
     Iterable<Reservation> findNextReservation(CafeteriaUser user);
-       
-    Reservation findByID(Long id);
-    
-    Reservation checkIfReservationExists(CafeteriaUser user, ReservationState state, Meal meal, Date date);
-
 }

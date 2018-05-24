@@ -34,7 +34,8 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int BOOKINGS_OPTION = 2;
     private static final int ACCOUNT_OPTION = 3;
     private static final int COMPLAINT_OPTION = 4;
-    private static final int SETTINGS_OPTION = 5;
+    private static final int RATINGS_AND_CALORIES_OPTION = 5;
+    private static final int SETTINGS_OPTION = 6;
 
     // BOOKINGS MENU
     private static final int BOOK_A_MEAL_OPTION = 1;
@@ -52,6 +53,9 @@ class MainMenu extends CafeteriaUserBaseUI {
 
     //COMPLAINTS MENU
     private static final int FILE_COMPLAINTS = 1;
+    
+    //RATINGS AND CALORIES MENU
+    private static final int REGISTER_MEAL_RATING = 1;
 
     // SETTINGS
     private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
@@ -95,6 +99,11 @@ class MainMenu extends CafeteriaUserBaseUI {
 
         mainMenu.add(VerticalSeparator.separator());
 
+        final Menu ratingsAndCaloriesMenu = buildRatingsAndCaloriesMenu();
+        mainMenu.add(new SubMenu(RATINGS_AND_CALORIES_OPTION, ratingsAndCaloriesMenu, new ShowVerticalSubMenuAction(ratingsAndCaloriesMenu)));
+        
+        mainMenu.add(VerticalSeparator.separator());
+        
         final Menu settingsMenu = buildAdminSettingsMenu();
         mainMenu.add(new SubMenu(SETTINGS_OPTION, settingsMenu, new ShowVerticalSubMenuAction(settingsMenu)));
 
@@ -146,6 +155,13 @@ class MainMenu extends CafeteriaUserBaseUI {
         menu.add(new MenuItem(LIST_PREVIOUS_PURCHASES, "Previous purchases", new PreviousPurchasesAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
+        return menu;
+    }
+    
+    private Menu buildRatingsAndCaloriesMenu() {
+        final Menu menu = new Menu("Ratings and Calories >");
+        menu.add(new MenuItem(REGISTER_MEAL_RATING, "Register meal rating", new RegisterMealRatingAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
 
