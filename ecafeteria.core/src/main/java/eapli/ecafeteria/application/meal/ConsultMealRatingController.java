@@ -23,6 +23,8 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  */
 public class ConsultMealRatingController implements Controller {
     
+    private Meal meal;
+    
     private final MealRepository mr = PersistenceContext.repositories().meals();
     private final MealRatingRepository rr = PersistenceContext.repositories().ratings();
     private final ReservationRepository rer = PersistenceContext.repositories().reservations();
@@ -31,8 +33,8 @@ public class ConsultMealRatingController implements Controller {
         return mr.findAll();
     }
     
-    public Iterable<Reservation> allReservations(){
-        return rer.findAll();
+    public Iterable<Reservation> allMealsOfReservations(){
+        return rer.findByMeal(meal);
     }
     
     public Iterable<MealRating> allRatings(Reservation r){
