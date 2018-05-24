@@ -7,7 +7,6 @@ import eapli.framework.domain.ddd.DomainEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
 
 /**
  * @author <1160777@isep.ipp.pt>Marco Carneiro</1160777@isep.ipp.pt>
@@ -64,7 +63,6 @@ public class Complaint implements Serializable, DomainEntity<Long> {
      * @param description
      */
     public Complaint(CafeteriaUser user, String title, String description) {
-        this.meal = meal;
         this.user = user;
         this.title = title;
         this.description = description;
