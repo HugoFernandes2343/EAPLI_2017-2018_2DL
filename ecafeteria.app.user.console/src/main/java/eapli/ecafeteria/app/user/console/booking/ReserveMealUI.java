@@ -5,12 +5,12 @@
  */
 package eapli.ecafeteria.app.user.console.booking;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.reservations.ReserveMealController;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.framework.application.Controller;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
 import eapli.framework.util.DateTime;
@@ -21,13 +21,9 @@ import java.util.Date;
  *
  * @author João Vieira
  */
-public class ReserveMealUI extends AbstractUI {
+public class ReserveMealUI extends CafeteriaUserBaseUI {
 
     private final ReserveMealController theController = new ReserveMealController();
-
-    protected Controller controller() {
-        return this.theController;
-    }
 
     @Override
     protected boolean doShow() {
@@ -64,11 +60,6 @@ public class ReserveMealUI extends AbstractUI {
 
     }
 
-    @Override
-    public String headline() {
-        return "Reserve Meal";
-    }
-
     private boolean validate(Date date) {
         Calendar cal = DateTime.dateToCalendar(date);
         if (DateTime.isBeforeToday(cal)) {
@@ -76,6 +67,11 @@ public class ReserveMealUI extends AbstractUI {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
 
 }

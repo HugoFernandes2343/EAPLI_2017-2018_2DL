@@ -5,15 +5,16 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShift;
+import eapli.ecafeteria.domain.ratings.MealRating;
 import eapli.framework.persistence.repositories.DataRepository;
+
+
 
 /**
  *
- * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
+ * @author Andre Rodrigues <1151136@isep.ipp.pt>
  */
-public interface CafeteriaShiftRepository extends DataRepository<CafeteriaShift,Long> {
-    
-    public CafeteriaShift findCafeteriaShift();
+public interface MealRatingRepository extends DataRepository<MealRating,Long>{
     
 }
+

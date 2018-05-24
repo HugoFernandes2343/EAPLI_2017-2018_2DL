@@ -6,6 +6,8 @@
 package eapli.ecafeteria.application.meal;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.ratings.Comment;
+import eapli.ecafeteria.domain.ratings.MealRating;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -18,20 +20,20 @@ public class ConsultMealRatingController implements Controller {
     
     private final MealRepository mr = PersistenceContext.repositories().meals();
 //    private final MealRatingService mrs = new MealRatingService();
-//    private final RatingRepository rr = PersistenceContext.repositories().ratings();
+//    private final MealRepository rr = PersistenceContext.repositories().ratings();
     
     public Iterable<Meal> allMeals(){
         return mr.findAll();
     }
     
-//    public Iterable<Rating> allRatings(Meal m){
+//    public Iterable<MealRating> allRatings(Meal m){
 //        return mrs.mealsRatingList(m);
 //        
 //    }
-//    
-//    public void answerToComment(Rating r, String answer){
-//        Comment c = rating.comment(answer);
-//        c.answer(answer);
+    
+//    public void answerToComment(MealRating r, String reply){
+//        Comment c = r.comment(reply);
+//        c.answer(reply);
 //        rr.save(r);
 //    }
 }

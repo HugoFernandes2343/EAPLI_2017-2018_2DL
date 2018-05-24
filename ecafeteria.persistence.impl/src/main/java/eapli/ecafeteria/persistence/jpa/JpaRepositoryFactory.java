@@ -1,22 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
-import eapli.ecafeteria.persistence.CafeteriaShiftRepository;
-import eapli.ecafeteria.persistence.DishReportingRepository;
-import eapli.ecafeteria.persistence.DishRepository;
-import eapli.ecafeteria.persistence.DishTypeRepository;
-import eapli.ecafeteria.persistence.KitchenAlertsRepository;
-import eapli.ecafeteria.persistence.MaterialRepository;
-import eapli.ecafeteria.persistence.MealPlanItemRepository;
-import eapli.ecafeteria.persistence.MealPlanRepository;
-import eapli.ecafeteria.persistence.MealRepository;
-import eapli.ecafeteria.persistence.MenuRepository;
-import eapli.ecafeteria.persistence.MovementRepository;
-import eapli.ecafeteria.persistence.POSRepository;
-import eapli.ecafeteria.persistence.RepositoryFactory;
-import eapli.ecafeteria.persistence.ReservationRepository;
-import eapli.ecafeteria.persistence.SignupRequestRepository;
-import eapli.ecafeteria.persistence.UserRepository;
+import eapli.ecafeteria.persistence.*;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
 
@@ -120,11 +105,23 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MealPlanItemRepository mealPlanItemRepository() {
         return new JpaMealPlanItemRepository();
-
     }
 
     @Override
     public KitchenAlertsRepository KitchenAlertsRepository() {
        return new JpaKitchenAlertRepository();
     }
+
+    public MealRatingRepository ratings() {
+        return new JpaMealRatingRepository();
+    }
+    
+    @Override
+    public AccountCardRepository accounts() {
+        return new JpaAccountCardRepository();
+    }
+
+    @Override
+    public ComplaintRepository complaints() {   return new JpaComplaintRepository();    }
+
 }

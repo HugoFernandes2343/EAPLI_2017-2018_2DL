@@ -3,7 +3,7 @@
 * To change this license header, choose License Headers in Project Properties.
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
-*/
+ */
 package eapli.ecafeteria.domain.reservations;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
@@ -71,7 +71,6 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         this.user = user;
         this.active = true;
     }
-
 
     public void cancel() throws ReservationStateViolationException {
         if (this.currentState == ReservationState.BOOKED) {
@@ -166,28 +165,28 @@ public class Reservation implements AggregateRoot<String>, Serializable {
         return String.format("Code: %s\nState: %s\n%s", code, currentState, meal.toString());
     }
 
-        public Money acquireRefundValue() {
+    public Money acquireRefundValue() {
         int diff;
-        Money value=meal.dish().currentPrice();
+        Money value = meal.dish().currentPrice();
         Money errantPenniesMoney[];
-        Calendar actual=DateTime.now();
-        Calendar booked=meal.date();
-        if(!DateTime.isSameDate(actual, booked)){
+        Calendar actual = DateTime.now();
+        Calendar booked = meal.date();
+        if (!DateTime.isSameDate(actual, booked)) {
             return value;
         }
-        if(meal.isLunch()){
-            diff=12-actual.get(Calendar.HOUR_OF_DAY);
-            if(diff>=10){
-                return value;
-            }
-        } 
-        if(meal.isDinner()){
-            diff=19-actual.get(Calendar.HOUR_OF_DAY);
-            if(diff>=16){
+        if (meal.isLunch()) {
+            diff = 12 - actual.get(Calendar.HOUR_OF_DAY);
+            if (diff >= 10) {
                 return value;
             }
         }
-        errantPenniesMoney=value.divide(2);
+        if (meal.isDinner()) {
+            diff = 19 - actual.get(Calendar.HOUR_OF_DAY);
+            if (diff >= 16) {
+                return value;
+            }
+        }
+        errantPenniesMoney = value.divide(2);
         return errantPenniesMoney[1];
     }
 

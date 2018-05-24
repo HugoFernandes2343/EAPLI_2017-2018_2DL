@@ -1,23 +1,8 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstrapper;
-import eapli.ecafeteria.persistence.CafeteriaShiftRepository;
-import eapli.ecafeteria.persistence.CafeteriaUserRepository;
-import eapli.ecafeteria.persistence.DishReportingRepository;
-import eapli.ecafeteria.persistence.DishRepository;
-import eapli.ecafeteria.persistence.DishTypeRepository;
-import eapli.ecafeteria.persistence.KitchenAlertsRepository;
-import eapli.ecafeteria.persistence.MaterialRepository;
-import eapli.ecafeteria.persistence.MealPlanItemRepository;
-import eapli.ecafeteria.persistence.MealPlanRepository;
-import eapli.ecafeteria.persistence.MealRepository;
-import eapli.ecafeteria.persistence.MenuRepository;
-import eapli.ecafeteria.persistence.MovementRepository;
-import eapli.ecafeteria.persistence.POSRepository;
-import eapli.ecafeteria.persistence.RepositoryFactory;
-import eapli.ecafeteria.persistence.ReservationRepository;
-import eapli.ecafeteria.persistence.SignupRequestRepository;
-import eapli.ecafeteria.persistence.UserRepository;
+
+import eapli.ecafeteria.persistence.*;
 import eapli.framework.persistence.repositories.TransactionalContext;
 
 /**
@@ -93,6 +78,8 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
         return new InMemoryReservationRepository();
     }
 
+    public ComplaintRepository complaints() {   return new InMemoryComplaintRepository();   }
+
     public MovementRepository movements() {
         return new InMemoryMovementRepository();
     }
@@ -130,5 +117,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public KitchenAlertsRepository KitchenAlertsRepository() {
        return new InMemoryKitchenAlertRepository();
+    }
+
+    @Override
+    public MealRatingRepository ratings() {
+        return new InMemoryMealRatingRepository();
+    }
+    
+    @Override
+    public AccountCardRepository accounts() {
+        return new InMemoryAccountCardRepository();
     }
 }

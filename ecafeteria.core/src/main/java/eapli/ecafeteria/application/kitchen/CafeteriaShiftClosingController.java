@@ -1,5 +1,6 @@
 package eapli.ecafeteria.application.kitchen;
 
+import eapli.ecafeteria.application.pos.ClosePosService;
 import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShift;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.domain.meals.Meal;
@@ -34,6 +35,7 @@ public class CafeteriaShiftClosingController implements Controller {
     private final ReservationRepository reservRP = PersistenceContext.repositories().reservations();
     private final MealRepository mRP = PersistenceContext.repositories().meals();
     private final MealPlanItemRepository mpiRP = PersistenceContext.repositories().mealPlanItemRepository();
+    private final ClosePosService cpS = new ClosePosService();
 
     /**
      *
@@ -51,9 +53,7 @@ public class CafeteriaShiftClosingController implements Controller {
 
         for (POS p : list_pos) {
 
-            p.close();
-
-            posRP.save(p);
+            cpS.CloseAndSavePOS(p.id(), list_pos);
         }
 
         CafeteriaShift cs = cfRP.findCafeteriaShift();
@@ -78,7 +78,8 @@ public class CafeteriaShiftClosingController implements Controller {
                 } catch (ReservationStateViolationException ex) {
                 }
             }
-            MealPlanItem mp = mpiRP.findByMeal(m);
+            ArrayList<MealPlanItem> array = (ArrayList<MealPlanItem>) mpiRP.findByMeal(m);
+            MealPlanItem mp = array.get(0);
             mp.calculateWastedMeals(list_reserv.size());
             mpiRP.save(mp);
         }

@@ -1,57 +1,74 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
-import eapli.framework.domain.ddd.DomainEntity;
+import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.persistence.GeneratedValue;
 
 /**
  *
  * @author 1161110 & 1161213
  */
 @Entity
-public class AccountCard implements Serializable, DomainEntity<Long>{
+public class AccountCard implements AggregateRoot<MecanographicNumber>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
-    private Long id;
-        
+    private Long menuID;
+
+    @Version
+    private Long version;
+
+    private MecanographicNumber mecanographicNumber;
+
+    @Embedded
     private BalanceLimit balanceLimit;
-    
-//    protected AccountCard(){
-//        //for ORM
-//    }
-    
+
+    protected AccountCard() {
+        //for ORM
+    }
+
     /**
      * New Account Card Constructor and for ORM use
+     *
+     * @param mecanographicNumber
      */
-    public AccountCard() {
+    public AccountCard(MecanographicNumber mecanographicNumber) {
         this.balanceLimit = new BalanceLimit();
-    }
-
-    @Override
-    public boolean is(Long otherId) {
-        return this.id.compareTo(otherId) == 0;
-    }
-
-    @Override
-    public Long id() {
-        return this.id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.mecanographicNumber = mecanographicNumber;
     }
 
     @Override
     public boolean sameAs(Object other) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!(other instanceof AccountCard)) {
+            return false;
+        }
+
+        final AccountCard that = (AccountCard) other;
+        if (this == that) {
+            return true;
+        }
+        return (this.mecanographicNumber.equals(that.mecanographicNumber)
+                && this.balanceLimit.equals(that.balanceLimit));
+    }
+
+    @Override
+    public MecanographicNumber id() {
+        return this.mecanographicNumber;
+    }
+
+    public boolean changeBalanceLimit(double value) {
+        return this.balanceLimit.defineLimit(value);
+    }
+
+    public BalanceLimit balanceLimit() {
+        return this.balanceLimit;
+    }
+
+    @Override
+    public String toString() {
+        return "Balance Limit: " + balanceLimit + '\n';
     }
 
 }

@@ -5,15 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShift;
+import eapli.ecafeteria.domain.cafeteriauser.AccountCard;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
- * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
+ * @author João Vieira
  */
-public interface CafeteriaShiftRepository extends DataRepository<CafeteriaShift,Long> {
-    
-    public CafeteriaShift findCafeteriaShift();
+public interface AccountCardRepository extends DataRepository<AccountCard, Long> {
     
 }

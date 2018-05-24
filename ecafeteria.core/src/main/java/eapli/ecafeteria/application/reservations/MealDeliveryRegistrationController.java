@@ -40,7 +40,7 @@ public class MealDeliveryRegistrationController implements Controller{
             throw new IllegalArgumentException();
         }
         
-        return this.rrp.findByCode(code).get();//Optional =/= Reservation so we need get. Might be needed a change here
+        return this.rrp.findByCode(code).get();
     }
    
     /**
