@@ -66,6 +66,12 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
         }
     }
 
+    public Comment comment(String reply) {
+        if (comment == null) {
+            throw new IllegalArgumentException("This rate have no comment.");
+        }
+        return this.comment;
+    }
     
 
     public Reservation reservation() {
