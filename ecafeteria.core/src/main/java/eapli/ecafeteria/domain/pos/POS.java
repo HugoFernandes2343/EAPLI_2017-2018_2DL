@@ -21,6 +21,7 @@ public class POS implements AggregateRoot<Long>, Serializable {
     @GeneratedValue
     private Long posID;
     
+    @Column(unique = true)
     private int code;
     
     @Enumerated(EnumType.STRING)
@@ -73,6 +74,10 @@ public class POS implements AggregateRoot<Long>, Serializable {
     @Override
     public Long id() {
         return posID;
+    }
+    
+    public int code(){
+        return this.code;
     }
        
     public String state(){

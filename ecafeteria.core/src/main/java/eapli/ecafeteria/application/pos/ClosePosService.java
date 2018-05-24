@@ -21,10 +21,10 @@ public class ClosePosService {
 
     private final POSRepository posRP = PersistenceContext.repositories().pos();
 
-    public boolean CloseAndSavePOS(Long id, ArrayList<POS> list_pos) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException {
+    public boolean CloseAndSavePOS(int code, ArrayList<POS> list_pos) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException {
 
         for (POS p : list_pos) {
-            if (p.id() == id) {
+            if (p.code() == code) {
                 p.close();
 
                 SavePOS(p);

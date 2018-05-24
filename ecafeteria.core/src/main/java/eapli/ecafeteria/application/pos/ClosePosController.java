@@ -30,7 +30,7 @@ public class ClosePosController implements Controller {
         } else {
             System.out.println("Open POS:");
             for(POS p : list_pos){
-                System.out.println("POS "+p.id());
+                System.out.println("POS "+p.code());
             }
         }
         
@@ -41,9 +41,9 @@ public class ClosePosController implements Controller {
     }
     
     
-    public boolean CloseAndSavePOS(Long id) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException{
+    public boolean CloseAndSavePOS(int code) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException{
         
-        return cpS.CloseAndSavePOS(id, list_pos);
+        return cpS.CloseAndSavePOS(code, list_pos);
     }
 
 }

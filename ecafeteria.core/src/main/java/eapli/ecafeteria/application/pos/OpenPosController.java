@@ -66,7 +66,7 @@ public class OpenPosController implements Controller {
         } else {
             System.out.println("Closed POS's:");
             for (POS p : list_pos) {
-                System.out.println("POS " + p.id());
+                System.out.println("POS " + p.code());
             }
         }
 
@@ -76,10 +76,10 @@ public class OpenPosController implements Controller {
         return true;
     }
 
-    public boolean OpenAndSavePOS(Long id) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException {
+    public boolean OpenAndSavePOS(int code) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException {
 
         for (POS p : list_pos) {
-            if (p.id() == id) {
+            if (p.code() == code) {
                 p.open();
 
                 posRP.save(p);

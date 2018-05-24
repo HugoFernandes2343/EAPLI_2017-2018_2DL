@@ -61,11 +61,11 @@ public class OpenPosUI extends AbstractUI {
             return false;
         }
 
-        Long pos;
+        int pos;
         boolean success = false;
 
         do {
-            pos = Console.readLong("Choose a pos to open:");
+            pos = Console.readInteger("Choose a pos to open:");
             try {
                 success = cont.OpenAndSavePOS(pos);
             } catch (POSStateViolationException | DataConcurrencyException | DataIntegrityViolationException ex) {
