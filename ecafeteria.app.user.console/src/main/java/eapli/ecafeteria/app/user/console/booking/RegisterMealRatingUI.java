@@ -21,10 +21,10 @@ import java.util.logging.Logger;
  *
  * @author Andre Rodrigues <1151136@isep.ipp.pt>
  */
-public class RegisterMealRatingUI extends AbstractUI{
-    
+public class RegisterMealRatingUI extends AbstractUI {
+
     private final RegisterMealRatingController rmrController = new RegisterMealRatingController();
-    
+
     protected Controller controller() {
         return this.rmrController;
     }
@@ -38,16 +38,34 @@ public class RegisterMealRatingUI extends AbstractUI{
             System.out.println(reservation.toString());
         }
         String code = Console.readLine("Choose one, using the code of reservation: ");
-        
+
         Reservation r = rmrController.selectReservation(code);
-        int rating = Console.readInteger("Insert rating number: (1 to 5)");
-        try {
+        int rating = -1;
+        while (rating < 1 || rating > 5) {
+            rating = Console.readInteger("Insert rating number: (1 to 5)");
+        }
+
+        String isComment = "";
+        String comment = "";
+
+        while (isComment.compareToIgnoreCase("Y") != 0 && isComment.compareToIgnoreCase("N") != 0) {
+            isComment = Console.readLine("Add comment? (Y/N)");
+            System.out.println(isComment);
+        }
+        if (isComment.equalsIgnoreCase("N")) {
             rmrController.registerMealRating(r, rating);
+        } else {
+            while (comment.compareTo("") == 0) {
+                comment = Console.readLine("Comment: ");
+                rmrController.registerMealRatingWithComment(r, rating, comment);
+            }
+        }
+        try {
+            rmrController.saveMealRating();
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(RegisterMealRatingUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         return true;
     }
 
@@ -55,5 +73,5 @@ public class RegisterMealRatingUI extends AbstractUI{
     public String headline() {
         return ("Register Meal Rating");
     }
-    
+
 }

@@ -8,7 +8,6 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
-import eapli.ecafeteria.domain.ratings.MealRating;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Calendar;
 

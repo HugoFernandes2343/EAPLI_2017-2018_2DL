@@ -23,10 +23,10 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
 
     @Embedded
     private Score ratingNumber;
-       
+
     @Embedded
     private Comment comment;
-    
+
     @ManyToOne
     private Reservation reservation;
 
@@ -34,62 +34,46 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
     }
 
     public MealRating(Reservation reservation, int ratingNumber) {
-        if (reservation == null) {
-            throw new IllegalStateException();
+        try {
+            this.reservation = reservation;
+            setRating(new Score(ratingNumber));
+            this.comment=null;
+        } catch (NullPointerException e) {
+            System.out.println("Error: " + e);
         }
-        this.reservation = reservation;
-        setRating(new Score(ratingNumber));
     }
-    
+
     public MealRating(Reservation reservation, int ratingNumber, String comment) {
         if (reservation == null) {
-            throw new IllegalStateException();
+            throw new NullPointerException();
         }
         this.reservation = reservation;
         setRating(new Score(ratingNumber));
-        setComment(new Comment(comment));
+        this.comment=new Comment(comment);
     }
 
     private void setRating(Score newRating) {
         if (checkRatingNumber(newRating)) {
             this.ratingNumber = newRating;
-        } else {
-            throw new IllegalArgumentException("Invalid rating");
-        }
+        } 
     }
 
     private boolean checkRatingNumber(Score newRating) {
-        if (newRating.score() > 5) {
-            throw new NumberFormatException("Insert a positive number, between 1 and 5");
-        } else if (newRating.score() < 1) {
-            throw new NumberFormatException("Insert a positive number, between 1 and 5");
+        if (newRating.score() > 5 || newRating.score() < 1) {
+            throw new NumberFormatException();
         } else {
             return true;
         }
     }
+
     
-    private void setComment(Comment newComment) {
-        if (checkComment(newComment)) {
-            this.comment = newComment;
-        } else {
-            throw new IllegalArgumentException("Invalid comment");
-        }
-    }
-    
-    private boolean checkComment(Comment newComment) {
-        if (newComment.toString().length() < 0) {
-            throw new IllegalArgumentException("Insert a valid comment");
-        } else {
-            return true;
-        }
-    }
 
     public Reservation reservation() {
         return reservation;
     }
-    
+
     public Score ratingNumber() {
-        return ratingNumber; 
+        return ratingNumber;
     }
 
     @Override
@@ -129,9 +113,6 @@ public class MealRating implements AggregateRoot<Long>, Serializable {
         }
         return true;
     }
-
-    
-    
 
     @Override
     public boolean sameAs(Object other) {
