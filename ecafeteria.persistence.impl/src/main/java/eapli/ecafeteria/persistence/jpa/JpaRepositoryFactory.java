@@ -37,6 +37,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
+    public JpaNutritionalProfileRepository nutritionalProfiles() {
+        return new JpaNutritionalProfileRepository();
+    }
+
+    
+    @Override
     public SignupRequestRepository signupRequests(TransactionalContext autoTx) {
         return new JpaSignupRequestRepository(autoTx);
     }

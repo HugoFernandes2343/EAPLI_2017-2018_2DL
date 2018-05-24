@@ -39,6 +39,9 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @OneToOne()
     private SystemUser systemUser;
 
+    //@OneToOne(cascade = CascadeType.ALL)
+    private NutritionalProfile nutritionalProfile;
+    
     public CafeteriaUser(SystemUser user, MecanographicNumber mecanographicNumber) {
         if (mecanographicNumber == null || user == null) {
             throw new IllegalArgumentException();
@@ -46,6 +49,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         this.systemUser = user;
         this.mecanographicNumber = mecanographicNumber;
         this.accountcard = new AccountCard(mecanographicNumber);
+        nutritionalProfile = new NutritionalProfile();
     }
 
     protected CafeteriaUser() {
@@ -101,6 +105,14 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return this.mecanographicNumber;
     }
 
+    public NutritionalProfile getNutritionalProfile() {
+        return nutritionalProfile;
+    }
+
+    public void setNutritionalProfile(NutritionalProfile nutritionalProfile) {
+        this.nutritionalProfile = nutritionalProfile;
+    }
+    
     @Override
     public String toString() {
         return "CafeteriaUser mecanographicNumber " + mecanographicNumber;

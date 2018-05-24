@@ -96,6 +96,8 @@ public interface RepositoryFactory {
      * @return
      */
     MovementRepository movements();
+    
+    NutritionalProfileRepository nutritionalProfiles();
 
     MealPlanRepository mealPlan();
 
