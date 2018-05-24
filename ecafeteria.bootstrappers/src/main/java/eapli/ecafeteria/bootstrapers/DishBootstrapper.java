@@ -34,6 +34,7 @@ public class DishBootstrapper implements Action {
         register(fish, TestDataConstants.DISH_NAME_LAGOSTA_SUADA, 230, 2, 24.99);
         register(meat, TestDataConstants.DISH_NAME_PICANHA, 375, 2, 4.99);
         register(meat, TestDataConstants.DISH_NAME_COSTELETA_A_SALSICHEIRO, 475, 2, 3.99);
+        register(meat, TestDataConstants.DISH_NAME_HAMBURGER, 400, 2, 3.99);
 
         return true;
     }
