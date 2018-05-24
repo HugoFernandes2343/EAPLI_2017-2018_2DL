@@ -124,4 +124,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public ComplaintRepository complaints() {   return new JpaComplaintRepository();    }
 
+    @Override
+    public eapli.ecafeteria.persistence.LotRepository lots() {
+        return new JpaLotRepository();
+    }
 }

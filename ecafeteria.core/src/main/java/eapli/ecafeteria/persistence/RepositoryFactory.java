@@ -112,6 +112,7 @@ public interface RepositoryFactory {
 
     CafeteriaShiftRepository cafeteriaShift();
 
+
     KitchenAlertsRepository KitchenAlertsRepository();
     
     MealRatingRepository ratings();
@@ -121,4 +122,7 @@ public interface RepositoryFactory {
      * @return
      */
     ComplaintRepository complaints();
+    
+     
+     LotRepository lots();
 }

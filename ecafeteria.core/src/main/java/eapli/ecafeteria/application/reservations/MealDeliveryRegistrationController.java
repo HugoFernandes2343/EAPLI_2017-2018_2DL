@@ -34,7 +34,7 @@ public class MealDeliveryRegistrationController implements Controller{
      */
     public Reservation acquireReservation(String code) throws DataConcurrencyException, DataIntegrityViolationException{
         
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
         
         if (code == null) {
             throw new IllegalArgumentException();

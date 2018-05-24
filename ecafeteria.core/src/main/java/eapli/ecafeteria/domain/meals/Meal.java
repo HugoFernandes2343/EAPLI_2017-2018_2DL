@@ -7,9 +7,12 @@ package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +23,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 
 /**
  * Meal class
@@ -50,7 +56,12 @@ public class Meal implements Serializable, AggregateRoot<Long>{
     private MealType mealType;
     @Temporal(TemporalType.DATE)
     private Calendar date;
-
+    
+    @ElementCollection
+    @CollectionTable(name = "Used_Lot")
+    @Column(name = "Lot")
+    private List<Lot> lotList;
+    
     private int mealNumber = 0;
 
     protected Meal() {
@@ -58,6 +69,7 @@ public class Meal implements Serializable, AggregateRoot<Long>{
     }
 
     public Meal(Dish dish, MealType mealType, Calendar date, Menu menu) {
+        this.lotList=new ArrayList<>();
         this.menu = menu;
         this.dish = dish;
         this.mealType = mealType;
@@ -159,5 +171,12 @@ public class Meal implements Serializable, AggregateRoot<Long>{
 
     public boolean isDinner() {
         return this.mealType.isOf(MealType.MealTypes.DINNER);
+    }
+    
+    public void registerLot(Lot lot){
+        if(lotList.contains(lot)){
+            throw new IllegalArgumentException();
+        }
+        lotList.add(lot);
     }
 }

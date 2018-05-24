@@ -29,7 +29,7 @@
     <class>eapli.ecafeteria.domain.kitchen.KitchenAlerts</class>
     <class>eapli.ecafeteria.domain.ratings.MealRating</class>
     <class>eapli.ecafeteria.domain.complaints.Complaint</class>
-
+    <class>eapli.ecafeteria.domain.kitchen.Lot</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--

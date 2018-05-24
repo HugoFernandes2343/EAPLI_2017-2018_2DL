@@ -37,4 +37,11 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         return q.getResultList();
     }
 
+    @Override
+    public Iterable<Meal> findMealByDate(Calendar d) {
+       final Query q = entityManager().createQuery("SELECT m FROM Meal m WHERE m.date=:dt", this.entityClass);
+        q.setParameter("dt", d);
+        return q.getResultList();
+    }
+
 }
