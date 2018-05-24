@@ -10,7 +10,7 @@ import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
- * @author hugod
+ * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
  */
 public interface CafeteriaShiftRepository extends DataRepository<CafeteriaShift,Long> {
     

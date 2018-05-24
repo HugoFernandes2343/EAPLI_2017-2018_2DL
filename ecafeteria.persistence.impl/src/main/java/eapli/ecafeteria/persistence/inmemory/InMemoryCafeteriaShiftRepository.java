@@ -7,16 +7,14 @@ package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShift;
 import eapli.ecafeteria.persistence.CafeteriaShiftRepository;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
-import java.util.Optional;
+import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
 
 /**
  *
- * @author hugod
+ * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
  */
-public class InMemoryCafeteriaShiftRepository extends InMemoryRepository<CafeteriaShift,Long> implements CafeteriaShiftRepository{
+public class InMemoryCafeteriaShiftRepository extends  InMemoryRepositoryWithLongPK<CafeteriaShift> implements CafeteriaShiftRepository{
 
     @Override
     protected Long newKeyFor(CafeteriaShift entity) {
@@ -25,7 +23,7 @@ public class InMemoryCafeteriaShiftRepository extends InMemoryRepository<Cafeter
 
     @Override
     public CafeteriaShift findCafeteriaShift() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return first();
     }
     
     

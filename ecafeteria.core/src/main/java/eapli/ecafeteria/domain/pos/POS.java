@@ -75,6 +75,8 @@ public class POS implements AggregateRoot<Long>, Serializable {
         return posID;
     }
        
-
+    public String state(){
+        return currentState.toString();
+    }
 
 }
