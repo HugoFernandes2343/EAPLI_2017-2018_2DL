@@ -52,7 +52,7 @@ import eapli.framework.presentation.console.VerticalSeparator;
  *
  * @author Paulo Gandra Sousa
  */
-public class MainMenu extends AbstractUI {
+public class MainMenu extends KitchenAlertUI{
 
     private static final int EXIT_OPTION = 0;
 
