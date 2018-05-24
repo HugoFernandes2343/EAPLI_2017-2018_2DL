@@ -17,8 +17,7 @@ public class JPACafeteriaShiftRepository extends CafeteriaJpaRepositoryBase<Cafe
 
     @Override
     public CafeteriaShift findCafeteriaShift() {
-        Query createQuery = entityManager().createQuery("SELECT cf FROM CafeteriaShift cf WHERE cf.id=:num",this.entityClass);
-        createQuery.setParameter("num", (long) 1);
+        Query createQuery = entityManager().createQuery("SELECT cf FROM CafeteriaShift cf",this.entityClass);
         return (CafeteriaShift) createQuery.getSingleResult();
 
     }
