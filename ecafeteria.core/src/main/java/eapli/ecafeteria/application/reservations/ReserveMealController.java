@@ -39,20 +39,26 @@ public class ReserveMealController implements Controller {
     private final ListMenuService listMenuService = new ListMenuService();
     private final ListMovementService listMovementService = new ListMovementService();
     private final CafeteriaUserService userService = new CafeteriaUserService();
+    
+    private MovementBuilder movementBuilder = new MovementBuilder();
 
     public Menu getMenu(Date date) {
         return listMenuService.listMenuBooking(date);
     }
 
+    public MovementBuilder getMVB() {
+        return movementBuilder;
+    }
+    
     public Reservation reserveMeal(Meal meal) {
         Reservation reservationAdded = null;
         Optional<CafeteriaUser> user = userService.findCafeteriaUserByUsername(AuthorizationService.session().authenticatedUser().id());
         if (meal.dish().currentPrice().amount() <= (listMovementService.calculateBalance(user.get()).amount())) {
             String code = DateTime.format(DateTime.dateToCalendar(meal.date().getTime())) + "//" + meal.mealNumber();
             Reservation reservation = new Reservation(code, meal, user.get());
-            final MovementBuilder movementBuilder = new MovementBuilder();
             movementBuilder.withCafeteriaUser(user.get()).withDescriptionAndMoney(MovementDescription.BOOKING, Money.euros(meal.dish().currentPrice().negate().amount()));
             Booking mov = (Booking) movementBuilder.build();
+            
             try {
                 reservationAdded = addReservation(reservation);
                 movementRepo.addBookingMovement(mov);

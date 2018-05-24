@@ -10,6 +10,7 @@ import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.reservations.ReserveMealController;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
+import eapli.ecafeteria.domain.movement.MovementBuilder;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
@@ -51,6 +52,11 @@ public class ReserveMealUI extends CafeteriaUserBaseUI {
 
         final String confirm = Console.readLine(meal.toString() + "\nDo you confirm the information?(Type 1 for yes, 0 for no)");
         if (confirm.equals("1")) {
+            /*Observer and Observable use*/
+            MovementBuilder temp = theController.getMVB();
+            super.defineObservable(temp);
+            super.defineObserver(temp);
+            /*-----*/
             Reservation reservation = theController.reserveMeal(meal);
             if (reservation != null) {
                 Console.readLine("\nSuccess! Your Reservation code is " + reservation.id());

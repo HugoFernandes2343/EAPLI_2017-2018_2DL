@@ -112,6 +112,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
        return new JpaKitchenAlertRepository();
     }
 
+    @Override
     public MealRatingRepository ratings() {
         return new JpaMealRatingRepository();
     }
