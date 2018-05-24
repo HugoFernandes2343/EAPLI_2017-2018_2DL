@@ -26,8 +26,4 @@ public class InMemoryLotRepository extends InMemoryRepository<Lot, String> imple
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Meal> getMealsUsed(Lot lot) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

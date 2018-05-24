@@ -5,11 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -25,5 +27,7 @@ public interface MealRepository extends DataRepository<Meal, Long> {
 //    Iterable<Meal> findRatingsByMeal(Meal meal);
 
     Iterable<Meal> findMealByDate(Calendar d);
+
+    public List<Meal> getMealsUsed(Lot lot);
 
 }

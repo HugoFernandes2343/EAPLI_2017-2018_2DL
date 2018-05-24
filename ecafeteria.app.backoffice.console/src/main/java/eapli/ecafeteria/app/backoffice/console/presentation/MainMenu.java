@@ -27,15 +27,8 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.Rep
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportHighCaloriesDishesUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CheckExistingReservationsAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CloseMealPlanAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.EditMealPlanAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.PublishMealAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.*;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.ConsultMealRatingAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterUsedLotAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.CopyMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
@@ -127,6 +120,7 @@ public class MainMenu extends AbstractUI {
     private static final int CREATE_MEAL_PLAN = 1;
     private static final int EDIT_MEAL_PLAN = 2;
     private static final int CLOSE_MEAL_PLAN = 3;
+    private static final int TESTE = 4;
 
     @Override
     public boolean show() {
@@ -306,6 +300,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(CREATE_MEAL_PLAN, "Create meal plan", new CreateMealPlanAction()));
         menu.add(new MenuItem(EDIT_MEAL_PLAN, "Edit meal plan", new EditMealPlanAction()));
         menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
+        menu.add(new MenuItem(TESTE, "Teste", new ListMealsByLotAction()));
         return menu;
     }
 

@@ -17,6 +17,5 @@ import java.util.List;
  */
 public interface LotRepository extends DataRepository<Lot, String>{
 
-        List<Meal> getMealsUsed(Lot lot);
 
 }

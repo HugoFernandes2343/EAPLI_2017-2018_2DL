@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.inmemory;
 
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.meals.Meal;
 
 import eapli.ecafeteria.domain.meals.MealType;
@@ -13,6 +14,7 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
 import java.util.ArrayList;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -59,6 +61,11 @@ public class InMemoryMealRepository extends InMemoryRepositoryWithLongPK<Meal> i
 
     @Override
     public Iterable<Meal> findMealByDate(Calendar d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Meal> getMealsUsed(Lot lot) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
