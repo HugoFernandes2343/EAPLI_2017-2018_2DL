@@ -1,26 +1,23 @@
 package eapli.ecafeteria.app.user.console.presentation.authz;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import eapli.ecafeteria.application.cafeteriauser.SignupController;
-import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
 /**
  *
  * @author Jorge Santos ajs@isep.ipp.pt
  */
-public class SignupRequestUI extends AbstractUI {
+public class SignupRequestUI extends CafeteriaUserBaseUI {
 
     private final SignupController theController = new SignupController();
 
-    protected Controller controller() {
-        return this.theController;
-    }
 
     @Override
     protected boolean doShow() {
@@ -43,7 +40,8 @@ public class SignupRequestUI extends AbstractUI {
     }
 
     @Override
-    public String headline() {
-        return "Sign Up";
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
+
 }

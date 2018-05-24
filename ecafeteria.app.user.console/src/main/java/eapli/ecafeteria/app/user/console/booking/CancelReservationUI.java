@@ -5,13 +5,14 @@
  */
 package eapli.ecafeteria.app.user.console.booking;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.reservations.CancelReservationController;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.domain.ReservationStateViolationException;
 import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
 
@@ -19,7 +20,7 @@ import eapli.framework.util.Console;
  *
  * @author 1161569
  */
-public class CancelReservationUI extends AbstractUI{
+public class CancelReservationUI extends CafeteriaUserBaseUI{
 
     private final CancelReservationController theController = new CancelReservationController();
     
@@ -44,8 +45,9 @@ public class CancelReservationUI extends AbstractUI{
     }
 
     @Override
-    public String headline() {
-        return ("Cancel Reservation"); 
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
+
     
 }
