@@ -20,23 +20,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Cerqueira
  */
-public class CloseMealPlanUI extends AbstractUI{
-    
+public class CloseMealPlanUI extends AbstractUI {
+
     private CloseMealPlanController controller = new CloseMealPlanController();
 
     @Override
     protected boolean doShow() {
-        boolean validar;
 
-        List<MealPlan> lmp = (List) controller.getMealPlans();
+        List<MealPlan> lmp = (List) controller.getMealPlansInProgress();
 
         if (lmp.isEmpty()) {
-            System.out.println("There are no open menuPlans");
+            System.out.println("There are no open meal plans");
         } else {
 
             for (int i = 0; i < lmp.size(); i++) {
@@ -45,38 +43,30 @@ public class CloseMealPlanUI extends AbstractUI{
 
             int y;
             do {
-                y = Console.readInteger("Choose the menuPlan you want to close:");
+                y = Console.readInteger("Choose the meal plan that you want to close:");
             } while (y < 0 || y > lmp.size());
 
             MealPlan mp = lmp.get(y - 1);
 
-            validar = controller.validateMealPlan(mp);
-            
-            if (validar == false) {
-                System.out.println("It was not possible to close the menu plan.");
-            } else {
-                
-                    controller.changeStatus(mp);
-                try {
-                    
-                    controller.saveMealPlan(mp);
+            controller.closeMealPlan(mp);
+            try {
 
-                } catch (DataConcurrencyException ex) {
-                    Logger.getLogger(CloseMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (DataIntegrityViolationException ex) {
-                    Logger.getLogger(CloseMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                System.out.println("The menu plan was closed successfully. ");
+                controller.saveMealPlan(mp);
+
+            } catch (DataConcurrencyException ex) {
+                Logger.getLogger(CloseMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DataIntegrityViolationException ex) {
+                Logger.getLogger(CloseMealPlanUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            System.out.println("The meal plan was closed successfully.");
         }
+
         return true;
     }
 
     @Override
     public String headline() {
-        return "Close the menu plan for this week's menu.";
+        return "Close Meal Plan.";
     }
-
 
 }

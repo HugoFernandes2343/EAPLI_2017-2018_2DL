@@ -8,6 +8,7 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.ecafeteria.application.menu.ListMenuService;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import eapli.ecafeteria.domain.kitchen.MealPlanState;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.persistence.MealPlanRepository;

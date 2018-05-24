@@ -24,10 +24,10 @@ public class JpaMealPlanRepository extends CafeteriaJpaRepositoryBase<MealPlan, 
     @Override
     public Iterable<MealPlan> findAllMealPlanInProgress() {
         final Query q;
-        String where = "e.mealPlanState=:mealPlanState";
-        q = entityManager().createQuery("SELECT e FROM MealPlan e WHERE " + where, this.entityClass);
-        q.setParameter("mealPlanState", MealPlanState.IN_PROGRESS);
+        q = entityManager().createQuery("SELECT e FROM MealPlan e WHERE e.mealPlanState=:state");
+        q.setParameter("state", MealPlanState.IN_PROGRESS);
         return q.getResultList();
+
     }
 
     @Override

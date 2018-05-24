@@ -39,6 +39,9 @@ public class RegisterMenuController implements Controller{
         
         Application.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
         
+        if (menuRepository.findMenuBetweenDates(startDate, finishDate).iterator().hasNext()){
+            throw new IllegalArgumentException("Já existe um menu com as datas sobrepostas às datas do menu que está a tentar criar");
+        }  
          
         menu = new Menu(startDate, finishDate, name);
 
