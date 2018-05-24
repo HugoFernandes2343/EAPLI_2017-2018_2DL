@@ -6,6 +6,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.ratings.MealRating;
+import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.MealRatingRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 
@@ -17,6 +18,11 @@ public class InMemoryMealRatingRepository extends InMemoryRepository<MealRating,
 
     @Override
     protected Long newKeyFor(MealRating entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<MealRating> findRatingsByMeal(Reservation reservation) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
