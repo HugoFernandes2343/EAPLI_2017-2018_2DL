@@ -105,4 +105,11 @@ public class JpaReservationRepository extends CafeteriaJpaRepositoryBase<Reserva
         return createQuery.getResultList();
     }     
 
+    @Override
+    public Iterable<Reservation> findByMeal(Meal meal) {
+        Query q = entityManager().createQuery("SELECT r FROM Reservation r WHERE r.meal=:me_pk");
+        q.setParameter("me_pk", meal);
+        return q.getResultList();
+    }
+
 }

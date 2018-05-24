@@ -114,4 +114,9 @@ public class InMemoryReservationRepository extends InMemoryRepositoryWithLongPK<
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Iterable<Reservation> findByMeal(Meal m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

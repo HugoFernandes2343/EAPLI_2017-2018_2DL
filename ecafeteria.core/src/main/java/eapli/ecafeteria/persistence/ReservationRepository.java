@@ -41,6 +41,8 @@ public interface ReservationRepository extends DataRepository<Reservation, Long>
      * @return
      */
     Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m);
+    
+    Iterable<Reservation> findByMeal(Meal m);
 
     /**
      * Finds all Reservations pertaining to a specific "date" for given "dishType", "dish" and "mealType"

@@ -44,12 +44,12 @@ public class ConsultMealRatingUI extends AbstractUI { // POR ACABAR
         Comment com;
         Score score;
         System.out.println(headline() + "\n\n");
-        List<Reservation> reserv = (List<Reservation>) cmrc.allReservations();
+        List<Reservation> reserv = (List<Reservation>) cmrc.allMealsOfReservations();
         if (reserv.isEmpty()) {
-            System.out.println("No reservations available at the moment.");
+            System.out.println("No reservations of meals available at the moment.");
             return false;
         } else {
-            SelectWidget<Reservation> reservChooser = new SelectWidget<>("Reservations", reserv);
+            SelectWidget<Reservation> reservChooser = new SelectWidget<>("RESERVATIONS OF MEALS", reserv);
             reservChooser.show();
             Reservation choosenReserv = reservChooser.selectedElement();
             
