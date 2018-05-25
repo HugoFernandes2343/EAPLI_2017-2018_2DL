@@ -16,4 +16,6 @@ import eapli.framework.persistence.repositories.DataRepository;
 public interface POSRepository extends DataRepository<POS, Long>{
     
      public Iterable<POS> findByState(POSState state);
+     
+      public POS saveWithDelete(POS p);
 }

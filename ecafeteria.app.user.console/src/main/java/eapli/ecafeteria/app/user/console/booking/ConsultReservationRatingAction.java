@@ -1,4 +1,4 @@
-package eapli.ecafeteria.app.backoffice.console.presentation.menu;
+package eapli.ecafeteria.app.user.console.booking;
 
 import eapli.framework.actions.Action;
 

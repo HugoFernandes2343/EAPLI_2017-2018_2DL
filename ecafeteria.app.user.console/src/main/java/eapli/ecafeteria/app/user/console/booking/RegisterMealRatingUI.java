@@ -5,13 +5,14 @@
  */
 package eapli.ecafeteria.app.user.console.booking;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.meal.RegisterMealRatingController;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,13 +22,9 @@ import java.util.logging.Logger;
  *
  * @author Andre Rodrigues <1151136@isep.ipp.pt>
  */
-public class RegisterMealRatingUI extends AbstractUI {
+public class RegisterMealRatingUI extends CafeteriaUserBaseUI {
 
     private final RegisterMealRatingController rmrController = new RegisterMealRatingController();
-
-    protected Controller controller() {
-        return this.rmrController;
-    }
 
     @Override
     protected boolean doShow() {
@@ -70,8 +67,8 @@ public class RegisterMealRatingUI extends AbstractUI {
     }
 
     @Override
-    public String headline() {
-        return ("Register Meal Rating");
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
 
 }

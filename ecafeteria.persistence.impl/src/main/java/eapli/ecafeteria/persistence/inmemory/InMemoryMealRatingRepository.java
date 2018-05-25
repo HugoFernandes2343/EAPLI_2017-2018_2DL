@@ -21,9 +21,10 @@ public class InMemoryMealRatingRepository extends InMemoryRepository<MealRating,
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
     @Override
-    public MealRating findRatingByReservation(Reservation res) {
+    public Iterable<MealRating> findRatingsByMeal(Reservation reservation) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 }

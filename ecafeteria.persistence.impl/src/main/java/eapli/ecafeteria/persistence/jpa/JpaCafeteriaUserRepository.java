@@ -5,11 +5,15 @@ import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,4 +48,17 @@ class JpaCafeteriaUserRepository extends JpaAutoTxRepository<CafeteriaUser, Meca
     public Iterable<CafeteriaUser> findAllActive() {
         return match("e.systemUser.active = true");
     }
+
+    @Override
+    public void updateUser(CafeteriaUser user) {
+        try {
+            save(user);
+        } catch (DataConcurrencyException ex) {
+            System.out.println ("Failed to update User - DataConcurrencyException occurred, please retry later.");
+        } catch (DataIntegrityViolationException ex) {
+            System.out.println ("Failed to update User - DataIntegrityViolationException occurred, please retry later.");
+        }
+    }
+    
+    
 }

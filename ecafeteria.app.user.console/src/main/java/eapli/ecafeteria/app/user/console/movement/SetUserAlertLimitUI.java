@@ -5,11 +5,11 @@
  */
 package eapli.ecafeteria.app.user.console.movement;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.cafeteriauser.SetUserAlertLimitController;
-import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,13 +18,10 @@ import java.util.logging.Logger;
  *
  * @author João Vieira
  */
-public class SetUserAlertLimitUI extends AbstractUI {
+public class SetUserAlertLimitUI extends CafeteriaUserBaseUI {
 
     private final SetUserAlertLimitController theController = new SetUserAlertLimitController();
 
-    protected Controller controller() {
-        return this.theController;
-    }
 
     @Override
     protected boolean doShow() {
@@ -43,8 +40,9 @@ public class SetUserAlertLimitUI extends AbstractUI {
     }
 
     @Override
-    public String headline() {
-        return "Alert Limit";
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
+
 
 }

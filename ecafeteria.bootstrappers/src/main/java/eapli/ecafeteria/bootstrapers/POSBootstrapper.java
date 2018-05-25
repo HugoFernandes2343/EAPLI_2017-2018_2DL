@@ -31,11 +31,11 @@ public class POSBootstrapper implements Action {
         
         try {
             pos1 = new POS(1);
-            pos1.close();
+          //  pos1.close();
             pos2 = new POS(2);
             pos2.close();
             pos3 = new POS(3);
-            pos3.close();
+          //  pos3.close();
             pos4 = new POS(4);
             pos4.close();
         } catch (POSStateViolationException ex) {

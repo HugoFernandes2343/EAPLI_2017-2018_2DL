@@ -8,11 +8,13 @@ package eapli.ecafeteria.domain.allergens;
 import java.io.Serializable;
 import java.util.Arrays;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  *
  * @author João Silva
  */
+//@Embeddable
 public enum Allergen implements Serializable {
 
     @Column(name = "Allergen")

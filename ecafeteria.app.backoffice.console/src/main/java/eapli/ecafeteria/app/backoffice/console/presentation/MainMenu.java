@@ -8,6 +8,7 @@ package eapli.ecafeteria.app.backoffice.console.presentation;
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
+import eapli.ecafeteria.app.backoffice.console.presentation.authz.AlertManagementAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
@@ -32,13 +33,11 @@ import eapli.ecafeteria.app.backoffice.console.presentation.menu.*;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.Menu;
 import eapli.framework.presentation.console.MenuItem;
 import eapli.framework.presentation.console.MenuRenderer;
-import eapli.framework.presentation.console.ShowMessageAction;
 import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
@@ -49,7 +48,7 @@ import eapli.framework.presentation.console.VerticalSeparator;
  *
  * @author Paulo Gandra Sousa
  */
-public class MainMenu extends AbstractUI {
+public class MainMenu extends KitchenAlertUI{
 
     private static final int EXIT_OPTION = 0;
 
@@ -88,6 +87,8 @@ public class MainMenu extends AbstractUI {
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
     private static final int ELABORATE_MEAL_PLAN_OPTION = 3;
+    private static final int FIND_MEALS_BY_LOT_OPTION = 4;
+
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -215,7 +216,7 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Settings >");
 
         menu.add(new MenuItem(SET_KITCHEN_ALERT_LIMIT_OPTION, "Set kitchen alert limit",
-                new ShowMessageAction("Not implemented yet")));
+                new AlertManagementAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
@@ -287,7 +288,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(MATERIAL_LIST_OPTION, "List all materials", new ListMaterialAction()));
         final Menu elaborateMealPlan = buildElaborateMealPlanMenu();
         menu.add(new SubMenu(ELABORATE_MEAL_PLAN_OPTION, elaborateMealPlan, new ShowVerticalSubMenuAction(buildElaborateMealPlanMenu())));
-       // menu.add(new MenuItem(FIND_MEALS_BY_LOT_OPTION, "Find Meals by Lot", new ))
+       menu.add(new MenuItem(FIND_MEALS_BY_LOT_OPTION, "Find Meals by Lot", new ListMealsByLotAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
@@ -299,8 +300,6 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(CREATE_MEAL_PLAN, "Create meal plan", new CreateMealPlanAction()));
         menu.add(new MenuItem(EDIT_MEAL_PLAN, "Edit meal plan", new EditMealPlanAction()));
         menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
-        menu.add(new MenuItem(TESTE, "Teste", new ListMealsByLotAction()));
-        menu.add(new MenuItem(TESTE2, "Teste2", new ConsultReservationRatingAction()));
         return menu;
     }
 
@@ -341,8 +340,8 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu", new PublishMenuAction()));
         menu.add(new MenuItem(COPY_MENU_OPTION, "Copy Menu", new CopyMenuAction()));
         menu.add(new MenuItem(PUBLISH_MEAL_OPTION, "Publish Meal", new PublishMealAction()));
-        menu.add(new MenuItem(CONSULT_MEALS_RATING, "Consult Meals Ratings", new ConsultMealRatingAction()));
         menu.add(new MenuItem(REGISTER_USED_LOT_OPTION, "Register Used Lot", new RegisterUsedLotAction()));
+        menu.add(new MenuItem(CONSULT_MEALS_RATING, "Consult meals rating", new ConsultMealRatingAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

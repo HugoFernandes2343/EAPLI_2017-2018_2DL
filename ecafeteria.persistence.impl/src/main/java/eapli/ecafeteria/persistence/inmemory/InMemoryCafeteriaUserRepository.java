@@ -11,8 +11,7 @@ import java.util.Optional;
  *
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
-public class InMemoryCafeteriaUserRepository extends InMemoryRepository<CafeteriaUser, MecanographicNumber>
-        implements CafeteriaUserRepository {
+public class InMemoryCafeteriaUserRepository extends InMemoryRepository<CafeteriaUser, MecanographicNumber> implements CafeteriaUserRepository {
 
     @Override
     protected MecanographicNumber newKeyFor(CafeteriaUser u) {
@@ -33,4 +32,11 @@ public class InMemoryCafeteriaUserRepository extends InMemoryRepository<Cafeteri
     public Iterable<CafeteriaUser> findAllActive() {
         return match(e -> e.user().isActive());
     }
+
+    @Override
+    public void updateUser(CafeteriaUser user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

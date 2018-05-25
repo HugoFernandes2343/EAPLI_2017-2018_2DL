@@ -51,6 +51,11 @@ public class MealType implements ValueObject, Serializable {
         mealType = MealTypes.DINNER.toString();
     }
 
+    @Override
+    public String toString() {
+        return "MealType{" + "mealType=" + mealType + '}';
+    }
+
 
     /**
      * It checks if the meal type (enum) is the same as this meal type.

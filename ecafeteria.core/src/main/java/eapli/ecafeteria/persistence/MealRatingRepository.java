@@ -17,6 +17,6 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface MealRatingRepository extends DataRepository<MealRating,Long>{
 
-    public MealRating findRatingByReservation(Reservation res);
+    Iterable<MealRating> findRatingsByMeal(Reservation reservation);
 }
 

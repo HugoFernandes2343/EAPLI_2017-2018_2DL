@@ -21,6 +21,8 @@ import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
 import eapli.ecafeteria.app.user.console.presentation.consultMenu.ConsultMenuAction;
+import eapli.ecafeteria.app.user.console.presentation.profile.EditAllergensAction;
+import eapli.ecafeteria.app.user.console.presentation.profile.EditNutritionalProfileAction;
 
 /**
  * @author Paulo Gandra Sousa
@@ -36,12 +38,14 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int COMPLAINT_OPTION = 4;
     private static final int RATINGS_AND_CALORIES_OPTION = 5;
     private static final int SETTINGS_OPTION = 6;
-
+    private static final int MY_PROFILE_OPTION = 7;
+    
     // BOOKINGS MENU
     private static final int BOOK_A_MEAL_OPTION = 1;
     private static final int CONSULT_RESERVATIONS = 3;
     private static final int CONSULT_MENU = 4;
     private static final int CANCEL_RESERVATION_OPTION = 5;
+    private static final int CONSULT_MEALS_RATING = 6;
 
     //RESERVATIONS SUB_MENU
     private static final int CONSULT_NEXT_RESERVATION = 1;
@@ -60,6 +64,10 @@ class MainMenu extends CafeteriaUserBaseUI {
     // SETTINGS
     private static final int SET_USER_ALERT_LIMIT_OPTION = 1;
 
+    // MY PROFILE
+    private static final int EDIT_NUTRITIONAL_PROFILE = 1;
+    private static final int EDIT_ALLERGENS = 2;
+    
     @Override
     public boolean show() {
         drawFormTitle();
@@ -108,6 +116,11 @@ class MainMenu extends CafeteriaUserBaseUI {
         mainMenu.add(new SubMenu(SETTINGS_OPTION, settingsMenu, new ShowVerticalSubMenuAction(settingsMenu)));
 
         mainMenu.add(VerticalSeparator.separator());
+        
+        final Menu myProfileMenu = buildMyProfileMenu();
+        mainMenu.add(new SubMenu(MY_PROFILE_OPTION, myProfileMenu, new ShowVerticalSubMenuAction(myProfileMenu)));
+        
+        mainMenu.add(VerticalSeparator.separator());
 
         mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
@@ -138,6 +151,7 @@ class MainMenu extends CafeteriaUserBaseUI {
         menu.add(new SubMenu(CONSULT_RESERVATIONS, menuConsult, new ShowVerticalSubMenuAction(buildConsultReservationsMenu())));
         menu.add(new MenuItem(CONSULT_MENU, "Consult menu", new ConsultMenuAction()));
         menu.add(new MenuItem(CANCEL_RESERVATION_OPTION, "Cancel Reservation", new CancelReservationAction()));
+        menu.add(new MenuItem(CONSULT_MEALS_RATING, "Consult Meals Ratings", new ConsultReservationRatingAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }
@@ -190,6 +204,18 @@ class MainMenu extends CafeteriaUserBaseUI {
         return menu;
     }
 
+    private Menu buildMyProfileMenu() {
+        final Menu menu = new Menu("My Profile >");
+
+        menu.add(new MenuItem(EDIT_NUTRITIONAL_PROFILE, "Edit Nutritional Profile",
+                new EditNutritionalProfileAction()));
+        menu.add(new MenuItem(EDIT_ALLERGENS, "Edit Allergens",
+                new EditAllergensAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
+        return menu;
+    }
+    
     @Override
     protected CafeteriaUserBaseController controller() {
         return new CafeteriaUserBaseController();

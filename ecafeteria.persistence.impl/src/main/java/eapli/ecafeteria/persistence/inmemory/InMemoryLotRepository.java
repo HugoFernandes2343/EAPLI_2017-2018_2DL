@@ -23,7 +23,7 @@ public class InMemoryLotRepository extends InMemoryRepository<Lot, String> imple
 
     @Override
     protected String newKeyFor(Lot entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entity.id();
     }
 
 }

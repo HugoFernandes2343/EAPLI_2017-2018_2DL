@@ -1,11 +1,9 @@
-package eapli.ecafeteria.app.backoffice.console.presentation.menu;
+package eapli.ecafeteria.app.user.console.booking;
 
 import eapli.ecafeteria.application.reservations.ConsultReservationRatingController;
 import eapli.ecafeteria.domain.ratings.MealRating;
-import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.util.Console;
 
 import java.util.List;
 

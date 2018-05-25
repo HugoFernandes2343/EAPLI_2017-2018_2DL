@@ -37,10 +37,19 @@ public class InMemoryMealPlanItemRepository extends InMemoryRepositoryWithLongPK
     }
 
     @Override
-    public Iterable<MealPlanItem> findByMeal(Meal m) {
-        ArrayList<MealPlanItem> ret = new ArrayList<>(1);
-        ret = (ArrayList<MealPlanItem>) match(mpi -> mpi.checkMeal(m)); 
-        return ret;
+    public MealPlanItem findByMeal(Meal m) {
+        
+        Optional<MealPlanItem> mpitem = matchOne(mpi -> mpi.checkMeal(m));
+
+        if (mpitem.isPresent()) {
+            MealPlanItem ret = mpitem.get();
+            return ret;
+        } else {
+            return null;
+        }
+     //   ArrayList<MealPlanItem> ret = new ArrayList<>(1);
+       // ret = (ArrayList<MealPlanItem>) match(mpi -> mpi.checkMeal(m)); 
+        //return ret;
     }
 
     @Override
@@ -55,6 +64,11 @@ public class InMemoryMealPlanItemRepository extends InMemoryRepositoryWithLongPK
 
     @Override
     public long count() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<MealPlanItem> findMealsFromMealPlanItem(Meal m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

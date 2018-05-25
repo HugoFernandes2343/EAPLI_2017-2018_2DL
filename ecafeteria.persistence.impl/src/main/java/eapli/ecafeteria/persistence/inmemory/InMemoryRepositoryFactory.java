@@ -43,6 +43,12 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
+    public NutritionalProfileRepository nutritionalProfiles() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    @Override
     public SignupRequestRepository signupRequests() {
         return signupRequests(null);
     }
@@ -78,7 +84,9 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
         return new InMemoryReservationRepository();
     }
 
-    public ComplaintRepository complaints() {   return new InMemoryComplaintRepository();   }
+    public ComplaintRepository complaints() {
+        return new InMemoryComplaintRepository();
+    }
 
     public MovementRepository movements() {
         return new InMemoryMovementRepository();
@@ -86,12 +94,12 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
     @Override
     public POSRepository pos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new InMemoryPOSRepository();
     }
 
     @Override
     public MealRepository meals() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new InMemoryMealRepository();
     }
 
     @Override
@@ -101,36 +109,36 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
     @Override
     public MealPlanRepository mealPlan() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new InMemoryMealPlanRepository();
     }
 
     @Override
     public CafeteriaShiftRepository cafeteriaShift() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    
+        return new InMemoryCafeteriaShiftRepository();
     }
+
     @Override
     public MealPlanItemRepository mealPlanItemRepository() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new InMemoryMealPlanItemRepository();
     }
 
     @Override
     public KitchenAlertsRepository KitchenAlertsRepository() {
-       return new InMemoryKitchenAlertRepository();
+        return new InMemoryKitchenAlertRepository();
     }
 
     @Override
     public MealRatingRepository ratings() {
         return new InMemoryMealRatingRepository();
     }
-    
+
     @Override
     public AccountCardRepository accounts() {
         return new InMemoryAccountCardRepository();
     }
 
     @Override
-    public LotRepository lots(){
+    public LotRepository lots() {
         return new InMemoryLotRepository();
 
     }
