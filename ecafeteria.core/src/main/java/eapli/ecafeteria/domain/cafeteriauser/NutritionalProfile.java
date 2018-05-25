@@ -45,10 +45,10 @@ public class NutritionalProfile implements ValueObject, Serializable {
     }
 
     protected NutritionalProfile() {
-        buildDefaultFields();
+        buildDefaultProfile();
     }
 
-    private void buildDefaultFields(){
+    private void buildDefaultProfile(){
         fields = new ArrayList<NutritionalProfileField>();
         allergens = new ArrayList<Allergen>(); 
         
@@ -61,6 +61,10 @@ public class NutritionalProfile implements ValueObject, Serializable {
     public List<NutritionalProfileField> getFields() {
         return fields;
     }    
+
+    public List<Allergen> getAllergens() {
+        return allergens;
+    }
     
     /**
      * 
@@ -79,6 +83,18 @@ public class NutritionalProfile implements ValueObject, Serializable {
             }
         }
         return false;
+    }
+    
+    public boolean addAllergen (Allergen newAllergen){
+        if (allergens.contains(newAllergen)){
+            return false;
+        }
+        allergens.add(newAllergen);
+        return true;
+    }
+    
+    public boolean removeAllergen (Allergen allergen){
+        return allergens.remove(allergen);
     }
     
     @Override

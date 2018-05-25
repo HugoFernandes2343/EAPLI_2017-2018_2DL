@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
+import eapli.ecafeteria.domain.allergens.Allergen;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
@@ -123,5 +124,11 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return nutritionalProfile.clone();
     }
     
+    public boolean addAllergen(Allergen newAllergen){
+        return nutritionalProfile.addAllergen(newAllergen);
+    }
     
+    public boolean removeAllergen (Allergen allergen){
+        return nutritionalProfile.removeAllergen(allergen);
+    }
 }

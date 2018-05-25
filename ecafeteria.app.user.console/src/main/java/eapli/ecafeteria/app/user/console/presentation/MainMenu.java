@@ -21,6 +21,7 @@ import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
 import eapli.ecafeteria.app.user.console.presentation.consultMenu.ConsultMenuAction;
+import eapli.ecafeteria.app.user.console.presentation.profile.EditAllergensAction;
 import eapli.ecafeteria.app.user.console.presentation.profile.EditNutritionalProfileAction;
 
 /**
@@ -64,6 +65,7 @@ class MainMenu extends CafeteriaUserBaseUI {
 
     // MY PROFILE
     private static final int EDIT_NUTRITIONAL_PROFILE = 1;
+    private static final int EDIT_ALLERGENS = 2;
     
     @Override
     public boolean show() {
@@ -205,6 +207,8 @@ class MainMenu extends CafeteriaUserBaseUI {
 
         menu.add(new MenuItem(EDIT_NUTRITIONAL_PROFILE, "Edit Nutritional Profile",
                 new EditNutritionalProfileAction()));
+        menu.add(new MenuItem(EDIT_ALLERGENS, "Edit Allergens",
+                new EditAllergensAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;

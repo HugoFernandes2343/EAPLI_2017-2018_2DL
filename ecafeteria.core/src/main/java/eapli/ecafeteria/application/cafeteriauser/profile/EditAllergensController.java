@@ -6,14 +6,9 @@
 package eapli.ecafeteria.application.cafeteriauser.profile;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
-import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserService;
-import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.allergens.Allergen;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
-import eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile;
-import eapli.ecafeteria.domain.cafeteriauser.NutritionalProfileField;
-import eapli.ecafeteria.persistence.NutritionalProfileRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import java.util.Optional;
 
@@ -21,7 +16,7 @@ import java.util.Optional;
  *
  * @author Rodrigo Soares <1140420@isep.ipp.pt>
  */
-public class EditNutritionalProfileController implements Controller{
+public class EditAllergensController implements Controller{
     private CafeteriaUserService userService;
     
     public CafeteriaUser findUser(){
@@ -31,9 +26,13 @@ public class EditNutritionalProfileController implements Controller{
         return user.get();
     }
     
-    public void updateNutritionalProfileField (CafeteriaUser user, NutritionalProfileField newField){
-        user.updateNutritionalProfileFieldValue(newField);
-        
+    public void addAllergen (CafeteriaUser user, Allergen newAllergen){
+        user.addAllergen(newAllergen);        
+        userService.updateUser(user);
+    }
+    
+    public void removeAllergen (CafeteriaUser user, Allergen allergen){
+        user.removeAllergen (allergen);        
         userService.updateUser(user);
     }
 }
