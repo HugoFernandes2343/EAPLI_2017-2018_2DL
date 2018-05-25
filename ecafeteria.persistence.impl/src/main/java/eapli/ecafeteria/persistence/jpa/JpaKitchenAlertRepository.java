@@ -19,19 +19,6 @@ public class JpaKitchenAlertRepository extends CafeteriaJpaRepositoryBase<Kitche
     @Override
     public Optional<KitchenAlerts> findByName(String name) {
         return matchOne("e.name=:name", "name", name);
-    }
-
-    @Override
-    public int getYellowValue() {
-        final Query q;
-        q = entityManager().createQuery("SELECT YellowAlert FROM KitchenAlerts");
-        return q.getFirstResult();
-    }
-
-    @Override
-    public int getRedValue() {
-        final Query q;
-        q = entityManager().createQuery("SELECT RedAlert FROM KitchenAlerts");
-        return q.getFirstResult();
-    }
+    }    
+    
 }

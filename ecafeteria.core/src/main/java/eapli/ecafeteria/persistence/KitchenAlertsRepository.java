@@ -15,10 +15,5 @@ import java.util.Optional;
  */
 public interface KitchenAlertsRepository extends DataRepository<KitchenAlerts, String> {
     
-    public Optional<KitchenAlerts> findByName(String name);
-
-    public int getYellowValue();
-    
-    public int getRedValue();
-    
+    public Optional<KitchenAlerts> findByName(String name);   
 }

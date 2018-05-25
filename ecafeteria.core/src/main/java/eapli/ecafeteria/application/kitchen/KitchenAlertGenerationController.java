@@ -21,11 +21,10 @@ public class KitchenAlertGenerationController {
     private int plannedQuantity;
     private int dangerValue;
     private Meal m;
+    private String name = "Kitchen Alerts";
 
     private final ReservationRepository reservationRepo = PersistenceContext.repositories().reservations();
     private final MealPlanItemRepository mealPlanItemRepo = PersistenceContext.repositories().mealPlanItemRepository();
-    private final ReservationRepository rRepo = PersistenceContext.repositories().reservations();
-    private final MealPlanItemRepository mpiRepo = PersistenceContext.repositories().mealPlanItemRepository();
     private final KitchenAlertsRepository kaRepo = PersistenceContext.repositories().KitchenAlertsRepository();
 
     public void setMeal(Meal m) {
@@ -34,13 +33,14 @@ public class KitchenAlertGenerationController {
 
     public void checkThreshold() {
 
-        //reservedQuantity = rRepo.findByID(m.id).count();
-        reservedQuantity = 3;
-        // plannedQuantity = mpiRepo.findByMeal(m).getDishQuantity();
-        plannedQuantity = 5;
+        reservedQuantity = this.getReservationsByMeal();
+        plannedQuantity = this.getPlannedQuantityFromMeal();
         this.dangerValue = this.reservedQuantity / this.plannedQuantity;
+        
+        int redAlert = kaRepo.findByName(name).get().redAlertValue();
+        int yellowAlert = kaRepo.findByName(name).get().yellowAlertValue();
 
-        if (this.dangerValue > kaRepo.getYellowValue() || this.dangerValue < kaRepo.getRedValue()) {
+        if (this.dangerValue > yellowAlert && this.dangerValue < redAlert) {
             System.out.println("*************************************************\n");
             System.out.println("***                                           ***\n");
             System.out.println("***                                           ***\n");
@@ -50,7 +50,7 @@ public class KitchenAlertGenerationController {
             System.out.println("***                                           ***\n");
             System.out.println("*************************************************\n");
 
-        } else if (this.dangerValue < kaRepo.getRedValue()) {
+        } else if (this.dangerValue < redAlert) {
 
             System.out.println("*************************************************\n");
             System.out.println("***                                           ***\n");
@@ -64,16 +64,16 @@ public class KitchenAlertGenerationController {
 
     }
 
-    public List<Reservation> getReservationfromMeal(Meal meal) {
+    private int getReservationsByMeal() {
         List<Reservation> listMeals;
-        listMeals = (List<Reservation>) reservationRepo.findReservationFromMeal(meal);
-        return listMeals;
+        listMeals = (List<Reservation>) reservationRepo.findReservationFromMeal(this.m);
+        return listMeals.size();
     }
 
-    public List<MealPlanItem> getQuantityFromMeal(Meal meal) {
-        List<MealPlanItem> listQuantity;
-        listQuantity = (List<MealPlanItem>) mealPlanItemRepo.findMealsFromMealPlanItem(meal);
-        return listQuantity;
+    private int getPlannedQuantityFromMeal() {
+        MealPlanItem mealPlanItem;
+        mealPlanItem = (MealPlanItem) mealPlanItemRepo.findMealsFromMealPlanItem(this.m);
+        return mealPlanItem.getDishQuantity();
     }
 
 }
