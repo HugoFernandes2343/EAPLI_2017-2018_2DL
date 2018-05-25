@@ -112,6 +112,8 @@ class MainMenu extends CafeteriaUserBaseUI {
         final Menu settingsMenu = buildAdminSettingsMenu();
         mainMenu.add(new SubMenu(SETTINGS_OPTION, settingsMenu, new ShowVerticalSubMenuAction(settingsMenu)));
 
+        mainMenu.add(VerticalSeparator.separator());
+        
         final Menu myProfileMenu = buildMyProfileMenu();
         mainMenu.add(new SubMenu(MY_PROFILE_OPTION, myProfileMenu, new ShowVerticalSubMenuAction(myProfileMenu)));
         
