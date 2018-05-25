@@ -27,6 +27,12 @@ public class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> impl
         return query.getResultList();
     }
 
+    /**
+     * THE DELETE PORTION IS ONLY IMPLEMENTED IN THE INMEMORY PERCISTENCE VERSION TO AVOID DUPLICATION,
+     * IN THE JPA VERSION SAVE() UPDATES THE OBJECT SO THE DELETE IS NOT NEEDED
+     * @param p
+     * @return
+     */
     @Override
     public POS saveWithDelete(POS p) {
         try {
