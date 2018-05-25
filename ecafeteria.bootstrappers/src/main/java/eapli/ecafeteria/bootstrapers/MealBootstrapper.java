@@ -50,7 +50,7 @@ public class MealBootstrapper implements Action {
         Dish dish1 = dishRepo.findByName(Designation.valueOf("Hamburger")).get();
         Dish dish2 = dishRepo.findByName(Designation.valueOf("picanha")).get();
         Dish dish3 = dishRepo.findByName(Designation.valueOf("tofu grelhado")).get();
-
+        
         Calendar tomorrow = DateTime.now();
         tomorrow.add(Calendar.DATE, 1);
         Menu menu1 = menuRepo.findByDate(tomorrow.getTime());

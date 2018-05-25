@@ -51,16 +51,20 @@ public class AcceptRefuseSignupRequestController implements Controller {
             throw new IllegalArgumentException();
         }
 
-        // explicitly begin a transaction
-        TxCtx.beginTransaction();
-
+        try {// explicitly begin a transaction
+            TxCtx.beginTransaction();
+        } catch (NullPointerException e) {
+        }
         final SystemUser newUser = createSystemUserForCafeteriaUser(theSignupRequest);
         createCafeteriaUser(theSignupRequest, newUser);
         theSignupRequest = acceptTheSignupRequest(theSignupRequest);
 
-        // explicitly commit the transaction
-        TxCtx.commit();
+        try {// explicitly begin a transaction
 
+            // explicitly commit the transaction
+            TxCtx.commit();
+        } catch (NullPointerException e) {
+        }
         return theSignupRequest;
     }
 

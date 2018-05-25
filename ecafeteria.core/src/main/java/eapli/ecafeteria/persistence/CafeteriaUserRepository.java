@@ -29,4 +29,6 @@ public interface CafeteriaUserRepository extends DataRepository<CafeteriaUser, M
     Optional<CafeteriaUser> findByMecanographicNumber(MecanographicNumber number);
 
     public Iterable<CafeteriaUser> findAllActive();
+    
+    void updateUser(CafeteriaUser user);
 }

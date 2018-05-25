@@ -22,7 +22,7 @@ public class ECafeteriaBootstrapper implements Action {
 
             new CafeteriaUserBootstrapper(), new DishBootstrapper(), new MaterialsBootstrapper(), new MenuBootstrapper(), new MealBootstrapper(),
             new KitchenBootstrapper(), new ReservationBootstrapper(), new CafeteriaShiftBootstrapper(), new POSBootstrapper(),
-            new LotsBootstrapper()};
+            new LotsBootstrapper(), new MealPanItemBootstrapper()};
 
 
         authenticateSuperUser();

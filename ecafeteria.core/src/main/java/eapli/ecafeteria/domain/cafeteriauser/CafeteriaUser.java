@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
+import eapli.ecafeteria.domain.allergens.Allergen;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
@@ -39,6 +40,9 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @OneToOne()
     private SystemUser systemUser;
 
+    //@OneToOne(cascade = CascadeType.ALL)
+    private NutritionalProfile nutritionalProfile;
+    
     public CafeteriaUser(SystemUser user, MecanographicNumber mecanographicNumber) {
         if (mecanographicNumber == null || user == null) {
             throw new IllegalArgumentException();
@@ -46,6 +50,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         this.systemUser = user;
         this.mecanographicNumber = mecanographicNumber;
         this.accountcard = new AccountCard(mecanographicNumber);
+        nutritionalProfile = new NutritionalProfile();
     }
 
     protected CafeteriaUser() {
@@ -101,10 +106,29 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return this.mecanographicNumber;
     }
 
+    public boolean updateNutritionalProfileFieldValue (NutritionalProfileField field){
+        return nutritionalProfile.updateFieldValue(field, field.value());
+    }
+    
+    
     @Override
     public String toString() {
         return "CafeteriaUser mecanographicNumber " + mecanographicNumber;
     }
+
+    /**
+     * 
+     * @return A deep clone, to ensure no accidental modifications. Explicitly use "updateNutritionalProfileFieldValue" instead
+     */
+    public NutritionalProfile getNutritionalProfile() {
+        return nutritionalProfile.clone();
+    }
     
+    public boolean addAllergen(Allergen newAllergen){
+        return nutritionalProfile.addAllergen(newAllergen);
+    }
     
+    public boolean removeAllergen (Allergen allergen){
+        return nutritionalProfile.removeAllergen(allergen);
+    }
 }

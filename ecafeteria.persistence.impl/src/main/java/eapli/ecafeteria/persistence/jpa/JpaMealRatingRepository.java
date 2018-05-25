@@ -17,10 +17,9 @@ import javax.persistence.Query;
 public class JpaMealRatingRepository extends CafeteriaJpaRepositoryBase<MealRating, Long> implements MealRatingRepository{
 
     @Override
-    public Iterable<MealRating> findRatingsByMeal(Reservation reservation) {
-        String where = "e.reservation=:reservation";
-        Query q = entityManager().createQuery("SELECT r FROM MealRating r WHERE " + where, this.entityClass);
-        q.setParameter(("reservation"), reservation);
+    public Iterable<MealRating> findRatingsByMeal(Reservation re) {
+        Query q = entityManager().createQuery("SELECT r FROM MealRating r WHERE r.reservation=:reservation");
+        q.setParameter("reservation", re);
         return q.getResultList();
     }
     

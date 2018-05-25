@@ -11,6 +11,7 @@ import eapli.ecafeteria.persistence.MealRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
+import eapli.framework.util.DateTime;
 import java.util.ArrayList;
 
 import java.util.Calendar;
@@ -37,7 +38,9 @@ public class InMemoryMealRepository extends InMemoryRepositoryWithLongPK<Meal> i
         ArrayList<Meal> ret = new ArrayList<>();
 
         for (Meal m : list_meals) {
-            if (m.date().equals(d)) {
+
+            if (m.date().getTime().toString().equalsIgnoreCase(d.getTime().toString())) {
+
                 ret.add(m);
             }
         }

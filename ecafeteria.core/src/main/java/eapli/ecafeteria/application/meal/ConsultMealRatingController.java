@@ -16,33 +16,47 @@ import eapli.ecafeteria.persistence.ReservationRepository;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.ArrayList;
 
 /**
  *
  * @author João Santiago <1160696@isep.ipp.pt>
  */
 public class ConsultMealRatingController implements Controller {
-    
-    private Meal meal;
-    
+
     private final MealRepository mr = PersistenceContext.repositories().meals();
     private final MealRatingRepository rr = PersistenceContext.repositories().ratings();
     private final ReservationRepository rer = PersistenceContext.repositories().reservations();
-    
-    public Iterable<Meal> allMeals(){
+
+    public Iterable<Meal> allMeals() {
         return mr.findAll();
     }
+
+//    public Iterable<Reservation> allMealsOfReservations() {
+//
+//        ArrayList<Meal> oi = new ArrayList<>();
+//
+//        ArrayList<Reservation> list = (ArrayList<Reservation>) rer.findAll();
+//
+//        for (Reservation r : list) {
+//            
+//            oi.add(r.meal());
+//
+//        }
+//
+//        return oi;
+//    }
     
-    public Iterable<Reservation> allMealsOfReservations(){
-        return rer.findByMeal(meal);
+    public Iterable<Reservation> allMealsOfReservations() {
+        return rer.findAll();
     }
-    
-    public Iterable<MealRating> allRatings(Reservation r){
+
+    public Iterable<MealRating> allRatings(Reservation r) {
         return rr.findRatingsByMeal(r);
-        
+
     }
-    
-    public void answerToComment(MealRating r, String reply) throws DataConcurrencyException, DataIntegrityViolationException{
+
+    public void answerToComment(MealRating r, String reply) throws DataConcurrencyException, DataIntegrityViolationException {
         Comment c = r.comment(reply);
         c.answerReply(reply);
         rr.save(r);

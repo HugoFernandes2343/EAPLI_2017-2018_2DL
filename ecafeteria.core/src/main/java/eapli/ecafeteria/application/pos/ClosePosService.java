@@ -37,6 +37,6 @@ public class ClosePosService {
     }
     
     public POS SavePOS(POS p) throws DataConcurrencyException, DataIntegrityViolationException{
-        return posRP.save(p);
+        return posRP.saveWithDelete(p);
     }
 }
