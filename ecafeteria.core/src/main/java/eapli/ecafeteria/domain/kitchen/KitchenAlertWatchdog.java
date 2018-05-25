@@ -24,18 +24,16 @@ public class KitchenAlertWatchdog extends Observable implements Runnable {
     private double watchdogExpiration = .5;
 
     private boolean stopped = false;
-    
+
     private Meal m;
 
     public KitchenAlertWatchdog() {
-        
-        
 
     }
 
     public void notifyObs(Meal m) {
-       notifyObservers();
-       this.m = m;
+        notifyObservers();
+        this.m = m;
     }
 
     @Override
@@ -45,10 +43,9 @@ public class KitchenAlertWatchdog extends Observable implements Runnable {
         watchdogThread.setDaemon(true);
         watchdogThread.start();
     }
-    
-    public Meal sendMeal(){
+
+    public Meal sendMeal() {
         return this.m;
     }
-    
-
+ 
 }
