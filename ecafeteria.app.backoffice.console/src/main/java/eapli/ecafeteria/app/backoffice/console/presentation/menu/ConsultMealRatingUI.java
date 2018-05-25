@@ -37,7 +37,7 @@ public class ConsultMealRatingUI extends AbstractUI { // POR ACABAR
     
     @Override
     protected boolean doShow() {
-//        final Iterable<Meal> meals = cmrc.allMeals();
+//        final List<Reservation> reserv = (List<Reservation>) cmrc.allMealsOfReservations();
         Iterable<MealRating> ratings;
         int ratingsCount = 0;
         String reply;
@@ -59,6 +59,7 @@ public class ConsultMealRatingUI extends AbstractUI { // POR ACABAR
             }
             
             ratings = cmrc.allRatings(choosenReserv);
+                
             if(ratings.iterator().hasNext() == true){
                 for(MealRating ra : ratings){
                     com = ra.comment("    ");
@@ -110,8 +111,8 @@ public class ConsultMealRatingUI extends AbstractUI { // POR ACABAR
                 SelectWidget<Integer> confirm = new SelectWidget<>("\n(1-Yes)Do you want to see another rating of some meal?(2-No)", oneTwo());
                 confirm.show();
                 CONFIRM = confirm.selectedOption();
-        
-            }
+    
+    }
         return false;
     }
 
