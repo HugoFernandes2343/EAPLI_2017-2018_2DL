@@ -28,10 +28,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.Rep
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.*;
-import eapli.ecafeteria.app.backoffice.console.presentation.menu.ConsultMealRatingAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.menu.CopyMenuAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.menu.PublishMenuAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.menu.RegisterMenuAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menu.*;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -121,6 +118,7 @@ public class MainMenu extends AbstractUI {
     private static final int EDIT_MEAL_PLAN = 2;
     private static final int CLOSE_MEAL_PLAN = 3;
     private static final int TESTE = 4;
+    private static final int TESTE2 = 5;
 
     @Override
     public boolean show() {
@@ -289,6 +287,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(MATERIAL_LIST_OPTION, "List all materials", new ListMaterialAction()));
         final Menu elaborateMealPlan = buildElaborateMealPlanMenu();
         menu.add(new SubMenu(ELABORATE_MEAL_PLAN_OPTION, elaborateMealPlan, new ShowVerticalSubMenuAction(buildElaborateMealPlanMenu())));
+       // menu.add(new MenuItem(FIND_MEALS_BY_LOT_OPTION, "Find Meals by Lot", new ))
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
@@ -301,6 +300,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(EDIT_MEAL_PLAN, "Edit meal plan", new EditMealPlanAction()));
         menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
         menu.add(new MenuItem(TESTE, "Teste", new ListMealsByLotAction()));
+        menu.add(new MenuItem(TESTE2, "Teste2", new ConsultReservationRatingAction()));
         return menu;
     }
 
