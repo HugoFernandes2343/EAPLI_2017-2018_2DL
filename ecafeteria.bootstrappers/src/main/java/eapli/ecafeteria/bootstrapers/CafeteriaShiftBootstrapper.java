@@ -28,9 +28,9 @@ public class CafeteriaShiftBootstrapper implements Action {
         tomorrow.add(Calendar.DATE, 1);
         CafeteriaShift cs = new CafeteriaShift(tomorrow, "LUNCH");
         try {
-            cs.closeShift();
+           // cs.closeShift();
             csCont.SaveCafeteriaShift(cs);
-        } catch (DataConcurrencyException | DataIntegrityViolationException | CafeteriaShiftStateViolationException ex) {
+        } catch (DataConcurrencyException | DataIntegrityViolationException /*| CafeteriaShiftStateViolationException*/ ex) {
             System.out.println("Erro a gravar cafeteria shift");
         }
         return true;

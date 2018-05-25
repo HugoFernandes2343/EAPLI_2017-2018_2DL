@@ -13,9 +13,12 @@ import java.util.Date;
 import java.util.Optional;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.menu.MenuState;
+import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.util.DateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import javax.persistence.TypedQuery;
@@ -31,20 +34,19 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> imple
 
     @Override
     public Menu findByDate(Date date) {
-
-        Optional<Menu> m = matchOne(e -> e.startDate().equals(date));
-
-        if (m.isPresent()) {
-            Menu ms = m.get();
-            return ms;
-        } else {
-            return null;
+        Iterable<Menu> menus =  super.findAll();
+     
+        for(Menu m : menus){
+            if(m.startDate().compareTo(DateTime.dateToCalendar(date)) <= 0 && m.finishDate().compareTo(DateTime.dateToCalendar(date))>=0){
+                return m;
+            }
         }
+        return null;
     }
 
     @Override
     public Iterable<Menu> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.findAll();
     }
 
     @Override
@@ -74,12 +76,30 @@ public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> imple
 
     @Override
     public Menu findByID(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Optional<Menu> men = matchOne(m -> m.compareID(id));
+
+        if (men.isPresent()) {
+            Menu ms = men.get();
+            return ms;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public Iterable<Menu> findMenuBetweenDates(Calendar start, Calendar end) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Menu> list_menus = new ArrayList<>();
+
+        list_menus = (ArrayList<Menu>) match(m -> m.startDate().equals(start));
+
+        ArrayList<Menu> ret = new ArrayList<>();
+
+        for (Menu m : list_menus) {
+            if (m.finishDate().equals(end)) {
+                ret.add(m);
+            }
+        }
+        return ret;
     }
 
 }

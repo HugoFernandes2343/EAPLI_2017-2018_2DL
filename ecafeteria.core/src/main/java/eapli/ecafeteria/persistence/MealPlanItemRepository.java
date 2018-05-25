@@ -22,7 +22,7 @@ public interface MealPlanItemRepository extends DataRepository<MealPlanItem, Lon
 
     public void updateTable(Long id, int quantidades);
 
-    public Iterable<MealPlanItem> findByMeal(Meal m);
+    public MealPlanItem findByMeal(Meal m);
 
     public Iterable<MealPlanItem> findMealsFromMealPlanItem(Meal m);
 }

@@ -14,17 +14,16 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  *
  * @author Norberto Sousa - 1120608 && Hugo Fernandes 1161155
  */
-public class InMemoryCafeteriaShiftRepository extends  InMemoryRepositoryWithLongPK<CafeteriaShift> implements CafeteriaShiftRepository{
+public class InMemoryCafeteriaShiftRepository extends InMemoryRepositoryWithLongPK<CafeteriaShift> implements CafeteriaShiftRepository {
 
     @Override
     protected Long newKeyFor(CafeteriaShift entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entity.id();
     }
 
     @Override
     public CafeteriaShift findCafeteriaShift() {
-       return first();
+        return first();
     }
-    
-    
+
 }

@@ -22,4 +22,9 @@ public class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> impl
         query.setParameter("st", s);
         return query.getResultList();
     }
+
+    @Override
+    public POS saveWithDelete(POS p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

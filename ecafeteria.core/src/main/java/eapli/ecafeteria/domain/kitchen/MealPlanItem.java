@@ -57,9 +57,13 @@ public class MealPlanItem implements Serializable {
 
     @Override
     public String toString() {
-        return  "\nDishQuantity=" + DishQuantity +meal+"NonDelivered Meals =" + NonDeliveredMeals;
+        return  "\n DishQuantity = " + DishQuantity + meal + "\n Non Delivered Meals = " + NonDeliveredMeals;
     }
 
+    public String toStringValuesOnly(){
+        return  "\n DishQuantity = " + DishQuantity + "\n Non Delivered Meals = " + NonDeliveredMeals;
+    }
+    
     public void setDishQuantity(Integer DishQuantity) {
         this.DishQuantity = DishQuantity;
     }

@@ -54,6 +54,8 @@ public class CafeteriaShiftClosingController implements Controller {
         for (POS p : list_pos) {
 
             cpS.CloseAndSavePOS(p.code(), list_pos);
+
+            System.out.println("\n We closed pos number: " + p.code());
         }
 
         CafeteriaShift cs = cfRP.findCafeteriaShift();
@@ -61,34 +63,50 @@ public class CafeteriaShiftClosingController implements Controller {
         MealType mealT = null;
         if (cs.dayTimeCheck().equalsIgnoreCase("lunch")) {
             mealT = new MealType(MealType.MealTypes.LUNCH);
+             System.out.println("It's lunch time.");
         } else if (cs.dayTimeCheck().equalsIgnoreCase("dinner")) {
             mealT = new MealType(MealType.MealTypes.DINNER);
+             System.out.println("It's dinner time.");
         }
 
         ArrayList<Meal> list_meals = new ArrayList<>();
+
         list_meals = (ArrayList<Meal>) mRP.findMealsByDateAndMealType(cs.date(), mealT);
 
+        System.out.println("\n Number of different meals for this lunch " + list_meals.size());
+        
         for (Meal m : list_meals) {
             ArrayList<Reservation> list_reserv = new ArrayList<>();
             list_reserv = (ArrayList<Reservation>) reservRP.findByStateAndMeal(ReservationState.BOOKED, m);
+
+            System.out.println( m.toString() );
+
             for (Reservation r : list_reserv) {
                 try {
                     r.expire();
                     reservRP.save(r);
+
+                    System.out.println("\n This is the number " + r.id() +" reservation. ");
+
                 } catch (ReservationStateViolationException ex) {
                 }
             }
-            ArrayList<MealPlanItem> array = (ArrayList<MealPlanItem>) mpiRP.findByMeal(m);
-            MealPlanItem mp = array.get(0);
+            MealPlanItem mp = mpiRP.findByMeal(m);
+
+            System.out.println("\n Number of expired meals: " + list_reserv.size());
+
             mp.calculateWastedMeals(list_reserv.size());
+
+            System.out.println("\n Meal plan item: " + mp.toStringValuesOnly());
+
             mpiRP.save(mp);
         }
 
         cs.closeShift();
         SaveCafeteriaShift(cs);
     }
-    
-    public CafeteriaShift SaveCafeteriaShift(CafeteriaShift cs) throws DataConcurrencyException, DataIntegrityViolationException{
+
+    public CafeteriaShift SaveCafeteriaShift(CafeteriaShift cs) throws DataConcurrencyException, DataIntegrityViolationException {
         return cfRP.save(cs);
     }
 }
