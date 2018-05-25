@@ -56,30 +56,26 @@ public class MenuTest {
         
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testStartDateNull() throws DataConcurrencyException, DataIntegrityViolationException {
-        RegisterMenuController rmc = new RegisterMenuController();
-        Menu m= rmc.MenuMaker(null, finishDate, Designation.valueOf("Menu David"));    
+        Menu m= new Menu(null, finishDate, Designation.valueOf("Menu David"));    
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testEndingDateNull() throws DataConcurrencyException, DataIntegrityViolationException {
-        RegisterMenuController rmc = new RegisterMenuController();
-        Menu m= rmc.MenuMaker(startDate, null, Designation.valueOf("Menu David"));    
+        Menu m= new Menu(startDate, null, Designation.valueOf("Menu David"));    
     }
     
-     @Test(expected = NullPointerException.class)
+     @Test(expected = java.lang.IllegalArgumentException.class)
     public void testNameNull() throws DataConcurrencyException, DataIntegrityViolationException {
-        RegisterMenuController rmc = new RegisterMenuController();
-        Menu m= rmc.MenuMaker(startDate, finishDate, null);    
+        Menu m= new Menu(startDate, finishDate, null);    
     }
     
-    @Test(expected = NullPointerException.class)
+    @Test(expected = java.lang.IllegalArgumentException.class)
     public void testMenuStartingDayBeforeToday() throws DataConcurrencyException, DataIntegrityViolationException {
-        RegisterMenuController rmc = new RegisterMenuController();
         Calendar beforeToday = (Calendar) startDate.clone();
         beforeToday.add(Calendar.DAY_OF_MONTH, -7);
-        Menu m= rmc.MenuMaker(beforeToday, finishDate, Designation.valueOf("Menu David"));    
+        Menu m= new Menu(beforeToday, finishDate, Designation.valueOf("Menu David"));    
     }
     
     
