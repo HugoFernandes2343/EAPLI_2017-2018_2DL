@@ -8,6 +8,10 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.pos.POS;
 import eapli.ecafeteria.domain.pos.POSState;
 import eapli.ecafeteria.persistence.POSRepository;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.*;
 
 /**
@@ -25,6 +29,11 @@ public class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> impl
 
     @Override
     public POS saveWithDelete(POS p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return super.save(p);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            System.out.println("Error saving POS");
+        }
+        return null;
     }
 }

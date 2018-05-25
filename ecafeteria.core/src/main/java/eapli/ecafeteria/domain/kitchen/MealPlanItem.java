@@ -16,12 +16,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Paulo Jorge
  */
 @Entity
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"meal_pk"})
+})
 public class MealPlanItem implements Serializable {
 
     @Id
@@ -57,13 +62,13 @@ public class MealPlanItem implements Serializable {
 
     @Override
     public String toString() {
-        return  "\n DishQuantity = " + DishQuantity + meal + "\n Non Delivered Meals = " + NonDeliveredMeals;
+        return "\n DishQuantity = " + DishQuantity + meal + "\n Non Delivered Meals = " + NonDeliveredMeals;
     }
 
-    public String toStringValuesOnly(){
-        return  "\n DishQuantity = " + DishQuantity + "\n Non Delivered Meals = " + NonDeliveredMeals;
+    public String toStringValuesOnly() {
+        return "\n DishQuantity = " + DishQuantity + "\n Non Delivered Meals = " + NonDeliveredMeals;
     }
-    
+
     public void setDishQuantity(Integer DishQuantity) {
         this.DishQuantity = DishQuantity;
     }
