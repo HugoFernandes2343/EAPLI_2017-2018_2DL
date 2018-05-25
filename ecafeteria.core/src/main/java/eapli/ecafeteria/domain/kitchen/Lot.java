@@ -79,7 +79,10 @@ public class Lot implements Serializable, AggregateRoot<String> {
         hash = 89 * hash + Objects.hashCode(this.material);
         return hash;
     }
-    
+
+    public String getCode(){
+        return this.code;
+    }
     
     @Override
     public boolean sameAs(Object other) {

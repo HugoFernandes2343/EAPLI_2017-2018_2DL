@@ -6,6 +6,7 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.ratings.MealRating;
+import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.framework.persistence.repositories.DataRepository;
 
 
@@ -15,6 +16,8 @@ import eapli.framework.persistence.repositories.DataRepository;
  * @author Andre Rodrigues <1151136@isep.ipp.pt>
  */
 public interface MealRatingRepository extends DataRepository<MealRating,Long>{
+    
+    Iterable<MealRating> findRatingsByMeal(Reservation reservation);
     
 }
 

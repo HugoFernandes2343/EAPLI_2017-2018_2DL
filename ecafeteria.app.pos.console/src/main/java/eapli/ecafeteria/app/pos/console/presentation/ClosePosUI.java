@@ -7,8 +7,6 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ClosePosUI extends AbstractUI {
 
@@ -31,11 +29,11 @@ public class ClosePosUI extends AbstractUI {
             return false;
         }
 
-        Long pos;
+        int pos;
         boolean success = false;
 
         do {
-            pos = Console.readLong("Choose a pos to close:");
+            pos = Console.readInteger("Choose a pos to close:");
             try {
                 success = cont.CloseAndSavePOS(pos);
             } catch (POSStateViolationException | DataConcurrencyException | DataIntegrityViolationException ex) {

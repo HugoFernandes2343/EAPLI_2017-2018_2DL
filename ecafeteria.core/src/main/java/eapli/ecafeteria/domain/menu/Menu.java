@@ -10,6 +10,7 @@ import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,8 +74,7 @@ public class Menu implements AggregateRoot<Long>, Serializable {
             throw new IllegalArgumentException("As datas têm de distar obrigatoriamente 7 dias");
         
         
-        Calendar today = Calendar.getInstance(TimeZone.getDefault());
-        today.add(Calendar.DATE, -1);
+        Calendar today = DateTime.now();
         
         if (startingDate.before(today)){
             throw new IllegalArgumentException("A Data de inicio é anterior à data atual");

@@ -20,6 +20,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 /**
  *
@@ -33,7 +34,7 @@ public class OpenPosController implements Controller {
 
     public boolean IsTheCafeteriaShiftClosed() {
         CafeteriaShift cs = cfRP.findCafeteriaShift();
-        
+
         if (cs.isClosed()) {
             return true;
         } else {
@@ -65,9 +66,35 @@ public class OpenPosController implements Controller {
             System.out.println("No POS can be opened now!");
         } else {
             System.out.println("Closed POS's:");
-            for (POS p : list_pos) {
-                System.out.println("POS " + p.id());
+
+            //Bubble sort
+            boolean is_sorted;
+            POS sortingTemp;
+
+            for (int i = 0; i < list_pos.size(); i++) {
+
+                is_sorted = true;
+
+                for (int j = 1; j < (list_pos.size() - i); j++) {
+
+                    if (list_pos.get(j - 1).code() > list_pos.get(j).code()) {
+                        sortingTemp = list_pos.get(j - 1);
+                        list_pos.set(j - 1, list_pos.get(j));
+                        list_pos.set(j, sortingTemp);
+                        is_sorted = false;
+                    }
+
+                }
+
+                // is sorted? then break it, avoid useless loop.
+                if (is_sorted) {
+                    break;
+                }
+
             }
+        }
+        for (POS p : list_pos) {
+            System.out.println("POS " + p.code());
         }
 
         if (list_pos.isEmpty()) {
@@ -76,13 +103,13 @@ public class OpenPosController implements Controller {
         return true;
     }
 
-    public boolean OpenAndSavePOS(Long id) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException {
+    public boolean OpenAndSavePOS(int code) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException {
 
         for (POS p : list_pos) {
-            if (p.id() == id) {
+            if (p.code() == code) {
                 p.open();
 
-                posRP.save(p);
+                posRP.saveWithDelete(p);
 
                 return true;
             }

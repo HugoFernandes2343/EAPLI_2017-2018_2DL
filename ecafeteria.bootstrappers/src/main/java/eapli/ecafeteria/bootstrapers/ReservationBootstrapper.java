@@ -21,6 +21,7 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -35,8 +36,10 @@ public class ReservationBootstrapper implements Action {
     @Override
     public boolean execute() {
         ArrayList<Meal> list = new ArrayList<>();
-        list = (ArrayList<Meal>) mRP.findMealsByDateAndMealType(DateTime.now(), new MealType(MealType.MealTypes.LUNCH));
-        Meal m1 = null, m2 = null, m3 = null;
+        Calendar tomorrow = DateTime.now();
+        tomorrow.add(Calendar.DATE, 1);
+        list = (ArrayList<Meal>) mRP.findMealsByDateAndMealType(tomorrow, new MealType(MealType.MealTypes.LUNCH));
+        Meal m1 = null;
         for (Meal m : list) {
             if (m.dish().is(Designation.valueOf("Hamburger"))) {
                 m1 = m;

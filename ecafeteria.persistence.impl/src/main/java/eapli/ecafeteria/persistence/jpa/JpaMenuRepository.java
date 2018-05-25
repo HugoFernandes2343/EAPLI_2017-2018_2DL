@@ -8,14 +8,11 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.menu.Menu;
 import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MenuRepository;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *

@@ -4,7 +4,6 @@ import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.reservations.ConsultNextReservationController;
 import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.framework.presentation.console.AbstractUI;
 
 
 /**

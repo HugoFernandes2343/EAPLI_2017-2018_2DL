@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menu.Menu;
@@ -12,6 +13,7 @@ import eapli.ecafeteria.domain.menu.MenuState;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.framework.util.DateTime;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.Query;
 
 /**
@@ -44,4 +46,13 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         return q.getResultList();
     }
 
+    @Override
+    public List<Meal> getMealsUsed(Lot lot) {
+        final Query q;
+        q = entityManager().createNativeQuery("SELECT * FROM Meal m WHERE m.pk IN (SELECT up.meal_pk FROM Used_Lot up WHERE up.lotlist_pk IN (SELECT l.pk FROM lot l WHERE l.code=:codigo))");
+        q.setParameter("codigo", lot.getCode());
+
+        System.out.println("Teste"+q.getResultList());
+        return q.getResultList();
+    }
 }

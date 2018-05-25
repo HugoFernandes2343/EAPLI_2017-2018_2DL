@@ -29,11 +29,40 @@ public class ClosePosController implements Controller {
             System.out.println("No POS currently open!");
         } else {
             System.out.println("Open POS:");
-            for(POS p : list_pos){
-                System.out.println("POS "+p.id());
+            
+                 
+        //Bubble sort
+        
+        boolean is_sorted;
+        POS sortingTemp;
+        
+        for (int i = 0; i < list_pos.size(); i++) {
+
+            is_sorted = true;
+
+            for (int j = 1; j < (list_pos.size() - i); j++) {
+
+                if (list_pos.get(j - 1).code() > list_pos.get(j).code()) {
+                    sortingTemp = list_pos.get(j - 1);
+                    list_pos.set(j-1, list_pos.get(j));
+                    list_pos.set(j, sortingTemp);
+                    is_sorted = false;
+                }
+
             }
+
+            // is sorted? then break it, avoid useless loop.
+            if (is_sorted) {
+                break;
+            }
+
         }
         
+            for(POS p : list_pos){
+                System.out.println("POS "+p.code());
+            }
+        }
+                
         if(list_pos.isEmpty()){
             return false;
         }
@@ -41,9 +70,9 @@ public class ClosePosController implements Controller {
     }
     
     
-    public boolean CloseAndSavePOS(Long id) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException{
+    public boolean CloseAndSavePOS(int code) throws POSStateViolationException, DataConcurrencyException, DataIntegrityViolationException{
         
-        return cpS.CloseAndSavePOS(id, list_pos);
+        return cpS.CloseAndSavePOS(code, list_pos);
     }
 
 }

@@ -5,9 +5,10 @@
  */
 package eapli.ecafeteria.app.user.console.booking;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.reservations.ConsultReservationsController;
 import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Andre Rodrigues <1151136@isep.ipp.pt>
  */
-public class PreviousPurchasesUI extends AbstractUI{
+public class PreviousPurchasesUI extends CafeteriaUserBaseUI{
     
     ConsultReservationsController crController = new ConsultReservationsController();
 
@@ -61,8 +62,7 @@ public class PreviousPurchasesUI extends AbstractUI{
     }
 
     @Override
-    public String headline() {
-        return ("Previous Purchases");  
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
-    
 }

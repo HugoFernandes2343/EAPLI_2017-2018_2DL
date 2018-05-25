@@ -8,11 +8,11 @@ package eapli.ecafeteria.bootstrapers;
 import eapli.ecafeteria.application.kitchen.CafeteriaShiftClosingController;
 import eapli.ecafeteria.domain.cafeteriashift.CafeteriaShift;
 import eapli.framework.actions.Action;
+import eapli.framework.domain.CafeteriaShiftStateViolationException;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Calendar;
 
 /**
  *
@@ -23,14 +23,17 @@ public class CafeteriaShiftBootstrapper implements Action {
     @Override
     public boolean execute() {
         CafeteriaShiftClosingController csCont = new CafeteriaShiftClosingController();
-        
-        CafeteriaShift cs = new CafeteriaShift(DateTime.now(), "LUNCH");
+
+        Calendar tomorrow = DateTime.now();
+        tomorrow.add(Calendar.DATE, 1);
+        CafeteriaShift cs = new CafeteriaShift(tomorrow, "LUNCH");
         try {
+           // cs.closeShift();
             csCont.SaveCafeteriaShift(cs);
-        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+        } catch (DataConcurrencyException | DataIntegrityViolationException /*| CafeteriaShiftStateViolationException*/ ex) {
             System.out.println("Erro a gravar cafeteria shift");
         }
         return true;
     }
-    
+
 }

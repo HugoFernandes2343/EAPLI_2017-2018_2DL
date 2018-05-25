@@ -6,7 +6,10 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.kitchen.Lot;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.LotRepository;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  *
@@ -16,5 +19,6 @@ public class JpaLotRepository extends CafeteriaJpaRepositoryBase<Lot, String> im
 
     public JpaLotRepository() {
     }
-    
+
+
 }

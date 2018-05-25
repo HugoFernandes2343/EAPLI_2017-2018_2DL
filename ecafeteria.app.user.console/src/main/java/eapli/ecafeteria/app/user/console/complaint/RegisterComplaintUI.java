@@ -1,17 +1,12 @@
 package eapli.ecafeteria.app.user.console.complaint;
 
 import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
-import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserService;
 import eapli.ecafeteria.application.complaints.RegisterComplaintController;
-import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
-
-import java.util.Optional;
 
 /**
  * @author <1160777@isep.ipp.pt>Marco Carneiro</1160777@isep.ipp.pt>

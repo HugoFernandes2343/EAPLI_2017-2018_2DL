@@ -41,4 +41,15 @@ public class InMemoryPOSRepository extends InMemoryRepositoryWithLongPK<POS> imp
     public long count() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
+    @Override
+    public POS saveWithDelete(POS p) {
+        
+        super.delete(p);
+        
+        super.save(p);
+        
+        return p;
+    }
 }

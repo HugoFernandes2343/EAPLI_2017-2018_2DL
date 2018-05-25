@@ -5,20 +5,17 @@
  */
 package eapli.ecafeteria.app.user.console.booking;
 
+import eapli.ecafeteria.app.user.console.presentation.CafeteriaUserBaseUI;
+import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.reservations.ConsultReservationsController;
 import eapli.ecafeteria.domain.reservations.Reservation;
-import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.Menu;
-import eapli.framework.presentation.console.MenuItem;
-import eapli.framework.util.Console;
-import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author Andre Rodrigues <1151136@isep.ipp.pt>
  */
-public class NextDaysUI extends AbstractUI {
+public class NextDaysUI extends CafeteriaUserBaseUI {
         
     private final ConsultReservationsController crController = new ConsultReservationsController();
 
@@ -38,8 +35,8 @@ public class NextDaysUI extends AbstractUI {
     }
 
     @Override
-    public String headline() {
-        return "Consult Reservations";
+    protected CafeteriaUserBaseController controller() {
+        return new CafeteriaUserBaseController();
     }
     
 }
