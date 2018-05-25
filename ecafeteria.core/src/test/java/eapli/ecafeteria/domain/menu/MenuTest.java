@@ -1,241 +1,83 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package eapli.ecafeteria.domain.menu;
-//
-//import eapli.ecafeteria.domain.meals.Meal;
-//import java.util.Calendar;
-//import java.util.List;
-//import org.junit.After;
-//import org.junit.AfterClass;
-//import org.junit.Before;
-//import org.junit.BeforeClass;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//
-///**
-// *
-// * @author jsant
-// */
-//public class MenuTest {
-//    
-//    public MenuTest() {
-//    }
-//    
-//    @BeforeClass
-//    public static void setUpClass() {
-//    }
-//    
-//    @AfterClass
-//    public static void tearDownClass() {
-//    }
-//    
-//    @Before
-//    public void setUp() {
-//    }
-//    
-//    @After
-//    public void tearDown() {
-//    }
-//
-//    /**
-//     * Test of publishedMenu method, of class Menu.
-//     */
-//    @Test
-//    public void testPublishedMenu() {
-//        System.out.println("publishedMenu");
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.publishedMenu();
-//        assertEquals(expResult, result);
-//    }
-//
-//    /**
-//     * Test of workingMenu method, of class Menu.
-//     */
-//    @Test
-//    public void testWorkingMenu() {
-//        System.out.println("workingMenu");
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.workingMenu();
-//        assertEquals(expResult, result);
-//    }
-//
-//    /**
-//     * Test of listMeals method, of class Menu.
-//     */
-//    @Test
-//    public void testListMeals() {
-//        System.out.println("listMeals");
-//        Menu instance = new Menu();
-//        List<Meal> expResult = null;
-//        List<Meal> result = instance.listMeals();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of containsMeal method, of class Menu.
-//     */
-//    @Test
-//    public void testContainsMeal() {
-//        System.out.println("containsMeal");
-//        Meal m = null;
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.containsMeal(m);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addMeal method, of class Menu.
-//     */
-//    @Test
-//    public void testAddMeal() {
-//        System.out.println("addMeal");
-//        Meal meal = null;
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.addMeal(meal);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of removeMeal method, of class Menu.
-//     */
-//    @Test
-//    public void testRemoveMeal() {
-//        System.out.println("removeMeal");
-//        Meal meal = null;
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.removeMeal(meal);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of startDate method, of class Menu.
-//     */
-//    @Test
-//    public void testStartDate() {
-//        System.out.println("startDate");
-//        Menu instance = new Menu();
-//        Calendar expResult = null;
-//        Calendar result = instance.startDate();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of finishDate method, of class Menu.
-//     */
-//    @Test
-//    public void testFinishDate() {
-//        System.out.println("finishDate");
-//        Menu instance = new Menu();
-//        Calendar expResult = null;
-//        Calendar result = instance.finishDate();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of hashCode method, of class Menu.
-//     */
-//    @Test
-//    public void testHashCode() {
-//        System.out.println("hashCode");
-//        Menu instance = new Menu();
-//        int expResult = 0;
-//        int result = instance.hashCode();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of id method, of class Menu.
-//     */
-//    @Test
-//    public void testId() {
-//        System.out.println("id");
-//        Menu instance = new Menu();
-//        Long expResult = null;
-//        Long result = instance.id();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of compareID method, of class Menu.
-//     */
-//    @Test
-//    public void testCompareID() {
-//        System.out.println("compareID");
-//        Long id = null;
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.compareID(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of equals method, of class Menu.
-//     */
-//    @Test
-//    public void testEquals() {
-//        System.out.println("equals");
-//        Object object = null;
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.equals(object);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of toString method, of class Menu.
-//     */
-//    @Test
-//    public void testToString() {
-//        System.out.println("toString");
-//        Menu instance = new Menu();
-//        String expResult = "";
-//        String result = instance.toString();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of sameAs method, of class Menu.
-//     */
-//    @Test
-//    public void testSameAs() {
-//        System.out.println("sameAs");
-//        Object other = null;
-//        Menu instance = new Menu();
-//        boolean expResult = false;
-//        boolean result = instance.sameAs(other);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//    
-//}
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eapli.ecafeteria.domain.menu;
+
+import eapli.ecafeteria.application.menu.RegisterMenuController;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.dishes.DishType;
+import eapli.ecafeteria.domain.dishes.NutricionalInfo;
+import eapli.ecafeteria.domain.kitchen.Lot;
+import eapli.ecafeteria.domain.kitchen.Material;
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
+import eapli.framework.domain.Designation;
+import eapli.framework.domain.money.Money;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Calendar;
+import org.junit.Before;
+import org.junit.Test;
+
+
+/**
+ *
+ * @author jsant
+ */
+public class MenuTest {
+    
+    private Material material;
+    private Lot lot;
+    private Meal meal;
+    private DishType peixe;
+    private Dish dish;
+    private MealType lunch;
+    private NutricionalInfo aNutricionalInfo;
+    private final Designation prego = Designation.valueOf("Prego");
+    private final Calendar startDate= Calendar.getInstance();
+    private Calendar  finishDate = (Calendar) startDate.clone();
+    
+    @Before
+    public void setUp() throws DataConcurrencyException, DataIntegrityViolationException {
+        Calendar startDate= Calendar.getInstance();
+        Calendar  finishDate = (Calendar) startDate.clone();
+        finishDate.add(Calendar.DAY_OF_MONTH, 6);
+        material=new Material("eggs","This his an turkey egg");
+        lot=new Lot("0x01",material);
+        peixe = new DishType("Peixe", "Peixe");
+        aNutricionalInfo = new NutricionalInfo(10, 11);
+        lunch= new MealType(MealType.MealTypes.LUNCH);
+        dish = new Dish(peixe, prego, aNutricionalInfo, Money.euros(8));
+        meal=new Meal(dish, lunch, Calendar.getInstance(), null);
+        meal.registerLot(lot);
+        
+        
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testStartDateNull() throws DataConcurrencyException, DataIntegrityViolationException {
+        Menu m= new Menu(null, finishDate, Designation.valueOf("Menu David"));    
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testEndingDateNull() throws DataConcurrencyException, DataIntegrityViolationException {
+        Menu m= new Menu(startDate, null, Designation.valueOf("Menu David"));    
+    }
+    
+     @Test(expected = java.lang.IllegalArgumentException.class)
+    public void testNameNull() throws DataConcurrencyException, DataIntegrityViolationException {
+        Menu m= new Menu(startDate, finishDate, null);    
+    }
+    
+    @Test(expected = java.lang.IllegalArgumentException.class)
+    public void testMenuStartingDayBeforeToday() throws DataConcurrencyException, DataIntegrityViolationException {
+        Calendar beforeToday = (Calendar) startDate.clone();
+        beforeToday.add(Calendar.DAY_OF_MONTH, -7);
+        Menu m= new Menu(beforeToday, finishDate, Designation.valueOf("Menu David"));    
+    }
+    
+    
+    
+}
