@@ -58,4 +58,12 @@ public class JpaMealPlanItemRepository extends CafeteriaJpaRepositoryBase<MealPl
         return (Iterable<MealPlanItem>) q.getResultList();
     }
 
+     @Override
+    public Iterable<MealPlanItem> findMealsFromMealPlanItem(Meal meal) {
+        final Query q;
+        q = entityManager().createQuery("SELECT mpi FROM MealPlanItem mpi WHERE mpi.meal=:meal", this.entityClass);
+        q.setParameter("m", meal);
+        return (Iterable<MealPlanItem>) q.getResultList();
+    }
+
 }

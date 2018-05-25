@@ -57,5 +57,10 @@ public class InMemoryMealPlanItemRepository extends InMemoryRepositoryWithLongPK
     public long count() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Iterable<MealPlanItem> findMealsFromMealPlanItem(Meal m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

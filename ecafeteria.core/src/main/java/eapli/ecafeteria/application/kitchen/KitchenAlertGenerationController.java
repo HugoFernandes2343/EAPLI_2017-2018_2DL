@@ -5,8 +5,11 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.reservations.Reservation;
 import eapli.ecafeteria.persistence.*;
+import java.util.List;
 
 /**
  *
@@ -19,6 +22,8 @@ public class KitchenAlertGenerationController {
     private int dangerValue;
     private Meal m;
 
+    private final ReservationRepository reservationRepo = PersistenceContext.repositories().reservations();
+    private final MealPlanItemRepository mealPlanItemRepo = PersistenceContext.repositories().mealPlanItemRepository();
     private final ReservationRepository rRepo = PersistenceContext.repositories().reservations();
     private final MealPlanItemRepository mpiRepo = PersistenceContext.repositories().mealPlanItemRepository();
     private final KitchenAlertsRepository kaRepo = PersistenceContext.repositories().KitchenAlertsRepository();
@@ -57,6 +62,18 @@ public class KitchenAlertGenerationController {
             System.out.println("*************************************************\n");
         }
 
+    }
+
+    public List<Reservation> getReservationfromMeal(Meal meal) {
+        List<Reservation> listMeals;
+        listMeals = (List<Reservation>) reservationRepo.findReservationFromMeal(meal);
+        return listMeals;
+    }
+
+    public List<MealPlanItem> getQuantityFromMeal(Meal meal) {
+        List<MealPlanItem> listQuantity;
+        listQuantity = (List<MealPlanItem>) mealPlanItemRepo.findMealsFromMealPlanItem(meal);
+        return listQuantity;
     }
 
 }

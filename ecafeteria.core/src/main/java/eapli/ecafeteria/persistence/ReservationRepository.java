@@ -40,7 +40,11 @@ public interface ReservationRepository extends DataRepository<Reservation, Long>
      * @param m
      * @return
      */
+    
+    
     Iterable<Reservation> findByStateAndMeal(ReservationState state, Meal m);
+    
+    Iterable<Reservation> findReservationFromMeal(Meal m);
     
     Iterable<Reservation> findByMeal(Meal m);
 
