@@ -1,3 +1,6 @@
+## This repository includes the work done by me and the whole 2DL class in the Aplication Engineerin class of the Informatics Engineering degree at ISEP in the year 2017-2018
+
+
 Cafeteria Management
 
 Polythecnic of Porto, School of Engineering
