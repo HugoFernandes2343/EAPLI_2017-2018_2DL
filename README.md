@@ -6,8 +6,7 @@ Cafeteria Management
 Polythecnic of Porto, School of Engineering
 
 EAPLI 
-
-=======================
+------
 
 This application is part of the lab project for the course EAPLI.
 
